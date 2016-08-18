@@ -1,0 +1,507 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9328AF6A1D6616C700E6B0E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328AF691D6616C700E6B0E2 /* AppDelegate.swift */; };
+		9328AF6C1D6616C700E6B0E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328AF6B1D6616C700E6B0E2 /* ViewController.swift */; };
+		9328AF6F1D6616C700E6B0E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9328AF6D1D6616C700E6B0E2 /* Main.storyboard */; };
+		9328AF711D6616C700E6B0E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9328AF701D6616C700E6B0E2 /* Assets.xcassets */; };
+		9328AF741D6616C700E6B0E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9328AF721D6616C700E6B0E2 /* LaunchScreen.storyboard */; };
+		9328AF7F1D6616C700E6B0E2 /* Gasteizko_MargolariakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328AF7E1D6616C700E6B0E2 /* Gasteizko_MargolariakTests.swift */; };
+		9328AF8A1D6616C700E6B0E2 /* Gasteizko_MargolariakUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328AF891D6616C700E6B0E2 /* Gasteizko_MargolariakUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9328AF7B1D6616C700E6B0E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9328AF5E1D6616C700E6B0E2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9328AF651D6616C700E6B0E2;
+			remoteInfo = "Gasteizko Margolariak";
+		};
+		9328AF861D6616C700E6B0E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9328AF5E1D6616C700E6B0E2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9328AF651D6616C700E6B0E2;
+			remoteInfo = "Gasteizko Margolariak";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9328AF661D6616C700E6B0E2 /* Gasteizko Margolariak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gasteizko Margolariak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9328AF691D6616C700E6B0E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9328AF6B1D6616C700E6B0E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9328AF6E1D6616C700E6B0E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9328AF701D6616C700E6B0E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9328AF731D6616C700E6B0E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9328AF751D6616C700E6B0E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9328AF7A1D6616C700E6B0E2 /* Gasteizko MargolariakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gasteizko MargolariakTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9328AF7E1D6616C700E6B0E2 /* Gasteizko_MargolariakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gasteizko_MargolariakTests.swift; sourceTree = "<group>"; };
+		9328AF801D6616C700E6B0E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9328AF851D6616C700E6B0E2 /* Gasteizko MargolariakUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gasteizko MargolariakUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9328AF891D6616C700E6B0E2 /* Gasteizko_MargolariakUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gasteizko_MargolariakUITests.swift; sourceTree = "<group>"; };
+		9328AF8B1D6616C700E6B0E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9328AF631D6616C700E6B0E2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9328AF771D6616C700E6B0E2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9328AF821D6616C700E6B0E2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9328AF5D1D6616C700E6B0E2 = {
+			isa = PBXGroup;
+			children = (
+				9328AF681D6616C700E6B0E2 /* Gasteizko Margolariak */,
+				9328AF7D1D6616C700E6B0E2 /* Gasteizko MargolariakTests */,
+				9328AF881D6616C700E6B0E2 /* Gasteizko MargolariakUITests */,
+				9328AF671D6616C700E6B0E2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9328AF671D6616C700E6B0E2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9328AF661D6616C700E6B0E2 /* Gasteizko Margolariak.app */,
+				9328AF7A1D6616C700E6B0E2 /* Gasteizko MargolariakTests.xctest */,
+				9328AF851D6616C700E6B0E2 /* Gasteizko MargolariakUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9328AF681D6616C700E6B0E2 /* Gasteizko Margolariak */ = {
+			isa = PBXGroup;
+			children = (
+				9328AF691D6616C700E6B0E2 /* AppDelegate.swift */,
+				9328AF6B1D6616C700E6B0E2 /* ViewController.swift */,
+				9328AF6D1D6616C700E6B0E2 /* Main.storyboard */,
+				9328AF701D6616C700E6B0E2 /* Assets.xcassets */,
+				9328AF721D6616C700E6B0E2 /* LaunchScreen.storyboard */,
+				9328AF751D6616C700E6B0E2 /* Info.plist */,
+			);
+			path = "Gasteizko Margolariak";
+			sourceTree = "<group>";
+		};
+		9328AF7D1D6616C700E6B0E2 /* Gasteizko MargolariakTests */ = {
+			isa = PBXGroup;
+			children = (
+				9328AF7E1D6616C700E6B0E2 /* Gasteizko_MargolariakTests.swift */,
+				9328AF801D6616C700E6B0E2 /* Info.plist */,
+			);
+			path = "Gasteizko MargolariakTests";
+			sourceTree = "<group>";
+		};
+		9328AF881D6616C700E6B0E2 /* Gasteizko MargolariakUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9328AF891D6616C700E6B0E2 /* Gasteizko_MargolariakUITests.swift */,
+				9328AF8B1D6616C700E6B0E2 /* Info.plist */,
+			);
+			path = "Gasteizko MargolariakUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9328AF651D6616C700E6B0E2 /* Gasteizko Margolariak */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9328AF8E1D6616C700E6B0E2 /* Build configuration list for PBXNativeTarget "Gasteizko Margolariak" */;
+			buildPhases = (
+				9328AF621D6616C700E6B0E2 /* Sources */,
+				9328AF631D6616C700E6B0E2 /* Frameworks */,
+				9328AF641D6616C700E6B0E2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Gasteizko Margolariak";
+			productName = "Gasteizko Margolariak";
+			productReference = 9328AF661D6616C700E6B0E2 /* Gasteizko Margolariak.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9328AF791D6616C700E6B0E2 /* Gasteizko MargolariakTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9328AF911D6616C700E6B0E2 /* Build configuration list for PBXNativeTarget "Gasteizko MargolariakTests" */;
+			buildPhases = (
+				9328AF761D6616C700E6B0E2 /* Sources */,
+				9328AF771D6616C700E6B0E2 /* Frameworks */,
+				9328AF781D6616C700E6B0E2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9328AF7C1D6616C700E6B0E2 /* PBXTargetDependency */,
+			);
+			name = "Gasteizko MargolariakTests";
+			productName = "Gasteizko MargolariakTests";
+			productReference = 9328AF7A1D6616C700E6B0E2 /* Gasteizko MargolariakTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9328AF841D6616C700E6B0E2 /* Gasteizko MargolariakUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9328AF941D6616C700E6B0E2 /* Build configuration list for PBXNativeTarget "Gasteizko MargolariakUITests" */;
+			buildPhases = (
+				9328AF811D6616C700E6B0E2 /* Sources */,
+				9328AF821D6616C700E6B0E2 /* Frameworks */,
+				9328AF831D6616C700E6B0E2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9328AF871D6616C700E6B0E2 /* PBXTargetDependency */,
+			);
+			name = "Gasteizko MargolariakUITests";
+			productName = "Gasteizko MargolariakUITests";
+			productReference = 9328AF851D6616C700E6B0E2 /* Gasteizko MargolariakUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9328AF5E1D6616C700E6B0E2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Gasteizko Margolariak";
+				TargetAttributes = {
+					9328AF651D6616C700E6B0E2 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					9328AF791D6616C700E6B0E2 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 9328AF651D6616C700E6B0E2;
+					};
+					9328AF841D6616C700E6B0E2 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 9328AF651D6616C700E6B0E2;
+					};
+				};
+			};
+			buildConfigurationList = 9328AF611D6616C700E6B0E2 /* Build configuration list for PBXProject "Gasteizko Margolariak" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9328AF5D1D6616C700E6B0E2;
+			productRefGroup = 9328AF671D6616C700E6B0E2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9328AF651D6616C700E6B0E2 /* Gasteizko Margolariak */,
+				9328AF791D6616C700E6B0E2 /* Gasteizko MargolariakTests */,
+				9328AF841D6616C700E6B0E2 /* Gasteizko MargolariakUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9328AF641D6616C700E6B0E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9328AF741D6616C700E6B0E2 /* LaunchScreen.storyboard in Resources */,
+				9328AF711D6616C700E6B0E2 /* Assets.xcassets in Resources */,
+				9328AF6F1D6616C700E6B0E2 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9328AF781D6616C700E6B0E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9328AF831D6616C700E6B0E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9328AF621D6616C700E6B0E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9328AF6C1D6616C700E6B0E2 /* ViewController.swift in Sources */,
+				9328AF6A1D6616C700E6B0E2 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9328AF761D6616C700E6B0E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9328AF7F1D6616C700E6B0E2 /* Gasteizko_MargolariakTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9328AF811D6616C700E6B0E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9328AF8A1D6616C700E6B0E2 /* Gasteizko_MargolariakUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9328AF7C1D6616C700E6B0E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9328AF651D6616C700E6B0E2 /* Gasteizko Margolariak */;
+			targetProxy = 9328AF7B1D6616C700E6B0E2 /* PBXContainerItemProxy */;
+		};
+		9328AF871D6616C700E6B0E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9328AF651D6616C700E6B0E2 /* Gasteizko Margolariak */;
+			targetProxy = 9328AF861D6616C700E6B0E2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9328AF6D1D6616C700E6B0E2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9328AF6E1D6616C700E6B0E2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9328AF721D6616C700E6B0E2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9328AF731D6616C700E6B0E2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9328AF8C1D6616C700E6B0E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9328AF8D1D6616C700E6B0E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9328AF8F1D6616C700E6B0E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Gasteizko Margolariak/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gm.Gasteizko-Margolariak";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9328AF901D6616C700E6B0E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Gasteizko Margolariak/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gm.Gasteizko-Margolariak";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		9328AF921D6616C700E6B0E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Gasteizko MargolariakTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gm.Gasteizko-MargolariakTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gasteizko Margolariak.app/Gasteizko Margolariak";
+			};
+			name = Debug;
+		};
+		9328AF931D6616C700E6B0E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Gasteizko MargolariakTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gm.Gasteizko-MargolariakTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gasteizko Margolariak.app/Gasteizko Margolariak";
+			};
+			name = Release;
+		};
+		9328AF951D6616C700E6B0E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Gasteizko MargolariakUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gm.Gasteizko-MargolariakUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Gasteizko Margolariak";
+			};
+			name = Debug;
+		};
+		9328AF961D6616C700E6B0E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Gasteizko MargolariakUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gm.Gasteizko-MargolariakUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Gasteizko Margolariak";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9328AF611D6616C700E6B0E2 /* Build configuration list for PBXProject "Gasteizko Margolariak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9328AF8C1D6616C700E6B0E2 /* Debug */,
+				9328AF8D1D6616C700E6B0E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9328AF8E1D6616C700E6B0E2 /* Build configuration list for PBXNativeTarget "Gasteizko Margolariak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9328AF8F1D6616C700E6B0E2 /* Debug */,
+				9328AF901D6616C700E6B0E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9328AF911D6616C700E6B0E2 /* Build configuration list for PBXNativeTarget "Gasteizko MargolariakTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9328AF921D6616C700E6B0E2 /* Debug */,
+				9328AF931D6616C700E6B0E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9328AF941D6616C700E6B0E2 /* Build configuration list for PBXNativeTarget "Gasteizko MargolariakUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9328AF951D6616C700E6B0E2 /* Debug */,
+				9328AF961D6616C700E6B0E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9328AF5E1D6616C700E6B0E2 /* Project object */;
+}
