@@ -7,13 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9310BCBD1D6B9E4700C93AFA /* res in Resources */ = {isa = PBXBuildFile; fileRef = 9310BCBC1D6B9E4700C93AFA /* res */; };
 		9328AF6A1D6616C700E6B0E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328AF691D6616C700E6B0E2 /* AppDelegate.swift */; };
 		9328AF6C1D6616C700E6B0E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328AF6B1D6616C700E6B0E2 /* ViewController.swift */; };
 		9328AF6F1D6616C700E6B0E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9328AF6D1D6616C700E6B0E2 /* Main.storyboard */; };
 		9328AF711D6616C700E6B0E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9328AF701D6616C700E6B0E2 /* Assets.xcassets */; };
-		9328AF741D6616C700E6B0E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9328AF721D6616C700E6B0E2 /* LaunchScreen.storyboard */; };
 		9328AF7F1D6616C700E6B0E2 /* Gasteizko_MargolariakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328AF7E1D6616C700E6B0E2 /* Gasteizko_MargolariakTests.swift */; };
 		9328AF8A1D6616C700E6B0E2 /* Gasteizko_MargolariakUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328AF891D6616C700E6B0E2 /* Gasteizko_MargolariakUITests.swift */; };
+		9338BE0D1D6B840D00D2735B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338BE0C1D6B840D00D2735B /* MainViewController.swift */; };
+		9338BE0F1D6B84D700D2735B /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338BE0E1D6B84D700D2735B /* SlideMenuController.swift */; };
+		9338BE121D6B8D9A00D2735B /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338BE101D6B8D9A00D2735B /* LeftViewController.swift */; };
+		9338BE151D6B8E3000D2735B /* ImageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338BE141D6B8E3000D2735B /* ImageHeaderView.swift */; };
+		93B05E291D6BA1EF00D909F9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B05E281D6BA1EF00D909F9 /* HomeViewController.swift */; };
+		93B05E2B1D6BA23A00D909F9 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B05E2A1D6BA23A00D909F9 /* LocationViewController.swift */; };
+		93B05E2D1D6BA27200D909F9 /* LablancaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B05E2C1D6BA27200D909F9 /* LablancaViewController.swift */; };
+		93B05E2F1D6BA29A00D909F9 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B05E2E1D6BA29A00D909F9 /* ScheduleViewController.swift */; };
+		93B05E311D6BA2BD00D909F9 /* GmscheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B05E301D6BA2BD00D909F9 /* GmscheduleViewController.swift */; };
+		93B05E331D6BA2E600D909F9 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B05E321D6BA2E600D909F9 /* ActivitiesViewController.swift */; };
+		93B05E351D6BA30E00D909F9 /* BlogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B05E341D6BA30E00D909F9 /* BlogViewController.swift */; };
+		93B05E371D6BA33600D909F9 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B05E361D6BA33600D909F9 /* GalleryViewController.swift */; };
+		93B05E391D6BA35200D909F9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B05E381D6BA35200D909F9 /* SettingsViewController.swift */; };
+		93B2BE831D6B8F05007CBED3 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE7F1D6B8F05007CBED3 /* BaseTableViewCell.swift */; };
+		93B2BE971D6B8F9D007CBED3 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE871D6B8F9C007CBED3 /* DataTableViewCell.swift */; };
+		93B2BE981D6B8F9D007CBED3 /* DataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93B2BE881D6B8F9C007CBED3 /* DataTableViewCell.xib */; };
+		93B2BE991D6B8F9D007CBED3 /* ExSlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE891D6B8F9C007CBED3 /* ExSlideMenuController.swift */; };
+		93B2BE9A1D6B8F9D007CBED3 /* ImageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93B2BE8A1D6B8F9C007CBED3 /* ImageHeaderView.xib */; };
+		93B2BE9B1D6B8F9D007CBED3 /* SlideMenuControllerSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE8B1D6B8F9C007CBED3 /* SlideMenuControllerSwift.xcdatamodeld */; };
+		93B2BE9C1D6B8F9D007CBED3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE8D1D6B8F9D007CBED3 /* String.swift */; };
+		93B2BE9D1D6B8F9D007CBED3 /* SubContentsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B2BE8E1D6B8F9D007CBED3 /* SubContentsViewController.storyboard */; };
+		93B2BE9E1D6B8F9D007CBED3 /* SubContentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE8F1D6B8F9D007CBED3 /* SubContentsViewController.swift */; };
+		93B2BE9F1D6B8F9D007CBED3 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE901D6B8F9D007CBED3 /* UIApplication.swift */; };
+		93B2BEA01D6B8F9D007CBED3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE911D6B8F9D007CBED3 /* UIColor.swift */; };
+		93B2BEA11D6B8F9D007CBED3 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE921D6B8F9D007CBED3 /* UIImage.swift */; };
+		93B2BEA21D6B8F9D007CBED3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE931D6B8F9D007CBED3 /* UIImageView.swift */; };
+		93B2BEA31D6B8F9D007CBED3 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE941D6B8F9D007CBED3 /* UITableViewExtension.swift */; };
+		93B2BEA41D6B8F9D007CBED3 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE951D6B8F9D007CBED3 /* UIView.swift */; };
+		93B2BEA51D6B8F9D007CBED3 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BE961D6B8F9D007CBED3 /* UIViewController.swift */; };
+		93B2BEAC1D6B8FEA007CBED3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93B2BEA61D6B8FEA007CBED3 /* Assets.xcassets */; };
+		93B2BEAD1D6B8FEA007CBED3 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 93B2BEA71D6B8FEA007CBED3 /* Base.lproj */; };
+		93B2BEAE1D6B8FEA007CBED3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93B2BEA81D6B8FEA007CBED3 /* Images.xcassets */; };
+		93B2BEB01D6B8FEA007CBED3 /* SlideMenuControllerSwift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93B2BEAA1D6B8FEA007CBED3 /* SlideMenuControllerSwift.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9310BCBC1D6B9E4700C93AFA /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		9328AF661D6616C700E6B0E2 /* Gasteizko Margolariak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gasteizko Margolariak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9328AF691D6616C700E6B0E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9328AF6B1D6616C700E6B0E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +81,39 @@
 		9328AF851D6616C700E6B0E2 /* Gasteizko MargolariakUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gasteizko MargolariakUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9328AF891D6616C700E6B0E2 /* Gasteizko_MargolariakUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gasteizko_MargolariakUITests.swift; sourceTree = "<group>"; };
 		9328AF8B1D6616C700E6B0E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9338BE0C1D6B840D00D2735B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		9338BE0E1D6B84D700D2735B /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
+		9338BE101D6B8D9A00D2735B /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
+		9338BE141D6B8E3000D2735B /* ImageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHeaderView.swift; sourceTree = "<group>"; };
+		93B05E281D6BA1EF00D909F9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		93B05E2A1D6BA23A00D909F9 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		93B05E2C1D6BA27200D909F9 /* LablancaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LablancaViewController.swift; sourceTree = "<group>"; };
+		93B05E2E1D6BA29A00D909F9 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		93B05E301D6BA2BD00D909F9 /* GmscheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GmscheduleViewController.swift; sourceTree = "<group>"; };
+		93B05E321D6BA2E600D909F9 /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
+		93B05E341D6BA30E00D909F9 /* BlogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogViewController.swift; sourceTree = "<group>"; };
+		93B05E361D6BA33600D909F9 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		93B05E381D6BA35200D909F9 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		93B2BE7F1D6B8F05007CBED3 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		93B2BE871D6B8F9C007CBED3 /* DataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
+		93B2BE881D6B8F9C007CBED3 /* DataTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataTableViewCell.xib; sourceTree = "<group>"; };
+		93B2BE891D6B8F9C007CBED3 /* ExSlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSlideMenuController.swift; sourceTree = "<group>"; };
+		93B2BE8A1D6B8F9C007CBED3 /* ImageHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageHeaderView.xib; sourceTree = "<group>"; };
+		93B2BE8C1D6B8F9D007CBED3 /* SlideMenuControllerSwift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SlideMenuControllerSwift.xcdatamodel; sourceTree = "<group>"; };
+		93B2BE8D1D6B8F9D007CBED3 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		93B2BE8E1D6B8F9D007CBED3 /* SubContentsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SubContentsViewController.storyboard; sourceTree = "<group>"; };
+		93B2BE8F1D6B8F9D007CBED3 /* SubContentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubContentsViewController.swift; sourceTree = "<group>"; };
+		93B2BE901D6B8F9D007CBED3 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		93B2BE911D6B8F9D007CBED3 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		93B2BE921D6B8F9D007CBED3 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		93B2BE931D6B8F9D007CBED3 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		93B2BE941D6B8F9D007CBED3 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		93B2BE951D6B8F9D007CBED3 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		93B2BE961D6B8F9D007CBED3 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		93B2BEA61D6B8FEA007CBED3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		93B2BEA71D6B8FEA007CBED3 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
+		93B2BEA81D6B8FEA007CBED3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		93B2BEAB1D6B8FEA007CBED3 /* SlideMenuControllerSwift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SlideMenuControllerSwift.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +164,46 @@
 		9328AF681D6616C700E6B0E2 /* Gasteizko Margolariak */ = {
 			isa = PBXGroup;
 			children = (
+				9310BCBC1D6B9E4700C93AFA /* res */,
+				93B2BEA61D6B8FEA007CBED3 /* Assets.xcassets */,
+				93B2BEA71D6B8FEA007CBED3 /* Base.lproj */,
+				93B2BEA81D6B8FEA007CBED3 /* Images.xcassets */,
+				93B2BEAA1D6B8FEA007CBED3 /* SlideMenuControllerSwift.xcdatamodeld */,
+				93B2BE871D6B8F9C007CBED3 /* DataTableViewCell.swift */,
+				93B2BE881D6B8F9C007CBED3 /* DataTableViewCell.xib */,
+				93B2BE891D6B8F9C007CBED3 /* ExSlideMenuController.swift */,
+				93B2BE8A1D6B8F9C007CBED3 /* ImageHeaderView.xib */,
+				93B2BE8B1D6B8F9C007CBED3 /* SlideMenuControllerSwift.xcdatamodeld */,
+				93B2BE8D1D6B8F9D007CBED3 /* String.swift */,
+				93B2BE8E1D6B8F9D007CBED3 /* SubContentsViewController.storyboard */,
+				93B2BE8F1D6B8F9D007CBED3 /* SubContentsViewController.swift */,
+				93B2BE901D6B8F9D007CBED3 /* UIApplication.swift */,
+				93B2BE911D6B8F9D007CBED3 /* UIColor.swift */,
+				93B2BE921D6B8F9D007CBED3 /* UIImage.swift */,
+				93B2BE931D6B8F9D007CBED3 /* UIImageView.swift */,
+				93B2BE941D6B8F9D007CBED3 /* UITableViewExtension.swift */,
+				93B2BE951D6B8F9D007CBED3 /* UIView.swift */,
+				93B2BE961D6B8F9D007CBED3 /* UIViewController.swift */,
+				93B2BE7F1D6B8F05007CBED3 /* BaseTableViewCell.swift */,
+				9338BE141D6B8E3000D2735B /* ImageHeaderView.swift */,
 				9328AF691D6616C700E6B0E2 /* AppDelegate.swift */,
+				9338BE101D6B8D9A00D2735B /* LeftViewController.swift */,
 				9328AF6B1D6616C700E6B0E2 /* ViewController.swift */,
+				9338BE0C1D6B840D00D2735B /* MainViewController.swift */,
+				93B05E361D6BA33600D909F9 /* GalleryViewController.swift */,
+				93B05E381D6BA35200D909F9 /* SettingsViewController.swift */,
+				93B05E341D6BA30E00D909F9 /* BlogViewController.swift */,
 				9328AF6D1D6616C700E6B0E2 /* Main.storyboard */,
 				9328AF701D6616C700E6B0E2 /* Assets.xcassets */,
 				9328AF721D6616C700E6B0E2 /* LaunchScreen.storyboard */,
 				9328AF751D6616C700E6B0E2 /* Info.plist */,
+				9338BE0E1D6B84D700D2735B /* SlideMenuController.swift */,
+				93B05E321D6BA2E600D909F9 /* ActivitiesViewController.swift */,
+				93B05E281D6BA1EF00D909F9 /* HomeViewController.swift */,
+				93B05E2A1D6BA23A00D909F9 /* LocationViewController.swift */,
+				93B05E2C1D6BA27200D909F9 /* LablancaViewController.swift */,
+				93B05E2E1D6BA29A00D909F9 /* ScheduleViewController.swift */,
+				93B05E301D6BA2BD00D909F9 /* GmscheduleViewController.swift */,
 			);
 			path = "Gasteizko Margolariak";
 			sourceTree = "<group>";
@@ -193,6 +294,7 @@
 				TargetAttributes = {
 					9328AF651D6616C700E6B0E2 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = B62ZJDY436;
 					};
 					9328AF791D6616C700E6B0E2 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -229,9 +331,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9328AF741D6616C700E6B0E2 /* LaunchScreen.storyboard in Resources */,
+				9310BCBD1D6B9E4700C93AFA /* res in Resources */,
+				93B2BEAE1D6B8FEA007CBED3 /* Images.xcassets in Resources */,
+				93B2BE9A1D6B8F9D007CBED3 /* ImageHeaderView.xib in Resources */,
+				93B2BEAD1D6B8FEA007CBED3 /* Base.lproj in Resources */,
+				93B2BE9D1D6B8F9D007CBED3 /* SubContentsViewController.storyboard in Resources */,
 				9328AF711D6616C700E6B0E2 /* Assets.xcassets in Resources */,
+				93B2BEAC1D6B8FEA007CBED3 /* Assets.xcassets in Resources */,
 				9328AF6F1D6616C700E6B0E2 /* Main.storyboard in Resources */,
+				93B2BE981D6B8F9D007CBED3 /* DataTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +364,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93B05E371D6BA33600D909F9 /* GalleryViewController.swift in Sources */,
+				93B2BE9F1D6B8F9D007CBED3 /* UIApplication.swift in Sources */,
+				93B2BEA11D6B8F9D007CBED3 /* UIImage.swift in Sources */,
+				9338BE151D6B8E3000D2735B /* ImageHeaderView.swift in Sources */,
 				9328AF6C1D6616C700E6B0E2 /* ViewController.swift in Sources */,
+				93B05E2F1D6BA29A00D909F9 /* ScheduleViewController.swift in Sources */,
+				93B05E331D6BA2E600D909F9 /* ActivitiesViewController.swift in Sources */,
+				93B2BEA31D6B8F9D007CBED3 /* UITableViewExtension.swift in Sources */,
+				93B05E2B1D6BA23A00D909F9 /* LocationViewController.swift in Sources */,
+				9338BE0F1D6B84D700D2735B /* SlideMenuController.swift in Sources */,
+				93B2BEA41D6B8F9D007CBED3 /* UIView.swift in Sources */,
+				93B2BE831D6B8F05007CBED3 /* BaseTableViewCell.swift in Sources */,
 				9328AF6A1D6616C700E6B0E2 /* AppDelegate.swift in Sources */,
+				93B05E291D6BA1EF00D909F9 /* HomeViewController.swift in Sources */,
+				93B2BEA01D6B8F9D007CBED3 /* UIColor.swift in Sources */,
+				9338BE121D6B8D9A00D2735B /* LeftViewController.swift in Sources */,
+				93B05E2D1D6BA27200D909F9 /* LablancaViewController.swift in Sources */,
+				93B2BEA51D6B8F9D007CBED3 /* UIViewController.swift in Sources */,
+				93B2BEB01D6B8FEA007CBED3 /* SlideMenuControllerSwift.xcdatamodeld in Sources */,
+				93B2BE9E1D6B8F9D007CBED3 /* SubContentsViewController.swift in Sources */,
+				93B05E351D6BA30E00D909F9 /* BlogViewController.swift in Sources */,
+				93B2BE991D6B8F9D007CBED3 /* ExSlideMenuController.swift in Sources */,
+				93B2BE9B1D6B8F9D007CBED3 /* SlideMenuControllerSwift.xcdatamodeld in Sources */,
+				9338BE0D1D6B840D00D2735B /* MainViewController.swift in Sources */,
+				93B2BEA21D6B8F9D007CBED3 /* UIImageView.swift in Sources */,
+				93B05E391D6BA35200D909F9 /* SettingsViewController.swift in Sources */,
+				93B2BE9C1D6B8F9D007CBED3 /* String.swift in Sources */,
+				93B2BE971D6B8F9D007CBED3 /* DataTableViewCell.swift in Sources */,
+				93B05E311D6BA2BD00D909F9 /* GmscheduleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,10 +536,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Gasteizko Margolariak/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gm.Gasteizko-Margolariak";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -412,10 +551,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Gasteizko Margolariak/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gm.Gasteizko-Margolariak";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -484,6 +627,7 @@
 				9328AF901D6616C700E6B0E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9328AF911D6616C700E6B0E2 /* Build configuration list for PBXNativeTarget "Gasteizko MargolariakTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +636,7 @@
 				9328AF931D6616C700E6B0E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9328AF941D6616C700E6B0E2 /* Build configuration list for PBXNativeTarget "Gasteizko MargolariakUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,8 +645,32 @@
 				9328AF961D6616C700E6B0E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		93B2BE8B1D6B8F9C007CBED3 /* SlideMenuControllerSwift.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				93B2BE8C1D6B8F9D007CBED3 /* SlideMenuControllerSwift.xcdatamodel */,
+			);
+			currentVersion = 93B2BE8C1D6B8F9D007CBED3 /* SlideMenuControllerSwift.xcdatamodel */;
+			path = SlideMenuControllerSwift.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		93B2BEAA1D6B8FEA007CBED3 /* SlideMenuControllerSwift.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				93B2BEAB1D6B8FEA007CBED3 /* SlideMenuControllerSwift.xcdatamodel */,
+			);
+			currentVersion = 93B2BEAB1D6B8FEA007CBED3 /* SlideMenuControllerSwift.xcdatamodel */;
+			path = SlideMenuControllerSwift.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9328AF5E1D6616C700E6B0E2 /* Project object */;
 }
