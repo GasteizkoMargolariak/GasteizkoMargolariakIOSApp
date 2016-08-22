@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9310BCBD1D6B9E4700C93AFA /* res in Resources */ = {isa = PBXBuildFile; fileRef = 9310BCBC1D6B9E4700C93AFA /* res */; };
+		9315AB341D6BB56D00BEBCD3 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 9315AB331D6BB56D00BEBCD3 /* README.md */; };
 		9328AF6A1D6616C700E6B0E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328AF691D6616C700E6B0E2 /* AppDelegate.swift */; };
 		9328AF6C1D6616C700E6B0E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328AF6B1D6616C700E6B0E2 /* ViewController.swift */; };
 		9328AF6F1D6616C700E6B0E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9328AF6D1D6616C700E6B0E2 /* Main.storyboard */; };
@@ -68,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		9310BCBC1D6B9E4700C93AFA /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
+		9315AB331D6BB56D00BEBCD3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9328AF661D6616C700E6B0E2 /* Gasteizko Margolariak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gasteizko Margolariak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9328AF691D6616C700E6B0E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9328AF6B1D6616C700E6B0E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		9328AF5D1D6616C700E6B0E2 = {
 			isa = PBXGroup;
 			children = (
+				9315AB331D6BB56D00BEBCD3 /* README.md */,
 				9328AF681D6616C700E6B0E2 /* Gasteizko Margolariak */,
 				9328AF7D1D6616C700E6B0E2 /* Gasteizko MargolariakTests */,
 				9328AF881D6616C700E6B0E2 /* Gasteizko MargolariakUITests */,
@@ -376,6 +379,7 @@
 				9338BE0F1D6B84D700D2735B /* SlideMenuController.swift in Sources */,
 				93B2BEA41D6B8F9D007CBED3 /* UIView.swift in Sources */,
 				93B2BE831D6B8F05007CBED3 /* BaseTableViewCell.swift in Sources */,
+				9315AB341D6BB56D00BEBCD3 /* README.md in Sources */,
 				9328AF6A1D6616C700E6B0E2 /* AppDelegate.swift in Sources */,
 				93B05E291D6BA1EF00D909F9 /* HomeViewController.swift in Sources */,
 				93B2BEA01D6B8F9D007CBED3 /* UIColor.swift in Sources */,
