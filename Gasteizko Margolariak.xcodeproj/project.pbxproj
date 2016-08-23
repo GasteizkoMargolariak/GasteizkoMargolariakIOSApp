@@ -19,6 +19,8 @@
 		9338BE0F1D6B84D700D2735B /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338BE0E1D6B84D700D2735B /* SlideMenuController.swift */; };
 		9338BE121D6B8D9A00D2735B /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338BE101D6B8D9A00D2735B /* LeftViewController.swift */; };
 		9338BE151D6B8E3000D2735B /* ImageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338BE141D6B8E3000D2735B /* ImageHeaderView.swift */; };
+		93A692EA1D6CB2F700594BA0 /* Preferences.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93A692E81D6CB2F700594BA0 /* Preferences.xcdatamodeld */; };
+		93A692ED1D6CB3BB00594BA0 /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93A692EB1D6CB3BB00594BA0 /* Database.xcdatamodeld */; };
 		93B05E291D6BA1EF00D909F9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B05E281D6BA1EF00D909F9 /* HomeViewController.swift */; };
 		93B05E2B1D6BA23A00D909F9 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B05E2A1D6BA23A00D909F9 /* LocationViewController.swift */; };
 		93B05E2D1D6BA27200D909F9 /* LablancaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B05E2C1D6BA27200D909F9 /* LablancaViewController.swift */; };
@@ -87,6 +89,10 @@
 		9338BE0E1D6B84D700D2735B /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
 		9338BE101D6B8D9A00D2735B /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		9338BE141D6B8E3000D2735B /* ImageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHeaderView.swift; sourceTree = "<group>"; };
+		93A692E41D6CB11400594BA0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		93A692E61D6CB14000594BA0 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		93A692E91D6CB2F700594BA0 /* Preferences.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Preferences.xcdatamodel; sourceTree = "<group>"; };
+		93A692EC1D6CB3BB00594BA0 /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
 		93B05E281D6BA1EF00D909F9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		93B05E2A1D6BA23A00D909F9 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		93B05E2C1D6BA27200D909F9 /* LablancaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LablancaViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +152,8 @@
 		9328AF5D1D6616C700E6B0E2 = {
 			isa = PBXGroup;
 			children = (
+				93A692E61D6CB14000594BA0 /* libsqlite3.0.tbd */,
+				93A692E41D6CB11400594BA0 /* libsqlite3.tbd */,
 				9315AB331D6BB56D00BEBCD3 /* README.md */,
 				9328AF681D6616C700E6B0E2 /* Gasteizko Margolariak */,
 				9328AF7D1D6616C700E6B0E2 /* Gasteizko MargolariakTests */,
@@ -207,6 +215,8 @@
 				93B05E2C1D6BA27200D909F9 /* LablancaViewController.swift */,
 				93B05E2E1D6BA29A00D909F9 /* ScheduleViewController.swift */,
 				93B05E301D6BA2BD00D909F9 /* GmscheduleViewController.swift */,
+				93A692E81D6CB2F700594BA0 /* Preferences.xcdatamodeld */,
+				93A692EB1D6CB3BB00594BA0 /* Database.xcdatamodeld */,
 			);
 			path = "Gasteizko Margolariak";
 			sourceTree = "<group>";
@@ -369,6 +379,7 @@
 			files = (
 				93B05E371D6BA33600D909F9 /* GalleryViewController.swift in Sources */,
 				93B2BE9F1D6B8F9D007CBED3 /* UIApplication.swift in Sources */,
+				93A692ED1D6CB3BB00594BA0 /* Database.xcdatamodeld in Sources */,
 				93B2BEA11D6B8F9D007CBED3 /* UIImage.swift in Sources */,
 				9338BE151D6B8E3000D2735B /* ImageHeaderView.swift in Sources */,
 				9328AF6C1D6616C700E6B0E2 /* ViewController.swift in Sources */,
@@ -386,6 +397,7 @@
 				9338BE121D6B8D9A00D2735B /* LeftViewController.swift in Sources */,
 				93B05E2D1D6BA27200D909F9 /* LablancaViewController.swift in Sources */,
 				93B2BEA51D6B8F9D007CBED3 /* UIViewController.swift in Sources */,
+				93A692EA1D6CB2F700594BA0 /* Preferences.xcdatamodeld in Sources */,
 				93B2BEB01D6B8FEA007CBED3 /* SlideMenuControllerSwift.xcdatamodeld in Sources */,
 				93B2BE9E1D6B8F9D007CBED3 /* SubContentsViewController.swift in Sources */,
 				93B05E351D6BA30E00D909F9 /* BlogViewController.swift in Sources */,
@@ -656,6 +668,26 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		93A692E81D6CB2F700594BA0 /* Preferences.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				93A692E91D6CB2F700594BA0 /* Preferences.xcdatamodel */,
+			);
+			currentVersion = 93A692E91D6CB2F700594BA0 /* Preferences.xcdatamodel */;
+			path = Preferences.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		93A692EB1D6CB3BB00594BA0 /* Database.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				93A692EC1D6CB3BB00594BA0 /* Database.xcdatamodel */,
+			);
+			currentVersion = 93A692EC1D6CB3BB00594BA0 /* Database.xcdatamodel */;
+			path = Database.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		93B2BE8B1D6B8F9C007CBED3 /* SlideMenuControllerSwift.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

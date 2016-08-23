@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
+    <entity name="Activity" syncable="YES">
+        <attribute name="after_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="after_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="after_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="album" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comments" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="inscription" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="max_people" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="people" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="permalink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="text_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Activity_comment" syncable="YES">
+        <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="dtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="lang" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Activity_image" syncable="YES">
+        <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="idx" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Activity_itinerary" syncable="YES">
+        <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="end" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="place" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="start" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="Activity_tag" syncable="YES">
+        <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Album" syncable="YES">
+        <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="open" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="permalink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="Festival" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="img" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Festival_day" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Festival_event" syncable="YES">
+        <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="end" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="gm" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="host" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="place" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="start" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Festival_event_image" syncable="YES">
+        <attribute name="event" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="idx" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Festival_offer" syncable="YES">
+        <attribute name="days" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Location" syncable="YES">
+        <attribute name="dtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="manual" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="Notification" syncable="YES">
+        <attribute name="action" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="internal" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="text_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="People" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Photo" syncable="YES">
+        <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="file" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="permalink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="place" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="size" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uploaded" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="width" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Photo_album" syncable="YES">
+        <attribute name="album" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Photo_comment" syncable="YES">
+        <attribute name="dtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="lang" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Place" syncable="YES">
+        <attribute name="address_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Post" syncable="YES">
+        <attribute name="comments" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="dtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="permalink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Post_comment" syncable="YES">
+        <attribute name="dtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="lang" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="post" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Post_image" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="idx" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="post" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Post_tag" syncable="YES">
+        <attribute name="post" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Activity" positionX="-54" positionY="-9" width="128" height="330"/>
+        <element name="Activity_comment" positionX="-36" positionY="9" width="128" height="135"/>
+        <element name="Activity_image" positionX="-18" positionY="27" width="128" height="105"/>
+        <element name="Activity_itinerary" positionX="0" positionY="45" width="128" height="210"/>
+        <element name="Activity_tag" positionX="18" positionY="63" width="128" height="75"/>
+        <element name="Album" positionX="36" positionY="81" width="128" height="195"/>
+        <element name="Festival" positionX="-9" positionY="36" width="128" height="135"/>
+        <element name="Festival_day" positionX="0" positionY="45" width="128" height="135"/>
+        <element name="Festival_event" positionX="9" positionY="54" width="128" height="225"/>
+        <element name="Festival_event_image" positionX="18" positionY="63" width="128" height="105"/>
+        <element name="Festival_offer" positionX="27" positionY="72" width="128" height="195"/>
+        <element name="Photo" positionX="45" positionY="90" width="128" height="285"/>
+        <element name="Photo_album" positionX="0" positionY="45" width="128" height="75"/>
+        <element name="Photo_comment" positionX="9" positionY="54" width="128" height="135"/>
+        <element name="Place" positionX="18" positionY="63" width="128" height="195"/>
+        <element name="Post" positionX="27" positionY="72" width="128" height="195"/>
+        <element name="Post_image" positionX="36" positionY="81" width="128" height="105"/>
+        <element name="Post_tag" positionX="45" positionY="90" width="128" height="75"/>
+        <element name="Location" positionX="27" positionY="171" width="128" height="120"/>
+        <element name="Notification" positionX="36" positionY="180" width="128" height="210"/>
+        <element name="People" positionX="45" positionY="189" width="128" height="120"/>
+        <element name="Post_comment" positionX="54" positionY="198" width="128" height="135"/>
+    </elements>
+</model>
