@@ -42,7 +42,7 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
     var galleryViewController: UIViewController!
     var settingsViewController: UIViewController!
     
-    var imageHeaderView: ImageHeaderView!
+   // var imageHeaderView: ImageHeaderView!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -50,7 +50,7 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.separatorColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
+        //self.tableView.separatorColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -83,8 +83,8 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
 		
         self.tableView.registerCellClass(BaseTableViewCell.self)
         
-        self.imageHeaderView = ImageHeaderView.loadNib()
-        self.view.addSubview(self.imageHeaderView)
+        //self.imageHeaderView = ImageHeaderView.loadNib()
+        //self.view.addSubview(self.imageHeaderView)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -93,7 +93,7 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.imageHeaderView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160)
+        //self.imageHeaderView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160)
         self.view.layoutIfNeeded()
     }
     

@@ -1,9 +1,11 @@
 //
 //  AppDelegate.swift
-//  test11
+//  Gasteizko Margolariak
 //
-//  Created by Yuji Hato on 4/20/15.
-//  Copyright (c) 2015 Yuji Hato. All rights reserved.
+//  Created by Inigo Valentin on 2016-08-23
+//  Copyright © 2016 Inigo Valentin. All rights reserved.
+//
+//  Based on the work of Yuji Hato.
 //
 
 import UIKit
@@ -23,15 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let leftViewController = storyboard.instantiateViewControllerWithIdentifier("LeftViewController") as! LeftViewController
         
         let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)
-        
-        UINavigationBar.appearance().tintColor = UIColor(hex: "689F38")
-        
+		
+		UINavigationBar.appearance().tintColor = UIColor.blackColor()
+		UINavigationBar.appearance().backgroundColor = UIColor(hex: "4c9ed8")
+		
         leftViewController.mainViewController = nvc
         
         let slideMenuController = ExSlideMenuController(mainViewController:nvc, leftMenuViewController: leftViewController)
         slideMenuController.automaticallyAdjustsScrollViewInsets = true
         slideMenuController.delegate = mainViewController
-        self.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
+        //self.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
+		self.window?.backgroundColor = UIColor(hex: "c6e4f6")
         self.window?.rootViewController = slideMenuController
         self.window?.makeKeyAndVisible()
     }
