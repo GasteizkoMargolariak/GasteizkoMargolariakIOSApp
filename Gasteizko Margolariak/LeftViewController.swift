@@ -36,7 +36,7 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
     var locationViewController: UIViewController!
     var lablancaViewController: UIViewController!
     var scheduleViewController: UIViewController!
-    var gmsccheduleViewController: UIViewController!
+    var gmscheduleViewController: UIViewController!
     var activitiesViewController: UIViewController!
     var blogViewController: UIViewController!
     var galleryViewController: UIViewController!
@@ -57,8 +57,30 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
         let homeViewController = storyboard.instantiateViewControllerWithIdentifier("HomeViewController") as! HomeViewController
         self.homeViewController = UINavigationController(rootViewController: homeViewController)
         
-        
-        
+        let locationViewController = storyboard.instantiateViewControllerWithIdentifier("LocationViewController") as! LocationViewController
+        self.locationViewController = UINavigationController(rootViewController: locationViewController)
+		
+		let lablancaViewController = storyboard.instantiateViewControllerWithIdentifier("LablancaViewController") as! LablancaViewController
+		self.lablancaViewController = UINavigationController(rootViewController: lablancaViewController)
+		
+		let scheduleViewController = storyboard.instantiateViewControllerWithIdentifier("ScheduleViewController") as! ScheduleViewController
+		self.scheduleViewController = UINavigationController(rootViewController: scheduleViewController)
+		
+		let gmscheduleViewController = storyboard.instantiateViewControllerWithIdentifier("GmscheduleViewController") as! GmscheduleViewController
+		self.gmscheduleViewController = UINavigationController(rootViewController: gmscheduleViewController)
+		
+		let activitiesViewController = storyboard.instantiateViewControllerWithIdentifier("ActivitiesViewController") as! ActivitiesViewController
+		self.activitiesViewController = UINavigationController(rootViewController: activitiesViewController)
+		
+		let blogViewController = storyboard.instantiateViewControllerWithIdentifier("BlogViewController") as! BlogViewController
+		self.blogViewController = UINavigationController(rootViewController: blogViewController)
+		
+		let galleryViewController = storyboard.instantiateViewControllerWithIdentifier("GalleryViewController") as! GalleryViewController
+		self.galleryViewController = UINavigationController(rootViewController: galleryViewController)
+		
+		let settingsViewController = storyboard.instantiateViewControllerWithIdentifier("SettingsViewController") as! SettingsViewController
+		self.settingsViewController = UINavigationController(rootViewController: settingsViewController)
+		
         self.tableView.registerCellClass(BaseTableViewCell.self)
         
         self.imageHeaderView = ImageHeaderView.loadNib()
@@ -77,14 +99,26 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
     
     func changeViewController(menu: LeftMenu) {
         switch menu {
-        case .Main:
-            self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
-        case .Home:
-            self.slideMenuController()?.changeMainViewController(self.homeViewController, close: true)
-        default: //Delete default
-            self.slideMenuController()?.changeMainViewController(self.homeViewController, close: true)
-
-
+			case .Main:
+				self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
+			case .Home:
+				self.slideMenuController()?.changeMainViewController(self.homeViewController, close: true)
+			case .Location:
+				self.slideMenuController()?.changeMainViewController(self.locationViewController, close: true)
+			case .Lablanca:
+				self.slideMenuController()?.changeMainViewController(self.lablancaViewController, close: true)
+			case .Schedule:
+				self.slideMenuController()?.changeMainViewController(self.scheduleViewController, close: true)
+			case .Gmschedule:
+				self.slideMenuController()?.changeMainViewController(self.gmscheduleViewController, close: true)
+			case .Activities:
+				self.slideMenuController()?.changeMainViewController(self.activitiesViewController, close: true)
+			case .Blog:
+				self.slideMenuController()?.changeMainViewController(self.blogViewController, close: true)
+			case .Gallery:
+				self.slideMenuController()?.changeMainViewController(self.galleryViewController, close: true)
+			case .Settings:
+				self.slideMenuController()?.changeMainViewController(self.settingsViewController, close: true)
         }
     }
 }

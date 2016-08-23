@@ -153,7 +153,7 @@
         <!--Location View Controller-->
         <scene sceneID="4cK-mI-MCG">
             <objects>
-                <viewController storyboardIdentifier="JavaViewController" id="TvI-C9-lSF" customClass="LocationViewController" customModule="Gasteizko_Margolariak" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationViewController" id="TvI-C9-lSF" customClass="LocationViewController" customModule="Gasteizko_Margolariak" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qOh-Be-bJ9"/>
                         <viewControllerLayoutGuide type="bottom" id="yPA-d7-Ile"/>
@@ -185,10 +185,10 @@
             </objects>
             <point key="canvasLocation" x="130" y="789"/>
         </scene>
-        <!--Go View Controller-->
+        <!--Lablanca View Controller-->
         <scene sceneID="adq-KJ-u5Z">
             <objects>
-                <viewController storyboardIdentifier="GoViewController" id="pwN-Wv-Ioh" customClass="GoViewController" customModule="Gasteizko_Margolariak" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LablancaViewController" id="pwN-Wv-Ioh" customClass="LablancaViewController" customModule="Gasteizko_Margolariak" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QEC-CO-vAa"/>
                         <viewControllerLayoutGuide type="bottom" id="4w6-Ph-vE3"/>
@@ -220,10 +220,10 @@
             </objects>
             <point key="canvasLocation" x="130" y="2189"/>
         </scene>
-        <!--Non Menu Controller-->
+        <!--Schedule View Controller-->
         <scene sceneID="d7w-0k-xlq">
             <objects>
-                <viewController storyboardIdentifier="NonMenuController" id="dnB-Mf-802" customClass="NonMenuController" customModule="Gasteizko_Margolariak" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScheduleViewController" id="dnB-Mf-802" customClass="ScheduleViewController" customModule="Gasteizko_Margolariak" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="P9h-CD-Kay"/>
                         <viewControllerLayoutGuide type="bottom" id="2A9-xu-LZI"/>
@@ -268,6 +268,261 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BqV-Y1-lxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="2864"/>
+        </scene>
+        <!--Gmschedule View Controller-->
+        <scene sceneID="Xif-Y4-3uZ">
+            <objects>
+                <viewController storyboardIdentifier="GmscheduleViewController" id="u1d-G3-tSj" customClass="GmscheduleViewController" customModule="Gasteizko_Margolariak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VtB-hu-YDw"/>
+                        <viewControllerLayoutGuide type="bottom" id="DF1-M8-ebs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Swh-fz-ASn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NonMenuViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSs-yU-m4w">
+                                <rect key="frame" x="180" y="100" width="240" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="cnE-js-3JZ"/>
+                                    <constraint firstAttribute="height" constant="93" id="fZT-s6-xkE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="0.61960784310000006" green="0.61960784310000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMu-Xy-Lhh">
+                                <rect key="frame" x="215" y="233" width="171" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="3zl-MN-aJ1"/>
+                                    <constraint firstAttribute="width" constant="171" id="alc-Ra-OnB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="To MainViewController">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchToMain:" destination="u1d-G3-tSj" eventType="touchUpInside" id="71f-Jy-Chc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.68235294120000001" green="0.83529411760000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="JSs-yU-m4w" secondAttribute="centerX" id="JeQ-0s-Jb8"/>
+                            <constraint firstAttribute="centerX" secondItem="rMu-Xy-Lhh" secondAttribute="centerX" id="Kam-Gq-ugj"/>
+                            <constraint firstItem="rMu-Xy-Lhh" firstAttribute="top" secondItem="JSs-yU-m4w" secondAttribute="bottom" constant="40" id="c8A-zt-MUm"/>
+                            <constraint firstItem="JSs-yU-m4w" firstAttribute="top" secondItem="VtB-hu-YDw" secondAttribute="bottom" constant="80" id="o8G-YM-Ebi"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ggi-fG-BLU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="2864"/>
+        </scene>
+        <!--Activities View Controller-->
+        <scene sceneID="ySS-kM-UxN">
+            <objects>
+                <viewController storyboardIdentifier="ActivitiesViewController" id="bGm-bT-ddk" customClass="ActivitiesViewController" customModule="Gasteizko_Margolariak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aCW-p3-RjS"/>
+                        <viewControllerLayoutGuide type="bottom" id="cwa-jo-ROW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TaR-Ay-dBx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NonMenuViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hI7-Zf-VZG">
+                                <rect key="frame" x="180" y="100" width="240" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="9GB-rw-uwf"/>
+                                    <constraint firstAttribute="height" constant="93" id="AB6-iI-gl6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="0.61960784310000006" green="0.61960784310000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DyV-Yd-Nh2">
+                                <rect key="frame" x="215" y="233" width="171" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="RhU-lq-Myp"/>
+                                    <constraint firstAttribute="width" constant="171" id="kbD-ed-y32"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="To MainViewController">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchToMain:" destination="bGm-bT-ddk" eventType="touchUpInside" id="B6d-Mt-JXc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.68235294120000001" green="0.83529411760000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="hI7-Zf-VZG" firstAttribute="top" secondItem="aCW-p3-RjS" secondAttribute="bottom" constant="80" id="6tP-9L-4MT"/>
+                            <constraint firstAttribute="centerX" secondItem="hI7-Zf-VZG" secondAttribute="centerX" id="BsD-rC-3Es"/>
+                            <constraint firstItem="DyV-Yd-Nh2" firstAttribute="top" secondItem="hI7-Zf-VZG" secondAttribute="bottom" constant="40" id="MQ9-le-zgK"/>
+                            <constraint firstAttribute="centerX" secondItem="DyV-Yd-Nh2" secondAttribute="centerX" id="huC-1q-jTU"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xK2-jB-B6R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="2864"/>
+        </scene>
+        <!--Blog View Controller-->
+        <scene sceneID="IIe-hG-X6c">
+            <objects>
+                <viewController storyboardIdentifier="BlogViewController" id="op4-Xb-3rZ" customClass="BlogViewController" customModule="Gasteizko_Margolariak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cZe-Ve-mPK"/>
+                        <viewControllerLayoutGuide type="bottom" id="7O8-9B-55P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ifz-OL-PyY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NonMenuViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31m-GU-ron">
+                                <rect key="frame" x="180" y="100" width="240" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="5qD-TU-xut"/>
+                                    <constraint firstAttribute="height" constant="93" id="BZu-yR-Jcb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="0.61960784310000006" green="0.61960784310000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOm-vs-MRs">
+                                <rect key="frame" x="215" y="233" width="171" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="171" id="Fb4-WO-oYG"/>
+                                    <constraint firstAttribute="height" constant="52" id="WIN-5m-oWh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="To MainViewController">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchToMain:" destination="op4-Xb-3rZ" eventType="touchUpInside" id="zr3-Fa-LjF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.68235294120000001" green="0.83529411760000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="bOm-vs-MRs" firstAttribute="top" secondItem="31m-GU-ron" secondAttribute="bottom" constant="40" id="4uL-6b-VqT"/>
+                            <constraint firstAttribute="centerX" secondItem="bOm-vs-MRs" secondAttribute="centerX" id="Clc-ty-WR9"/>
+                            <constraint firstItem="31m-GU-ron" firstAttribute="top" secondItem="cZe-Ve-mPK" secondAttribute="bottom" constant="80" id="WvG-PT-AS3"/>
+                            <constraint firstAttribute="centerX" secondItem="31m-GU-ron" secondAttribute="centerX" id="yZt-PC-208"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FkD-lX-1Cz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="2864"/>
+        </scene>
+        <!--Gallery View Controller-->
+        <scene sceneID="gqs-XF-Qei">
+            <objects>
+                <viewController storyboardIdentifier="GalleryViewController" id="NUL-Wy-06d" customClass="GalleryViewController" customModule="Gasteizko_Margolariak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Q0O-iS-gpg"/>
+                        <viewControllerLayoutGuide type="bottom" id="50j-bB-VnM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FfK-Cj-D5k">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NonMenuViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikF-ua-pez">
+                                <rect key="frame" x="180" y="100" width="240" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="93" id="8qu-IW-gs8"/>
+                                    <constraint firstAttribute="width" constant="240" id="nOa-NS-mw8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="0.61960784310000006" green="0.61960784310000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9X-nf-gfH">
+                                <rect key="frame" x="215" y="233" width="171" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="683-TZ-QXZ"/>
+                                    <constraint firstAttribute="width" constant="171" id="AIc-AX-BiA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="To MainViewController">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchToMain:" destination="NUL-Wy-06d" eventType="touchUpInside" id="YHL-jy-41B"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.68235294120000001" green="0.83529411760000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="ikF-ua-pez" firstAttribute="top" secondItem="Q0O-iS-gpg" secondAttribute="bottom" constant="80" id="8Dr-aY-jb2"/>
+                            <constraint firstAttribute="centerX" secondItem="f9X-nf-gfH" secondAttribute="centerX" id="VQJ-oy-E8M"/>
+                            <constraint firstAttribute="centerX" secondItem="ikF-ua-pez" secondAttribute="centerX" id="cN1-IT-8Z3"/>
+                            <constraint firstItem="f9X-nf-gfH" firstAttribute="top" secondItem="ikF-ua-pez" secondAttribute="bottom" constant="40" id="h5I-jf-EeI"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EyC-OL-zKc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="2864"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="2bd-bW-eTv">
+            <objects>
+                <viewController storyboardIdentifier="SettingsViewController" id="jQJ-R1-Iz4" customClass="SettingsViewController" customModule="Gasteizko_Margolariak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LJd-j5-Uf0"/>
+                        <viewControllerLayoutGuide type="bottom" id="ayy-5y-7gz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kBl-ic-d1h">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NonMenuViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIh-f2-kcF">
+                                <rect key="frame" x="180" y="100" width="240" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="93" id="8Qb-xv-huU"/>
+                                    <constraint firstAttribute="width" constant="240" id="Yox-Ri-fRh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="0.61960784310000006" green="0.61960784310000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nlk-ce-Oow">
+                                <rect key="frame" x="215" y="233" width="171" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="el0-o8-VQD"/>
+                                    <constraint firstAttribute="width" constant="171" id="x0M-UR-aSw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="To MainViewController">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTouchToMain:" destination="jQJ-R1-Iz4" eventType="touchUpInside" id="TGd-Vi-EYu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.68235294120000001" green="0.83529411760000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Nlk-ce-Oow" firstAttribute="top" secondItem="GIh-f2-kcF" secondAttribute="bottom" constant="40" id="bWf-eZ-atT"/>
+                            <constraint firstAttribute="centerX" secondItem="Nlk-ce-Oow" secondAttribute="centerX" id="isL-iC-r85"/>
+                            <constraint firstItem="GIh-f2-kcF" firstAttribute="top" secondItem="LJd-j5-Uf0" secondAttribute="bottom" constant="80" id="oJR-jK-ixD"/>
+                            <constraint firstAttribute="centerX" secondItem="GIh-f2-kcF" secondAttribute="centerX" id="wQl-gH-ZAv"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5cR-4x-Hu9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="138" y="2864"/>
         </scene>
