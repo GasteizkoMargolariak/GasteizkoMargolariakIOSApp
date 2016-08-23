@@ -43,9 +43,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         self.createMenuView()
-        
+		
+		//Get db version
+		//NSUserDefaults.standardUserDefaults().setObject("mynameisben", forKey: "username")
+		
+		if let dbVersion = NSUserDefaults.standardUserDefaults().stringForKey("dbversion"){
+			print("DB Version: \(dbVersion)")
+		}
+		else{
+			print("DB Verion not set. Fetching content")
+			
+			
+			//Async task to do the initial sync
+			let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+			dispatch_async(dispatch_get_global_queue(priority, 0)) {
+				// do some task
+				let urlPath: String = "http://margolariak.com/app/sync.php"
+				let url: NSURL = NSURL(string: urlPath)!
+				let request1: NSURLRequest = NSURLRequest(URL: url)
+				let queue:NSOperationQueue = NSOperationQueue()
+				
+				NSURLConnection.sendAsynchronousRequest(request1, queue: queue, completionHandler:{ (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
+					
+					do {
+						let content = try String(contentsOfURL: url)
+						//print("HTML : \(content)")
+						//let newVersion = content.substringWithRange(Range<String.Index>(start: content.rangeOfString("<version>"), end: content.rangeOfString("</version>")))
+						if let startRange = content.rangeOfString("<version>"), endRange = content.rangeOfString("</version>") {
+							let newVersion = content[startRange.endIndex..<endRange.startIndex]
+							print("Remote db Verion : \(newVersion)")
+						}
+						
+					} catch let error as NSError {
+						print(error.localizedDescription)
+					}
+					
+					
+				})
+				
+				
+				dispatch_async(dispatch_get_main_queue()) {
+					// update some UI
+				}
+			}
+		}
+	
+		
+		
         return true
     }
+	
+	func applicationDidFinishLaunching(application: UIApplication) {
+		print("App launched")
+	}
     
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
