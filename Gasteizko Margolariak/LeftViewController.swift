@@ -11,8 +11,7 @@
 import UIKit
 
 enum LeftMenu: Int {
-    case Main = 0
-    case Home
+    case Home = 0
     case Location
     case Lablanca
     case Schedule
@@ -31,7 +30,6 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
     
     @IBOutlet weak var tableView: UITableView!
     var menus = ["Home", "Localizacion", "La Blanca", "Programa de Fiestas", "Programa Margolari", "Actividades", "Blog", "Galeria", "Ajustes"]
-    var mainViewController: UIViewController!
     var homeViewController: UIViewController!
     var locationViewController: UIViewController!
     var lablancaViewController: UIViewController!
@@ -98,9 +96,8 @@ class LeftViewController : UIViewController, LeftMenuProtocol {
     }
     
     func changeViewController(menu: LeftMenu) {
+		print("Selected item: \(menu)")
         switch menu {
-			case .Main:
-				self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
 			case .Home:
 				self.slideMenuController()?.changeMainViewController(self.homeViewController, close: true)
 			case .Location:
@@ -127,7 +124,7 @@ extension LeftViewController : UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if let menu = LeftMenu(rawValue: indexPath.item) {
             switch menu {
-            case .Main, .Home, .Location, .Lablanca, .Schedule, .Gmschedule, .Activities, .Blog, .Gallery, .Settings:
+            case .Home, .Location, .Lablanca, .Schedule, .Gmschedule, .Activities, .Blog, .Gallery, .Settings:
                 return BaseTableViewCell.height()
             }
         }
@@ -145,7 +142,7 @@ extension LeftViewController : UITableViewDataSource {
         
         if let menu = LeftMenu(rawValue: indexPath.item) {
             switch menu {
-            case .Main, .Home, .Location, .Lablanca, .Schedule, .Gmschedule, .Activities, .Blog, .Gallery, .Settings:
+            case .Home, .Location, .Lablanca, .Schedule, .Gmschedule, .Activities, .Blog, .Gallery, .Settings:
                 let cell = BaseTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: BaseTableViewCell.identifier)
                 cell.setData(menus[indexPath.row])
                 return cell
