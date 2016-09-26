@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UINavigationBar.appearance().tintColor = UIColor.blackColor()
 		UINavigationBar.appearance().backgroundColor = UIColor(hex: "4c9ed8")
 		
-        leftViewController.mainViewController = nvc
+        //leftViewController.mainViewController = nvc
         
         let slideMenuController = ExSlideMenuController(mainViewController:nvc, leftMenuViewController: leftViewController)
         slideMenuController.automaticallyAdjustsScrollViewInsets = true
@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		//Get db version
 		//NSUserDefaults.standardUserDefaults().setObject("mynameisben", forKey: "username")
 		
-		if let dbVersion = NSUserDefaults.standardUserDefaults().stringForKey("dbversion"){
+		/*if let dbVersion = NSUserDefaults.standardUserDefaults().stringForKey("dbversion"){
 			print("DB Version: \(dbVersion)")
 		}
 		else{
@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 						let content = try String(contentsOfURL: url)
 						//print("HTML : \(content)")
 						//let newVersion = content.substringWithRange(Range<String.Index>(start: content.rangeOfString("<version>"), end: content.rangeOfString("</version>")))
-						if let startRange = content.rangeOfString("<version>"), endRange = content.rangeOfString("</version>") {
+						if let startRange = content.rangeOfString("<version>"), let endRange = content.rangeOfString("</version>") {
 							let newVersion = content[startRange.endIndex..<endRange.startIndex]
 							print("Remote db Verion : \(newVersion)")
 						}
@@ -86,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					// update some UI
 				}
 			}
-		}
+		}*/
 	
 		
 		
