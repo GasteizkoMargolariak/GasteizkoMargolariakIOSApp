@@ -15,7 +15,6 @@
 		9328AF711D6616C700E6B0E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9328AF701D6616C700E6B0E2 /* Assets.xcassets */; };
 		9338BE0D1D6B840D00D2735B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338BE0C1D6B840D00D2735B /* MainViewController.swift */; };
 		9338BE0F1D6B84D700D2735B /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338BE0E1D6B84D700D2735B /* SlideMenuController.swift */; };
-		9338BE121D6B8D9A00D2735B /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338BE101D6B8D9A00D2735B /* LeftViewController.swift */; };
 		9338BE151D6B8E3000D2735B /* ImageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9338BE141D6B8E3000D2735B /* ImageHeaderView.swift */; };
 		93A692EA1D6CB2F700594BA0 /* Preferences.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93A692E81D6CB2F700594BA0 /* Preferences.xcdatamodeld */; };
 		93A692ED1D6CB3BB00594BA0 /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93A692EB1D6CB3BB00594BA0 /* Database.xcdatamodeld */; };
@@ -66,7 +65,6 @@
 		9328AF8B1D6616C700E6B0E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9338BE0C1D6B840D00D2735B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9338BE0E1D6B84D700D2735B /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
-		9338BE101D6B8D9A00D2735B /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		9338BE141D6B8E3000D2735B /* ImageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHeaderView.swift; sourceTree = "<group>"; };
 		93A692E41D6CB11400594BA0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		93A692E61D6CB14000594BA0 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -161,7 +159,6 @@
 				93B2BE7F1D6B8F05007CBED3 /* BaseTableViewCell.swift */,
 				9338BE141D6B8E3000D2735B /* ImageHeaderView.swift */,
 				9328AF691D6616C700E6B0E2 /* AppDelegate.swift */,
-				9338BE101D6B8D9A00D2735B /* LeftViewController.swift */,
 				9328AF6B1D6616C700E6B0E2 /* ViewController.swift */,
 				9338BE0C1D6B840D00D2735B /* MainViewController.swift */,
 				93B05E361D6BA33600D909F9 /* GalleryViewController.swift */,
@@ -298,7 +295,6 @@
 				9328AF6A1D6616C700E6B0E2 /* AppDelegate.swift in Sources */,
 				93B05E291D6BA1EF00D909F9 /* HomeViewController.swift in Sources */,
 				93B2BEA01D6B8F9D007CBED3 /* UIColor.swift in Sources */,
-				9338BE121D6B8D9A00D2735B /* LeftViewController.swift in Sources */,
 				93B05E2D1D6BA27200D909F9 /* LablancaViewController.swift in Sources */,
 				93B2BEA51D6B8F9D007CBED3 /* UIViewController.swift in Sources */,
 				93A692EA1D6CB2F700594BA0 /* Preferences.xcdatamodeld in Sources */,

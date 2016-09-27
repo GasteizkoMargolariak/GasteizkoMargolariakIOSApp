@@ -90,10 +90,10 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    public convenience init(mainViewController: UIViewController, leftMenuViewController: UIViewController) {
+    public convenience init(mainViewController: UIViewController) {
         self.init()
         self.mainViewController = mainViewController
-        leftViewController = leftMenuViewController
+        //leftViewController = leftMenuViewController
         initView()
     }
     
