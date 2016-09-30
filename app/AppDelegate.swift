@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Set a one line for collectionView
         
+        
+        //Navigation bar customization
+        //UINavigationBar.appearance().isTranslucent = false;
         return true
     }
 

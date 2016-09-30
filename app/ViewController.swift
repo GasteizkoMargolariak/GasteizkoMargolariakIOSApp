@@ -23,7 +23,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
     var items = ["Home", "Location", "La Blanca", "Actividades", "Blog", "Gallery"]
     
-    
     // MARK: - UICollectionViewDataSource protocol
     
     // tell the collection view how many cells to make

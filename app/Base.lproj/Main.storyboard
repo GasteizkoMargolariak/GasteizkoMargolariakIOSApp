@@ -28,21 +28,21 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFh-si-6JY">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFh-si-6JY">
                                 <color key="backgroundColor" red="0.72748052552819176" green="0.91921132201073807" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="MHT-7R-T2c"/>
                                 </constraints>
+                                <color key="barTintColor" red="0.85979589512451782" green="0.95012098090369101" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Gasteizko Margolariak" id="Bum-YC-FZU"/>
                                 </items>
                             </navigationBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ikv-46-g2m">
-                                <frame key="frameInset" minY="242" width="375" height="128"/>
-                                <color key="backgroundColor" red="0.72748052549999997" green="0.919211322" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ikv-46-g2m">
+                                <color key="backgroundColor" red="0.85979589509999998" green="0.95012098089999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="D8o-cR-8qU"/>
                                 </constraints>
@@ -54,7 +54,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="a4j-DF-epb" customClass="MenuCollectionViewCell" customModule="app" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="39" width="100" height="50"/>
+                                        <rect key="frame" x="0.0" y="-5" width="100" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
@@ -62,7 +62,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbJ-gz-Ivz">
                                                     <frame key="frameInset" minX="6" minY="5" width="100" height="40"/>
-                                                    <color key="backgroundColor" red="0.72748052549999997" green="0.919211322" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.85979589509999998" green="0.95012098089999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="JDi-Ta-B3u"/>
                                                         <constraint firstAttribute="width" constant="100" id="eKL-ga-53F"/>
@@ -73,7 +73,7 @@
                                                 </label>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.58073881927014726" green="0.82106793130139011" blue="0.99835759401321411" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="PbJ-gz-Ivz" firstAttribute="centerX" secondItem="a4j-DF-epb" secondAttribute="centerX" id="BgU-YL-9w0"/>
                                             <constraint firstItem="PbJ-gz-Ivz" firstAttribute="centerY" secondItem="a4j-DF-epb" secondAttribute="centerY" id="YZg-8N-4hG"/>
@@ -88,21 +88,45 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="k4t-RF-DxW"/>
                                 </connections>
                             </collectionView>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FfD-xR-Ufj">
+                                <frame key="frameInset" height="380" maxY="-5"/>
+                                <connections>
+                                    <segue destination="aNc-O2-1Df" kind="embed" id="QXk-51-7xE"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Ikv-46-g2m" firstAttribute="top" secondItem="zFh-si-6JY" secondAttribute="bottom" id="779-4E-igL"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="FfD-xR-Ufj" secondAttribute="bottom" id="7jk-ze-1Vp"/>
                             <constraint firstItem="zFh-si-6JY" firstAttribute="leading" secondItem="Ikv-46-g2m" secondAttribute="leading" id="DtH-3x-QsB"/>
                             <constraint firstItem="zFh-si-6JY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="HNI-Oh-agx"/>
+                            <constraint firstItem="FfD-xR-Ufj" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="MPS-z3-zNb"/>
                             <constraint firstItem="zFh-si-6JY" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="MZQ-hn-ezh"/>
                             <constraint firstItem="Ikv-46-g2m" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eln-ck-QcI"/>
+                            <constraint firstItem="FfD-xR-Ufj" firstAttribute="top" secondItem="Ikv-46-g2m" secondAttribute="bottom" id="fwz-Vq-Hzc"/>
                             <constraint firstItem="Ikv-46-g2m" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="j8o-dm-xpa"/>
+                            <constraint firstItem="FfD-xR-Ufj" firstAttribute="centerX" secondItem="Ikv-46-g2m" secondAttribute="centerX" id="kSp-hr-GIX"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="789.60000000000002" y="899.10044977511257"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="DhP-V4-Fb2">
+            <objects>
+                <viewController storyboardIdentifier="homeViewControllerScene" id="aNc-O2-1Df" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="12o-6g-8cT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.9425276964" green="1" blue="0.35931510379999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jry-8b-RWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="454" y="1646"/>
         </scene>
     </scenes>
 </document>
