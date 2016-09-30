@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -38,10 +39,10 @@
                                 </constraints>
                                 <color key="barTintColor" red="0.85979589512451782" green="0.95012098090369101" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <navigationItem title="Gasteizko Margolariak" id="Bum-YC-FZU"/>
+                                    <navigationItem title="Title" id="isw-jq-8xu"/>
                                 </items>
                             </navigationBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ikv-46-g2m">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ikv-46-g2m">
                                 <color key="backgroundColor" red="0.85979589509999998" green="0.95012098089999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="D8o-cR-8qU"/>
@@ -71,11 +72,24 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0zD-5h-K1i">
+                                                    <frame key="frameInset" minX="29" minY="14" width="42" height="21"/>
+                                                    <color key="backgroundColor" red="0.39387386904777305" green="0.62796053144439012" blue="0.99835759401321411" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="2" id="V9n-Wq-pBe"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.58073881927014726" green="0.82106793130139011" blue="0.99835759401321411" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="0zD-5h-K1i" firstAttribute="centerX" secondItem="a4j-DF-epb" secondAttribute="centerX" id="2n7-QU-CYC"/>
                                             <constraint firstItem="PbJ-gz-Ivz" firstAttribute="centerX" secondItem="a4j-DF-epb" secondAttribute="centerX" id="BgU-YL-9w0"/>
+                                            <constraint firstItem="0zD-5h-K1i" firstAttribute="width" secondItem="a4j-DF-epb" secondAttribute="width" constant="-8" id="SKa-0j-eNV"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="0zD-5h-K1i" secondAttribute="bottom" id="WfL-GN-Mgd"/>
                                             <constraint firstItem="PbJ-gz-Ivz" firstAttribute="centerY" secondItem="a4j-DF-epb" secondAttribute="centerY" id="YZg-8N-4hG"/>
                                         </constraints>
                                         <connections>
