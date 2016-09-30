@@ -31,11 +31,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFh-si-6JY">
+                                <color key="backgroundColor" red="0.72748052552819176" green="0.91921132201073807" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="MHT-7R-T2c"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Gasteizko Margolariak" id="Bum-YC-FZU"/>
+                                </items>
+                            </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ikv-46-g2m">
                                 <frame key="frameInset" minY="242" width="375" height="128"/>
-                                <color key="backgroundColor" red="0.9425276964" green="1" blue="0.35931510379999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.72748052549999997" green="0.919211322" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="D8o-cR-8qU"/>
+                                    <constraint firstAttribute="height" constant="40" id="D8o-cR-8qU"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="3" minimumInteritemSpacing="1000" id="uuj-Dg-Ftx">
                                     <size key="itemSize" width="100" height="50"/>
@@ -51,11 +60,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbJ-gz-Ivz">
-                                                    <frame key="frameInset" minX="-95" minY="-39" width="240" height="128"/>
-                                                    <color key="backgroundColor" red="0.4079896717" green="1" blue="0.34807942549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbJ-gz-Ivz">
+                                                    <frame key="frameInset" minX="6" minY="5" width="100" height="40"/>
+                                                    <color key="backgroundColor" red="0.72748052549999997" green="0.919211322" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="JDi-Ta-B3u"/>
+                                                        <constraint firstAttribute="height" constant="40" id="JDi-Ta-B3u"/>
                                                         <constraint firstAttribute="width" constant="100" id="eKL-ga-53F"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -65,6 +74,10 @@
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="PbJ-gz-Ivz" firstAttribute="centerX" secondItem="a4j-DF-epb" secondAttribute="centerX" id="BgU-YL-9w0"/>
+                                            <constraint firstItem="PbJ-gz-Ivz" firstAttribute="centerY" secondItem="a4j-DF-epb" secondAttribute="centerY" id="YZg-8N-4hG"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="myLabel" destination="PbJ-gz-Ivz" id="Qtp-JE-TDT"/>
                                         </connections>
@@ -78,9 +91,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Ikv-46-g2m" firstAttribute="top" secondItem="zFh-si-6JY" secondAttribute="bottom" id="779-4E-igL"/>
+                            <constraint firstItem="zFh-si-6JY" firstAttribute="leading" secondItem="Ikv-46-g2m" secondAttribute="leading" id="DtH-3x-QsB"/>
+                            <constraint firstItem="zFh-si-6JY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="HNI-Oh-agx"/>
+                            <constraint firstItem="zFh-si-6JY" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="MZQ-hn-ezh"/>
                             <constraint firstItem="Ikv-46-g2m" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eln-ck-QcI"/>
                             <constraint firstItem="Ikv-46-g2m" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="j8o-dm-xpa"/>
-                            <constraint firstItem="Ikv-46-g2m" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="65" id="kb5-4D-ytn"/>
                         </constraints>
                     </view>
                 </viewController>
