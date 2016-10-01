@@ -9,7 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    var sectionCollection: UICollectionView!
 
+    @IBOutlet weak var containerViewLocation: UIView!
+    @IBOutlet weak var containerViewHome: UIView!
     override func viewDidLoad() {
         print("LOAD")
         super.viewDidLoad()
@@ -40,13 +44,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         //Get a reference to our storyboard cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MenuCollectionViewCell
         
-        //Make the updatable
-        //cell.setNeedsDisplay()
-        //cell.setNeedsLayout()
-        
         //Set text
         cell.label.text = self.items[indexPath.item]
-        
         
         
         //Mark the first cell as selected
@@ -65,13 +64,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     // MARK: - UICollectionViewDelegate protocol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Return all labels to their original state, and mark the selected as such
+        sectionCollection = collectionView
+        print("You selected cell #\(indexPath.item)!")
+        showComponent(selected: indexPath.item)
+    }
+    
+    @IBAction func showComponent(selected: Int) {
+        print("SELECTED: \(selected)")
+        //Activate label
         var i = 0
-        selected = indexPath.item
-        for cell in collectionView.visibleCells as! [MenuCollectionViewCell]{
-            print("\(i)/\(indexPath.item)")
-            if i == indexPath.item{
-                print("CHANGE")
+        for cell in sectionCollection.visibleCells as! [MenuCollectionViewCell]{
+            if i == selected + 1{
                 cell.bar.backgroundColor = UIColor(red: 90/255, green: 180/255, blue: 255/255, alpha: 1)
                 cell.label.font = UIFont.boldSystemFont(ofSize: cell.label.font.pointSize)
             }
@@ -80,26 +83,21 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 cell.label.font = UIFont.systemFont(ofSize: cell.label.font.pointSize)
                 
             }
-            //cell.superview?.superview?.setNeedsDisplay()
-            //cell.setNeedsLayout()
-            //DispatchQueue.main.async{cell.setNeedsDisplay()}
             i = i + 1
         }
-        print("REDRAW")
-        //collectionView.setNeedsDisplay()
-        collectionView.layoutIfNeeded()
-        //collectionView.setNeedsLayout()
-        //DispatchQueue.main.async{collectionView.setNeedsDisplay()}
-        //dispatch_async(dispatch_get_main_queue(), {collectionView.setNeedsDisplay()})
         
-            
-        
-        //Mark the selected one
-        //let sel = collectionView.visibleCells as! [[MenuCollectionViewCell]indexPath]
-        
-        
-        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MenuCollectionViewCell
-        print("You selected cell #\(indexPath.item)!")
+        //Show the view
+        if selected == 0 {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.containerViewHome.alpha = 1
+                self.containerViewLocation.alpha = 0
+            })
+        } else if selected == 1 {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.containerViewHome.alpha = 0
+                self.containerViewLocation.alpha = 1
+            })
+        }
     }
 
 
