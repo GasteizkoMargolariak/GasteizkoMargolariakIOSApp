@@ -9,5 +9,7 @@
 import UIKit
 class MenuCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var myLabel: UILabel!
+    @IBOutlet weak var label: UILabel!
+ 
+    @IBOutlet weak var bar: UIView!
 }
