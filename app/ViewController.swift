@@ -12,10 +12,21 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     var sectionCollection: UICollectionView!
 
+    @IBOutlet weak var containerViewGallery: UIView!
+    @IBOutlet weak var containerViewBlog: UIView!
+    @IBOutlet weak var containerViewActivities: UIView!
+    @IBOutlet weak var containerViewLablanca: UIView!
     @IBOutlet weak var containerViewLocation: UIView!
     @IBOutlet weak var containerViewHome: UIView!
     override func viewDidLoad() {
-        print("LOAD")
+        
+        //Hide all sections, except for the first one
+        self.containerViewLocation.alpha = 0
+        self.containerViewLablanca.alpha = 0
+        self.containerViewActivities.alpha = 0
+        self.containerViewBlog.alpha = 0
+        self.containerViewGallery.alpha = 0
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -47,12 +58,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         //Set text
         cell.label.text = self.items[indexPath.item]
         
-        
-        //Mark the first cell as selected
+        //Mark the first cell as selected...
         if indexPath.item == selected{
             cell.bar.backgroundColor = UIColor(red: 90/255, green: 180/255, blue: 255/255, alpha: 1)
             cell.label.font = UIFont.boldSystemFont(ofSize: cell.label.font.pointSize)
         }
+            
+        //... and the others as unselected
         else{
             cell.bar.backgroundColor = UIColor(red: 148/255, green: 209/255, blue: 255/255, alpha: 1)
             cell.label.font = UIFont.systemFont(ofSize: cell.label.font.pointSize)
@@ -73,7 +85,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         print("SELECTED: \(selected)")
         //Activate label
         var i = 0
-        for cell in sectionCollection.visibleCells as! [MenuCollectionViewCell]{
+        for cell in sectionCollection.visibleCells as! [MenuCollectionViewCell]{ //TODO: Not only visibles!
             if i == selected + 1{
                 cell.bar.backgroundColor = UIColor(red: 90/255, green: 180/255, blue: 255/255, alpha: 1)
                 cell.label.font = UIFont.boldSystemFont(ofSize: cell.label.font.pointSize)
@@ -91,13 +103,63 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             UIView.animate(withDuration: 0.5, animations: {
                 self.containerViewHome.alpha = 1
                 self.containerViewLocation.alpha = 0
+                self.containerViewLablanca.alpha = 0
+                self.containerViewActivities.alpha = 0
+                self.containerViewBlog.alpha = 0
+                self.containerViewGallery.alpha = 0
             })
-        } else if selected == 1 {
+        }
+        else if selected == 1 {
             UIView.animate(withDuration: 0.5, animations: {
                 self.containerViewHome.alpha = 0
                 self.containerViewLocation.alpha = 1
+                self.containerViewLablanca.alpha = 0
+                self.containerViewActivities.alpha = 0
+                self.containerViewBlog.alpha = 0
+                self.containerViewGallery.alpha = 0
             })
         }
+        else if selected == 2 {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.containerViewHome.alpha = 0
+                self.containerViewLocation.alpha = 0
+                self.containerViewLablanca.alpha = 1
+                self.containerViewActivities.alpha = 0
+                self.containerViewBlog.alpha = 0
+                self.containerViewGallery.alpha = 0
+            })
+        }
+        else if selected == 3 {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.containerViewHome.alpha = 0
+                self.containerViewLocation.alpha = 0
+                self.containerViewLablanca.alpha = 0
+                self.containerViewActivities.alpha = 1
+                self.containerViewBlog.alpha = 0
+                self.containerViewGallery.alpha = 0
+            })
+        }
+        else if selected == 4 {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.containerViewHome.alpha = 0
+                self.containerViewLocation.alpha = 0
+                self.containerViewLablanca.alpha = 0
+                self.containerViewActivities.alpha = 0
+                self.containerViewBlog.alpha = 1
+                self.containerViewGallery.alpha = 0
+            })
+        }
+        else if selected == 5 {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.containerViewHome.alpha = 0
+                self.containerViewLocation.alpha = 0
+                self.containerViewLablanca.alpha = 0
+                self.containerViewActivities.alpha = 0
+                self.containerViewBlog.alpha = 0
+                self.containerViewGallery.alpha = 1
+            })
+        }
+        
     }
 
 
