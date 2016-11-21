@@ -1,10 +1,22 @@
+// Copyright (C) 2016 Inigo Valentin
 //
-//  AppDelegate.swift
-//  app
+// This file is part of the Gasteizko Margolariak IOS app.
 //
-//  Created by Inigo Valentin on 28/09/16.
-//  Copyright © 2016 Margolariak. All rights reserved.
+// The Gasteizko Margolariak IOS app is free software: you can
+// redistribute it and/or modify it under the terms of the
+// GNU General Public License as published by the Free Software
+// Foundation, either version 3 of the License, or (at your
+// option) any later version.
 //
+// The Gasteizko Margolariak IOS app is distributed in the
+// hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+// Public License for more details.
+//
+// You should have received a copy of the GNU General Public
+// License along with the Gasteizko Margolariak IOS app.
+// If not, see <http://www.gnu.org/licenses/>.
 
 import UIKit
 import CoreData
@@ -17,8 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        //Set a one line for collectionView
         
         return true
     }
@@ -48,6 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - Core Data stack
+    
+    //Check: Why is this here?
 
     /*lazy var persistentContainer: NSPersistentContainer = {
         /*

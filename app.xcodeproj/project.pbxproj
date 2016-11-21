@@ -19,6 +19,8 @@
 		93D9EA681DE342AC00089002 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA671DE342AC00089002 /* UIView.swift */; };
 		93D9EA6A1DE3491100089002 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA691DE3491100089002 /* HomeView.swift */; };
 		93D9EA6C1DE3498500089002 /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EA6B1DE3498500089002 /* HomeView.xib */; };
+		93D9EA711DE37C7900089002 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D9EA701DE37C7900089002 /* libsqlite3.tbd */; };
+		93D9EA761DE3ACBB00089002 /* Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA751DE3ACBB00089002 /* Sync.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		93D9EA671DE342AC00089002 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		93D9EA691DE3491100089002 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		93D9EA6B1DE3498500089002 /* HomeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
+		93D9EA701DE37C7900089002 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		93D9EA751DE3ACBB00089002 /* Sync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sync.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93D9EA711DE37C7900089002 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +59,7 @@
 			children = (
 				93B84B981D9C31AB006C0F67 /* app */,
 				93B84B971D9C31AB006C0F67 /* Products */,
+				93D9EA6F1DE37C7900089002 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,8 +87,17 @@
 				93D9EA631DE273FD00089002 /* Section.swift */,
 				93D9EA691DE3491100089002 /* HomeView.swift */,
 				93D9EA671DE342AC00089002 /* UIView.swift */,
+				93D9EA751DE3ACBB00089002 /* Sync.swift */,
 			);
 			path = app;
+			sourceTree = "<group>";
+		};
+		93D9EA6F1DE37C7900089002 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EA701DE37C7900089002 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +177,7 @@
 			files = (
 				93D9EA641DE273FD00089002 /* Section.swift in Sources */,
 				93D9EA6A1DE3491100089002 /* HomeView.swift in Sources */,
+				93D9EA761DE3ACBB00089002 /* Sync.swift in Sources */,
 				93B84B9C1D9C31AB006C0F67 /* ViewController.swift in Sources */,
 				93B84B9A1D9C31AB006C0F67 /* AppDelegate.swift in Sources */,
 				93B84BA21D9C31AB006C0F67 /* app.xcdatamodeld in Sources */,

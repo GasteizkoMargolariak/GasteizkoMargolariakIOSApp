@@ -107,7 +107,7 @@
             </subviews>
             <constraints>
                 <constraint firstItem="Poy-ba-9jX" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" identifier="HomeView.Scroll.Width" id="91y-2B-LO2"/>
-                <constraint firstItem="Poy-ba-9jX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" symbolic="YES" identifier="HomeView.Scroll.Top" id="Oqf-OH-F61"/>
+                <constraint firstItem="Poy-ba-9jX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" identifier="HomeView.Scroll.Top" id="Oqf-OH-F61"/>
                 <constraint firstItem="Poy-ba-9jX" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" identifier="HomeView.Scroll.Height" id="j3N-FA-cWS"/>
             </constraints>
             <point key="canvasLocation" x="26" y="52"/>

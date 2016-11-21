@@ -1,14 +1,32 @@
+// Copyright (C) 2016 Inigo Valentin
 //
-//  UIView.swift
-//  app
+// This file is part of the Gasteizko Margolariak IOS app.
 //
-//  Created by Iñigo Valentin on 21/11/16.
-//  Copyright © 2016 Margolariak. All rights reserved.
+// The Gasteizko Margolariak IOS app is free software: you can
+// redistribute it and/or modify it under the terms of the
+// GNU General Public License as published by the Free Software
+// Foundation, either version 3 of the License, or (at your
+// option) any later version.
 //
+// The Gasteizko Margolariak IOS app is distributed in the
+// hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+// Public License for more details.
+//
+// You should have received a copy of the GNU General Public
+// License along with the Gasteizko Margolariak IOS app.
+// If not, see <http://www.gnu.org/licenses/>.
 
 import UIKit
 
+/**
+ Extension of UIView that adds some options at the interface
+ builder.
+ */
 @IBDesignable extension UIView {
+    
+    //Border color.
     @IBInspectable var borderColor:UIColor? {
         set {
             layer.borderColor = newValue!.cgColor
@@ -22,6 +40,8 @@ import UIKit
             }
         }
     }
+    
+    //Border width.
     @IBInspectable var borderWidth:CGFloat {
         set {
             layer.borderWidth = newValue

@@ -1,17 +1,38 @@
+// Copyright (C) 2016 Inigo Valentin
 //
-//  HomeView.swift
-//  app
+// This file is part of the Gasteizko Margolariak IOS app.
 //
-//  Created by Iñigo Valentin on 21/11/16.
-//  Copyright © 2016 Margolariak. All rights reserved.
+// The Gasteizko Margolariak IOS app is free software: you can
+// redistribute it and/or modify it under the terms of the
+// GNU General Public License as published by the Free Software
+// Foundation, either version 3 of the License, or (at your
+// option) any later version.
 //
+// The Gasteizko Margolariak IOS app is distributed in the
+// hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+// Public License for more details.
+//
+// You should have received a copy of the GNU General Public
+// License along with the Gasteizko Margolariak IOS app.
+// If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
 import UIKit
+
+/**
+ Class to handle the home view.
+ */
 class HomeView: UIView {
     
+    //The main scroll view.
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    //The container of the view.
     @IBOutlet weak var container: UIView!
+    
+    //Each of the sections of the view.
     @IBOutlet weak var locationSection: Section!
     @IBOutlet weak var lablancaSection: Section!
     @IBOutlet weak var futureActivitiesSection: Section!
@@ -20,18 +41,19 @@ class HomeView: UIView {
     @IBOutlet weak var pastActivitiesSection: Section!
     @IBOutlet weak var socialSection: Section!
     
+    /**
+     Run when the view is started.
+    */
     required init?(coder aDecoder: NSCoder) {
         
-        print("HomeView: init")
         super.init(coder: aDecoder)
         
+        //Load the contents of the HomeView.xib file.
         Bundle.main.loadNibNamed("HomeView", owner: self, options: nil)
         self.addSubview(container)
         container.frame = self.bounds
         
-        
-        
-        //Set titles
+        //Set titles for each section
         locationSection.setTitle(text: "Encuentranos")
         lablancaSection.setTitle(text: "La Blanca")
         futureActivitiesSection.setTitle(text: "Proximas actividades")
@@ -41,13 +63,6 @@ class HomeView: UIView {
         socialSection.setTitle(text: "Siguenos")
         
         //Always at the end: update scrollview
-        //var contentRect: CGRect = CGRect.zero;
-        //for view in scrollView.subviews {
-        //    contentRect = contentRect.union(view.frame);
-        //}
-        //self.scrollView.contentSize = contentRect.size;
-        
-        
         var h: Int = 0
         for view in scrollView.subviews {
             //contentRect = contentRect.union(view.frame);
@@ -55,11 +70,5 @@ class HomeView: UIView {
             print("curh: \(h)")
         }
         self.scrollView.contentSize.height = CGFloat(h);
-        
-        //let lastView : Section! = scrollView.subviews.last as! Section!
-        //let height = lastView.frame.size.height
-        //let pos = lastView.frame.origin.y
-        //let sizeOfContent = height + pos + 10
-        //scrollView.contentSize.height = sizeOfContent
     }
 }

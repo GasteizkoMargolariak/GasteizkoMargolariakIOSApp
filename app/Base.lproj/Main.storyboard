@@ -199,7 +199,6 @@
                     <view key="view" contentMode="scaleToFill" id="12o-6g-8cT" customClass="HomeView" customModule="app" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="380"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.9425276964" green="1" blue="0.35931510379999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jry-8b-RWd" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -1,23 +1,44 @@
+// Copyright (C) 2016 Inigo Valentin
 //
-//  ViewController.swift
-//  app
+// This file is part of the Gasteizko Margolariak IOS app.
 //
-//  Created by Inigo Valentin on 28/09/16.
-//  Copyright © 2016 Margolariak. All rights reserved.
+// The Gasteizko Margolariak IOS app is free software: you can
+// redistribute it and/or modify it under the terms of the
+// GNU General Public License as published by the Free Software
+// Foundation, either version 3 of the License, or (at your
+// option) any later version.
 //
+// The Gasteizko Margolariak IOS app is distributed in the
+// hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+// Public License for more details.
+//
+// You should have received a copy of the GNU General Public
+// License along with the Gasteizko Margolariak IOS app.
+// If not, see <http://www.gnu.org/licenses/>.
 
 import UIKit
 
+/**
+  The view controller of the app.
+ */
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    //The menu collection.
     var sectionCollection: UICollectionView!
 
+    //Each of the sections of the app.
     @IBOutlet weak var containerViewGallery: UIView!
     @IBOutlet weak var containerViewBlog: UIView!
     @IBOutlet weak var containerViewActivities: UIView!
     @IBOutlet weak var containerViewLablanca: UIView!
     @IBOutlet weak var containerViewLocation: UIView!
     @IBOutlet weak var containerViewHome: HomeView!
+    
+    /**
+     Run when the app loads.
+    */
     override func viewDidLoad() {
         
         //Hide all sections, except for the first one
@@ -31,11 +52,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    /**
+     Dispose of any resources that can be recreated.
+    */
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    
+    //Menu items.
     let reuseIdentifier = "cell"
     var selected = 0
     var items = ["Home", "Location", "La Blanca", "Actividades", "Blog", "Gallery"]
@@ -77,12 +102,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         sectionCollection = collectionView
-        print("You selected cell #\(indexPath.item)!")
         showComponent(selected: indexPath.item)
     }
     
     @IBAction func showComponent(selected: Int) {
-        print("SELECTED: \(selected)")
         //Activate label
         var i = 0
         for cell in sectionCollection.visibleCells as! [MenuCollectionViewCell]{ //TODO: Not only visibles!
