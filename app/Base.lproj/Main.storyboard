@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,10 +32,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFh-si-6JY">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                 <color key="backgroundColor" red="0.72748052552819176" green="0.91921132201073807" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="MHT-7R-T2c"/>
@@ -43,6 +47,7 @@
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ikv-46-g2m">
+                                <rect key="frame" x="0.0" y="65" width="320" height="45"/>
                                 <color key="backgroundColor" red="0.85979589509999998" green="0.95012098089999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="D8o-cR-8qU"/>
@@ -62,7 +67,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbJ-gz-Ivz">
-                                                    <frame key="frameInset" minX="6" minY="5" width="100" height="40"/>
+                                                    <rect key="frame" x="6" y="5" width="100" height="40"/>
                                                     <color key="backgroundColor" red="0.85979589509999998" green="0.95012098089999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="JDi-Ta-B3u"/>
@@ -73,7 +78,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNu-9N-o6K">
-                                                    <frame key="frameInset" minX="4" minY="30" width="80" height="5"/>
+                                                    <rect key="frame" x="4" y="30" width="80" height="5"/>
                                                     <color key="backgroundColor" red="0.58073881930000004" green="0.8210679313" blue="0.99835759400000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="4" id="Si5-HX-bjR"/>
@@ -100,37 +105,37 @@
                                 </connections>
                             </collectionView>
                             <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FfD-xR-Ufj" userLabel="Container View Home">
-                                <frame key="frameInset" minX="-2" height="380" maxX="2" maxY="-2"/>
+                                <rect key="frame" x="-2" y="0.0" width="0.0" height="380"/>
                                 <connections>
                                     <segue destination="aNc-O2-1Df" kind="embed" id="DGi-yn-SV1"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T4H-Rn-I4y" userLabel="Container View Location">
-                                <frame key="frameInset" minX="38" height="128" maxX="42" maxY="126"/>
+                                <rect key="frame" x="38" y="0.0" width="0.0" height="128"/>
                                 <connections>
                                     <segue destination="Xnt-cB-Rqv" kind="embed" id="tDq-Wx-d8o"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nhy-Gy-cgq" userLabel="Container View Lablanca">
-                                <frame key="frameInset" minX="38" height="128" maxX="42" maxY="178"/>
+                                <rect key="frame" x="38" y="0.0" width="0.0" height="128"/>
                                 <connections>
                                     <segue destination="BMN-HQ-lp2" kind="embed" id="pVd-Ff-B2f"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T5i-d0-9I1" userLabel="Container View Activities">
-                                <frame key="frameInset" minX="38" height="128" maxX="42" maxY="178"/>
+                                <rect key="frame" x="38" y="0.0" width="0.0" height="128"/>
                                 <connections>
                                     <segue destination="0Sj-kN-N7N" kind="embed" id="TI8-Fn-Xcz"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p8H-ai-kTU" userLabel="Container View Blog">
-                                <frame key="frameInset" minX="40" height="128" maxX="40" maxY="176"/>
+                                <rect key="frame" x="40" y="0.0" width="0.0" height="128"/>
                                 <connections>
                                     <segue destination="CT0-x2-ZHC" kind="embed" id="53Z-m9-zSG"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3r9-W6-dmf" userLabel="Container View Gallery">
-                                <frame key="frameInset" minX="40" height="128" maxX="40" maxY="176"/>
+                                <rect key="frame" x="40" y="0.0" width="0.0" height="128"/>
                                 <connections>
                                     <segue destination="Bxe-vP-zrv" kind="embed" id="ufh-fQ-2yF"/>
                                 </connections>
@@ -186,11 +191,55 @@
         <!--Home-->
         <scene sceneID="DhP-V4-Fb2">
             <objects>
-                <viewController storyboardIdentifier="homeViewControllerScene" title="Home" id="aNc-O2-1Df" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homeViewControllerScene" title="Home" id="aNc-O2-1Df" propertyAccessControl="none" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="g5I-wK-I6c"/>
+                        <viewControllerLayoutGuide type="bottom" id="Upn-3g-9US"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="12o-6g-8cT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="380"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37J-7E-Jw8">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ukX-Wu-wG2">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="380"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Encuentranos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OoK-6e-ste">
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZTJ-9u-buD" customClass="Section" customModule="app">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="380"/>
+                                                <color key="backgroundColor" red="1" green="0.2617365491187772" blue="0.22632500519708976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="ZTJ-9u-buD" firstAttribute="width" secondItem="ukX-Wu-wG2" secondAttribute="width" id="0DN-Cq-MF4"/>
+                                            <constraint firstItem="ZTJ-9u-buD" firstAttribute="height" secondItem="ukX-Wu-wG2" secondAttribute="height" id="bz3-Zx-oDX"/>
+                                            <constraint firstItem="OoK-6e-ste" firstAttribute="width" secondItem="ukX-Wu-wG2" secondAttribute="width" id="zqs-IC-trj"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ukX-Wu-wG2" firstAttribute="width" secondItem="37J-7E-Jw8" secondAttribute="width" id="DuN-8C-0or"/>
+                                    <constraint firstItem="ukX-Wu-wG2" firstAttribute="height" secondItem="37J-7E-Jw8" secondAttribute="height" id="RkD-fP-8to"/>
+                                    <constraint firstAttribute="trailing" secondItem="ukX-Wu-wG2" secondAttribute="trailing" id="T4j-JG-JcH"/>
+                                    <constraint firstAttribute="bottom" secondItem="ukX-Wu-wG2" secondAttribute="bottom" id="URv-6U-zx6"/>
+                                    <constraint firstItem="ukX-Wu-wG2" firstAttribute="top" secondItem="37J-7E-Jw8" secondAttribute="top" id="VFk-uc-Ttt"/>
+                                    <constraint firstItem="ukX-Wu-wG2" firstAttribute="leading" secondItem="37J-7E-Jw8" secondAttribute="leading" id="yB0-VE-Rk2"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" red="0.9425276964" green="1" blue="0.35931510379999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="37J-7E-Jw8" firstAttribute="height" secondItem="12o-6g-8cT" secondAttribute="height" id="AeP-0y-it2"/>
+                            <constraint firstItem="37J-7E-Jw8" firstAttribute="width" secondItem="12o-6g-8cT" secondAttribute="width" id="Yp6-cZ-Fa6"/>
+                            <constraint firstItem="37J-7E-Jw8" firstAttribute="top" secondItem="12o-6g-8cT" secondAttribute="top" id="fXa-iH-KIg"/>
+                            <constraint firstItem="37J-7E-Jw8" firstAttribute="leading" secondItem="12o-6g-8cT" secondAttribute="leading" id="fga-yN-ljf"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jry-8b-RWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -201,8 +250,12 @@
         <scene sceneID="LiN-jX-2oB">
             <objects>
                 <viewController title="Location" id="Xnt-cB-Rqv" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pcm-Ee-gOc"/>
+                        <viewControllerLayoutGuide type="bottom" id="3Ws-3b-fnx"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hp8-jo-hEx">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.055437682639999999" blue="0.9161184698" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -215,8 +268,12 @@
         <scene sceneID="FPb-4H-Oac">
             <objects>
                 <viewController title="La Blanca" id="BMN-HQ-lp2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dmp-DU-HeF"/>
+                        <viewControllerLayoutGuide type="bottom" id="cDH-sf-Urh"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XIc-19-qoq">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -229,8 +286,12 @@
         <scene sceneID="Dyc-GB-FPW">
             <objects>
                 <viewController title="Activities" id="0Sj-kN-N7N" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OhA-Gv-fwb"/>
+                        <viewControllerLayoutGuide type="bottom" id="3Yd-97-laW"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="e8E-bp-zJI">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.4079896717" green="1" blue="0.34807942549999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -243,8 +304,12 @@
         <scene sceneID="A6s-4k-Qpj">
             <objects>
                 <viewController title="Blog" id="CT0-x2-ZHC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yir-Ne-huf"/>
+                        <viewControllerLayoutGuide type="bottom" id="126-8G-plw"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="c4t-ul-w0Z">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.33842284866451022" blue="0.42972784824945376" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -257,8 +322,12 @@
         <scene sceneID="Uqp-if-ZuD">
             <objects>
                 <viewController title="Gallery" id="Bxe-vP-zrv" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yvh-VS-RXe"/>
+                        <viewControllerLayoutGuide type="bottom" id="tOB-l0-rCU"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pPe-Xd-teA">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
