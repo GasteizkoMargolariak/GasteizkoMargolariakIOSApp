@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,6 +18,7 @@
                 <outlet property="lablancaSection" destination="9nu-j1-wGI" id="3eu-wW-jM4"/>
                 <outlet property="locationSection" destination="Ljm-NP-c4e" id="bCD-0M-vqb"/>
                 <outlet property="pastActivitiesSection" destination="fZk-r1-Tca" id="U8D-Sh-TpR"/>
+                <outlet property="scrollView" destination="Poy-ba-9jX" id="PyU-Nb-kOS"/>
                 <outlet property="socialSection" destination="dgk-s8-xje" id="Wyw-VJ-YaI"/>
             </connections>
         </placeholder>
@@ -28,89 +28,87 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Poy-ba-9jX">
-                    <rect key="frame" x="0.0" y="20" width="320" height="480"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ljm-NP-c4e" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
-                            <color key="backgroundColor" red="0.7046612645" green="1" blue="0.65893771199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="120" id="4XI-rg-Du1"/>
+                                <constraint firstAttribute="height" constant="120" identifier="HomeView.Location.height" id="4XI-rg-Du1"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nu-j1-wGI" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="120" width="320" height="120"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="120" id="B0a-14-gfY"/>
+                                <constraint firstAttribute="height" constant="120" identifier="HomeView.Lablanca.height" id="B0a-14-gfY"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQo-nm-4Mo" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="240" width="320" height="120"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="120" id="AJi-J2-weg"/>
+                                <constraint firstAttribute="height" constant="120" identifier="HomeView.FActivity.height" id="AJi-J2-weg"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-Mu-U68" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="360" width="320" height="120"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="120" id="bV3-sl-7SD"/>
+                                <constraint firstAttribute="height" constant="120" identifier="HomeView.Blog.Height" id="bV3-sl-7SD"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6A-Ya-esA" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="28" y="480" width="320" height="120"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="120" id="vSS-A6-4QV"/>
+                                <constraint firstAttribute="height" constant="120" identifier="HomeView.Gallery.Height" id="vSS-A6-4QV"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZk-r1-Tca" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="160" y="600" width="0.0" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="120" id="6SU-vG-oBN"/>
+                                <constraint firstAttribute="height" constant="120" identifier="HomeView.PActivity.height" id="6SU-vG-oBN"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgk-s8-xje" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="83" y="600" width="320" height="15"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="120" id="9Ea-4y-vjH"/>
+                                <constraint firstAttribute="height" constant="120" identifier="HomeView.Social.height" id="9Ea-4y-vjH"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.60846421632124348" green="0.58038871196685571" blue="0.12541175828852164" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="FQo-nm-4Mo" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="000-Cy-wsR"/>
-                        <constraint firstItem="Ljm-NP-c4e" firstAttribute="top" secondItem="Poy-ba-9jX" secondAttribute="top" id="23E-en-DDi"/>
+                        <constraint firstItem="Ljm-NP-c4e" firstAttribute="top" secondItem="Poy-ba-9jX" secondAttribute="top" identifier="HomeView.Location.Top" id="23E-en-DDi"/>
                         <constraint firstItem="uHa-Mu-U68" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="4KD-jX-3eU"/>
                         <constraint firstItem="dgk-s8-xje" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="5mi-n8-URM"/>
                         <constraint firstItem="fZk-r1-Tca" firstAttribute="top" secondItem="v6A-Ya-esA" secondAttribute="bottom" id="63J-zm-eA8"/>
                         <constraint firstItem="dgk-s8-xje" firstAttribute="top" secondItem="fZk-r1-Tca" secondAttribute="bottom" id="8YH-MM-1cR"/>
-                        <constraint firstItem="9nu-j1-wGI" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="D2d-eu-aQa"/>
+                        <constraint firstItem="9nu-j1-wGI" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" identifier="HomeView.Lablanca.Width" id="D2d-eu-aQa"/>
+                        <constraint firstItem="fZk-r1-Tca" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="Db8-t5-Jgb"/>
                         <constraint firstItem="dgk-s8-xje" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="J7B-uj-NKg"/>
-                        <constraint firstItem="Ljm-NP-c4e" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="T2f-t6-8Ax"/>
-                        <constraint firstItem="Ljm-NP-c4e" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="V7B-2e-Zlq"/>
+                        <constraint firstItem="Ljm-NP-c4e" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" identifier="HomeView.Location.Center" id="T2f-t6-8Ax"/>
+                        <constraint firstItem="Ljm-NP-c4e" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" identifier="HomeView.Location.Width" id="V7B-2e-Zlq"/>
                         <constraint firstItem="v6A-Ya-esA" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="VCL-tk-qZ9"/>
                         <constraint firstItem="FQo-nm-4Mo" firstAttribute="top" secondItem="9nu-j1-wGI" secondAttribute="bottom" id="ZV1-6F-w0q"/>
                         <constraint firstItem="uHa-Mu-U68" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="aSc-0o-zFE"/>
                         <constraint firstItem="uHa-Mu-U68" firstAttribute="top" secondItem="FQo-nm-4Mo" secondAttribute="bottom" id="ad9-hp-x4I"/>
                         <constraint firstItem="FQo-nm-4Mo" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="aqE-NW-zTF"/>
-                        <constraint firstItem="9nu-j1-wGI" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="cWL-iF-ULd"/>
+                        <constraint firstItem="9nu-j1-wGI" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" identifier="HomeView.Lablanca.Center" id="cWL-iF-ULd"/>
                         <constraint firstItem="v6A-Ya-esA" firstAttribute="top" secondItem="uHa-Mu-U68" secondAttribute="bottom" id="hSf-46-xQk"/>
                         <constraint firstItem="fZk-r1-Tca" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="iGW-Be-hEH"/>
-                        <constraint firstItem="9nu-j1-wGI" firstAttribute="top" secondItem="Ljm-NP-c4e" secondAttribute="bottom" id="pCk-kh-wha"/>
+                        <constraint firstItem="9nu-j1-wGI" firstAttribute="top" secondItem="Ljm-NP-c4e" secondAttribute="bottom" identifier="HomeView.Lablanca.Top" id="pCk-kh-wha"/>
                         <constraint firstItem="v6A-Ya-esA" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="r2z-Z1-yS5"/>
                         <constraint firstItem="uHa-Mu-U68" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="rp2-BX-jNV"/>
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Poy-ba-9jX" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="91y-2B-LO2"/>
-                <constraint firstItem="Poy-ba-9jX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" symbolic="YES" id="Oqf-OH-F61"/>
-                <constraint firstItem="Poy-ba-9jX" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="2" id="lJf-Z7-Bcw"/>
+                <constraint firstItem="Poy-ba-9jX" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" identifier="HomeView.Scroll.Width" id="91y-2B-LO2"/>
+                <constraint firstItem="Poy-ba-9jX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" symbolic="YES" identifier="HomeView.Scroll.Top" id="Oqf-OH-F61"/>
+                <constraint firstItem="Poy-ba-9jX" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" identifier="HomeView.Scroll.Height" id="j3N-FA-cWS"/>
             </constraints>
             <point key="canvasLocation" x="26" y="52"/>
         </view>
