@@ -17,7 +17,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var containerViewActivities: UIView!
     @IBOutlet weak var containerViewLablanca: UIView!
     @IBOutlet weak var containerViewLocation: UIView!
-    @IBOutlet weak var containerViewHome: UIView!
+    @IBOutlet weak var containerViewHome: HomeView!
     override func viewDidLoad() {
         
         //Hide all sections, except for the first one

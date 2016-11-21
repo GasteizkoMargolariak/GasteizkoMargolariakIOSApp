@@ -17,6 +17,8 @@
 		93D9EA601DE271E700089002 /* Section.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EA5F1DE271E700089002 /* Section.xib */; };
 		93D9EA641DE273FD00089002 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA631DE273FD00089002 /* Section.swift */; };
 		93D9EA681DE342AC00089002 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA671DE342AC00089002 /* UIView.swift */; };
+		93D9EA6A1DE3491100089002 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA691DE3491100089002 /* HomeView.swift */; };
+		93D9EA6C1DE3498500089002 /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EA6B1DE3498500089002 /* HomeView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		93D9EA5F1DE271E700089002 /* Section.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Section.xib; path = ../Section.xib; sourceTree = "<group>"; };
 		93D9EA631DE273FD00089002 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		93D9EA671DE342AC00089002 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		93D9EA691DE3491100089002 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		93D9EA6B1DE3498500089002 /* HomeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +77,9 @@
 				93B84BA81D9C31AB006C0F67 /* Info.plist */,
 				93B84BA01D9C31AB006C0F67 /* app.xcdatamodeld */,
 				93D9EA5F1DE271E700089002 /* Section.xib */,
+				93D9EA6B1DE3498500089002 /* HomeView.xib */,
 				93D9EA631DE273FD00089002 /* Section.swift */,
+				93D9EA691DE3491100089002 /* HomeView.swift */,
 				93D9EA671DE342AC00089002 /* UIView.swift */,
 			);
 			path = app;
@@ -143,6 +149,7 @@
 				93D9EA601DE271E700089002 /* Section.xib in Resources */,
 				93B84BA41D9C31AB006C0F67 /* Assets.xcassets in Resources */,
 				93B84B9F1D9C31AB006C0F67 /* Main.storyboard in Resources */,
+				93D9EA6C1DE3498500089002 /* HomeView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93D9EA641DE273FD00089002 /* Section.swift in Sources */,
+				93D9EA6A1DE3491100089002 /* HomeView.swift in Sources */,
 				93B84B9C1D9C31AB006C0F67 /* ViewController.swift in Sources */,
 				93B84B9A1D9C31AB006C0F67 /* AppDelegate.swift in Sources */,
 				93B84BA21D9C31AB006C0F67 /* app.xcdatamodeld in Sources */,
