@@ -48,6 +48,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.containerViewBlog.alpha = 0
         self.containerViewGallery.alpha = 0
         
+        print("ViewController:viewDidLoad()")
+        Sync()
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }

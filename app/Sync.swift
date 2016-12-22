@@ -63,8 +63,12 @@ class Sync{
                 return
             }
             
-            let json = try! JSONSerialization.jsonObject(with: data, options: [])
-            print(json)
+            let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String:AnyObject]
+            //print(json)
+            print("Got the JSON")
+            
+            
+            getTable(data: data AS String, table: "activities")
             
             
             //TODO: Do this for ech table
@@ -88,6 +92,23 @@ class Sync{
         
         task.resume()
 
+    }
+    
+    func getTable(data: String, table: String){
+        //let index2 = data.index(data.startIndex, offsetBy: 2) //will call succ 2 times
+        //let lastChar: Character = data[index2] //now we can index!
+        
+        //let characterIndex2 = data.characters.index(data.characters.startIndex, offsetBy: 2)
+        //let lastChar2 = data.characters[characterIndex2] //will do the same as above
+        
+        //let range: Range<String.Index> = data.range(of: table)!
+        //let index: Int = data.distance(from: data.startIndex, to: range.lowerBound)
+        
+        //print(data)
+        
+        //if let index = find(data, table) { // Unwrap the optional
+        //    data.substringFromIndex(advance(index, 1)) // => "ABCDE"
+        //}
     }
     
 }

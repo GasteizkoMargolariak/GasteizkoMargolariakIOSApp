@@ -21,7 +21,7 @@
         <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Activity_Comment" representedClassName="Activity_Comment" syncable="YES" codeGenerationType="class">
+    <entity name="Activity_comment" representedClassName="Activity_comment" syncable="YES" codeGenerationType="class">
         <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="dtime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -29,13 +29,13 @@
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Activity_Image" representedClassName="Activity_Image" syncable="YES" codeGenerationType="class">
+    <entity name="Activity_image" representedClassName="Activity_image" syncable="YES" codeGenerationType="class">
         <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="idx" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Activity_Itinerary" representedClassName="Activity_Itinerary" syncable="YES" codeGenerationType="class">
+    <entity name="Activity_itinerary" representedClassName="Activity_itinerary" syncable="YES" codeGenerationType="class">
         <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
@@ -48,7 +48,7 @@
         <attribute name="place" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
-    <entity name="Activity_Tag" representedClassName="Activity_Tag" syncable="YES" codeGenerationType="class">
+    <entity name="Activity_tag" representedClassName="Activity_tag" syncable="YES" codeGenerationType="class">
         <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -67,6 +67,16 @@
         <attribute name="attribute" optional="YES" syncable="YES"/>
         <attribute name="attribute1" optional="YES" syncable="YES"/>
         <attribute name="attribute2" optional="YES" syncable="YES"/>
+        <attribute name="attribute3" optional="YES" syncable="YES"/>
+        <attribute name="attribute4" optional="YES" syncable="YES"/>
+        <attribute name="attribute5" optional="YES" syncable="YES"/>
+        <attribute name="attribute6" optional="YES" syncable="YES"/>
+        <attribute name="attribute7" optional="YES" syncable="YES"/>
+        <attribute name="attribute8" optional="YES" syncable="YES"/>
+        <attribute name="attribute9" optional="YES" syncable="YES"/>
+        <attribute name="attribute10" optional="YES" syncable="YES"/>
+        <attribute name="attribute11" optional="YES" syncable="YES"/>
+        <attribute name="attribute12" optional="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="img" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary_en" optional="YES" attributeType="String" syncable="YES"/>
@@ -77,7 +87,7 @@
         <attribute name="text_eu" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="year" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
-    <entity name="Festival_Day" representedClassName="Festival_Day" syncable="YES" codeGenerationType="class">
+    <entity name="Festival_day" representedClassName="Festival_day" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
@@ -85,7 +95,7 @@
         <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Festival_Event" representedClassName="Festival_Event" syncable="YES" codeGenerationType="class">
+    <entity name="Festival_event" representedClassName="Festival_event" syncable="YES" codeGenerationType="class">
         <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
@@ -99,13 +109,13 @@
         <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Festival_Event_Image" representedClassName="Festival_Event_Image" syncable="YES" codeGenerationType="class">
+    <entity name="Festival_event_image" representedClassName="Festival_event_image" syncable="YES" codeGenerationType="class">
         <attribute name="event" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="idx" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Festival_Offer" representedClassName="Festival_Offer" syncable="YES" codeGenerationType="class">
+    <entity name="Festival_offer" representedClassName="Festival_offer" syncable="YES" codeGenerationType="class">
         <attribute name="days" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
@@ -154,7 +164,7 @@
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="width" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
-    <entity name="Photo_Album" representedClassName="Photo_Album" syncable="YES" codeGenerationType="class">
+    <entity name="Photo_album" representedClassName="Photo_album" syncable="YES" codeGenerationType="class">
         <attribute name="album" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
@@ -170,22 +180,79 @@
         <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Post" representedClassName="Post" syncable="YES" codeGenerationType="class">
+        <attribute name="comments" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="dtime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="permalink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Post_comment" representedClassName="Post_comment" syncable="YES" codeGenerationType="class">
+        <attribute name="dtime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lang" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="post" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Post_image" representedClassName="Post_image" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="idx" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="post" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Post_tag" representedClassName="Post_tag" syncable="YES" codeGenerationType="class">
+        <attribute name="post" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Sponsor" representedClassName="Sponsor" syncable="YES" codeGenerationType="class">
+        <attribute name="address_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Version" representedClassName="Version" syncable="YES" codeGenerationType="class">
+        <attribute name="section" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Activity" positionX="-56" positionY="-4059" width="128" height="328"/>
-        <element name="Activity_Comment" positionX="-45" positionY="-3906" width="128" height="135"/>
-        <element name="Activity_Image" positionX="-36" positionY="-3897" width="128" height="105"/>
-        <element name="Activity_Itinerary" positionX="-18" positionY="-3888" width="128" height="210"/>
-        <element name="Activity_Tag" positionX="0" positionY="-3852" width="128" height="75"/>
+        <element name="Activity_comment" positionX="-45" positionY="-3906" width="128" height="135"/>
+        <element name="Activity_image" positionX="-36" positionY="-3897" width="128" height="105"/>
+        <element name="Activity_itinerary" positionX="-18" positionY="-3888" width="128" height="210"/>
+        <element name="Activity_tag" positionX="0" positionY="-3852" width="128" height="75"/>
         <element name="Album" positionX="18" positionY="-3861" width="128" height="180"/>
-        <element name="Festival" positionX="36" positionY="-3852" width="128" height="225"/>
-        <element name="Festival_Day" positionX="-9" positionY="-3906" width="128" height="135"/>
-        <element name="Festival_Event" positionX="0" positionY="-3897" width="128" height="225"/>
-        <element name="Festival_Event_Image" positionX="9" positionY="-3888" width="128" height="105"/>
-        <element name="Festival_Offer" positionX="18" positionY="-3879" width="128" height="195"/>
+        <element name="Festival" positionX="36" positionY="-3852" width="128" height="375"/>
+        <element name="Festival_day" positionX="-9" positionY="-3906" width="128" height="135"/>
+        <element name="Festival_event" positionX="0" positionY="-3897" width="128" height="225"/>
+        <element name="Festival_event_image" positionX="9" positionY="-3888" width="128" height="105"/>
+        <element name="Festival_offer" positionX="18" positionY="-3879" width="128" height="195"/>
         <element name="Location" positionX="27" positionY="-3870" width="128" height="90"/>
         <element name="Notification" positionX="36" positionY="-3861" width="128" height="225"/>
         <element name="Photo" positionX="-9" positionY="-3906" width="128" height="285"/>
-        <element name="Photo_Album" positionX="0" positionY="-3897" width="128" height="75"/>
+        <element name="Photo_album" positionX="0" positionY="-3897" width="128" height="75"/>
         <element name="Place" positionX="9" positionY="-3888" width="128" height="195"/>
+        <element name="Post" positionX="18" positionY="-3879" width="128" height="210"/>
+        <element name="Post_comment" positionX="27" positionY="-3870" width="128" height="135"/>
+        <element name="Post_image" positionX="36" positionY="-3861" width="128" height="105"/>
+        <element name="Post_tag" positionX="45" positionY="-3852" width="128" height="75"/>
+        <element name="Sponsor" positionX="-9" positionY="-3906" width="128" height="255"/>
+        <element name="Version" positionX="-9" positionY="-3906" width="128" height="75"/>
     </elements>
 </model>
