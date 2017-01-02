@@ -67,27 +67,15 @@ class Sync{
             //print(json)
             print("Got the JSON")
             
+            var strData = String(data:data, encoding: String.Encoding.utf8)
             
-            getTable(data: data AS String, table: "activities")
+            let dataIdx = strData?.indexOf(target: "{\"data\"")
+            strData = strData!.subStr(start: dataIdx!, end: strData!.length - 1)
             
+            //TODO: do something with versions
             
-            //TODO: Do this for ech table
-            /*
-             let data = [
-             (1, ["name": "United States of America", "short_name": "US"]),
-             (2, ["name": "United Kingdom",           "short_name": "UK"]),
-             (3, ["name": "France"])]
-             
-             let companiesTable = db["companies"] // get the table from our SQLite Database
-             db.transaction(.Deferred) { txn in
-             for (index,company) in data {
-             if companiesTable.insert(name <- company["name"]!, shortname <- company["short_name"]).statement.failed {
-             return .Rollback
-             }
-             }
-             return .Commit
-             }
-             */
+            self.getTable(data: strData!, table: "activity")
+            
         }
         
         task.resume()
@@ -95,20 +83,11 @@ class Sync{
     }
     
     func getTable(data: String, table: String){
-        //let index2 = data.index(data.startIndex, offsetBy: 2) //will call succ 2 times
-        //let lastChar: Character = data[index2] //now we can index!
-        
-        //let characterIndex2 = data.characters.index(data.characters.startIndex, offsetBy: 2)
-        //let lastChar2 = data.characters[characterIndex2] //will do the same as above
-        
-        //let range: Range<String.Index> = data.range(of: table)!
-        //let index: Int = data.distance(from: data.startIndex, to: range.lowerBound)
-        
-        //print(data)
-        
-        //if let index = find(data, table) { // Unwrap the optional
-        //    data.substringFromIndex(advance(index, 1)) // => "ABCDE"
-        //}
+        let iS : Int? = data.indexOf(target: table)
+        var str = data.subStr(start: iS!, end: data.length - 1)
+        let iE : Int? = str.indexOf(target: ";")! - iS!
+        str = str.subStr(start: 0, end: iE!)
+        print("Table \(table): \(str)")
     }
     
 }

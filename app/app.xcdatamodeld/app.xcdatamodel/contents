@@ -64,19 +64,6 @@
         <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Festival" representedClassName="Festival" syncable="YES" codeGenerationType="class">
-        <attribute name="attribute" optional="YES" syncable="YES"/>
-        <attribute name="attribute1" optional="YES" syncable="YES"/>
-        <attribute name="attribute2" optional="YES" syncable="YES"/>
-        <attribute name="attribute3" optional="YES" syncable="YES"/>
-        <attribute name="attribute4" optional="YES" syncable="YES"/>
-        <attribute name="attribute5" optional="YES" syncable="YES"/>
-        <attribute name="attribute6" optional="YES" syncable="YES"/>
-        <attribute name="attribute7" optional="YES" syncable="YES"/>
-        <attribute name="attribute8" optional="YES" syncable="YES"/>
-        <attribute name="attribute9" optional="YES" syncable="YES"/>
-        <attribute name="attribute10" optional="YES" syncable="YES"/>
-        <attribute name="attribute11" optional="YES" syncable="YES"/>
-        <attribute name="attribute12" optional="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="img" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary_en" optional="YES" attributeType="String" syncable="YES"/>
@@ -136,8 +123,8 @@
         <attribute name="action" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dtime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="gm" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="internal" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="seen" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="text_en" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text_es" optional="YES" attributeType="String" syncable="YES"/>
@@ -238,13 +225,13 @@
         <element name="Activity_itinerary" positionX="-18" positionY="-3888" width="128" height="210"/>
         <element name="Activity_tag" positionX="0" positionY="-3852" width="128" height="75"/>
         <element name="Album" positionX="18" positionY="-3861" width="128" height="180"/>
-        <element name="Festival" positionX="36" positionY="-3852" width="128" height="375"/>
+        <element name="Festival" positionX="36" positionY="-3852" width="128" height="180"/>
         <element name="Festival_day" positionX="-9" positionY="-3906" width="128" height="135"/>
         <element name="Festival_event" positionX="0" positionY="-3897" width="128" height="225"/>
         <element name="Festival_event_image" positionX="9" positionY="-3888" width="128" height="105"/>
         <element name="Festival_offer" positionX="18" positionY="-3879" width="128" height="195"/>
         <element name="Location" positionX="27" positionY="-3870" width="128" height="90"/>
-        <element name="Notification" positionX="36" positionY="-3861" width="128" height="225"/>
+        <element name="Notification" positionX="36" positionY="-3861" width="128" height="30"/>
         <element name="Photo" positionX="-9" positionY="-3906" width="128" height="285"/>
         <element name="Photo_album" positionX="0" positionY="-3897" width="128" height="75"/>
         <element name="Place" positionX="9" positionY="-3888" width="128" height="195"/>
