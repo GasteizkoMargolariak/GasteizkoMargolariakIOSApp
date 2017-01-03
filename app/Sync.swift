@@ -74,28 +74,28 @@ class Sync{
 			
 			//Get tables
 			let dataActivity : [String] = self.getTable(data: strData!, table: "activity")
-			let dataActivityComment : [String] = self.getTable(data: strData!, table: "activity_comment")
-			let dataActivityImage : [String] = self.getTable(data: strData!, table: "activity_image")
-			let dataActivityTag : [String] = self.getTable(data: strData!, table: "activity_tag")
-			let dataAlbum : [String] = self.getTable(data: strData!, table: "album")
-			let dataFestival : [String] = self.getTable(data: strData!, table: "festival")
-			let dataFestivalDay : [String] = self.getTable(data: strData!, table: "festival_day")
-			let dataFestivalEvent : [String] = self.getTable(data: strData!, table: "festival_event")
-			let dataFestivalEventImage : [String] = self.getTable(data: strData!, table: "festival_event_image")
-			let dataFestivalOffer : [String] = self.getTable(data: strData!, table: "festival_offer")
-			let dataPeople : [String] = self.getTable(data: strData!, table: "people")
-			let dataPhoto : [String] = self.getTable(data: strData!, table: "photo")
-			let dataPhotoAlbum : [String] = self.getTable(data: strData!, table: "photo_album")
-			let dataPhotoComment : [String] = self.getTable(data: strData!, table: "photo_comment")
-			let dataPlace : [String] = self.getTable(data: strData!, table: "place")
-			let dataPost : [String] = self.getTable(data: strData!, table: "post")
-			let dataPostComment : [String] = self.getTable(data: strData!, table: "post_comment")
-			let dataPostImage : [String] = self.getTable(data: strData!, table: "post_image")
-			let dataPostTag : [String] = self.getTable(data: strData!, table: "post_tag")
-			let dataSponsor : [String] = self.getTable(data: strData!, table: "sponsor")
+			//let dataActivityComment : [String] = self.getTable(data: strData!, table: "activity_comment")
+			//let dataActivityImage : [String] = self.getTable(data: strData!, table: "activity_image")
+			//let dataActivityTag : [String] = self.getTable(data: strData!, table: "activity_tag")
+			//let dataAlbum : [String] = self.getTable(data: strData!, table: "album")
+			//let dataFestival : [String] = self.getTable(data: strData!, table: "festival")
+			//let dataFestivalDay : [String] = self.getTable(data: strData!, table: "festival_day")
+			//let dataFestivalEvent : [String] = self.getTable(data: strData!, table: "festival_event")
+			//let dataFestivalEventImage : [String] = self.getTable(data: strData!, table: "festival_event_image")
+			//let dataFestivalOffer : [String] = self.getTable(data: strData!, table: "festival_offer")
+			//let dataPeople : [String] = self.getTable(data: strData!, table: "people")
+			//let dataPhoto : [String] = self.getTable(data: strData!, table: "photo")
+			//let dataPhotoAlbum : [String] = self.getTable(data: strData!, table: "photo_album")
+			//let dataPhotoComment : [String] = self.getTable(data: strData!, table: "photo_comment")
+			//let dataPlace : [String] = self.getTable(data: strData!, table: "place")
+			//let dataPost : [String] = self.getTable(data: strData!, table: "post")
+			//let dataPostComment : [String] = self.getTable(data: strData!, table: "post_comment")
+			//let dataPostImage : [String] = self.getTable(data: strData!, table: "post_image")
+			//let dataPostTag : [String] = self.getTable(data: strData!, table: "post_tag")
+			//let dataSponsor : [String] = self.getTable(data: strData!, table: "sponsor")
 			
 			//One by one, save the received data
-			//self.saveActivities(dataActivity)
+			self.saveTableActivity(entries : dataActivity)
 		}
 		
 		task.resume()
@@ -123,6 +123,122 @@ class Sync{
 		
 			//Return the array
 			return entries
+	}
+	
+	func saveTableActivity(entries : [String]){
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.timeZone = TimeZone.ReferenceType.local
+		
+		//TODO: Delete all previous entries
+		
+		//Loop new entries
+		for entry in entries{
+			
+			//Get id
+			var str = entry
+			let id : Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			//print("Id: \(id)")
+			
+			//Get permalink
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let permalink : String = str.subStr(start : str.indexOf(target : "\"permalink\":")! + 13, end : str.indexOf(target : ",\"")! - 2)
+			//print("Permalink: \(permalink)")
+			
+			//Get date
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			dateFormatter.dateFormat = "yyyy-MM-dd"
+			let date = dateFormatter.date(from : str.subStr(start : str.indexOf(target : "\"date\":")! + 8, end : str.indexOf(target : ",\"")! - 2))!
+			//print("Date: \(date)")
+			
+			//Get city
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let city : String = str.subStr(start : str.indexOf(target : "\"city\":")! + 8, end : str.indexOf(target : ",\"")! - 2)
+			//print("City: \(city)")
+			
+			//Get title_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let title_es : String = str.subStr(start : str.indexOf(target : "\"title_es\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			//print("Title (es): \(title_es)")
+			
+			//Get title_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let title_en : String = str.subStr(start : str.indexOf(target : "\"title_en\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			//print("Title (en): \(title_en)")
+			
+			//Get title_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let title_eu : String = str.subStr(start : str.indexOf(target : "\"title_eu\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			//print("Title (eu): \(title_eu)")
+			
+			//Get text_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text_es : String = str.subStr(start : str.indexOf(target : "\"text_es\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			//print("Text (es): \(text_es)")
+			
+			//Get text_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text_eu : String = str.subStr(start : str.indexOf(target : "\"text_eu\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			//print("Text (eu): \(text_eu)")
+			
+			//Get text_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text_en : String = str.subStr(start : str.indexOf(target : "\"text_en\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			//print("Text (en): \(text_en)")
+			
+			//Get after_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			var after_es : String = str.subStr(start : str.indexOf(target : "\"after_es\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			if (after_es == "ul"){ //From "null"
+				after_es = ""
+			}
+			//print("After (es): \(after_es)")
+			
+			//Get after_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			var after_en : String = str.subStr(start : str.indexOf(target : "\"after_en\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			if (after_en == "ul"){ //From "null"
+				after_en = ""
+			}
+			//print("After (en): \(after_en)")
+			
+			//Get after_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			var after_eu : String = str.subStr(start : str.indexOf(target : "\"after_eu\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			if (after_eu == "ul"){  //From "null"
+				after_eu = ""
+			}
+			//print("After (eu): \(after_eu)")
+			
+			//Get price
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let price : Int = Int(str.subStr(start : str.indexOf(target : "\"price\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
+			//print("Price: \(price)")
+			
+			//Get inscription
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let inscription : Int = Int(str.subStr(start : str.indexOf(target : "\"inscription\":")! + 15, end : str.indexOf(target : ",\"")! - 2))!
+			//print("Inscription: \(inscription)")
+			
+			//Get max_people
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let maxPeople : Int = Int(str.subStr(start : str.indexOf(target : "\"max_people\":")! + 14, end : str.indexOf(target : ",\"")! - 2))!
+			//print("Max People: \(maxPeople)")
+			
+			//Get album
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let albumPre = str.subStr(start : str.indexOf(target : "\"album\":")! + 9, end : str.length - 2)
+			var album = -1
+			if (albumPre != "ul"){ //From "null"
+				album = Int(albumPre)!
+			}
+			//print("Album: \(album)")
+			
+			//Skipping dtime
+			//Skipping comments
+			
+			//TODO: Save CoreData
+		}
 	}
 	
 }
