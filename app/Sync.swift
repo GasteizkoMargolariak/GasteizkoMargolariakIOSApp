@@ -63,9 +63,7 @@ class Sync{
                 return
             }
             
-            let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String:AnyObject]
-            //print(json)
-            print("Got the JSON")
+            print("Got the Sync JSON")
             
             var strData = String(data:data, encoding: String.Encoding.utf8)
             
@@ -74,7 +72,7 @@ class Sync{
             
             //TODO: do something with versions
             
-            self.getTable(data: strData!, table: "activity")
+            let dataActivities : [String] = self.getTable(data: strData!, table: "activity")
             
         }
         
@@ -82,12 +80,22 @@ class Sync{
 
     }
     
-    func getTable(data: String, table: String){
+    func getTable(data: String, table: String) -> [String]{
         let iS : Int? = data.indexOf(target: table)
         var str = data.subStr(start: iS!, end: data.length - 1)
-        let iE : Int? = str.indexOf(target: ";")! - iS!
+        let iE : Int? = str.indexOf(target: "}]}")!
         str = str.subStr(start: 0, end: iE!)
-        print("Table \(table): \(str)")
+        str = str.subStr(start: table.length + 3,end: str.length - 1)
+        
+        //Separate the entries
+        var entries : [String] = str.components(separatedBy: "},{")
+        
+        //Modify the first and the last one to remove bracers
+        entries[0] = entries[0].subStr(start: 1, end: entries[0].length - 1)
+        entries[entries.count - 1] = entries[entries.count - 1].subStr(start: 0, end: entries[entries.count - 1].length - 2)
+        
+        //Return the array
+        return entries
     }
     
 }
