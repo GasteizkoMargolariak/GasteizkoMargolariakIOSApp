@@ -24,8 +24,8 @@ import UIKit
  Extension of UICollectionViewCell for the main menu.
  */
 class MenuCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var label: UILabel!
+	
+	@IBOutlet weak var label: UILabel!
  
-    @IBOutlet weak var bar: UIView!
+	@IBOutlet weak var bar: UIView!
 }

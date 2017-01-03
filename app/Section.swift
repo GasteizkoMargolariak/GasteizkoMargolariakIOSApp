@@ -25,33 +25,33 @@ import UIKit
   Extension of UIView to be formatted as sections.
  */
 class Section: UIView {
-    
-    //The container.
-    @IBOutlet weak var container: UIView!
-    
-    //The section title.
-    @IBOutlet weak var title: UITextView!
-    
-    //The content of the section.
-    @IBOutlet weak var content: UIView!
-    
-    /**
-     Run when the section is loaded.
-    */
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        //Load the contents of the Section.xib file.
-        Bundle.main.loadNibNamed("Section", owner: self, options: nil)
-        self.addSubview(container)
-        container.frame = self.bounds
-    }
-    
-    /**
-     Chancges the title of the section.
-     :param: title The new title.
-    */
-    func setTitle(text: String){
-        title.text = text
-    }
+	
+	//The container.
+	@IBOutlet weak var container: UIView!
+	
+	//The section title.
+	@IBOutlet weak var title: UITextView!
+	
+	//The content of the section.
+	@IBOutlet weak var content: UIView!
+	
+	/**
+	 Run when the section is loaded.
+	*/
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		
+		//Load the contents of the Section.xib file.
+		Bundle.main.loadNibNamed("Section", owner: self, options: nil)
+		self.addSubview(container)
+		container.frame = self.bounds
+	}
+	
+	/**
+	 Chancges the title of the section.
+	 :param: title The new title.
+	*/
+	func setTitle(text: String){
+		title.text = text
+	}
 }
