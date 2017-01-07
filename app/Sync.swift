@@ -27,16 +27,12 @@ import UIKit
  */
 class Sync{
 	
-	var cnt: NSManagedObjectContext
-	
 	/**
 	 Starts the sync process.
 	*/
-	init(cnt: NSManagedObjectContext){
-		self.cnt = cnt
+	init(){
 		let url = buildUrl();
 		sync(url: url)
-	
 	}
 	
 	/**
@@ -81,9 +77,9 @@ class Sync{
 			
 			//Get tables
 			let dataActivity : [String] = self.getTable(data: strData!, table: "activity")
-			//let dataActivityComment : [String] = self.getTable(data: strData!, table: "activity_comment")
-			//let dataActivityImage : [String] = self.getTable(data: strData!, table: "activity_image")
-			//let dataActivityTag : [String] = self.getTable(data: strData!, table: "activity_tag")
+			let dataActivityComment : [String] = self.getTable(data: strData!, table: "activity_comment")
+			let dataActivityImage : [String] = self.getTable(data: strData!, table: "activity_image")
+			let dataActivityTag : [String] = self.getTable(data: strData!, table: "activity_tag")
 			//let dataAlbum : [String] = self.getTable(data: strData!, table: "album")
 			//let dataFestival : [String] = self.getTable(data: strData!, table: "festival")
 			//let dataFestivalDay : [String] = self.getTable(data: strData!, table: "festival_day")
@@ -103,12 +99,16 @@ class Sync{
 			
 			//One by one, save the received data
 			self.saveTableActivity(entries : dataActivity)
+			self.saveTableActivityComment(entries : dataActivityComment)
+			self.saveTableActivityImage(entries : dataActivityImage)
+			self.saveTableActivityTag(entries : dataActivityTag)
 			
-			//TEST
+			//TODO: Tester, Debug only
+			// Test if a entity has entries
 			let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 			let appDelegate = UIApplication.shared.delegate as! AppDelegate
 			context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-			let fetchRequest: NSFetchRequest<Activity> = Activity.fetchRequest()
+			let fetchRequest: NSFetchRequest<Activity_comment> = Activity_comment.fetchRequest()
 			
 			do {
 				//go get the results
@@ -120,11 +120,12 @@ class Sync{
 				//You need to convert to NSManagedObject to use 'for' loops
 				for trans in searchResults as [NSManagedObject] {
 					//get the Key Value pairs (although there may be a better way to do that...
-					print("\(trans.value(forKey: "permalink"))")
+					print("\(trans.value(forKey: "id"))")
 				}
 			} catch {
 				print("Error with request: \(error)")
 			}
+			//End tester
 		}
 		
 		task.resume()
@@ -156,12 +157,8 @@ class Sync{
 	
 	func saveTableActivity(entries : [String]){
 		
-		
-				
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
-		
-		//let context = self.cnt //getContext()
 		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -170,7 +167,7 @@ class Sync{
 		
 		let entity =  NSEntityDescription.entity(forEntityName: "Activity", in: context)
 		
-		var transc: NSManagedObject
+		var row: NSManagedObject
 		
 		//Delete all previous entries
 		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
@@ -178,7 +175,7 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("Could not clean up Activity table: \(error), \(error.userInfo)")
+			print("Could not clean up Activity entity: \(error), \(error.userInfo)")
 		} catch {
 			
 		}
@@ -189,53 +186,43 @@ class Sync{
 			//Get id
 			var str = entry
 			let id : Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
-			//print("Id: \(id)")
 			
 			//Get permalink
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let permalink : String = str.subStr(start : str.indexOf(target : "\"permalink\":")! + 13, end : str.indexOf(target : ",\"")! - 2)
-			//print("Permalink: \(permalink)")
 			
 			//Get date
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			dateFormatter.dateFormat = "yyyy-MM-dd"
 			let date = dateFormatter.date(from : str.subStr(start : str.indexOf(target : "\"date\":")! + 8, end : str.indexOf(target : ",\"")! - 2))!
-			//print("Date: \(date)")
 			
 			//Get city
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let city : String = str.subStr(start : str.indexOf(target : "\"city\":")! + 8, end : str.indexOf(target : ",\"")! - 2)
-			//print("City: \(city)")
 			
 			//Get title_es
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_es : String = str.subStr(start : str.indexOf(target : "\"title_es\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			//print("Title (es): \(title_es)")
 			
 			//Get title_en
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_en : String = str.subStr(start : str.indexOf(target : "\"title_en\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			//print("Title (en): \(title_en)")
 			
 			//Get title_eu
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_eu : String = str.subStr(start : str.indexOf(target : "\"title_eu\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			//print("Title (eu): \(title_eu)")
 			
 			//Get text_es
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let text_es : String = str.subStr(start : str.indexOf(target : "\"text_es\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
-			//print("Text (es): \(text_es)")
 			
 			//Get text_eu
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let text_eu : String = str.subStr(start : str.indexOf(target : "\"text_eu\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
-			//print("Text (eu): \(text_eu)")
 			
 			//Get text_en
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let text_en : String = str.subStr(start : str.indexOf(target : "\"text_en\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
-			//print("Text (en): \(text_en)")
 			
 			//Get after_es
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
@@ -243,7 +230,6 @@ class Sync{
 			if (after_es == "ul"){ //From "null"
 				after_es = ""
 			}
-			//print("After (es): \(after_es)")
 			
 			//Get after_en
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
@@ -251,7 +237,6 @@ class Sync{
 			if (after_en == "ul"){ //From "null"
 				after_en = ""
 			}
-			//print("After (en): \(after_en)")
 			
 			//Get after_eu
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
@@ -259,7 +244,6 @@ class Sync{
 			if (after_eu == "ul"){  //From "null"
 				after_eu = ""
 			}
-			//print("After (eu): \(after_eu)")
 			
 			//Get price
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
@@ -269,12 +253,10 @@ class Sync{
 			//Get inscription
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let inscription : Int = Int(str.subStr(start : str.indexOf(target : "\"inscription\":")! + 15, end : str.indexOf(target : ",\"")! - 2))!
-			//print("Inscription: \(inscription)")
 			
 			//Get max_people
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let maxPeople : Int = Int(str.subStr(start : str.indexOf(target : "\"max_people\":")! + 14, end : str.indexOf(target : ",\"")! - 2))!
-			//print("Max People: \(maxPeople)")
 			
 			//Get album
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
@@ -283,32 +265,31 @@ class Sync{
 			if (albumPre != "ul"){ //From "null"
 				album = Int(albumPre)!
 			}
-			//print("Album: \(album)")
 			
 			//Skipping dtime
 			//Skipping comments
 			
-			//TODO: Save CoreData
-			transc = NSManagedObject(entity: entity!, insertInto: context)
+			//Save CoreData
+			row = NSManagedObject(entity: entity!, insertInto: context)
 			//set the entity values
-			transc.setValue(id, forKey: "id")
-			transc.setValue(permalink, forKey: "permalink")
-			transc.setValue(date, forKey: "date")
-			transc.setValue(city, forKey: "city")
-			transc.setValue(title_es, forKey: "title_es")
-			transc.setValue(title_en, forKey: "title_en")
-			transc.setValue(title_eu, forKey: "title_eu")
-			transc.setValue(text_es, forKey: "text_es")
-			transc.setValue(text_en, forKey: "text_en")
-			transc.setValue(text_eu, forKey: "text_eu")
-			transc.setValue(after_es, forKey: "after_es")
-			transc.setValue(after_en, forKey: "after_en")
-			transc.setValue(after_eu, forKey: "after_eu")
-			transc.setValue(price, forKey: "price")
-			transc.setValue(inscription, forKey: "inscription")
-			transc.setValue(maxPeople, forKey: "max_people")
+			row.setValue(id, forKey: "id")
+			row.setValue(permalink, forKey: "permalink")
+			row.setValue(date, forKey: "date")
+			row.setValue(city, forKey: "city")
+			row.setValue(title_es, forKey: "title_es")
+			row.setValue(title_en, forKey: "title_en")
+			row.setValue(title_eu, forKey: "title_eu")
+			row.setValue(text_es, forKey: "text_es")
+			row.setValue(text_en, forKey: "text_en")
+			row.setValue(text_eu, forKey: "text_eu")
+			row.setValue(after_es, forKey: "after_es")
+			row.setValue(after_en, forKey: "after_en")
+			row.setValue(after_eu, forKey: "after_eu")
+			row.setValue(price, forKey: "price")
+			row.setValue(inscription, forKey: "inscription")
+			row.setValue(maxPeople, forKey: "max_people")
 			if (album != -1){
-				transc.setValue(album, forKey: "album")
+				row.setValue(album, forKey: "album")
 			}
 
 			do {
@@ -319,6 +300,182 @@ class Sync{
 				
 			}
 
+		}
+	}
+	
+	func saveTableActivityComment(entries : [String]){
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.timeZone = TimeZone.ReferenceType.local
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Activity_comment", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity_comment")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			print("Could not clean up Activity_comment entity: \(error), \(error.userInfo)")
+		} catch {
+			
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			//Get id
+			var str = entry
+			let id : Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			
+			//Get activity
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let activity : String = str.subStr(start : str.indexOf(target : "\"activity\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get text
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text : String = str.subStr(start : str.indexOf(target : "\"text\":")! + 8, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get dtime
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			dateFormatter.dateFormat = "yyyy-MM-dd"
+			let dtime = dateFormatter.date(from : str.subStr(start : str.indexOf(target : "\"dtime\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
+			
+			//Get username
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let username : String = str.subStr(start : str.indexOf(target : "\"username\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get lang
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let lang : String = str.subStr(start : str.indexOf(target : "\"lang\":")! + 8, end : str.length - 1)
+			
+			//Save CoreData
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			row.setValue(id, forKey: "id")
+			row.setValue(activity, forKey: "activity")
+			row.setValue(text, forKey: "text")
+			row.setValue(dtime, forKey: "dtime")
+			row.setValue(username, forKey: "username")
+			row.setValue(lang, forKey: "lang")
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				print("Could not store Activity_comment with id \(id) \(error), \(error.userInfo)")
+			} catch {
+				
+			}
+			
+		}
+	}
+	
+	func saveTableActivityImage(entries : [String]){
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Activity_image", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity_image")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			print("Could not clean up Activity_comment entity: \(error), \(error.userInfo)")
+		} catch {
+			
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			//Get id
+			var str = entry
+			let id : Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			
+			//Get activity
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let activity : Int = Int(str.subStr(start : str.indexOf(target : "\"activity\":")! + 12, end : str.indexOf(target : ",\"")! - 2))!
+			
+			//Get image
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let image : String = str.subStr(start : str.indexOf(target : "\"image\":")! + 9, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get idx
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let idx : Int = Int(str.subStr(start : str.indexOf(target : "\"idx\":")! + 7, end : str.length - 2))!
+			
+			//Save CoreData
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			row.setValue(id, forKey: "id")
+			row.setValue(activity, forKey: "activity")
+			row.setValue(image, forKey: "image")
+			row.setValue(idx, forKey: "idx")
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				print("Could not store Activity_image with id \(id) \(error), \(error.userInfo)")
+			} catch {
+				
+			}
+		}
+	}
+	
+	func saveTableActivityTag(entries : [String]){
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Activity_tag", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity_tag")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			print("Could not clean up Activity_tag entity: \(error), \(error.userInfo)")
+		} catch {
+			
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			//Get activity
+			var str = entry
+			let activity : Int = Int(str.subStr(start : str.indexOf(target : "\"activity\":")! + 12, end : str.indexOf(target : ",\"")! - 2))!
+			
+			//Get tag
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let tag : String = str.subStr(start : str.indexOf(target : "\"tag\":")! + 7, end : str.length - 1)
+			
+			//Save CoreData
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			row.setValue(activity, forKey: "activity")
+			row.setValue(tag, forKey: "tag")
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				print("Could not store Activity_tag for activity: \(activity), tag: \(tag). Error: \(error), \(error.userInfo)")
+			} catch {
+				
+			}
 		}
 	}
 }

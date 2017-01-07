@@ -56,7 +56,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewGallery.alpha = 0
 		
 		print("ViewController:viewDidLoad()")
-		Sync(cnt: getContext())
+		Sync()
 		
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
