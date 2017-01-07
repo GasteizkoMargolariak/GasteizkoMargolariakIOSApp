@@ -84,9 +84,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	//Make a cell for each section
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		
-		print("SET: \(selected)/\(indexPath.item)")
-		
+				
 		//Get a reference to our storyboard cell
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MenuCollectionViewCell
 		

@@ -103,6 +103,28 @@ class Sync{
 			
 			//One by one, save the received data
 			self.saveTableActivity(entries : dataActivity)
+			
+			//TEST
+			let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+			let appDelegate = UIApplication.shared.delegate as! AppDelegate
+			context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+			let fetchRequest: NSFetchRequest<Activity> = Activity.fetchRequest()
+			
+			do {
+				//go get the results
+				let searchResults = try context.fetch(fetchRequest)
+				
+				//I like to check the size of the returned results!
+				print ("num of results = \(searchResults.count)")
+				
+				//You need to convert to NSManagedObject to use 'for' loops
+				for trans in searchResults as [NSManagedObject] {
+					//get the Key Value pairs (although there may be a better way to do that...
+					print("\(trans.value(forKey: "permalink"))")
+				}
+			} catch {
+				print("Error with request: \(error)")
+			}
 		}
 		
 		task.resume()
@@ -133,16 +155,33 @@ class Sync{
 	}
 	
 	func saveTableActivity(entries : [String]){
+		
+		
 				
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
 		
-		let context = self.cnt //getContext()
+		//let context = self.cnt //getContext()
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
 		let entity =  NSEntityDescription.entity(forEntityName: "Activity", in: context)
 		
 		var transc: NSManagedObject
 		
-		//TODO: Delete all previous entries
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Activity")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			print("Could not clean up Activity table: \(error), \(error.userInfo)")
+		} catch {
+			
+		}
 		
 		//Loop new entries
 		for entry in entries{
