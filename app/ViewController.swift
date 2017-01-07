@@ -19,6 +19,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 import UIKit
+import CoreData
 
 /**
   The view controller of the app.
@@ -36,11 +37,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet weak var containerViewLocation: UIView!
 	@IBOutlet weak var containerViewHome: HomeView!
 	
+	func getContext () -> NSManagedObjectContext {
+		//let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		//return appDelegate.persistentContainer.viewContext
+		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+	}
+	
 	/**
 	 Run when the app loads.
 	*/
 	override func viewDidLoad() {
-		
+				
 		//Hide all sections, except for the first one
 		self.containerViewLocation.alpha = 0
 		self.containerViewLablanca.alpha = 0
@@ -49,7 +56,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewGallery.alpha = 0
 		
 		print("ViewController:viewDidLoad()")
-		Sync()
+		Sync(cnt: getContext())
 		
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.

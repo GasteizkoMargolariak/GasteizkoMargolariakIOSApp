@@ -19,16 +19,21 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
+import CoreData
+import UIKit
 
 /**
  Class to handle server sync.
  */
 class Sync{
 	
+	var cnt: NSManagedObjectContext
+	
 	/**
 	 Starts the sync process.
 	*/
-	init(){
+	init(cnt: NSManagedObjectContext){
+		self.cnt = cnt
 		let url = buildUrl();
 		sync(url: url)
 	
@@ -44,6 +49,8 @@ class Sync{
 		return url!
 		
 	}
+	
+	
 	
 	/**
 	 Performs an asynchronous sync.
@@ -126,9 +133,14 @@ class Sync{
 	}
 	
 	func saveTableActivity(entries : [String]){
-		
+				
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
+		
+		let context = self.cnt //getContext()
+		let entity =  NSEntityDescription.entity(forEntityName: "Activity", in: context)
+		
+		var transc: NSManagedObject
 		
 		//TODO: Delete all previous entries
 		
@@ -238,7 +250,36 @@ class Sync{
 			//Skipping comments
 			
 			//TODO: Save CoreData
+			transc = NSManagedObject(entity: entity!, insertInto: context)
+			//set the entity values
+			transc.setValue(id, forKey: "id")
+			transc.setValue(permalink, forKey: "permalink")
+			transc.setValue(date, forKey: "date")
+			transc.setValue(city, forKey: "city")
+			transc.setValue(title_es, forKey: "title_es")
+			transc.setValue(title_en, forKey: "title_en")
+			transc.setValue(title_eu, forKey: "title_eu")
+			transc.setValue(text_es, forKey: "text_es")
+			transc.setValue(text_en, forKey: "text_en")
+			transc.setValue(text_eu, forKey: "text_eu")
+			transc.setValue(after_es, forKey: "after_es")
+			transc.setValue(after_en, forKey: "after_en")
+			transc.setValue(after_eu, forKey: "after_eu")
+			transc.setValue(price, forKey: "price")
+			transc.setValue(inscription, forKey: "inscription")
+			transc.setValue(maxPeople, forKey: "max_people")
+			if (album != -1){
+				transc.setValue(album, forKey: "album")
+			}
+
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				print("Could not store Activity with id \(id) \(error), \(error.userInfo)")
+			} catch {
+				
+			}
+
 		}
 	}
-	
 }

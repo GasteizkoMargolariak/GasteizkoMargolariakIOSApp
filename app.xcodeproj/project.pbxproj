@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		931AA5891E1AFF8C003A2290 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AA5881E1AFF8C003A2290 /* String.swift */; };
+		931AA58B1E1DA911003A2290 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 931AA58A1E1DA910003A2290 /* CoreData.framework */; };
 		93B408031D9ED44C000FBC99 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B408021D9ED44C000FBC99 /* MenuCollectionViewCell.swift */; };
 		93B84B9A1D9C31AB006C0F67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B84B991D9C31AB006C0F67 /* AppDelegate.swift */; };
 		93B84B9C1D9C31AB006C0F67 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B84B9B1D9C31AB006C0F67 /* ViewController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		931AA5881E1AFF8C003A2290 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		931AA58A1E1DA910003A2290 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		93B408021D9ED44C000FBC99 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuCollectionViewCell.swift; path = ../MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		93B84B961D9C31AB006C0F67 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93B84B991D9C31AB006C0F67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				931AA58B1E1DA911003A2290 /* CoreData.framework in Frameworks */,
 				93D9EA711DE37C7900089002 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,6 +101,7 @@
 		93D9EA6F1DE37C7900089002 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				931AA58A1E1DA910003A2290 /* CoreData.framework */,
 				93D9EA701DE37C7900089002 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
