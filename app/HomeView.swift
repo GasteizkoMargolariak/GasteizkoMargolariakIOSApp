@@ -62,6 +62,8 @@ class HomeView: UIView {
 		pastActivitiesSection.setTitle(text: "Ultimas actividades")
 		socialSection.setTitle(text: "Siguenos")
 		
+		//
+		
 		//Always at the end: update scrollview
 		var h: Int = 0
 		for view in scrollView.subviews {
