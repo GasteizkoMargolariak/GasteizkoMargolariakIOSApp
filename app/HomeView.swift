@@ -19,8 +19,8 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
+import CoreData
 import UIKit
-
 /**
  Class to handle the home view.
  */
@@ -62,6 +62,13 @@ class HomeView: UIView {
 		pastActivitiesSection.setTitle(text: "Ultimas actividades")
 		socialSection.setTitle(text: "Siguenos")
 		
+		//Get info to populate sections
+		let moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let lang : String = getLanguage()
+		
+		//Populate sections
+		setUpPastActivities(context: moc, delegate: appDelegate, lang: lang, parent: pastActivitiesSection)
 		
 		//Always at the end: update scrollview
 		var h: Int = 0
@@ -73,6 +80,72 @@ class HomeView: UIView {
 		self.scrollView.contentSize.height = CGFloat(h);
 	}
 	
-	func setUpPastActivities(){
+	func getLanguage() -> String{
+		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
+		print("Device language: \(pre)")
+		if(pre == "es" || pre == "en" || pre == "eu"){
+			return pre
+		}
+		else{
+			return "es"
+		}
+	}
+	
+	func setUpPastActivities(context : NSManagedObjectContext, delegate: AppDelegate, lang: String, parent : Section){
+		
+		context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
+		let fetchRequest: NSFetchRequest<Activity> = Activity.fetchRequest()
+		let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+		let sortDescriptors = [sortDescriptor]
+		fetchRequest.sortDescriptors = sortDescriptors
+		//TODO Compare dates
+		//fetchRequest.predicate = NSPredicate(format: "date < %@", sysdate)
+		fetchRequest.fetchLimit = 2
+		
+		do {
+			//go get the results
+			let searchResults = try context.fetch(fetchRequest)
+			
+			//I like to check the size of the returned results!
+			print ("Activities: \(searchResults.count)")
+			
+			var row : RowHomePastActivities
+			var count = 0;
+			var title : String
+			
+			//You need to convert to NSManagedObject to use 'for' loops
+			for r in searchResults as [NSManagedObject] {
+				count = count + 1
+				//get the Key Value pairs (although there may be a better way to do that...
+				print("Perm: \(r.value(forKey: "permalink"))")
+				
+				
+				//Create a new row
+				row = RowHomePastActivities(s: "rowHomePastActivities", i: count) //frame: CGRect(top: 0, left: 0, width: 200, height: 50)
+				row.frame = CGRect(x: 15, y: 15, width: 100, height: 100)
+				title = r.value(forKey: "permalink")! as! String
+				print(title)
+				row.setTitle(text: title)
+				parent.addSubview(row)
+				let lbl = UILabel()
+				lbl.text = "ABBA"
+				//view.addEntry(view: row)
+				//parent.addSubview(lbl)
+				var testView: UIView = UIView(frame: CGRect(x: 13, y: 13, width: 100, height: 100))
+    testView.backgroundColor = UIColor.blue
+    testView.alpha = 0.5
+    testView.tag = 100
+    testView.isUserInteractionEnabled = true
+    parent.addSubview(testView)
+				
+				//parent.addConstraint(NSLayoutConstraint(item: row, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: parent, attribute: NSLayoutAttribute.right, multiplier: 1, constant: -10))
+				//parent.addConstraint(NSLayoutConstraint(item: row, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: parent, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -10))
+				//row = RowHomePastActivities(s: "rowHomePastActivities", i: count)//Bundle.mainBundle("RowPastActivities").loadNibNamed("", owner: nil, options: nil)[0] as! RowHomePastActivities
+				//row.setupWithSuperView(superView: self)
+				
+			}
+		} catch {
+			print("Error with request: \(error)")
+		}
 	}
 }

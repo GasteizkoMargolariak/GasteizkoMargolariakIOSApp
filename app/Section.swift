@@ -54,4 +54,10 @@ class Section: UIView {
 	func setTitle(text: String){
 		title.text = text
 	}
+	
+	func addEntry(view : UIView){
+		let lbl = UILabel()
+		lbl.text = "ABBA"
+		content.addSubview(lbl)
+	}
 }

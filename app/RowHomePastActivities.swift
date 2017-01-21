@@ -24,24 +24,33 @@ import UIKit
 /**
 Extension of UIView to be formatted as sections.
 */
-class RowHomePastActivities: UIView {
+@IBDesignable class RowHomePastActivities: UIView {
 	
 	//The container.
-	@IBOutlet weak var container: UIView!
+	
 	
 	//The activity title.
-	@IBOutlet weak var title: UITextView!
+	@IBOutlet weak var title: UILabel!
+	
+	
 	
 	//The acvtivity text.
-	@IBOutlet weak var descrip: UITextView!
+	@IBOutlet weak var descrip: UILabel!
+	
+	
+	@IBOutlet weak var container: UIView!
 	
 	/**
 	Run when the section is loaded.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		
-		//Load the contents of the Section.xib file.
+	}
+	
+	init(s: String, i: Int) {
+		//self.s = s
+		//self.i = i
+		super.init(frame: CGRect(x: 20, y: 10, width: 300, height: 100))
 		Bundle.main.loadNibNamed("RowHomePastActivities", owner: self, options: nil)
 		self.addSubview(container)
 		container.frame = self.bounds
@@ -52,7 +61,9 @@ class RowHomePastActivities: UIView {
 	:param: text The new title.
 	*/
 	func setTitle(text: String){
+		print("Setting title: \(text)")
 		title.text = text
+		descrip.text = text
 	}
 	
 	/**
@@ -71,4 +82,23 @@ class RowHomePastActivities: UIView {
 	func setImage(path: String){
 		//TODO
 	}
+	
+	
+	
+	
+	/*var view:UIView!
+	
+	func setup() {
+		view = loadViewFromNib()
+		view.frame = bounds
+		view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeightaddSubview(view)
+	}
+	
+	func loadViewFromNib() -> UIView {
+		let bundle = Bundle(for:type(of: self))
+		let nib = UINib(nibName: "RowHomePastActivities", bundle: bundle)
+		let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
+		
+		return view
+	}*/
 }
