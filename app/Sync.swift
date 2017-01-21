@@ -256,7 +256,11 @@ class Sync{
 			
 			//Get max_people
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let maxPeople : Int = Int(str.subStr(start : str.indexOf(target : "\"max_people\":")! + 14, end : str.indexOf(target : ",\"")! - 2))!
+			let maxPeoplePre : String = str.subStr(start : str.indexOf(target : "\"max_people\":")! + 14, end : str.indexOf(target : ",")! - 2)
+			var maxPeople = -1
+			if (maxPeoplePre != "ul"){ //From "null"
+				maxPeople = Int(maxPeoplePre)!
+			}
 			
 			//Get album
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)

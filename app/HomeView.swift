@@ -62,7 +62,6 @@ class HomeView: UIView {
 		pastActivitiesSection.setTitle(text: "Ultimas actividades")
 		socialSection.setTitle(text: "Siguenos")
 		
-		//
 		
 		//Always at the end: update scrollview
 		var h: Int = 0
@@ -72,5 +71,8 @@ class HomeView: UIView {
 			print("curh: \(h)")
 		}
 		self.scrollView.contentSize.height = CGFloat(h);
+	}
+	
+	func setUpPastActivities(){
 	}
 }
