@@ -50,12 +50,18 @@ Extension of UIView to be formatted as sections.
 	init(s: String, i: Int) {
 		//self.s = s
 		//self.i = i
-		super.init(frame: CGRect(x: 00, y: 350, width: 10, height: 10))
+		super.init(frame: CGRect(x: 00, y: 0, width: 100, height: 150))
 		Bundle.main.loadNibNamed("RowHomePastActivities", owner: self, options: nil)
 		self.addSubview(container)
-		//container.frame = CGRect(x: 20, y: 100, width: 10, height: 10)
-		container.bounds = self.bounds//CGRect(x: 20, y: 100, width: 10, height: 10)
-		//title.bounds = self.bounds
+		container.frame = CGRect(x: 20, y: 100, width: 100, height: 150)
+		//container.bounds = self.bounds//CGRect(x: 20, y: 100, width: 10, height: 10)
+		//title.frame = self.bounds
+		container.addSubview(title)
+		title.frame = CGRect(x: 30, y: 150, width: 80, height: 100)
+	}
+	
+	override init(frame: CGRect){
+		super.init(frame: frame)
 	}
 	
 	func setBounds(rect: CGRect){

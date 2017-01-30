@@ -104,38 +104,38 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="k4t-RF-DxW"/>
                                 </connections>
                             </collectionView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FfD-xR-Ufj" userLabel="Container View Home">
-                                <rect key="frame" x="-2" y="0.0" width="0.0" height="380"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FfD-xR-Ufj" userLabel="Container View Home">
+                                <rect key="frame" x="0.0" y="110" width="320" height="458"/>
                                 <connections>
                                     <segue destination="aNc-O2-1Df" kind="embed" id="DGi-yn-SV1"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T4H-Rn-I4y" userLabel="Container View Location">
-                                <rect key="frame" x="38" y="0.0" width="0.0" height="128"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T4H-Rn-I4y" userLabel="Container View Location">
+                                <rect key="frame" x="0.0" y="110" width="320" height="458"/>
                                 <connections>
                                     <segue destination="Xnt-cB-Rqv" kind="embed" id="tDq-Wx-d8o"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nhy-Gy-cgq" userLabel="Container View Lablanca">
-                                <rect key="frame" x="38" y="0.0" width="0.0" height="128"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhy-Gy-cgq" userLabel="Container View Lablanca">
+                                <rect key="frame" x="0.0" y="110" width="320" height="458"/>
                                 <connections>
                                     <segue destination="BMN-HQ-lp2" kind="embed" id="pVd-Ff-B2f"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T5i-d0-9I1" userLabel="Container View Activities">
-                                <rect key="frame" x="38" y="0.0" width="0.0" height="128"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T5i-d0-9I1" userLabel="Container View Activities">
+                                <rect key="frame" x="0.0" y="110" width="320" height="458"/>
                                 <connections>
                                     <segue destination="0Sj-kN-N7N" kind="embed" id="TI8-Fn-Xcz"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p8H-ai-kTU" userLabel="Container View Blog">
-                                <rect key="frame" x="40" y="0.0" width="0.0" height="128"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p8H-ai-kTU" userLabel="Container View Blog">
+                                <rect key="frame" x="0.0" y="110" width="320" height="458"/>
                                 <connections>
                                     <segue destination="CT0-x2-ZHC" kind="embed" id="53Z-m9-zSG"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3r9-W6-dmf" userLabel="Container View Gallery">
-                                <rect key="frame" x="40" y="0.0" width="0.0" height="128"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3r9-W6-dmf" userLabel="Container View Gallery">
+                                <rect key="frame" x="0.0" y="110" width="320" height="458"/>
                                 <connections>
                                     <segue destination="Bxe-vP-zrv" kind="embed" id="ufh-fQ-2yF"/>
                                 </connections>
@@ -197,8 +197,9 @@
                         <viewControllerLayoutGuide type="bottom" id="Upn-3g-9US"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="12o-6g-8cT" customClass="HomeView" customModule="app" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="380"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.60846421630000003" green="0.58038871199999997" blue="0.12541175830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jry-8b-RWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -214,7 +215,7 @@
                         <viewControllerLayoutGuide type="bottom" id="3Ws-3b-fnx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hp8-jo-hEx">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.055437682639999999" blue="0.9161184698" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -232,7 +233,7 @@
                         <viewControllerLayoutGuide type="bottom" id="cDH-sf-Urh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XIc-19-qoq">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -250,7 +251,7 @@
                         <viewControllerLayoutGuide type="bottom" id="3Yd-97-laW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="e8E-bp-zJI">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.4079896717" green="1" blue="0.34807942549999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -268,7 +269,7 @@
                         <viewControllerLayoutGuide type="bottom" id="126-8G-plw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="c4t-ul-w0Z">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.33842284866451022" blue="0.42972784824945376" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -286,7 +287,7 @@
                         <viewControllerLayoutGuide type="bottom" id="tOB-l0-rCU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pPe-Xd-teA">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

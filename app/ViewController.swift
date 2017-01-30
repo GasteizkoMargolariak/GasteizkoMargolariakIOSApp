@@ -54,7 +54,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewActivities.alpha = 0
 		self.containerViewBlog.alpha = 0
 		self.containerViewGallery.alpha = 0
-		
+				
 		print("ViewController:viewDidLoad()")
 		Sync()
 		

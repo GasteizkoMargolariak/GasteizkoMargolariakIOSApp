@@ -53,6 +53,8 @@ class HomeView: UIView {
 		self.addSubview(container)
 		container.frame = self.bounds
 		
+
+		
 		//Set titles for each section
 		locationSection.setTitle(text: "Encuentranos")
 		lablancaSection.setTitle(text: "La Blanca")
