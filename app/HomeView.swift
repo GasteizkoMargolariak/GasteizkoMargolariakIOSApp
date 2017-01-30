@@ -122,10 +122,13 @@ class HomeView: UIView {
 				
 				//Create a new row
 				row = RowHomePastActivities(s: "rowHomePastActivities", i: count) //frame: CGRect(top: 0, left: 0, width: 200, height: 50)
-				row.frame = CGRect(x: 15, y: 15, width: 100, height: 100)
+				//row.frame = CGRect(x: 15, y: 15, width: 100, height: 100)
+				//row = RowHomePastActivities(frame: CGRect(x: 13, y: 13, width: 100, height: 100))
 				title = r.value(forKey: "permalink")! as! String
 				print(title)
 				row.setTitle(text: title)
+				row.backgroundColor = UIColor.red
+				row.setBounds(rect: parent.bounds)
 				parent.addSubview(row)
 				let lbl = UILabel()
 				lbl.text = "ABBA"
@@ -139,7 +142,7 @@ class HomeView: UIView {
     parent.addSubview(testView)
 				
 				//parent.addConstraint(NSLayoutConstraint(item: row, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: parent, attribute: NSLayoutAttribute.right, multiplier: 1, constant: -10))
-				//parent.addConstraint(NSLayoutConstraint(item: row, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: parent, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -10))
+				//Íparent.addConstraint(NSLayoutConstraint(item: row, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: parent, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -10))
 				//row = RowHomePastActivities(s: "rowHomePastActivities", i: count)//Bundle.mainBundle("RowPastActivities").loadNibNamed("", owner: nil, options: nil)[0] as! RowHomePastActivities
 				//row.setupWithSuperView(superView: self)
 				
