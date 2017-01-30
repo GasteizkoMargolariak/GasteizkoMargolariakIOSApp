@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Section">
             <connections>
                 <outlet property="container" destination="iN0-l3-epB" id="Wlw-JP-OOQ"/>
+                <outlet property="content" destination="PeG-j2-Npa" id="iLe-Gu-TMy"/>
                 <outlet property="title" destination="mYX-eR-Wot" id="a6d-ku-3LY"/>
             </connections>
         </placeholder>

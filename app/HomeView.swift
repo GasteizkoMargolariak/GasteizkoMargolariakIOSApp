@@ -70,7 +70,7 @@ class HomeView: UIView {
 		let lang : String = getLanguage()
 		
 		//Populate sections
-		setUpPastActivities(context: moc, delegate: appDelegate, lang: lang, parent: pastActivitiesSection)
+		setUpPastActivities(context: moc, delegate: appDelegate, lang: lang, parent: pastActivitiesSection.getContentView())
 		
 		//Always at the end: update scrollview
 		var h: Int = 0
@@ -93,7 +93,7 @@ class HomeView: UIView {
 		}
 	}
 	
-	func setUpPastActivities(context : NSManagedObjectContext, delegate: AppDelegate, lang: String, parent : Section){
+	func setUpPastActivities(context : NSManagedObjectContext, delegate: AppDelegate, lang: String, parent : UIView){
 		
 		context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Activity> = Activity.fetchRequest()
@@ -130,7 +130,7 @@ class HomeView: UIView {
 				print(title)
 				row.setTitle(text: title)
 				row.backgroundColor = UIColor.red
-				row.setBounds(rect: parent.bounds)
+				//row.setBounds(rect: parent.bounds)
 				parent.addSubview(row)
 				let lbl = UILabel()
 				lbl.text = "ABBA"

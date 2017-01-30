@@ -35,6 +35,7 @@ class Section: UIView {
 	//The content of the section.
 	@IBOutlet weak var content: UIView!
 	
+	
 	/**
 	 Run when the section is loaded.
 	*/
@@ -45,6 +46,10 @@ class Section: UIView {
 		Bundle.main.loadNibNamed("Section", owner: self, options: nil)
 		self.addSubview(container)
 		container.frame = self.bounds
+	}
+	
+	func getContentView() -> UIView {
+		return content
 	}
 	
 	/**
