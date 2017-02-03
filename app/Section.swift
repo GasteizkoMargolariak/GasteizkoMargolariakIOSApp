@@ -33,7 +33,8 @@ class Section: UIView {
 	@IBOutlet weak var title: UITextView!
 	
 	//The content of the section.
-	@IBOutlet weak var content: UIView!
+	@IBOutlet weak var content: UIStackView!
+	
 	
 	
 	/**
@@ -48,7 +49,7 @@ class Section: UIView {
 		container.frame = self.bounds
 	}
 	
-	func getContentView() -> UIView {
+	func getContentStack() -> UIStackView {
 		return content
 	}
 	

@@ -10,20 +10,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RowHomePastActivities" customModule="app" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RowHomePastActivities" customModule="app">
             <connections>
-                <outlet property="container" destination="2hI-rc-KPm" id="0ga-QO-cvj"/>
-                <outlet property="descrip" destination="f4E-5p-Bid" id="ihi-Bg-Jib"/>
-                <outlet property="title" destination="Bkz-DV-HVr" id="2ey-2J-PCM"/>
+                <outlet property="container" destination="2hI-rc-KPm" id="rWX-Vl-kOp"/>
+                <outlet property="descrip" destination="f4E-5p-Bid" id="IF5-ck-qUL"/>
+                <outlet property="entry" destination="wLM-VU-VYk" id="Gkq-yE-fdN"/>
+                <outlet property="title" destination="Bkz-DV-HVr" id="L4e-zP-foa"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="RowHomePastActivities" customClass="RowHomePastActivities" customModule="app" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="RowHomePastActivities" customClass="RowHomePastActivities" customModule="app">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hI-rc-KPm" userLabel="Container">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hI-rc-KPm" userLabel="Container">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLM-VU-VYk" userLabel="Entry">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
@@ -80,9 +81,9 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="wLM-VU-VYk" firstAttribute="leading" secondItem="2hI-rc-KPm" secondAttribute="leading" id="COo-WD-1w9"/>
-                        <constraint firstItem="wLM-VU-VYk" firstAttribute="top" secondItem="2hI-rc-KPm" secondAttribute="top" id="XVB-II-0rK"/>
-                        <constraint firstItem="wLM-VU-VYk" firstAttribute="width" secondItem="2hI-rc-KPm" secondAttribute="width" id="jxF-AQ-Vkm"/>
+                        <constraint firstItem="wLM-VU-VYk" firstAttribute="leading" secondItem="2hI-rc-KPm" secondAttribute="leading" id="4wm-Kd-QZe"/>
+                        <constraint firstItem="wLM-VU-VYk" firstAttribute="top" secondItem="2hI-rc-KPm" secondAttribute="top" id="fmF-H5-bZ9"/>
+                        <constraint firstAttribute="trailing" secondItem="wLM-VU-VYk" secondAttribute="trailing" id="rOM-9n-P02"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -96,25 +97,20 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="2hI-rc-KPm" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="VKl-d5-fJd"/>
-                <constraint firstAttribute="bottom" secondItem="2hI-rc-KPm" secondAttribute="bottom" id="cU8-H8-q3m"/>
-                <constraint firstItem="2hI-rc-KPm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dVg-F6-N4H"/>
-                <constraint firstItem="2hI-rc-KPm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uDg-Fu-bJw"/>
+                <constraint firstItem="2hI-rc-KPm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PMg-Yl-oAA"/>
+                <constraint firstAttribute="trailing" secondItem="2hI-rc-KPm" secondAttribute="trailing" id="WIN-BI-cuJ"/>
+                <constraint firstItem="2hI-rc-KPm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="a5e-qs-gY9"/>
+                <constraint firstAttribute="bottom" secondItem="2hI-rc-KPm" secondAttribute="bottom" constant="248" id="whR-Gz-dvd"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                     <color key="value" red="0.0" green="0.0" blue="0.3381076388888889" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                    <real key="value" value="10"/>
+                    <real key="value" value="3"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <connections>
-                <outlet property="descrip" destination="f4E-5p-Bid" id="Xda-6E-LNC"/>
-                <outlet property="title" destination="Bkz-DV-HVr" id="Eiz-p3-B1a"/>
-            </connections>
             <point key="canvasLocation" x="46" y="-43"/>
         </view>
     </objects>

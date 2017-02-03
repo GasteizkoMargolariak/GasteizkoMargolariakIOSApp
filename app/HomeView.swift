@@ -41,6 +41,10 @@ class HomeView: UIView {
 	@IBOutlet weak var pastActivitiesSection: Section!
 	@IBOutlet weak var socialSection: Section!
 	
+	override init(frame: CGRect){
+		super.init(frame: frame)
+	}
+	
 	/**
 	 Run when the view is started.
 	*/
@@ -70,7 +74,7 @@ class HomeView: UIView {
 		let lang : String = getLanguage()
 		
 		//Populate sections
-		setUpPastActivities(context: moc, delegate: appDelegate, lang: lang, parent: pastActivitiesSection.getContentView())
+		setUpPastActivities(context: moc, delegate: appDelegate, lang: lang, parent: pastActivitiesSection.getContentStack())
 		
 		//Always at the end: update scrollview
 		var h: Int = 0
@@ -93,7 +97,7 @@ class HomeView: UIView {
 		}
 	}
 	
-	func setUpPastActivities(context : NSManagedObjectContext, delegate: AppDelegate, lang: String, parent : UIView){
+	func setUpPastActivities(context : NSManagedObjectContext, delegate: AppDelegate, lang: String, parent : UIStackView){
 		
 		context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Activity> = Activity.fetchRequest()
@@ -102,7 +106,7 @@ class HomeView: UIView {
 		fetchRequest.sortDescriptors = sortDescriptors
 		//TODO Compare dates
 		//fetchRequest.predicate = NSPredicate(format: "date < %@", sysdate)
-		fetchRequest.fetchLimit = 2
+		fetchRequest.fetchLimit = 1//2
 		
 		do {
 			//go get the results
@@ -123,25 +127,29 @@ class HomeView: UIView {
 				
 				
 				//Create a new row
-				row = RowHomePastActivities(s: "rowHomePastActivities", i: count) //frame: CGRect(top: 0, left: 0, width: 200, height: 50)
+				row = RowHomePastActivities.init(s: "rowHomePastActivities", i: count) //frame: CGRect(top: 0, left: 0, width: 200, height: 50)
+				//row = RowHomePastActivities(frame: parent.bounds)
+				//row = RowHomePastActivities.instanceFromNib() as! RowHomePastActivities
 				//row.frame = CGRect(x: 15, y: 15, width: 100, height: 100)
-				//row = RowHomePastActivities(frame: CGRect(x: 13, y: 13, width: 100, height: 100))
+				//row = RowHomePastActivities(frame: CGRect(x: 13, y: 0, width: 100, height: 100))
 				title = r.value(forKey: "permalink")! as! String
 				print(title)
 				row.setTitle(text: title)
-				row.backgroundColor = UIColor.red
+				//row.backgroundColor = UIColor.red
 				//row.setBounds(rect: parent.bounds)
-				parent.addSubview(row)
+				
+				parent.addArrangedSubview(row)
+				//parent.addSubview(row)
 				let lbl = UILabel()
 				lbl.text = "ABBA"
 				//view.addEntry(view: row)
-				//parent.addSubview(lbl)
-				var testView: UIView = UIView(frame: CGRect(x: 13, y: 13, width: 100, height: 100))
-    testView.backgroundColor = UIColor.blue
-    testView.alpha = 0.5
-    testView.tag = 100
-    testView.isUserInteractionEnabled = true
-    parent.addSubview(testView)
+				parent.addArrangedSubview(lbl)
+				//var testView: UIView = UIView(frame: CGRect(x: 13, y: 13, width: 100, height: 100))
+    //testView.backgroundColor = UIColor.blue
+    //testView.alpha = 0.5
+    //testView.tag = 100
+    //testView.isUserInteractionEnabled = true
+    //parent.addSubview(testView)
 				
 				//parent.addConstraint(NSLayoutConstraint(item: row, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: parent, attribute: NSLayoutAttribute.right, multiplier: 1, constant: -10))
 				//Íparent.addConstraint(NSLayoutConstraint(item: row, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: parent, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -10))
