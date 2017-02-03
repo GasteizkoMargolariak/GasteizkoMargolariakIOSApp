@@ -31,89 +31,55 @@ Extension of UIView to be formatted as sections.
 	
 	//The container.
 	@IBOutlet weak var container: UIView!
-	@IBOutlet weak var entry: UIView!
 	
+	//The entry
+	@IBOutlet weak var entry: UIView!
 	
 	//The activity title.
 	@IBOutlet weak var title: UILabel!
+	
+	//The activity description
 	@IBOutlet weak var descrip: UILabel!
 	
-	
-	
-	
-	//The acvtivity text.
-	
-	
-	
-	
 	/**
-	Run when the section is loaded.
+	Default constructor
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	
-	private func loadViewFromNib() -> UIView {
+	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		let nibView = nib.instantiate(withOwner: self, options: nil).first as! UIView
-		
-		return nibView
+		nib.instantiate(withOwner: self, options: nil).first as! UIView
 	}
 	
+	/**
+	Default constructor.
+	:param: s Custom identifier
+	:param: i Custom identifier
+	*/
 	init(s: String, i: Int) {
-		//self.s = s
-		//self.i = i
-		super.init(frame: CGRect(x: 20, y: 100, width: 200, height: 450))
-		print("Constructor: Custom")
-		//self.bounds = CGRect(x: 00, y: 0, width: 200, height: 150)
-		//v = loadViewFromNib()
+		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
 		v = self
 		v.frame = bounds
 		v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		v.translatesAutoresizingMaskIntoConstraints = true
-		v.backgroundColor = UIColor.green
-			//Bundle.main.loadNibNamed("RowHomePastActivities", owner: self, options: nil)
-		//self.addSubview(container)
-		//container.frame = CGRect(x: 20, y: 100, width: 100, height: 150)
-		//container.frame = CGRect(x: 20, y: 0, width: 100, height: 150)
-		container.backgroundColor = UIColor.green
 		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		container.translatesAutoresizingMaskIntoConstraints = true
-		self.backgroundColor = UIColor.red
-		self.borderColor = UIColor.blue
-		self.borderWidth = 3
-		//container.bounds = self.bounds//CGRect(x: 20, y: 100, width: 10, height: 10)
-		//title.frame = self.bounds
-		
-		print("bounds")
-		//title.frame = container.bounds//CGRect(x: 30, y: 150, width: 80, height: 100)
-		//title.frame = CGRect(x: 0, y: 0, width: 50, height: 15)
-		//title.bounds = CGRect(x: 0, y: 0, width: 50, height: 15)
-		//title.bounds = CGRec
-		container.frame = v.frame
-		//container.frame = CGRect(x: self.bounds.origin.x, y: self.bounds.origin.y, width: self.bounds.width, height: self.bounds.height)
+
+		container.frame = v.bounds
 		v.addSubview(container)
 		title.frame = self.bounds
 		container.addSubview(title)
-		//container.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
-		
-		let lbl = UILabel()
-		lbl.text = "ABBA2"
-		lbl.frame = v.bounds
-		//view.addEntry(view: row)
-		v.addSubview(lbl)
-		
-		
 	}
 	
+	/**
+	Default constructor for the interface builder
+	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
-	}
-	
-	func setBounds(rect: CGRect){
-		container.bounds = rect
 	}
 	
 	/**

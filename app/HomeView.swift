@@ -106,7 +106,7 @@ class HomeView: UIView {
 		fetchRequest.sortDescriptors = sortDescriptors
 		//TODO Compare dates
 		//fetchRequest.predicate = NSPredicate(format: "date < %@", sysdate)
-		fetchRequest.fetchLimit = 1//2
+		fetchRequest.fetchLimit = 2
 		
 		do {
 			//go get the results
@@ -118,6 +118,7 @@ class HomeView: UIView {
 			var row : RowHomePastActivities
 			var count = 0;
 			var title : String
+			var text: String
 			
 			//You need to convert to NSManagedObject to use 'for' loops
 			for r in searchResults as [NSManagedObject] {
@@ -127,34 +128,14 @@ class HomeView: UIView {
 				
 				
 				//Create a new row
-				row = RowHomePastActivities.init(s: "rowHomePastActivities", i: count) //frame: CGRect(top: 0, left: 0, width: 200, height: 50)
-				//row = RowHomePastActivities(frame: parent.bounds)
-				//row = RowHomePastActivities.instanceFromNib() as! RowHomePastActivities
-				//row.frame = CGRect(x: 15, y: 15, width: 100, height: 100)
-				//row = RowHomePastActivities(frame: CGRect(x: 13, y: 0, width: 100, height: 100))
+				row = RowHomePastActivities.init(s: "rowHomePastActivities", i: count)
 				title = r.value(forKey: "permalink")! as! String
+				text = r.value(forKey: "text_\(lang)")! as! String
 				print(title)
 				row.setTitle(text: title)
-				//row.backgroundColor = UIColor.red
-				//row.setBounds(rect: parent.bounds)
+				row.setText(text: text)
 				
 				parent.addArrangedSubview(row)
-				//parent.addSubview(row)
-				let lbl = UILabel()
-				lbl.text = "ABBA"
-				//view.addEntry(view: row)
-				parent.addArrangedSubview(lbl)
-				//var testView: UIView = UIView(frame: CGRect(x: 13, y: 13, width: 100, height: 100))
-    //testView.backgroundColor = UIColor.blue
-    //testView.alpha = 0.5
-    //testView.tag = 100
-    //testView.isUserInteractionEnabled = true
-    //parent.addSubview(testView)
-				
-				//parent.addConstraint(NSLayoutConstraint(item: row, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: parent, attribute: NSLayoutAttribute.right, multiplier: 1, constant: -10))
-				//Íparent.addConstraint(NSLayoutConstraint(item: row, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: parent, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -10))
-				//row = RowHomePastActivities(s: "rowHomePastActivities", i: count)//Bundle.mainBundle("RowPastActivities").loadNibNamed("", owner: nil, options: nil)[0] as! RowHomePastActivities
-				//row.setupWithSuperView(superView: self)
 				
 			}
 		} catch {

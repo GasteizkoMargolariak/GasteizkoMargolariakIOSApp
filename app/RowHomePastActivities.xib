@@ -31,7 +31,6 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bkz-DV-HVr" userLabel="Title">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="8"/>
-                                    <color key="backgroundColor" red="0.7046612645" green="1" blue="0.65893771199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -79,23 +78,18 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="wLM-VU-VYk" firstAttribute="leading" secondItem="2hI-rc-KPm" secondAttribute="leading" id="4wm-Kd-QZe"/>
                         <constraint firstItem="wLM-VU-VYk" firstAttribute="top" secondItem="2hI-rc-KPm" secondAttribute="top" id="fmF-H5-bZ9"/>
                         <constraint firstAttribute="trailing" secondItem="wLM-VU-VYk" secondAttribute="trailing" id="rOM-9n-P02"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" red="0.033257378472222224" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="7"/>
+                            <real key="value" value="0.0"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="2hI-rc-KPm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PMg-Yl-oAA"/>
                 <constraint firstAttribute="trailing" secondItem="2hI-rc-KPm" secondAttribute="trailing" id="WIN-BI-cuJ"/>

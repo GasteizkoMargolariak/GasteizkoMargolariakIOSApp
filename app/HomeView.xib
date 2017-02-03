@@ -30,48 +30,49 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Poy-ba-9jX">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <subviews>
-                        <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ljm-NP-c4e" customClass="Section" customModule="app" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ljm-NP-c4e" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="120" identifier="HomeView.Location.height" id="4XI-rg-Du1"/>
                             </constraints>
                         </view>
-                        <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nu-j1-wGI" customClass="Section" customModule="app" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nu-j1-wGI" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="120" width="320" height="120"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="120" identifier="HomeView.Lablanca.height" id="B0a-14-gfY"/>
                             </constraints>
                         </view>
-                        <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQo-nm-4Mo" customClass="Section" customModule="app" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQo-nm-4Mo" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="240" width="320" height="120"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="120" identifier="HomeView.FActivity.height" id="AJi-J2-weg"/>
                             </constraints>
                         </view>
-                        <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-Mu-U68" customClass="Section" customModule="app" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-Mu-U68" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="360" width="320" height="120"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="120" identifier="HomeView.Blog.Height" id="bV3-sl-7SD"/>
                             </constraints>
                         </view>
-                        <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6A-Ya-esA" customClass="Section" customModule="app" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6A-Ya-esA" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="28" y="480" width="320" height="120"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="120" identifier="HomeView.Gallery.Height" id="vSS-A6-4QV"/>
                             </constraints>
                         </view>
-                        <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZk-r1-Tca" customClass="Section" customModule="app" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZk-r1-Tca" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="160" y="600" width="0.0" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="120" identifier="HomeView.PActivity.height" id="6SU-vG-oBN"/>
                             </constraints>
                         </view>
-                        <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgk-s8-xje" customClass="Section" customModule="app" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgk-s8-xje" customClass="Section" customModule="app" customModuleProvider="target">
                             <rect key="frame" x="83" y="600" width="320" height="15"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
