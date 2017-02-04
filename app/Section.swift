@@ -66,4 +66,18 @@ class Section: UIView {
 		lbl.text = "ABBA"
 		content.addSubview(lbl)
 	}
+	
+	func resizeToFitSubviews() {
+		var width: CGFloat = 0
+		var height: CGFloat = 0
+		for someView in self.subviews {
+			let aView = someView
+			let newWidth = aView.frame.origin.x + aView.frame.width
+			let newHeight = aView.frame.origin.y + aView.frame.height
+			width = max(width, newWidth)
+			height = max(height, newHeight)
+		}
+		
+		frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: width, height: height)
+	}
 }

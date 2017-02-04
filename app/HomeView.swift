@@ -76,6 +76,8 @@ class HomeView: UIView {
 		//Populate sections
 		setUpPastActivities(context: moc, delegate: appDelegate, lang: lang, parent: pastActivitiesSection.getContentStack())
 		
+		pastActivitiesSection.resizeToFitSubviews()
+		
 		//Always at the end: update scrollview
 		var h: Int = 0
 		for view in scrollView.subviews {
@@ -129,10 +131,10 @@ class HomeView: UIView {
 				
 				//Create a new row
 				row = RowHomePastActivities.init(s: "rowHomePastActivities", i: count)
-				title = r.value(forKey: "permalink")! as! String
+				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
 				print(title)
-				row.setTitle(text: title)
+				row.setTitle(text: "aa\(title)")
 				row.setText(text: text)
 				
 				parent.addArrangedSubview(row)

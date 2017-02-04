@@ -71,8 +71,10 @@ Extension of UIView to be formatted as sections.
 
 		container.frame = v.bounds
 		v.addSubview(container)
-		title.frame = self.bounds
-		container.addSubview(title)
+		
+		
+		
+		
 	}
 	
 	/**
@@ -88,7 +90,7 @@ Extension of UIView to be formatted as sections.
 	*/
 	func setTitle(text: String){
 		print("Setting title: \(text)")
-		//title.text = text
+		title.text = text
 		//descrip.text = text
 	}
 	
