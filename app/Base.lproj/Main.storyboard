@@ -37,18 +37,21 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFh-si-6JY">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
-                                <color key="backgroundColor" red="0.72748052552819176" green="0.91921132201073807" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.47058823529999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="MHT-7R-T2c"/>
                                 </constraints>
-                                <color key="barTintColor" red="0.85979589512451782" green="0.95012098090369101" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.0" green="0.47058823529999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="Gasteizko Margolariak" id="isw-jq-8xu"/>
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ikv-46-g2m">
                                 <rect key="frame" x="0.0" y="65" width="320" height="45"/>
-                                <color key="backgroundColor" red="0.85979589509999998" green="0.95012098089999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.47058823529999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="D8o-cR-8qU"/>
                                 </constraints>
@@ -68,18 +71,17 @@
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbJ-gz-Ivz">
                                                     <rect key="frame" x="0.0" y="5" width="100" height="40"/>
-                                                    <color key="backgroundColor" red="0.85979589509999998" green="0.95012098089999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="JDi-Ta-B3u"/>
                                                         <constraint firstAttribute="width" constant="100" id="eKL-ga-53F"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZNu-9N-o6K">
                                                     <rect key="frame" x="4" y="38" width="92" height="4"/>
-                                                    <color key="backgroundColor" red="0.58073881930000004" green="0.8210679313" blue="0.99835759400000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="4" id="Si5-HX-bjR"/>
                                                     </constraints>
@@ -141,7 +143,7 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.47058823529411764" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="p8H-ai-kTU" firstAttribute="top" secondItem="Ikv-46-g2m" secondAttribute="bottom" id="1fj-8m-lWP"/>
                             <constraint firstItem="T4H-Rn-I4y" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="3Eh-im-76c"/>
@@ -199,7 +201,7 @@
                     <view key="view" contentMode="scaleToFill" id="12o-6g-8cT" customClass="HomeView" customModule="app" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.60846421630000003" green="0.58038871199999997" blue="0.12541175830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.70980392156862748" green="0.82745098039215681" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jry-8b-RWd" userLabel="First Responder" sceneMemberID="firstResponder"/>

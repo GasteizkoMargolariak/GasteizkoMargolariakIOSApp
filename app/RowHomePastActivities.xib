@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,44 +20,48 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="RowHomePastActivities" customClass="RowHomePastActivities" customModule="app">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hI-rc-KPm" userLabel="Container">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLM-VU-VYk" userLabel="Entry">
-                            <rect key="frame" x="10" y="10" width="300" height="568"/>
+                            <rect key="frame" x="10" y="10" width="355" height="667"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bkz-DV-HVr" userLabel="Title">
-                                    <rect key="frame" x="10" y="10" width="280" height="21.5"/>
+                                    <rect key="frame" x="10" y="10" width="335" height="21.5"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                    <color key="textColor" red="0.13929578993055555" green="0.4641384548611111" blue="0.33924696180555558" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.15294117647058825" green="0.33333333333333331" blue="0.45098039215686275" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WSe-uz-Uhz" userLabel="Image">
-                                    <rect key="frame" x="10" y="40" width="80" height="64"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WSe-uz-Uhz" userLabel="Image">
+                                    <rect key="frame" x="10" y="40" width="89" height="64"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-5p-Bid" userLabel="Text">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-5p-Bid" userLabel="Text">
                                     <rect key="frame" x="98" y="40" width="214" height="64"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="1" green="0.2033420138888889" blue="0.32001410590277779" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="1" green="1" blue="0.32001410590277779" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstItem="WSe-uz-Uhz" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.2" id="9Lz-WQ-1aS"/>
+                                <constraint firstItem="f4E-5p-Bid" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="40" id="Emi-Ob-27Q"/>
                                 <constraint firstItem="Bkz-DV-HVr" firstAttribute="leading" secondItem="wLM-VU-VYk" secondAttribute="leading" constant="10" id="LSz-FM-x2V"/>
+                                <constraint firstItem="f4E-5p-Bid" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.7" id="MdM-ps-4b8"/>
                                 <constraint firstAttribute="trailing" secondItem="Bkz-DV-HVr" secondAttribute="trailing" constant="10" id="MdM-yF-pmK"/>
+                                <constraint firstItem="WSe-uz-Uhz" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="40" id="Pyf-oT-PQl"/>
+                                <constraint firstItem="WSe-uz-Uhz" firstAttribute="leading" secondItem="wLM-VU-VYk" secondAttribute="leading" constant="10" id="YG6-eX-oTj"/>
                                 <constraint firstItem="Bkz-DV-HVr" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="10" id="mwG-d2-HQL"/>
+                                <constraint firstAttribute="trailing" secondItem="f4E-5p-Bid" secondAttribute="trailing" constant="10" id="svU-xx-LsR"/>
                             </constraints>
                             <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" red="0.0" green="0.0" blue="0.33810763890000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="value" red="0.42745098039215684" green="0.41176470588235292" blue="0.56470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                     <real key="value" value="1"/>
@@ -93,7 +98,7 @@
                     <real key="value" value="0.0"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="46" y="-43"/>
+            <point key="canvasLocation" x="45.5" y="-43.5"/>
         </view>
     </objects>
     <resources>

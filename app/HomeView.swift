@@ -90,7 +90,6 @@ class HomeView: UIView {
 	
 	func getLanguage() -> String{
 		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
-		print("Device language: \(pre)")
 		if(pre == "es" || pre == "en" || pre == "eu"){
 			return pre
 		}

@@ -26,15 +26,17 @@
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Titulo" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mYX-eR-Wot">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
-                            <color key="backgroundColor" red="0.23731978796769859" green="0.48982898252051899" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.47058823529999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hhU-TV-XGc" userLabel="Content">
                             <rect key="frame" x="0.0" y="27" width="355" height="620"/>
+                            <color key="backgroundColor" red="0.59607843137254901" green="0.78431372549019607" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </stackView>
                     </subviews>
+                    <color key="backgroundColor" red="0.59607843140000005" green="0.7843137255" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="mYX-eR-Wot" firstAttribute="bottom" secondItem="hhU-TV-XGc" secondAttribute="top" id="0JC-9a-fRi"/>
                         <constraint firstItem="mYX-eR-Wot" firstAttribute="trailing" secondItem="hhU-TV-XGc" secondAttribute="trailing" id="4VF-IP-46O"/>
@@ -58,7 +60,6 @@
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="e7S-aL-6Ed" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="0Kw-6t-Izr"/>
                 <constraint firstItem="e7S-aL-6Ed" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="WVI-h0-OgP"/>
@@ -67,7 +68,7 @@
             </constraints>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                    <real key="value" value="4"/>
+                    <real key="value" value="0.0"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="-409.5" y="74.5"/>
