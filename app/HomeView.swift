@@ -76,7 +76,8 @@ class HomeView: UIView {
 		//Populate sections
 		setUpPastActivities(context: moc, delegate: appDelegate, lang: lang, parent: pastActivitiesSection.getContentStack())
 		
-		pastActivitiesSection.resizeToFitSubviews()
+		
+		pastActivitiesSection.expandSection()
 		
 		//Always at the end: update scrollview
 		var h: Int = 0
@@ -85,7 +86,8 @@ class HomeView: UIView {
 			h = h + Int(view.frame.height) + 30 //Why 30?
 			print("curh: \(h)")
 		}
-		self.scrollView.contentSize.height = CGFloat(h);
+		// TODO: Calculate at the end
+		self.scrollView.contentSize.height = 1200// CGFloat(h);
 	}
 	
 	func getLanguage() -> String{
@@ -133,8 +135,10 @@ class HomeView: UIView {
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
 				print(title)
-				row.setTitle(text: "aa\(title)")
+				row.setTitle(text: title)
 				row.setText(text: text)
+				
+				print("Row height: \(row.frame.height)")
 				
 				parent.addArrangedSubview(row)
 				

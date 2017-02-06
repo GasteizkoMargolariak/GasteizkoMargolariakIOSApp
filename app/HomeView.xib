@@ -30,80 +30,70 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Poy-ba-9jX">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ljm-NP-c4e" customClass="Section" customModule="app" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gOz-rr-CeQ">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                            <subviews>
+                                <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ljm-NP-c4e" customClass="Section" customModule="app">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nu-j1-wGI" customClass="Section" customModule="app">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQo-nm-4Mo" customClass="Section" customModule="app">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-Mu-U68" customClass="Section" customModule="app">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6A-Ya-esA" customClass="Section" customModule="app" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="10"/>
+                                </view>
+                                <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZk-r1-Tca" customClass="Section" customModule="app">
+                                    <rect key="frame" x="0.0" y="10" width="320" height="350"/>
+                                    <color key="backgroundColor" red="0.13929578989999999" green="0.4641384549" blue="0.33924696180000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.60846421630000003" green="0.58038871199999997" blue="0.12541175830000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgk-s8-xje" customClass="Section" customModule="app">
+                                    <rect key="frame" x="0.0" y="360" width="320" height="120"/>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="0.42787000868055558" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="120" identifier="HomeView.Location.height" id="4XI-rg-Du1"/>
+                                <constraint firstItem="fZk-r1-Tca" firstAttribute="centerX" secondItem="gOz-rr-CeQ" secondAttribute="centerX" id="2Ly-H5-cg3"/>
+                                <constraint firstItem="dgk-s8-xje" firstAttribute="width" secondItem="gOz-rr-CeQ" secondAttribute="width" id="Fns-iO-jXi"/>
+                                <constraint firstItem="v6A-Ya-esA" firstAttribute="centerX" secondItem="gOz-rr-CeQ" secondAttribute="centerX" id="GUl-qy-hrg"/>
+                                <constraint firstItem="Ljm-NP-c4e" firstAttribute="centerX" secondItem="gOz-rr-CeQ" secondAttribute="centerX" id="Hca-x5-ir8"/>
+                                <constraint firstItem="9nu-j1-wGI" firstAttribute="centerX" secondItem="gOz-rr-CeQ" secondAttribute="centerX" id="JLF-kC-CR9"/>
+                                <constraint firstItem="dgk-s8-xje" firstAttribute="centerX" secondItem="gOz-rr-CeQ" secondAttribute="centerX" id="Oy3-i3-zcd"/>
+                                <constraint firstItem="fZk-r1-Tca" firstAttribute="width" secondItem="gOz-rr-CeQ" secondAttribute="width" id="UDc-t0-pJ0"/>
+                                <constraint firstItem="v6A-Ya-esA" firstAttribute="width" secondItem="gOz-rr-CeQ" secondAttribute="width" id="Uaq-4u-NBS"/>
+                                <constraint firstItem="FQo-nm-4Mo" firstAttribute="centerX" secondItem="gOz-rr-CeQ" secondAttribute="centerX" id="aWZ-5w-1ke"/>
+                                <constraint firstItem="FQo-nm-4Mo" firstAttribute="width" secondItem="gOz-rr-CeQ" secondAttribute="width" id="azo-MK-F5R"/>
+                                <constraint firstItem="uHa-Mu-U68" firstAttribute="centerX" secondItem="gOz-rr-CeQ" secondAttribute="centerX" id="i5O-1b-eCi"/>
+                                <constraint firstItem="uHa-Mu-U68" firstAttribute="width" secondItem="gOz-rr-CeQ" secondAttribute="width" id="ljo-DJ-9M1"/>
+                                <constraint firstItem="Ljm-NP-c4e" firstAttribute="width" secondItem="gOz-rr-CeQ" secondAttribute="width" id="s8R-dV-4ju"/>
+                                <constraint firstItem="9nu-j1-wGI" firstAttribute="width" secondItem="gOz-rr-CeQ" secondAttribute="width" id="v1C-hQ-R98"/>
                             </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nu-j1-wGI" customClass="Section" customModule="app" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="120" width="320" height="120"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="120" identifier="HomeView.Lablanca.height" id="B0a-14-gfY"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQo-nm-4Mo" customClass="Section" customModule="app" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="240" width="320" height="120"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="120" identifier="HomeView.FActivity.height" id="AJi-J2-weg"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-Mu-U68" customClass="Section" customModule="app" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="360" width="320" height="120"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="120" identifier="HomeView.Blog.Height" id="bV3-sl-7SD"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6A-Ya-esA" customClass="Section" customModule="app" customModuleProvider="target">
-                            <rect key="frame" x="28" y="480" width="320" height="120"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="120" identifier="HomeView.Gallery.Height" id="vSS-A6-4QV"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZk-r1-Tca" customClass="Section" customModule="app" customModuleProvider="target">
-                            <rect key="frame" x="160" y="600" width="0.0" height="0.0"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="120" identifier="HomeView.PActivity.height" id="6SU-vG-oBN"/>
-                            </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgk-s8-xje" customClass="Section" customModule="app" customModuleProvider="target">
-                            <rect key="frame" x="83" y="600" width="320" height="15"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="120" identifier="HomeView.Social.height" id="9Ea-4y-vjH"/>
-                            </constraints>
-                        </view>
+                        </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="FQo-nm-4Mo" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="000-Cy-wsR"/>
-                        <constraint firstItem="Ljm-NP-c4e" firstAttribute="top" secondItem="Poy-ba-9jX" secondAttribute="top" identifier="HomeView.Location.Top" id="23E-en-DDi"/>
-                        <constraint firstItem="uHa-Mu-U68" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="4KD-jX-3eU"/>
-                        <constraint firstItem="dgk-s8-xje" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="5mi-n8-URM"/>
-                        <constraint firstItem="fZk-r1-Tca" firstAttribute="top" secondItem="v6A-Ya-esA" secondAttribute="bottom" id="63J-zm-eA8"/>
-                        <constraint firstItem="dgk-s8-xje" firstAttribute="top" secondItem="fZk-r1-Tca" secondAttribute="bottom" id="8YH-MM-1cR"/>
-                        <constraint firstItem="9nu-j1-wGI" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" identifier="HomeView.Lablanca.Width" id="D2d-eu-aQa"/>
-                        <constraint firstItem="fZk-r1-Tca" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="Db8-t5-Jgb"/>
-                        <constraint firstItem="dgk-s8-xje" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="J7B-uj-NKg"/>
-                        <constraint firstItem="Ljm-NP-c4e" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" identifier="HomeView.Location.Center" id="T2f-t6-8Ax"/>
-                        <constraint firstItem="Ljm-NP-c4e" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" identifier="HomeView.Location.Width" id="V7B-2e-Zlq"/>
-                        <constraint firstItem="v6A-Ya-esA" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="VCL-tk-qZ9"/>
-                        <constraint firstItem="FQo-nm-4Mo" firstAttribute="top" secondItem="9nu-j1-wGI" secondAttribute="bottom" id="ZV1-6F-w0q"/>
-                        <constraint firstItem="uHa-Mu-U68" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="aSc-0o-zFE"/>
-                        <constraint firstItem="uHa-Mu-U68" firstAttribute="top" secondItem="FQo-nm-4Mo" secondAttribute="bottom" id="ad9-hp-x4I"/>
-                        <constraint firstItem="FQo-nm-4Mo" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="aqE-NW-zTF"/>
-                        <constraint firstItem="9nu-j1-wGI" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" identifier="HomeView.Lablanca.Center" id="cWL-iF-ULd"/>
-                        <constraint firstItem="v6A-Ya-esA" firstAttribute="top" secondItem="uHa-Mu-U68" secondAttribute="bottom" id="hSf-46-xQk"/>
-                        <constraint firstItem="fZk-r1-Tca" firstAttribute="centerX" secondItem="Poy-ba-9jX" secondAttribute="centerX" id="iGW-Be-hEH"/>
-                        <constraint firstItem="9nu-j1-wGI" firstAttribute="top" secondItem="Ljm-NP-c4e" secondAttribute="bottom" identifier="HomeView.Lablanca.Top" id="pCk-kh-wha"/>
-                        <constraint firstItem="v6A-Ya-esA" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="r2z-Z1-yS5"/>
-                        <constraint firstItem="uHa-Mu-U68" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="rp2-BX-jNV"/>
+                        <constraint firstItem="gOz-rr-CeQ" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="Gw0-jw-ldE"/>
+                        <constraint firstItem="gOz-rr-CeQ" firstAttribute="top" secondItem="Poy-ba-9jX" secondAttribute="top" id="Hmx-ri-LqQ"/>
+                        <constraint firstItem="gOz-rr-CeQ" firstAttribute="leading" secondItem="Poy-ba-9jX" secondAttribute="leading" id="k5u-hr-4th"/>
                     </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.70980392160000005" green="0.82745098039999998" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Poy-ba-9jX" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" identifier="HomeView.Scroll.Width" id="91y-2B-LO2"/>
-                <constraint firstItem="Poy-ba-9jX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" identifier="HomeView.Scroll.Top" id="Oqf-OH-F61"/>
-                <constraint firstItem="Poy-ba-9jX" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" identifier="HomeView.Scroll.Height" id="j3N-FA-cWS"/>
+                <constraint firstItem="Poy-ba-9jX" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="9SN-Tf-raC"/>
+                <constraint firstItem="Poy-ba-9jX" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="TFG-sf-YY4"/>
             </constraints>
             <point key="canvasLocation" x="26" y="52"/>
         </view>

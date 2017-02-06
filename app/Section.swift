@@ -61,6 +61,13 @@ class Section: UIView {
 		title.text = text
 	}
 	
+	func expandSection(){
+		print("Bounds: \(self.bounds)")
+		print("Frame: \(self.frame)")
+		print("Subviews: \(self.subviews)")
+		//sizeToFit()
+	}
+	
 	func addEntry(view : UIView){
 		let lbl = UILabel()
 		lbl.text = "ABBA"

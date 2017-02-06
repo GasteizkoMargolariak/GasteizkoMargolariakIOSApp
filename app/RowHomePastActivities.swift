@@ -73,7 +73,7 @@ Extension of UIView to be formatted as sections.
 		v.addSubview(container)
 		
 		
-		
+		//v.sizeToFit()
 		
 	}
 	

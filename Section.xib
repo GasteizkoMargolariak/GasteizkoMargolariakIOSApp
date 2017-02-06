@@ -31,15 +31,15 @@
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hhU-TV-XGc" userLabel="Content">
+                        <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleAspectFit" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hhU-TV-XGc" userLabel="Content">
                             <rect key="frame" x="0.0" y="27" width="355" height="620"/>
                             <color key="backgroundColor" red="0.59607843137254901" green="0.78431372549019607" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </stackView>
                     </subviews>
                     <color key="backgroundColor" red="0.59607843140000005" green="0.7843137255" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="mYX-eR-Wot" firstAttribute="bottom" secondItem="hhU-TV-XGc" secondAttribute="top" id="0JC-9a-fRi"/>
-                        <constraint firstItem="mYX-eR-Wot" firstAttribute="trailing" secondItem="hhU-TV-XGc" secondAttribute="trailing" id="4VF-IP-46O"/>
+                        <constraint firstItem="mYX-eR-Wot" firstAttribute="bottom" secondItem="hhU-TV-XGc" secondAttribute="top" id="0JC-9a-fRi" userLabel="Section_Title.bottom=Content.top"/>
+                        <constraint firstItem="mYX-eR-Wot" firstAttribute="trailing" secondItem="hhU-TV-XGc" secondAttribute="trailing" id="4VF-IP-46O" userLabel="Section_Title.trailing=Content.trailing"/>
                         <constraint firstItem="mYX-eR-Wot" firstAttribute="leading" secondItem="hhU-TV-XGc" secondAttribute="leading" id="5pZ-0J-Mc4"/>
                         <constraint firstItem="hhU-TV-XGc" firstAttribute="top" secondItem="e7S-aL-6Ed" secondAttribute="top" constant="27" id="GaL-O1-uum"/>
                         <constraint firstAttribute="trailing" secondItem="hhU-TV-XGc" secondAttribute="trailing" id="IEf-ra-MWR"/>
