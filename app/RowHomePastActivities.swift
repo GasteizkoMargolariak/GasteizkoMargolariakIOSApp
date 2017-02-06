@@ -38,8 +38,11 @@ Extension of UIView to be formatted as sections.
 	//The activity title.
 	@IBOutlet weak var title: UILabel!
 	
-	//The activity description
+	//The activity description.
 	@IBOutlet weak var descrip: UILabel!
+	
+	//The activity image.
+	@IBOutlet weak var image: UIImageView!
 	
 	/**
 	Default constructor
@@ -101,7 +104,15 @@ Extension of UIView to be formatted as sections.
 	If null or empty, the igage is hidden.
 	:param: path The new text.
 	*/
-	func setImage(path: String){
-		//TODO
+	func setImage(filename: String){
+		if (filename == ""){
+			print("No image")
+			//TODO hide the imageview
+		}
+		else{
+			print("Set image \(filename)")
+			let path = "img/actividades/thumb/\(filename)"
+			image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+		}
 	}
 }

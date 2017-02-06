@@ -15,6 +15,7 @@
                 <outlet property="container" destination="2hI-rc-KPm" id="rWX-Vl-kOp"/>
                 <outlet property="descrip" destination="f4E-5p-Bid" id="IF5-ck-qUL"/>
                 <outlet property="entry" destination="wLM-VU-VYk" id="Gkq-yE-fdN"/>
+                <outlet property="image" destination="WSe-uz-Uhz" id="iU4-jm-UzQ"/>
                 <outlet property="title" destination="Bkz-DV-HVr" id="1ok-yI-Npt"/>
             </connections>
         </placeholder>

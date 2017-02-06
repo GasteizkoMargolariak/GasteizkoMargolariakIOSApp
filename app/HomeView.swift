@@ -119,9 +119,11 @@ class HomeView: UIView {
 			print ("Activities: \(searchResults.count)")
 			
 			var row : RowHomePastActivities
-			var count = 0;
-			var title : String
+			var count = 0
+			var id: Int
+			var title: String
 			var text: String
+			var image: String
 			
 			//You need to convert to NSManagedObject to use 'for' loops
 			for r in searchResults as [NSManagedObject] {
@@ -132,11 +134,31 @@ class HomeView: UIView {
 				
 				//Create a new row
 				row = RowHomePastActivities.init(s: "rowHomePastActivities\(count)", i: count)
+				id = r.value(forKey: "id")! as! Int
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
 				print(title)
 				row.setTitle(text: title)
 				row.setText(text: text)
+				
+				// Get main image
+				image = ""
+				let imgFetchRequest: NSFetchRequest<Activity_image> = Activity_image.fetchRequest()
+				let imgSortDescriptor = NSSortDescriptor(key: "idx", ascending: true)
+				let imgSortDescriptors = [imgSortDescriptor]
+				imgFetchRequest.sortDescriptors = imgSortDescriptors
+				imgFetchRequest.predicate = NSPredicate(format: "activity == %i", id)
+				imgFetchRequest.fetchLimit = 1
+				do{
+					let imgSearchResults = try context.fetch(imgFetchRequest)
+					for imgR in imgSearchResults as [NSManagedObject]{
+						image = imgR.value(forKey: "image")! as! String
+						print ("IMAGE: \(image)")
+						row.setImage(filename: image)
+					}
+				} catch {
+					print("Error getting image for activity \(id): \(error)")
+				}
 				
 				print("Row height: \(row.frame.height)")
 				
