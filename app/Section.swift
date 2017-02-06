@@ -65,7 +65,7 @@ class Section: UIView {
 		print("Bounds: \(self.bounds)")
 		print("Frame: \(self.frame)")
 		print("Subviews: \(self.subviews)")
-		//sizeToFit()
+		sizeToFit()
 	}
 	
 	func addEntry(view : UIView){

@@ -131,7 +131,7 @@ class HomeView: UIView {
 				
 				
 				//Create a new row
-				row = RowHomePastActivities.init(s: "rowHomePastActivities", i: count)
+				row = RowHomePastActivities.init(s: "rowHomePastActivities\(count)", i: count)
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
 				print(title)

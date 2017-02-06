@@ -35,12 +35,14 @@
                                     <color key="textColor" red="0.15294117647058825" green="0.33333333333333331" blue="0.45098039215686275" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WSe-uz-Uhz" userLabel="Image">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WSe-uz-Uhz" userLabel="Image">
                                     <rect key="frame" x="10" y="40" width="89" height="64"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="64" id="EJ3-uo-Xp3"/>
+                                    </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-5p-Bid" userLabel="Text">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-5p-Bid" userLabel="Text">
                                     <rect key="frame" x="98" y="40" width="214" height="64"/>
-                                    <color key="backgroundColor" red="1" green="0.2033420138888889" blue="0.32001410590277779" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -75,6 +77,7 @@
                     <constraints>
                         <constraint firstItem="wLM-VU-VYk" firstAttribute="bottom" secondItem="2hI-rc-KPm" secondAttribute="bottom" constant="10" id="39K-W7-EIE"/>
                         <constraint firstAttribute="trailing" secondItem="wLM-VU-VYk" secondAttribute="trailing" constant="10" id="HSF-55-R5c"/>
+                        <constraint firstAttribute="height" constant="120" id="PdT-5v-I0r"/>
                         <constraint firstItem="wLM-VU-VYk" firstAttribute="top" secondItem="2hI-rc-KPm" secondAttribute="top" constant="10" id="fWN-oO-QzS"/>
                         <constraint firstItem="wLM-VU-VYk" firstAttribute="leading" secondItem="2hI-rc-KPm" secondAttribute="leading" constant="10" id="teN-oh-Db9"/>
                     </constraints>
