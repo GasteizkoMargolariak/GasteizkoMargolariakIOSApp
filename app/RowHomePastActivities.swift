@@ -71,10 +71,6 @@ Extension of UIView to be formatted as sections.
 
 		container.frame = v.bounds
 		v.addSubview(container)
-		
-		
-		//v.sizeToFit()
-		
 	}
 	
 	/**
@@ -85,21 +81,19 @@ Extension of UIView to be formatted as sections.
 	}
 	
 	/**
-	Changes the title of the activity.
+	Changes the title of the activity. Decodes HTML.
 	:param: text The new title.
 	*/
 	func setTitle(text: String){
-		print("Setting title: \(text)")
-		title.text = text
-		//descrip.text = text
+		title.text = text.stripHtml()
 	}
 	
 	/**
-	Changes the description of the activity.
+	Changes the description of the activity. Decodes HTML.
 	:param: text The new text.
 	*/
 	func setText(text: String){
-		descrip.text = text
+		descrip.text = text.stripHtml()
 	}
 	
 	/**
@@ -110,23 +104,4 @@ Extension of UIView to be formatted as sections.
 	func setImage(path: String){
 		//TODO
 	}
-	
-	
-	
-	
-	/*var view:UIView!
-	
-	func setup() {
-		view = loadViewFromNib()
-		view.frame = bounds
-		view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeightaddSubview(view)
-	}
-	
-	func loadViewFromNib() -> UIView {
-		let bundle = Bundle(for:type(of: self))
-		let nib = UINib(nibName: "RowHomePastActivities", bundle: bundle)
-		let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-		
-		return view
-	}*/
 }

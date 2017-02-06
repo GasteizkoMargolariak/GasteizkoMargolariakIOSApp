@@ -58,7 +58,7 @@ class Sync{
 		//Synchronously get data
 		let task = URLSession.shared.dataTask(with: url) { data, response, error in
 			guard error == nil else {
-				print("error")
+				print("Sync error")
 				return
 			}
 			guard let data = data else {
@@ -114,13 +114,9 @@ class Sync{
 				//go get the results
 				let searchResults = try context.fetch(fetchRequest)
 				
-				//I like to check the size of the returned results!
-				print ("num of results = \(searchResults.count)")
-				
-				//You need to convert to NSManagedObject to use 'for' loops
-				for trans in searchResults as [NSManagedObject] {
-					//get the Key Value pairs (although there may be a better way to do that...
-					print("\(trans.value(forKey: "id"))")
+				print ("Num of results = \(searchResults.count)")
+				for r in searchResults as [NSManagedObject] {
+					print("\(r.value(forKey: "id"))")
 				}
 			} catch {
 				print("Error with request: \(error)")
@@ -248,7 +244,6 @@ class Sync{
 			//Get price
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let price : Int = Int(str.subStr(start : str.indexOf(target : "\"price\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
-			//print("Price: \(price)")
 			
 			//Get inscription
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)

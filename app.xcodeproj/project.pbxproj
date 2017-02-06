@@ -101,11 +101,11 @@
 				93294FF71E336FA000FDAF50 /* Entry.swift */,
 				93D9EA6B1DE3498500089002 /* HomeView.xib */,
 				93D9EA691DE3491100089002 /* HomeView.swift */,
-				93D9EA671DE342AC00089002 /* UIView.swift */,
 				93D9EA751DE3ACBB00089002 /* Sync.swift */,
-				931AA5881E1AFF8C003A2290 /* String.swift */,
 				931AA5AF1E219006003A2290 /* RowHomePastActivities.xib */,
 				93294FF91E337D0D00FDAF50 /* RowHomePastActivities.swift */,
+				931AA5881E1AFF8C003A2290 /* String.swift */,
+				93D9EA671DE342AC00089002 /* UIView.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
