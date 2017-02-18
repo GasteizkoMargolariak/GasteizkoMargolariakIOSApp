@@ -13,6 +13,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RowHomeSocial" customModule="app">
             <connections>
+                <outlet property="btnFacebook" destination="wP8-1o-Rrh" id="6uv-pC-Nta"/>
+                <outlet property="btnGoogle" destination="L4k-eK-pkc" id="DCM-a0-yah"/>
+                <outlet property="btnInstagram" destination="OlS-ga-Ngl" id="egF-6B-SQd"/>
+                <outlet property="btnMail" destination="5Xa-Sh-XrB" id="HCb-xY-VDs"/>
+                <outlet property="btnPhone" destination="512-B2-6nt" id="C2I-qn-kPa"/>
+                <outlet property="btnTwitter" destination="Ttk-Ce-1XP" id="JUs-rm-Q5M"/>
+                <outlet property="btnWhatsapp" destination="0jq-K4-utG" id="d7P-Md-D7b"/>
+                <outlet property="btnYoutube" destination="1qd-jG-4Bn" id="WVU-fK-qg1"/>
                 <outlet property="container" destination="2hI-rc-KPm" id="Qyi-RK-3V8"/>
                 <outlet property="entry" destination="wLM-VU-VYk" id="ebu-Wm-4By"/>
             </connections>
