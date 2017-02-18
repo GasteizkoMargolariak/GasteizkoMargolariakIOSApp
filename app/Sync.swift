@@ -92,9 +92,9 @@ class Sync{
 			//let dataPhotoComment : [String] = self.getTable(data: strData!, table: "photo_comment")
 			//let dataPlace : [String] = self.getTable(data: strData!, table: "place")
 			let dataPost : [String] = self.getTable(data: strData!, table: "post")
-			//let dataPostComment : [String] = self.getTable(data: strData!, table: "post_comment")
-			//let dataPostImage : [String] = self.getTable(data: strData!, table: "post_image")
-			//let dataPostTag : [String] = self.getTable(data: strData!, table: "post_tag")
+			let dataPostComment : [String] = self.getTable(data: strData!, table: "post_comment")
+			let dataPostImage : [String] = self.getTable(data: strData!, table: "post_image")
+			let dataPostTag : [String] = self.getTable(data: strData!, table: "post_tag")
 			//let dataSponsor : [String] = self.getTable(data: strData!, table: "sponsor")
 			
 			//One by one, save the received data
@@ -104,6 +104,9 @@ class Sync{
 			self.saveTableActivityTag(entries : dataActivityTag)
 			
 			self.saveTablePost(entries: dataPost)
+			self.saveTablePostComment(entries: dataPostComment)
+			self.saveTablePostImage(entries: dataPostImage)
+			self.saveTablePostTag(entries: dataPostTag)
 			
 			//TODO: Tester, Debug only
 			// Test if a entity has entries
