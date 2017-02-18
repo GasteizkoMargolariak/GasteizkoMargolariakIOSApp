@@ -70,13 +70,16 @@ class HomeView: UIView {
 		
 		//Get info to populate sections
 		let moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		moc.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 		let lang : String = getLanguage()
 		
 		//Populate sections
 		setUpPastActivities(context: moc, delegate: appDelegate, lang: lang, parent: pastActivitiesSection.getContentStack())
 		setUpBlog(context: moc, delegate: appDelegate, lang: lang, parent: blogSection.getContentStack())
 		setUpFutureActivities(context: moc, delegate: appDelegate, lang: lang, parent: futureActivitiesSection.getContentStack())
+		setUpSocial(parent: socialSection.getContentStack())
 		
 		
 		pastActivitiesSection.expandSection()
@@ -89,7 +92,7 @@ class HomeView: UIView {
 			print("curh: \(h)")
 		}
 		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 1200// CGFloat(h);
+		self.scrollView.contentSize.height = 1300// CGFloat(h);
 	}
 	
 	func getLanguage() -> String{
@@ -104,12 +107,11 @@ class HomeView: UIView {
 	
 	func setUpFutureActivities(context : NSManagedObjectContext, delegate: AppDelegate, lang: String, parent : UIStackView){
 		
-		context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
+		//context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Activity> = Activity.fetchRequest()
-		let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+		let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
 		let sortDescriptors = [sortDescriptor]
 		fetchRequest.sortDescriptors = sortDescriptors
-		//TODO Compare dates
 		fetchRequest.predicate = NSPredicate(format: "date > %@", NSDate())
 		fetchRequest.fetchLimit = 2
 		
@@ -174,7 +176,7 @@ class HomeView: UIView {
 	
 	func setUpBlog(context : NSManagedObjectContext, delegate: AppDelegate, lang: String, parent : UIStackView){
 		
-		context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
+		//context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "dtime", ascending: false)
 		let sortDescriptors = [sortDescriptor]
@@ -242,12 +244,11 @@ class HomeView: UIView {
 	
 	func setUpPastActivities(context : NSManagedObjectContext, delegate: AppDelegate, lang: String, parent : UIStackView){
 		
-		context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
+		//context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Activity> = Activity.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
 		let sortDescriptors = [sortDescriptor]
 		fetchRequest.sortDescriptors = sortDescriptors
-		//TODO Compare dates
 		fetchRequest.predicate = NSPredicate(format: "date <= %@", NSDate())
 		fetchRequest.fetchLimit = 2
 		
@@ -308,5 +309,14 @@ class HomeView: UIView {
 		} catch {
 			print("Error with request: \(error)")
 		}
+	}
+	
+	func setUpSocial(parent : UIStackView){
+		print("SETING UP SOCIAL")
+		//Create a new row
+		var row : RowHomeSocial
+		row = RowHomeSocial.init(s: "rowHomeSocial", i: 0)
+		print("ROW CREATED")
+		parent.addArrangedSubview(row)
 	}
 }

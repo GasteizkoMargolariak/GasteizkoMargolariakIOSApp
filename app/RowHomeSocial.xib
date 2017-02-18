@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RowHomeSocial" customModule="app">
+            <connections>
+                <outlet property="container" destination="2hI-rc-KPm" id="Qyi-RK-3V8"/>
+                <outlet property="entry" destination="wLM-VU-VYk" id="ebu-Wm-4By"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="RowHomeSocial" customClass="RowHomeSocial" customModule="app">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hI-rc-KPm" userLabel="Container">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="177.5"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLM-VU-VYk" userLabel="Entry">
+                            <rect key="frame" x="10" y="10" width="355" height="177.5"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Phone" translatesAutoresizingMaskIntoConstraints="NO" id="512-B2-6nt">
+                                    <rect key="frame" x="0.0" y="0.0" width="89.5" height="89.5"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Mail" translatesAutoresizingMaskIntoConstraints="NO" id="5Xa-Sh-XrB" userLabel="Mail">
+                                    <rect key="frame" x="89.5" y="0.0" width="89" height="89.5"/>
+                                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="0jq-K4-utG" userLabel="Whatsapp">
+                                    <rect key="frame" x="179" y="0.0" width="89" height="89"/>
+                                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Facebook" translatesAutoresizingMaskIntoConstraints="NO" id="wP8-1o-Rrh" userLabel="Facebook">
+                                    <rect key="frame" x="268" y="0.0" width="89" height="89"/>
+                                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Twitter" translatesAutoresizingMaskIntoConstraints="NO" id="Ttk-Ce-1XP">
+                                    <rect key="frame" x="0.0" y="90" width="89.5" height="89.5"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="GooglePlus" translatesAutoresizingMaskIntoConstraints="NO" id="L4k-eK-pkc">
+                                    <rect key="frame" x="90" y="90" width="89.5" height="89.5"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Youtube" translatesAutoresizingMaskIntoConstraints="NO" id="1qd-jG-4Bn">
+                                    <rect key="frame" x="179" y="89" width="89.5" height="89.5"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Instagram" translatesAutoresizingMaskIntoConstraints="NO" id="OlS-ga-Ngl">
+                                    <rect key="frame" x="268" y="89" width="89.5" height="89.5"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="Ttk-Ce-1XP" firstAttribute="width" secondItem="512-B2-6nt" secondAttribute="width" id="0QX-sh-Y62"/>
+                                <constraint firstItem="Ttk-Ce-1XP" firstAttribute="height" secondItem="512-B2-6nt" secondAttribute="height" id="39L-QV-csw"/>
+                                <constraint firstItem="wP8-1o-Rrh" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" id="3xb-00-2P6"/>
+                                <constraint firstItem="5Xa-Sh-XrB" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" id="7T1-Hk-R35"/>
+                                <constraint firstItem="Ttk-Ce-1XP" firstAttribute="top" secondItem="512-B2-6nt" secondAttribute="bottom" id="9F0-DU-FFO"/>
+                                <constraint firstItem="0jq-K4-utG" firstAttribute="leading" secondItem="5Xa-Sh-XrB" secondAttribute="trailing" id="AH1-0L-nYQ"/>
+                                <constraint firstItem="1qd-jG-4Bn" firstAttribute="height" secondItem="0jq-K4-utG" secondAttribute="height" id="CUC-LH-oVM"/>
+                                <constraint firstItem="wP8-1o-Rrh" firstAttribute="leading" secondItem="0jq-K4-utG" secondAttribute="trailing" id="IM6-dv-FSu"/>
+                                <constraint firstItem="L4k-eK-pkc" firstAttribute="height" secondItem="5Xa-Sh-XrB" secondAttribute="height" id="IWg-0Z-7tO"/>
+                                <constraint firstItem="L4k-eK-pkc" firstAttribute="top" secondItem="5Xa-Sh-XrB" secondAttribute="bottom" id="Jf9-UI-kn3"/>
+                                <constraint firstItem="L4k-eK-pkc" firstAttribute="leading" secondItem="5Xa-Sh-XrB" secondAttribute="leading" id="Lkg-Ff-jNA"/>
+                                <constraint firstItem="wP8-1o-Rrh" firstAttribute="height" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" id="Lyv-es-d3j"/>
+                                <constraint firstItem="512-B2-6nt" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" id="MYA-FO-b5k"/>
+                                <constraint firstItem="1qd-jG-4Bn" firstAttribute="top" secondItem="0jq-K4-utG" secondAttribute="bottom" id="QMP-Gi-WCw"/>
+                                <constraint firstItem="0jq-K4-utG" firstAttribute="height" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" id="RPd-iR-02y"/>
+                                <constraint firstItem="512-B2-6nt" firstAttribute="height" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" id="Z1m-CY-xaF"/>
+                                <constraint firstItem="5Xa-Sh-XrB" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" id="aFU-bQ-Y2T"/>
+                                <constraint firstItem="OlS-ga-Ngl" firstAttribute="leading" secondItem="wP8-1o-Rrh" secondAttribute="leading" id="aGq-AJ-HXg"/>
+                                <constraint firstItem="5Xa-Sh-XrB" firstAttribute="height" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" id="agd-tD-Z7B"/>
+                                <constraint firstItem="L4k-eK-pkc" firstAttribute="width" secondItem="5Xa-Sh-XrB" secondAttribute="width" id="bD5-gc-RZQ"/>
+                                <constraint firstItem="OlS-ga-Ngl" firstAttribute="width" secondItem="wP8-1o-Rrh" secondAttribute="width" id="bil-4K-d7f"/>
+                                <constraint firstItem="Ttk-Ce-1XP" firstAttribute="leading" secondItem="512-B2-6nt" secondAttribute="leading" id="fMj-Zv-80b"/>
+                                <constraint firstItem="wP8-1o-Rrh" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" id="gjG-xf-f2v"/>
+                                <constraint firstItem="5Xa-Sh-XrB" firstAttribute="leading" secondItem="512-B2-6nt" secondAttribute="trailing" id="iay-5b-e6B"/>
+                                <constraint firstItem="1qd-jG-4Bn" firstAttribute="width" secondItem="0jq-K4-utG" secondAttribute="width" id="jDu-hC-arJ"/>
+                                <constraint firstAttribute="height" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.5" id="jGP-1G-1P3"/>
+                                <constraint firstItem="512-B2-6nt" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" id="lyN-c0-DOH"/>
+                                <constraint firstItem="0jq-K4-utG" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" id="nUV-gk-zhw"/>
+                                <constraint firstItem="0jq-K4-utG" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" id="uCp-Vv-c61"/>
+                                <constraint firstItem="OlS-ga-Ngl" firstAttribute="top" secondItem="wP8-1o-Rrh" secondAttribute="bottom" id="vCU-hL-wuO"/>
+                                <constraint firstItem="512-B2-6nt" firstAttribute="leading" secondItem="wLM-VU-VYk" secondAttribute="leading" id="wMJ-K2-1e9"/>
+                                <constraint firstItem="OlS-ga-Ngl" firstAttribute="height" secondItem="wP8-1o-Rrh" secondAttribute="height" id="xZ5-XM-Ixz"/>
+                                <constraint firstItem="1qd-jG-4Bn" firstAttribute="leading" secondItem="0jq-K4-utG" secondAttribute="leading" id="zfP-9S-Gfc"/>
+                            </constraints>
+                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" red="0.42745098039215684" green="0.41176470588235292" blue="0.56470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="wLM-VU-VYk" firstAttribute="bottom" secondItem="2hI-rc-KPm" secondAttribute="bottom" constant="10" id="39K-W7-EIE"/>
+                        <constraint firstAttribute="trailing" secondItem="wLM-VU-VYk" secondAttribute="trailing" constant="10" id="HSF-55-R5c"/>
+                        <constraint firstItem="wLM-VU-VYk" firstAttribute="top" secondItem="2hI-rc-KPm" secondAttribute="top" constant="10" id="fWN-oO-QzS"/>
+                        <constraint firstItem="wLM-VU-VYk" firstAttribute="leading" secondItem="2hI-rc-KPm" secondAttribute="leading" constant="10" id="teN-oh-Db9"/>
+                    </constraints>
+                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="2hI-rc-KPm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cYi-xQ-QXA"/>
+                <constraint firstItem="2hI-rc-KPm" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="clR-QU-zlD"/>
+                <constraint firstItem="2hI-rc-KPm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="rig-k7-6bz"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="-36.5" y="-43.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Facebook" width="105" height="105"/>
+        <image name="GooglePlus" width="105" height="105"/>
+        <image name="Instagram" width="105" height="105"/>
+        <image name="Mail" width="105" height="105"/>
+        <image name="Phone" width="105" height="105"/>
+        <image name="Twitter" width="105" height="105"/>
+        <image name="Whatsapp" width="105" height="105"/>
+        <image name="Youtube" width="105" height="105"/>
+    </resources>
+</document>
