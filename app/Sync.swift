@@ -91,10 +91,10 @@ class Sync{
 			//let dataPhotoAlbum : [String] = self.getTable(data: strData!, table: "photo_album")
 			//let dataPhotoComment : [String] = self.getTable(data: strData!, table: "photo_comment")
 			//let dataPlace : [String] = self.getTable(data: strData!, table: "place")
-			//let dataPost : [String] = self.getTable(data: strData!, table: "post")
-			//let dataPostComment : [String] = self.getTable(data: strData!, table: "post_comment")
-			//let dataPostImage : [String] = self.getTable(data: strData!, table: "post_image")
-			//let dataPostTag : [String] = self.getTable(data: strData!, table: "post_tag")
+			let dataPost : [String] = self.getTable(data: strData!, table: "post")
+			let dataPostComment : [String] = self.getTable(data: strData!, table: "post_comment")
+			let dataPostImage : [String] = self.getTable(data: strData!, table: "post_image")
+			let dataPostTag : [String] = self.getTable(data: strData!, table: "post_tag")
 			//let dataSponsor : [String] = self.getTable(data: strData!, table: "sponsor")
 			
 			//One by one, save the received data
@@ -103,12 +103,17 @@ class Sync{
 			self.saveTableActivityImage(entries : dataActivityImage)
 			self.saveTableActivityTag(entries : dataActivityTag)
 			
+			self.saveTablePost(entries: dataPost)
+			self.saveTablePostComment(entries: dataPostComment)
+			self.saveTablePostImage(entries: dataPostImage)
+			self.saveTablePostTag(entries: dataPostTag)
+			
 			//TODO: Tester, Debug only
 			// Test if a entity has entries
 			let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 			let appDelegate = UIApplication.shared.delegate as! AppDelegate
 			context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-			let fetchRequest: NSFetchRequest<Activity_comment> = Activity_comment.fetchRequest()
+			let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
 			
 			do {
 				//go get the results
@@ -129,26 +134,304 @@ class Sync{
 	}
 	
 	func getTable(data: String, table: String) -> [String]{
-			//Does the table exists?
-			if data.indexOf(target: table) == nil{
-				print("No data in table \(table)")
-				return [String]()
+		//Does the table exists?
+		if data.indexOf(target: "\"\(table)\"") == nil{
+			print("No data in table \(table)")
+			return [String]()
+		}
+		let iS : Int? = data.indexOf(target: "\"\(table)\"")
+		var str = data.subStr(start: iS!, end: data.length - 1)
+		let iE : Int? = str.indexOf(target: "}]}")!
+		str = str.subStr(start: 0, end: iE!)
+		str = str.subStr(start: table.length + 3,end: str.length - 1)
+	
+		//Separate the entries
+		var entries : [String] = str.components(separatedBy: "},{")
+	
+		//Modify the first and the last one to remove bracers
+		entries[0] = entries[0].subStr(start: 1, end: entries[0].length - 1)
+		entries[entries.count - 1] = entries[entries.count - 1].subStr(start: 0, end: entries[entries.count - 1].length - 2)
+	
+		//Return the array
+		return entries
+	}
+
+	
+	func saveTablePost(entries : [String]){
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.timeZone = TimeZone.ReferenceType.local
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Post", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Post")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			print("Could not clean up Post entity: \(error), \(error.userInfo)")
+		} catch {
+			
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			//Get id
+			var str = entry
+			let id : Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			
+			//Get permalink
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let permalink : String = str.subStr(start : str.indexOf(target : "\"permalink\":")! + 13, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get title_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let title_es : String = str.subStr(start : str.indexOf(target : "\"title_es\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get title_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let title_en : String = str.subStr(start : str.indexOf(target : "\"title_en\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get title_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let title_eu : String = str.subStr(start : str.indexOf(target : "\"title_eu\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get text_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text_es : String = str.subStr(start : str.indexOf(target : "\"text_es\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get text_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text_en : String = str.subStr(start : str.indexOf(target : "\"text_en\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get text_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text_eu : String = str.subStr(start : str.indexOf(target : "\"text_eu\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get comments
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let comments : Int = Int(str.subStr(start : str.indexOf(target : "\"comments\":")! + 12, end : str.indexOf(target : ",\"")! - 2))!
+			
+			//Get username
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let username : String = str.subStr(start : str.indexOf(target : "\"username\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get dtime
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+			let dtime = dateFormatter.date(from : str.subStr(start : str.indexOf(target : "\"dtime\":")! + 9, end : str.length - 2))!
+			
+			
+			
+			//Save CoreData
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			//set the entity values
+			row.setValue(id, forKey: "id")
+			row.setValue(permalink, forKey: "permalink")
+			row.setValue(dtime, forKey: "dtime")
+			row.setValue(username, forKey: "username")
+			row.setValue(comments, forKey: "comments")
+			row.setValue(title_es, forKey: "title_es")
+			row.setValue(title_en, forKey: "title_en")
+			row.setValue(title_eu, forKey: "title_eu")
+			row.setValue(text_es, forKey: "text_es")
+			row.setValue(text_en, forKey: "text_en")
+			row.setValue(text_eu, forKey: "text_eu")
+			
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				print("Could not store Post with id \(id) \(error), \(error.userInfo)")
+			} catch {
+				
 			}
-			let iS : Int? = data.indexOf(target: table)
-			var str = data.subStr(start: iS!, end: data.length - 1)
-			let iE : Int? = str.indexOf(target: "}]}")!
-			str = str.subStr(start: 0, end: iE!)
-			str = str.subStr(start: table.length + 3,end: str.length - 1)
+			
+		}
+	}
+	
+	func saveTablePostComment(entries : [String]){
 		
-			//Separate the entries
-			var entries : [String] = str.components(separatedBy: "},{")
+		let dateFormatter = DateFormatter()
+		dateFormatter.timeZone = TimeZone.ReferenceType.local
 		
-			//Modify the first and the last one to remove bracers
-			entries[0] = entries[0].subStr(start: 1, end: entries[0].length - 1)
-			entries[entries.count - 1] = entries[entries.count - 1].subStr(start: 0, end: entries[entries.count - 1].length - 2)
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 		
-			//Return the array
-			return entries
+		let entity =  NSEntityDescription.entity(forEntityName: "Post_comment", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Post_comment")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			print("Could not clean up Post_comment entity: \(error), \(error.userInfo)")
+		} catch {
+			
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			//Get id
+			var str = entry
+			let id : Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			
+			//Get activity
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let post : String = str.subStr(start : str.indexOf(target : "\"post\":")! + 8, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get text
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text : String = str.subStr(start : str.indexOf(target : "\"text\":")! + 8, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get dtime
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			dateFormatter.dateFormat = "yyyy-MM-dd"
+			let dtime = dateFormatter.date(from : str.subStr(start : str.indexOf(target : "\"dtime\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
+			
+			//Get username
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let username : String = str.subStr(start : str.indexOf(target : "\"username\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get lang
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let lang : String = str.subStr(start : str.indexOf(target : "\"lang\":")! + 8, end : str.length - 1)
+			
+			//Save CoreData
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			row.setValue(id, forKey: "id")
+			row.setValue(post, forKey: "post")
+			row.setValue(text, forKey: "text")
+			row.setValue(dtime, forKey: "dtime")
+			row.setValue(username, forKey: "username")
+			row.setValue(lang, forKey: "lang")
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				print("Could not store Activity_comment with id \(id) \(error), \(error.userInfo)")
+			} catch {
+				
+			}
+			
+		}
+	}
+	
+	func saveTablePostImage(entries : [String]){
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Post_image", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Post_image")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			print("Could not clean up Post_comment entity: \(error), \(error.userInfo)")
+		} catch {
+			
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			//Get id
+			var str = entry
+			let id : Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			
+			//Get activity
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let post : Int = Int(str.subStr(start : str.indexOf(target : "\"post\":")! + 8, end : str.indexOf(target : ",\"")! - 2))!
+			
+			//Get image
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let image : String = str.subStr(start : str.indexOf(target : "\"image\":")! + 9, end : str.indexOf(target : ",\"")! - 2)
+			
+			//Get idx
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let idx : Int = Int(str.subStr(start : str.indexOf(target : "\"idx\":")! + 7, end : str.length - 2))!
+			
+			//Save CoreData
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			row.setValue(id, forKey: "id")
+			row.setValue(post, forKey: "post")
+			row.setValue(image, forKey: "image")
+			row.setValue(idx, forKey: "idx")
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				print("Could not store Post_image with id \(id) \(error), \(error.userInfo)")
+			} catch {
+				
+			}
+		}
+	}
+	
+	func saveTablePostTag(entries : [String]){
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Post_tag", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Post_tag")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			print("Could not clean up Post_tag entity: \(error), \(error.userInfo)")
+		} catch {
+			
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			//Get activity
+			var str = entry
+			let post : Int = Int(str.subStr(start : str.indexOf(target : "\"post\":")! + 8, end : str.indexOf(target : ",\"")! - 2))!
+			
+			//Get tag
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let tag : String = str.subStr(start : str.indexOf(target : "\"tag\":")! + 7, end : str.length - 1)
+			
+			//Save CoreData
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			row.setValue(post, forKey: "post")
+			row.setValue(tag, forKey: "tag")
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				print("Could not store Post_tag for post: \(post), tag: \(tag). Error: \(error), \(error.userInfo)")
+			} catch {
+				
+			}
+		}
 	}
 	
 	func saveTableActivity(entries : [String]){
