@@ -75,6 +75,7 @@ class HomeView: UIView {
 		
 		//Populate sections
 		setUpPastActivities(context: moc, delegate: appDelegate, lang: lang, parent: pastActivitiesSection.getContentStack())
+		setUpBlog(context: moc, delegate: appDelegate, lang: lang, parent: blogSection.getContentStack())
 		
 		
 		pastActivitiesSection.expandSection()
@@ -97,6 +98,74 @@ class HomeView: UIView {
 		}
 		else{
 			return "es"
+		}
+	}
+	
+	func setUpBlog(context : NSManagedObjectContext, delegate: AppDelegate, lang: String, parent : UIStackView){
+		
+		context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
+		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
+		let sortDescriptor = NSSortDescriptor(key: "dtime", ascending: false)
+		let sortDescriptors = [sortDescriptor]
+		fetchRequest.sortDescriptors = sortDescriptors
+		fetchRequest.fetchLimit = 2
+		
+		do {
+			//go get the results
+			let searchResults = try context.fetch(fetchRequest)
+			
+			//I like to check the size of the returned results!
+			print ("Post: \(searchResults.count)")
+			
+			var row : RowHomePastActivities
+			var count = 0
+			var id: Int
+			var title: String
+			var text: String
+			var image: String
+			
+			//You need to convert to NSManagedObject to use 'for' loops
+			for r in searchResults as [NSManagedObject] {
+				count = count + 1
+				//get the Key Value pairs (although there may be a better way to do that...
+				print("Perm: \(r.value(forKey: "permalink"))")
+				
+				
+				//Create a new row
+				row = RowHomePastActivities.init(s: "rowHomeBlog\(count)", i: count)
+				id = r.value(forKey: "id")! as! Int
+				title = r.value(forKey: "title_\(lang)")! as! String
+				text = r.value(forKey: "text_\(lang)")! as! String
+				print(title)
+				row.setTitle(text: title)
+				row.setText(text: text)
+				
+				// Get main image
+				image = ""
+				let imgFetchRequest: NSFetchRequest<Post_image> = Post_image.fetchRequest()
+				let imgSortDescriptor = NSSortDescriptor(key: "idx", ascending: true)
+				let imgSortDescriptors = [imgSortDescriptor]
+				imgFetchRequest.sortDescriptors = imgSortDescriptors
+				imgFetchRequest.predicate = NSPredicate(format: "post == %i", id)
+				imgFetchRequest.fetchLimit = 1
+				do{
+					let imgSearchResults = try context.fetch(imgFetchRequest)
+					for imgR in imgSearchResults as [NSManagedObject]{
+						image = imgR.value(forKey: "image")! as! String
+						print ("IMAGE: \(image)")
+						row.setImage(filename: image)
+					}
+				} catch {
+					print("Error getting image for post \(id): \(error)")
+				}
+				
+				print("Row height: \(row.frame.height)")
+				
+				parent.addArrangedSubview(row)
+				
+			}
+		} catch {
+			print("Error with request: \(error)")
 		}
 	}
 	
