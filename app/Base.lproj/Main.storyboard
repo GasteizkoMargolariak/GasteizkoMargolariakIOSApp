@@ -142,6 +142,10 @@
                                     <segue destination="Bxe-vP-zrv" kind="embed" id="ufh-fQ-2yF"/>
                                 </connections>
                             </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bdj-h9-Qx6" userLabel="Container View Gallery">
+                                <rect key="frame" x="0.0" y="55" width="320" height="458"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47058823529411764" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -297,6 +301,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vc-bF-Qwf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1509" y="576"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="zgg-Cx-j75">
+            <objects>
+                <viewController id="UkS-wI-Yhx" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yy6-d2-MRo"/>
+                        <viewControllerLayoutGuide type="bottom" id="IxZ-up-5UO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zcp-qV-FPt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r4n-Sk-nt4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-728" y="1744"/>
         </scene>
     </scenes>
 </document>
