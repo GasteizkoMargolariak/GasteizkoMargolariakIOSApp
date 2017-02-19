@@ -104,7 +104,48 @@
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gq3-pT-mgO" userLabel="Comments">
                                             <rect key="frame" x="8" y="300" width="304" height="148"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GfC-zi-ouX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="304" height="379"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# comments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3V-dl-ijf" userLabel="Comment Count">
+                                                            <rect key="frame" x="0.0" y="0.0" width="304" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="For-Ru-u5Y">
+                                                            <rect key="frame" x="0.0" y="20.5" width="304" height="200"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="200" id="5tA-ix-yCI"/>
+                                                            </constraints>
+                                                        </stackView>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Rd-hH-5iP">
+                                                            <rect key="frame" x="0.0" y="220.5" width="304" height="30.5"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kba-hh-hSu">
+                                                            <rect key="frame" x="0.0" y="251" width="304" height="128"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="w3V-dl-ijf" firstAttribute="centerX" secondItem="GfC-zi-ouX" secondAttribute="centerX" id="Yyp-d0-ZpI"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="GfC-zi-ouX" secondAttribute="bottom" constant="-231" id="0wM-uD-gyd"/>
+                                                <constraint firstItem="GfC-zi-ouX" firstAttribute="width" secondItem="Gq3-pT-mgO" secondAttribute="width" id="vQs-af-5Ep"/>
+                                                <constraint firstItem="GfC-zi-ouX" firstAttribute="top" secondItem="Gq3-pT-mgO" secondAttribute="top" id="xfA-Wa-OyL"/>
+                                                <constraint firstItem="GfC-zi-ouX" firstAttribute="centerX" secondItem="Gq3-pT-mgO" secondAttribute="centerX" id="zP0-qX-mvn"/>
+                                            </constraints>
                                             <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
