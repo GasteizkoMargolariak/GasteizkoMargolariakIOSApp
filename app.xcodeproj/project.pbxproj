@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93075C6A1E59CAB000396389 /* BlogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93075C691E59CAB000396389 /* BlogView.xib */; };
+		93075C6C1E59CB6B00396389 /* BlogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93075C6B1E59CB6B00396389 /* BlogView.swift */; };
+		93075C701E59D04A00396389 /* RowBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93075C6F1E59D04A00396389 /* RowBlog.swift */; };
+		93075C721E59D06900396389 /* RowBlog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93075C711E59D06900396389 /* RowBlog.xib */; };
 		931AA5891E1AFF8C003A2290 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AA5881E1AFF8C003A2290 /* String.swift */; };
 		931AA58B1E1DA911003A2290 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 931AA58A1E1DA910003A2290 /* CoreData.framework */; };
 		931AA5AE1E218D0E003A2290 /* Entry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 931AA5AD1E218D0D003A2290 /* Entry.xib */; };
@@ -31,6 +35,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		93075C691E59CAB000396389 /* BlogView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlogView.xib; sourceTree = "<group>"; };
+		93075C6B1E59CB6B00396389 /* BlogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogView.swift; sourceTree = "<group>"; };
+		93075C6F1E59D04A00396389 /* RowBlog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowBlog.swift; sourceTree = "<group>"; };
+		93075C711E59D06900396389 /* RowBlog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowBlog.xib; sourceTree = "<group>"; };
 		931AA5881E1AFF8C003A2290 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		931AA58A1E1DA910003A2290 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		931AA5AD1E218D0D003A2290 /* Entry.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Entry.xib; sourceTree = "<group>"; };
@@ -109,6 +117,10 @@
 				931AA5881E1AFF8C003A2290 /* String.swift */,
 				93D9EA671DE342AC00089002 /* UIView.swift */,
 				935892CF1E493C2300E1CD5F /* UIImageView.swift */,
+				93075C691E59CAB000396389 /* BlogView.xib */,
+				93075C6B1E59CB6B00396389 /* BlogView.swift */,
+				93075C6F1E59D04A00396389 /* RowBlog.swift */,
+				93075C711E59D06900396389 /* RowBlog.xib */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -183,9 +195,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				931AA5AE1E218D0E003A2290 /* Entry.xib in Resources */,
+				93075C721E59D06900396389 /* RowBlog.xib in Resources */,
 				93B84BA71D9C31AB006C0F67 /* LaunchScreen.storyboard in Resources */,
 				931AA5B01E219006003A2290 /* RowHomePastActivities.xib in Resources */,
 				93D9EA601DE271E700089002 /* Section.xib in Resources */,
+				93075C6A1E59CAB000396389 /* BlogView.xib in Resources */,
 				93B84BA41D9C31AB006C0F67 /* Assets.xcassets in Resources */,
 				93B84B9F1D9C31AB006C0F67 /* Main.storyboard in Resources */,
 				93D9EA6C1DE3498500089002 /* HomeView.xib in Resources */,
@@ -207,9 +221,11 @@
 				93D9EA761DE3ACBB00089002 /* Sync.swift in Sources */,
 				931AA5891E1AFF8C003A2290 /* String.swift in Sources */,
 				93B84B9C1D9C31AB006C0F67 /* ViewController.swift in Sources */,
+				93075C6C1E59CB6B00396389 /* BlogView.swift in Sources */,
 				93B84B9A1D9C31AB006C0F67 /* AppDelegate.swift in Sources */,
 				93B84BA21D9C31AB006C0F67 /* app.xcdatamodeld in Sources */,
 				93D9EA681DE342AC00089002 /* UIView.swift in Sources */,
+				93075C701E59D04A00396389 /* RowBlog.swift in Sources */,
 				93B408031D9ED44C000FBC99 /* MenuCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
