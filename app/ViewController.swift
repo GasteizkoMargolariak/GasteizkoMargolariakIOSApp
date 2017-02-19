@@ -31,7 +31,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 	//Each of the sections of the app.
 	@IBOutlet weak var containerViewGallery: UIView!
-	@IBOutlet weak var containerViewBlog: UIView!
+	@IBOutlet weak var containerViewBlog: BlogView!
 	@IBOutlet weak var containerViewActivities: UIView!
 	@IBOutlet weak var containerViewLablanca: UIView!
 	@IBOutlet weak var containerViewLocation: UIView!
