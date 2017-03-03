@@ -25,12 +25,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="2500"/>
                     <subviews>
                         <stackView contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Iqa-PQ-TOo">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="2200"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="22"/>
                             <subviews>
                                 <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlt-p5-m6w" customClass="Section" customModule="app">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="2200"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="22"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="2200" id="dig-UC-mt1"/>
+                                        <constraint firstAttribute="height" constant="22" id="dig-UC-mt1"/>
                                     </constraints>
                                 </view>
                             </subviews>

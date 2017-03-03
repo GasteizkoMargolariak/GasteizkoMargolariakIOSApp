@@ -63,7 +63,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="a4j-DF-epb" customClass="MenuCollectionViewCell" customModule="app" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-3" width="100" height="50"/>
+                                        <rect key="frame" x="0.0" y="-2.5" width="100" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
@@ -274,7 +274,7 @@
                         <viewControllerLayoutGuide type="top" id="yir-Ne-huf"/>
                         <viewControllerLayoutGuide type="bottom" id="126-8G-plw"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="c4t-ul-w0Z" customClass="BlogView" customModule="app" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="c4t-ul-w0Z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.70980392156862748" green="0.82745098039215681" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>

@@ -64,7 +64,7 @@ class BlogView: UIView {
 		let sortDescriptors = [sortDescriptor]
 		fetchRequest.sortDescriptors = sortDescriptors
 		
-		do {
+		/*do {
 			//go get the results
 			let searchResults = try context.fetch(fetchRequest)
 			
@@ -120,7 +120,7 @@ class BlogView: UIView {
 			}
 		} catch {
 			print("Error with request: \(error)")
-		}
+		}*/
 		
 		//Always at the end: update scrollview
 		var h: Int = 0
@@ -130,15 +130,15 @@ class BlogView: UIView {
 			print("Blog curh: \(h)")
 		}
 		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 2500//CGFloat(h);
+		//self.scrollView.contentSize.height = 2500//CGFloat(h);
 		
 		// The view controller
 		//var viewController: ViewController  = self.window?.rootViewController as! ViewController
 		
 		
-		let viewController = UIApplication.topViewController() as! ViewController
+		//let viewController = UIApplication.topViewController() as! ViewController
 		
-		viewController.showPost(id: 4)
+		//viewController.showPost(id: 4)
 		
 		
 	}
