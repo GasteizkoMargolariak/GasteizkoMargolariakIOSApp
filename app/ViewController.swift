@@ -37,10 +37,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet weak var containerViewLocation: UIView!
 	@IBOutlet weak var containerViewHome: HomeView!
 	
+	
 	func getContext () -> NSManagedObjectContext {
 		//let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		//return appDelegate.persistentContainer.viewContext
 		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+	}
+	
+	func showPost(id: Int){
+		print("VIEW CONTROLLER showPost")
 	}
 	
 	/**

@@ -131,6 +131,16 @@ class BlogView: UIView {
 		}
 		// TODO: Calculate at the end
 		self.scrollView.contentSize.height = 2500//CGFloat(h);
+		
+		// The view controller
+		//var viewController: ViewController  = self.window?.rootViewController as! ViewController
+		
+		
+		let viewController = UIApplication.topViewController() as! ViewController
+		
+		viewController.showPost(id: 4)
+		
+		
 	}
 	
 	func getLanguage() -> String{

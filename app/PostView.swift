@@ -28,11 +28,23 @@ class PostView: UIView {
 	//The main scroll view.
 	@IBOutlet weak var scrollView: UIScrollView!
 	
-	//The container of the view.
-	@IBOutlet var container: UIView!
+	@IBOutlet weak var title: UILabel!
 	
-	//Each of the sections of the view.
-	@IBOutlet weak var section: Section!
+	@IBOutlet weak var image: UIImageView!
+	
+	@IBOutlet weak var text: UILabel!
+	
+	@IBOutlet weak var imageExtra: UIStackView!
+	
+	@IBOutlet weak var date: UILabel!
+	
+	@IBOutlet weak var commentCount: UILabel!
+	
+	@IBOutlet weak var commentList: UIStackView!
+	
+	@IBOutlet weak var commentUser: UITextField!
+	
+	@IBOutlet weak var commentContent: UITextView!
 	
 	
 	override init(frame: CGRect){
@@ -48,8 +60,8 @@ class PostView: UIView {
 		
 		//Load the contents of the HomeView.xib file.
 		Bundle.main.loadNibNamed("BlogView", owner: self, options: nil)
-		self.addSubview(container)
-		container.frame = self.bounds
+		//self.addSubview(container)
+		//container.frame = self.bounds
 		
 		
 	}
@@ -62,9 +74,7 @@ class PostView: UIView {
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
-		let sortDescriptor = NSSortDescriptor(key: "dtime", ascending: false)
-		let sortDescriptors = [sortDescriptor]
-		fetchRequest.sortDescriptors = sortDescriptors
+		fetchRequest.predicate = NSPredicate(format: "post == %i", id)
 		
 		do {
 			//go get the results
@@ -73,11 +83,9 @@ class PostView: UIView {
 			//I like to check the size of the returned results!
 			print ("Post: \(searchResults.count)")
 			
-			var row : RowBlog
 			var count = 0
-			var id: Int
-			var title: String
-			var text: String
+			var sTitle: String
+			var sText: String
 			var image: String
 			
 			//You need to convert to NSManagedObject to use 'for' loops
@@ -87,14 +95,10 @@ class PostView: UIView {
 				print("Perm: \(r.value(forKey: "permalink"))")
 				
 				
-				//Create a new row
-				row = RowBlog.init(s: "rowBlog\(count)", i: count)
-				id = r.value(forKey: "id")! as! Int
-				title = r.value(forKey: "title_\(lang)")! as! String
-				text = r.value(forKey: "text_\(lang)")! as! String
-				print(title)
-				row.setTitle(text: title)
-				row.setText(text: text)
+				sTitle = r.value(forKey: "title_\(lang)")! as! String
+				sText = r.value(forKey: "text_\(lang)")! as! String
+				title.text = sTitle
+				text.text = sText
 				
 				// Get main image
 				image = ""
@@ -104,20 +108,18 @@ class PostView: UIView {
 				imgFetchRequest.sortDescriptors = imgSortDescriptors
 				imgFetchRequest.predicate = NSPredicate(format: "post == %i", id)
 				imgFetchRequest.fetchLimit = 1
+				//TODO get more images
 				do{
 					let imgSearchResults = try context.fetch(imgFetchRequest)
 					for imgR in imgSearchResults as [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
 						print ("IMAGE: \(image)")
-						row.setImage(filename: image)
+						//TODO set image
+						//row.setImage(filename: image)
 					}
 				} catch {
 					print("Error getting image for post \(id): \(error)")
 				}
-				
-				print("Row height: \(row.frame.height)")
-				
-				parent.addArrangedSubview(row)
 				
 			}
 		} catch {
