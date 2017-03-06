@@ -57,11 +57,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewLocation.alpha = 0
 		self.containerViewLablanca.alpha = 0
 		self.containerViewActivities.alpha = 0
-		self.containerViewBlog.alpha = 0.5
+		self.containerViewBlog.alpha = 0
 		self.containerViewGallery.alpha = 0
+		
+		//self.containerViewBlog.isHidden = true
 				
 		print("ViewController:viewDidLoad()")
-		Sync()
+		print("CONTROLLER:DEBUG: Skyp sync")
+		//Sync()
 		
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.

@@ -142,10 +142,6 @@
                                     <segue destination="Bxe-vP-zrv" kind="embed" id="ufh-fQ-2yF"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bdj-h9-Qx6" userLabel="Container View Gallery">
-                                <rect key="frame" x="0.0" y="55" width="320" height="458"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47058823529411764" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -274,7 +270,7 @@
                         <viewControllerLayoutGuide type="top" id="yir-Ne-huf"/>
                         <viewControllerLayoutGuide type="bottom" id="126-8G-plw"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="c4t-ul-w0Z">
+                    <view key="view" contentMode="scaleToFill" id="c4t-ul-w0Z" customClass="BlogView" customModule="app" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.70980392156862748" green="0.82745098039215681" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
@@ -282,7 +278,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDB-bY-1MG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1643" y="1803"/>
+            <point key="canvasLocation" x="2081" y="2157"/>
         </scene>
         <!--Gallery-->
         <scene sceneID="Uqp-if-ZuD">

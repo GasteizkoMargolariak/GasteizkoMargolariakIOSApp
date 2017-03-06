@@ -47,6 +47,8 @@ class BlogView: UIView {
 		
 		super.init(coder: aDecoder)
 		
+		print("BLOG:DEBUG: init.")
+		
 		//Load the contents of the HomeView.xib file.
 		Bundle.main.loadNibNamed("BlogView", owner: self, options: nil)
 		self.addSubview(container)
@@ -64,12 +66,12 @@ class BlogView: UIView {
 		let sortDescriptors = [sortDescriptor]
 		fetchRequest.sortDescriptors = sortDescriptors
 		
-		/*do {
+		do {
 			//go get the results
 			let searchResults = try context.fetch(fetchRequest)
 			
 			//I like to check the size of the returned results!
-			print ("Post: \(searchResults.count)")
+			print ("BLOG:DEBUG: Total posts: \(searchResults.count)")
 			
 			var row : RowBlog
 			var count = 0
@@ -82,7 +84,7 @@ class BlogView: UIView {
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
 				//get the Key Value pairs (although there may be a better way to do that...
-				print("Perm: \(r.value(forKey: "permalink"))")
+				print("BLOG:DEBUG: Post perm: \(r.value(forKey: "permalink"))")
 				
 				
 				//Create a new row
@@ -90,7 +92,6 @@ class BlogView: UIView {
 				id = r.value(forKey: "id")! as! Int
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
-				print(title)
 				row.setTitle(text: title)
 				row.setText(text: text)
 				
@@ -106,31 +107,31 @@ class BlogView: UIView {
 					let imgSearchResults = try context.fetch(imgFetchRequest)
 					for imgR in imgSearchResults as [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
-						print ("IMAGE: \(image)")
+						print ("BLOG:DEBUG: Image: \(image)")
 						row.setImage(filename: image)
 					}
 				} catch {
 					print("Error getting image for post \(id): \(error)")
 				}
 				
-				print("Row height: \(row.frame.height)")
+				print("BLOG:DEBUG: Row height: \(row.frame.height)")
 				
 				parent.addArrangedSubview(row)
 				
 			}
 		} catch {
-			print("Error with request: \(error)")
-		}*/
+			print("BLOG:ERROR: Error with request: \(error)")
+		}
 		
 		//Always at the end: update scrollview
 		var h: Int = 0
 		for view in scrollView.subviews {
 			//contentRect = contentRect.union(view.frame);
 			h = h + Int(view.frame.height) + 30 //Why 30?
-			print("Blog curh: \(h)")
+			print("BLOG:DEBUG: curh: \(h)")
 		}
 		// TODO: Calculate at the end
-		//self.scrollView.contentSize.height = 2500//CGFloat(h);
+		self.scrollView.contentSize.height = 2500//CGFloat(h);
 		
 		// The view controller
 		//var viewController: ViewController  = self.window?.rootViewController as! ViewController

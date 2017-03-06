@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BlogView" customModule="app" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BlogView" customModule="app">
             <connections>
                 <outlet property="container" destination="iN0-l3-epB" id="Nzq-0W-kDj"/>
                 <outlet property="scrollView" destination="V2d-fd-cjO" id="0Px-EW-La0"/>
@@ -21,32 +21,25 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2d-fd-cjO">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="2500"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2d-fd-cjO">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <subviews>
-                        <stackView contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Iqa-PQ-TOo">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="22"/>
+                        <stackView contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Iqa-PQ-TOo">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="2200"/>
                             <subviews>
                                 <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlt-p5-m6w" customClass="Section" customModule="app">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="22"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="2200"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="22" id="dig-UC-mt1"/>
+                                        <constraint firstAttribute="height" constant="2200" id="dig-UC-mt1" userLabel="height = 2200"/>
                                     </constraints>
+                                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" red="0.16731770830000001" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="xlt-p5-m6w" firstAttribute="top" secondItem="Iqa-PQ-TOo" secondAttribute="top" id="ARG-5x-hIU"/>
                                 <constraint firstAttribute="bottom" secondItem="xlt-p5-m6w" secondAttribute="bottom" id="EIU-Wo-4hn"/>
+                                <constraint firstAttribute="height" constant="2200" id="FSh-mk-71J"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" red="1" green="0.20334201390000001" blue="0.32001410590000001" alpha="1" colorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </stackView>
                     </subviews>
                     <constraints>
