@@ -24,14 +24,16 @@ import CoreData
 /**
   The view controller of the app.
  */
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate {
+	
+	var delegate: AppDelegate?
 	
 	//The menu collection.
 	var sectionCollection: UICollectionView!
 
 	//Each of the sections of the app.
 	@IBOutlet weak var containerViewGallery: UIView!
-	@IBOutlet weak var containerViewBlog: UIView!
+	@IBOutlet weak var containerViewBlog: BlogView!
 	@IBOutlet weak var containerViewActivities: UIView!
 	@IBOutlet weak var containerViewLablanca: UIView!
 	@IBOutlet weak var containerViewLocation: UIView!
@@ -45,7 +47,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	func showPost(id: Int){
-		print("VIEW CONTROLLER showPost")
+		print("CONTROLLER:DEBUG: showPost")
 	}
 	
 	/**
@@ -62,12 +64,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 		//self.containerViewBlog.isHidden = true
 				
-		print("ViewController:viewDidLoad()")
+		print("CONTROLLER:LOG: viewDidLoad()")
 		print("CONTROLLER:DEBUG: Skyp sync")
 		//Sync()
 		
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
+		
+		//self.containerViewBlog.setController(controller: self as ViewController)
+		
+		delegate = UIApplication.shared.delegate as! AppDelegate
+		delegate?.controller = self
 	}
 
 	/**

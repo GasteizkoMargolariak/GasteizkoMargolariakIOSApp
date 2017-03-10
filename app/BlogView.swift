@@ -26,6 +26,8 @@ Class to handle the home view.
 */
 class BlogView: UIView {
 	
+	//var window:UIWindow?
+	
 	//The main scroll view.
 	@IBOutlet weak var scrollView: UIScrollView!
 	
@@ -34,6 +36,8 @@ class BlogView: UIView {
 	
 	//Each of the sections of the view.
 	@IBOutlet weak var section: Section!
+	
+	var controller : ViewController? = nil
 	
 	
 	override init(frame: CGRect){
@@ -116,6 +120,12 @@ class BlogView: UIView {
 				
 				print("BLOG:DEBUG: Row height: \(row.frame.height)")
 				
+				
+				// Set tap recognizer
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (self.openPost (_:)))
+				row.isUserInteractionEnabled = true
+				row.addGestureRecognizer(tapRecognizer)
+				
 				parent.addArrangedSubview(row)
 				
 			}
@@ -142,6 +152,16 @@ class BlogView: UIView {
 		//viewController.showPost(id: 4)
 		
 		
+		
+		
+		
+	}
+	
+	func openPost(_ sender:UITapGestureRecognizer? = nil){
+		print("BLOG:DEBUG: getting delegate and showing post.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPost(id: 4)
+		print("BLOG:DEBUG: Post should be shown.")
 	}
 	
 	func getLanguage() -> String{
@@ -152,5 +172,10 @@ class BlogView: UIView {
 		else{
 			return "es"
 		}
+	}
+	
+	func setController(controller: ViewController){
+		
+		//self.controller = controller
 	}
 }

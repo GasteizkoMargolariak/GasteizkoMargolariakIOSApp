@@ -74,6 +74,12 @@ Extension of UIView to be formatted as sections.
 		
 		container.frame = v.bounds
 		v.addSubview(container)
+		
+		// Set tap recognizer
+		print("ROW_BLOG:DEBUG: set tap recognizer")
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (self.openPost (_:)))
+		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+		addGestureRecognizer(tapRecognizer)
 	}
 	
 	/**
@@ -82,6 +88,8 @@ Extension of UIView to be formatted as sections.
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}
+	
+
 	
 	/**
 	Changes the title of the post. Decodes HTML.
@@ -114,5 +122,9 @@ Extension of UIView to be formatted as sections.
 			let path = "img/blog/thumb/\(filename)"
 			image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
+	}
+	
+	func openPost(_ sender:UITapGestureRecognizer? = nil){
+		print("ROW_BLOG:DEBUG: openpost")
 	}
 }

@@ -84,6 +84,7 @@ class HomeView: UIView {
 		
 		pastActivitiesSection.expandSection()
 		
+		
 		//Always at the end: update scrollview
 		var h: Int = 0
 		for view in scrollView.subviews {
