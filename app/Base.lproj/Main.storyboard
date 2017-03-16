@@ -23,10 +23,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="utt-1m-pei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Gasteizko Margolariak-->
+        <!--GMViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Gasteizko Margolariak" id="BYZ-38-t0r" customClass="ViewController" customModule="app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GMViewController" title="Gasteizko Margolariak" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" userLabel="GMViewController" customClass="ViewController" customModule="app" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>

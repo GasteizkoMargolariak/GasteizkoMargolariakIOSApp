@@ -37,8 +37,9 @@ class BlogView: UIView {
 	//Each of the sections of the view.
 	@IBOutlet weak var section: Section!
 	
-	var controller : ViewController? = nil
+	//var controller : ViewController
 	
+	var delegate: AppDelegate? = nil
 	
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -60,9 +61,14 @@ class BlogView: UIView {
 		section.setTitle(text: "Blog")
 		let parent = section.getContentStack()
 		
+		// Get viewController from StoryBoard
+		let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+		let controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
+		
 		// Show posts
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		self.delegate = appDelegate
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
@@ -115,7 +121,7 @@ class BlogView: UIView {
 						row.setImage(filename: image)
 					}
 				} catch {
-					print("Error getting image for post \(id): \(error)")
+					print("BLOG:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
 				print("BLOG:DEBUG: Row height: \(row.frame.height)")
@@ -150,6 +156,11 @@ class BlogView: UIView {
 		//let viewController = UIApplication.topViewController() as! ViewController
 		
 		//viewController.showPost(id: 4)
+		
+		print("BLOG:DEBUG: Show post on load.")
+		//self.delegate?.controller?.showPost(id: 4)
+		
+		controller.showPost(id: 4)
 		
 		
 		
