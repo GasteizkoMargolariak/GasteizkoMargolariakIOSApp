@@ -25,8 +25,10 @@ Class to handle the post view.
 */
 class PostView: UIView {
 	
+	@IBOutlet var container: UIView!
 	//The main scroll view.
 	@IBOutlet weak var scrollView: UIScrollView!
+
 	
 	@IBOutlet weak var title: UILabel!
 	
@@ -56,20 +58,22 @@ class PostView: UIView {
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		
+		print("POST:DEBUG: Init")
+		
 		super.init(coder: aDecoder)
 		
-		//Load the contents of the HomeView.xib file.
-		Bundle.main.loadNibNamed("BlogView", owner: self, options: nil)
-		//self.addSubview(container)
-		//container.frame = self.bounds
+		//Load the contents of the PostView.xib file.
+		Bundle.main.loadNibNamed("PostView", owner: self, options: nil)
+		self.addSubview(container)
+		container.frame = self.bounds
 		
 		
 	}
 	
 	func loadPost(id : Int){
 	
-		// Show posts
-		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		// Show post
+		/*let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
@@ -134,7 +138,7 @@ class PostView: UIView {
 			print("Blog curh: \(h)")
 		}
 		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 2500//CGFloat(h);
+		self.scrollView.contentSize.height = 2500//CGFloat(h);*/
 	}
 	
 	func getLanguage() -> String{

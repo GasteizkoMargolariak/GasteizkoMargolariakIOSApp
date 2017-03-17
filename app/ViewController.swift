@@ -38,6 +38,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet weak var containerViewLablanca: UIView!
 	@IBOutlet weak var containerViewLocation: UIView!
 	@IBOutlet weak var containerViewHome: HomeView!
+	@IBOutlet weak var containerViewPost: PostView!
 	
 	
 	func getContext () -> NSManagedObjectContext {
@@ -48,6 +49,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	func showPost(id: Int){
 		print("CONTROLLER:DEBUG: showPost \(id)")
+		UIView.animate(withDuration: 0.5, animations: {
+			self.containerViewHome.alpha = 0
+			self.containerViewLocation.alpha = 0
+			self.containerViewLablanca.alpha = 0
+			self.containerViewActivities.alpha = 0
+			self.containerViewBlog.alpha = 0
+			self.containerViewGallery.alpha = 0
+			self.containerViewPost.alpha = 1
+		})
 	}
 	
 	/**
@@ -61,6 +71,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewActivities.alpha = 0
 		self.containerViewBlog.alpha = 0
 		self.containerViewGallery.alpha = 0
+		self.containerViewPost.alpha = 0
 		
 		//self.containerViewBlog.isHidden = true
 				
@@ -153,6 +164,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				self.containerViewActivities.alpha = 0
 				self.containerViewBlog.alpha = 0
 				self.containerViewGallery.alpha = 0
+				self.containerViewPost.alpha = 0
 			})
 		}
 		else if selected == 1 {
@@ -163,6 +175,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				self.containerViewActivities.alpha = 0
 				self.containerViewBlog.alpha = 0
 				self.containerViewGallery.alpha = 0
+				self.containerViewPost.alpha = 0
 			})
 		}
 		else if selected == 2 {
@@ -173,6 +186,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				self.containerViewActivities.alpha = 0
 				self.containerViewBlog.alpha = 0
 				self.containerViewGallery.alpha = 0
+				self.containerViewPost.alpha = 0
 			})
 		}
 		else if selected == 3 {
@@ -183,6 +197,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				self.containerViewActivities.alpha = 1
 				self.containerViewBlog.alpha = 0
 				self.containerViewGallery.alpha = 0
+				self.containerViewPost.alpha = 0
 			})
 		}
 		else if selected == 4 {
@@ -193,6 +208,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				self.containerViewActivities.alpha = 0
 				self.containerViewBlog.alpha = 1
 				self.containerViewGallery.alpha = 0
+				self.containerViewPost.alpha = 0
 			})
 		}
 		else if selected == 5 {
@@ -203,6 +219,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				self.containerViewActivities.alpha = 0
 				self.containerViewBlog.alpha = 0
 				self.containerViewGallery.alpha = 1
+				self.containerViewPost.alpha = 0
 			})
 		}
 		

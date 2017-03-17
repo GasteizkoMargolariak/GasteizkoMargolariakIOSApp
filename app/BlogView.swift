@@ -132,9 +132,9 @@ class BlogView: UIView {
 				
 				// TODO: Do this on the row didLoad method
 				// Set tap recognizer
-				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPost(_:)))
-				row.isUserInteractionEnabled = true
-				row.addGestureRecognizer(tapRecognizer)
+				//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPost(_:)))
+				//row.isUserInteractionEnabled = true
+				//row.addGestureRecognizer(tapRecognizer)
 				
 				
 				
@@ -161,7 +161,7 @@ class BlogView: UIView {
 		
 		//viewController.showPost(id: 4)
 		
-		print("BLOG:DEBUG: Show post on load.")
+		//print("BLOG:DEBUG: Show post on load.")
 		//self.delegate?.controller?.showPost(id: 4)
 		
 		//controller.showPost(id: 4)
@@ -169,10 +169,10 @@ class BlogView: UIView {
 		
 		
 		
-		
+		print("BLOG:DEBUG: Finished loading BlogView")
 	}
 	
-	func openPost(){//(_ sender:UITapGestureRecognizer? = nil){
+	/*func openPost(){//(_ sender:UITapGestureRecognizer? = nil){
 		print("BLOG:DEBUG: getting delegate and showing post.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: 4)
@@ -184,7 +184,7 @@ class BlogView: UIView {
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: 4)
 		print("BLOG:DEBUG: Post should be shown.")
-	}
+	}*/
 	
 	func getLanguage() -> String{
 		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
