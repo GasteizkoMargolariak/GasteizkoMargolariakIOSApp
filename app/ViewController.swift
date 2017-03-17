@@ -47,7 +47,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	func showPost(id: Int){
-		print("CONTROLLER:DEBUG: showPost")
+		print("CONTROLLER:DEBUG: showPost \(id)")
 	}
 	
 	/**

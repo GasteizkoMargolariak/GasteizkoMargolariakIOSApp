@@ -191,7 +191,7 @@ class HomeView: UIView {
 			//I like to check the size of the returned results!
 			print ("Post: \(searchResults.count)")
 			
-			var row : RowHomePastActivities
+			var row : RowHomeBlog
 			var count = 0
 			var id: Int
 			var title: String
@@ -206,11 +206,12 @@ class HomeView: UIView {
 				
 				
 				//Create a new row
-				row = RowHomePastActivities.init(s: "rowHomeBlog\(count)", i: count)
+				row = RowHomeBlog.init(s: "rowHomeBlog\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
-				print(title)
+				
+				row.id = id
 				row.setTitle(text: title)
 				row.setText(text: text)
 				
@@ -236,6 +237,10 @@ class HomeView: UIView {
 				print("Row height: \(row.frame.height)")
 				
 				parent.addArrangedSubview(row)
+				
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPost(_:)))
+				row.isUserInteractionEnabled = true
+				row.addGestureRecognizer(tapRecognizer)
 				
 			}
 		} catch {
@@ -279,7 +284,8 @@ class HomeView: UIView {
 				id = r.value(forKey: "id")! as! Int
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
-				print(title)
+				
+				
 				row.setTitle(text: title)
 				row.setText(text: text)
 				
@@ -319,5 +325,12 @@ class HomeView: UIView {
 		row = RowHomeSocial.init(s: "rowHomeSocial", i: 0)
 		print("ROW CREATED")
 		parent.addArrangedSubview(row)
+	}
+	
+	func openPost(_ sender:UITapGestureRecognizer? = nil){
+		print("HOME:DEBUG: getting delegate and showing post.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPost(id: (sender?.view as! RowHomeBlog).id)
+		print("HOME:DEBUG: Post should be shown.")
 	}
 }

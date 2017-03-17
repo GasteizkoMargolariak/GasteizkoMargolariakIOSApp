@@ -29,6 +29,8 @@ Extension of UIView to be formatted as sections.
 	//This view
 	var v: UIView!
 	
+	var id: Int!
+	
 	//The container.
 	@IBOutlet weak var container: UIView!
 	

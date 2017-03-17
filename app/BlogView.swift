@@ -126,13 +126,17 @@ class BlogView: UIView {
 				
 				print("BLOG:DEBUG: Row height: \(row.frame.height)")
 				
+				parent.addArrangedSubview(row)
+				row.setNeedsLayout()
+				row.layoutIfNeeded()
 				
+				// TODO: Do this on the row didLoad method
 				// Set tap recognizer
-				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (self.openPost (_:)))
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPost(_:)))
 				row.isUserInteractionEnabled = true
 				row.addGestureRecognizer(tapRecognizer)
 				
-				parent.addArrangedSubview(row)
+				
 				
 			}
 		} catch {
@@ -160,12 +164,19 @@ class BlogView: UIView {
 		print("BLOG:DEBUG: Show post on load.")
 		//self.delegate?.controller?.showPost(id: 4)
 		
-		controller.showPost(id: 4)
+		//controller.showPost(id: 4)
 		
 		
 		
 		
 		
+	}
+	
+	func openPost(){//(_ sender:UITapGestureRecognizer? = nil){
+		print("BLOG:DEBUG: getting delegate and showing post.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPost(id: 4)
+		print("BLOG:DEBUG: Post should be shown.")
 	}
 	
 	func openPost(_ sender:UITapGestureRecognizer? = nil){
