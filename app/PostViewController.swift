@@ -26,6 +26,8 @@ The view controller of the app.
 */
 class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	
+	@IBOutlet var postView: PostView!
+	
 	var id: Int = -1
 	var delegate: AppDelegate?
 	
@@ -41,6 +43,8 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	
 	func showPost(id: Int){
 		print("POSTCONTROLLER:DEBUG: showPost \(id)")
+		self.postView.id = id
+		self.postView.loadPost(id: id)
 	}
 	
 	/**
@@ -51,7 +55,7 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 		print("POSTCONTROLLER:LOG: viewDidLoad()")
 		
 		super.viewDidLoad()
-		
+		self.postView.loadPost(id: id)
 	}
 	
 	/**

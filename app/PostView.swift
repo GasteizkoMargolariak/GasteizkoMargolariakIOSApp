@@ -47,10 +47,11 @@ class PostView: UIView {
 
 	@IBOutlet weak var commentContent: UITextView!
 	
+	// Post id. Must be set pre-segue.
 	var id: Int = -1
 	
 	override init(frame: CGRect){
-		print("POST:DEBUG: Init cgrect")
+		print("POST:LOG: Init (cgrect). Id is \(self.id)")
 		super.init(frame: frame)
 		//Load the contents of the PostView.xib file.
 		Bundle.main.loadNibNamed("PostView", owner: self, options: nil)
@@ -62,11 +63,8 @@ class PostView: UIView {
 	Run when the view is started.
 	*/
 	required init?(coder aDecoder: NSCoder) {
-		
-		print("POST:DEBUG: Init coder")
-		
+		print("POST:LOG: Init (coder). Id is: \(self.id)")
 		super.init(coder: aDecoder)
-		
 		//Load the contents of the PostView.xib file.
 		Bundle.main.loadNibNamed("PostView", owner: self, options: nil)
 		self.addSubview(container)
@@ -75,30 +73,20 @@ class PostView: UIView {
 		
 	}
 	
-	open func lp(){
-		print("POST:DEBUG: Lp");
-	}
-	
 	public func loadPost(id: Int) -> Bool{
 	
 		print("POST:DEBUG: Loading post \(id)")
 		
-		// TODO Show post
-		/*let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
-		fetchRequest.predicate = NSPredicate(format: "post = %i", id)
-		
-		//title.text = "AAAAA"
+		fetchRequest.predicate = NSPredicate(format: "id = %i", id)
 		
 		do {
 			//go get the results
-			/*let searchResults = try context.fetch(fetchRequest)
-			
-			//I like to check the size of the returned results!
-			print ("Post: \(searchResults.count)")
+			let searchResults = try context.fetch(fetchRequest)
 			
 			var count = 0
 			var sTitle: String
@@ -108,9 +96,6 @@ class PostView: UIView {
 			//You need to convert to NSManagedObject to use 'for' loops
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
-				//get the Key Value pairs (although there may be a better way to do that...
-				print("Perm: \(r.value(forKey: "permalink"))")
-				
 				
 				sTitle = r.value(forKey: "title_\(lang)")! as! String
 				sText = r.value(forKey: "text_\(lang)")! as! String
@@ -130,27 +115,28 @@ class PostView: UIView {
 					let imgSearchResults = try context.fetch(imgFetchRequest)
 					for imgR in imgSearchResults as [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
-						print ("IMAGE: \(image)")
+						print ("POST:LOG: Image: \(image)")
 						//TODO set image
 						//row.setImage(filename: image)
 					}
 				} catch {
-					print("Error getting image for post \(id): \(error)")
+					print("POST:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
-			}*/
+			}
 		} catch {
-			print("Error with request: \(error)")
+			print("POST:ERROR: Error with request: \(error)")
 		}
 		
 		//Always at the end: update scrollview
+		// TODOs
 		/*var h: Int = 0
 		for view in scrollView.subviews {
 			//contentRect = contentRect.union(view.frame);
 			h = h + Int(view.frame.height) + 30 //Why 30?
 		}
 		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 2500//CGFloat(h);*/*/
+		self.scrollView.contentSize.height = 2500//CGFloat(h);*/
 		
 		return true
 	}
