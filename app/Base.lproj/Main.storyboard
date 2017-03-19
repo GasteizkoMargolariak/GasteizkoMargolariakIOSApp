@@ -302,7 +302,7 @@
         <!--Post-->
         <scene sceneID="zgg-Cx-j75">
             <objects>
-                <viewController title="Post" id="UkS-wI-Yhx" sceneMemberID="viewController">
+                <viewController title="Post" id="UkS-wI-Yhx" customClass="PostViewController" customModule="app" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yy6-d2-MRo"/>
                         <viewControllerLayoutGuide type="bottom" id="IxZ-up-5UO"/>

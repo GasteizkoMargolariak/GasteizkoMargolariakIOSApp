@@ -34,6 +34,7 @@
 		93BAD2F41E585EE6009DF853 /* RowHomeFutureActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAD2F31E585EE6009DF853 /* RowHomeFutureActivities.swift */; };
 		93BAD2F61E586310009DF853 /* RowHomeSocial.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93BAD2F51E586310009DF853 /* RowHomeSocial.xib */; };
 		93BAD2F81E586741009DF853 /* RowHomeSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAD2F71E586741009DF853 /* RowHomeSocial.swift */; };
+		93BEB6D21E7E878300C68DE5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BEB6D11E7E878300C68DE5 /* PostViewController.swift */; };
 		93D9EA601DE271E700089002 /* Section.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EA5F1DE271E700089002 /* Section.xib */; };
 		93D9EA641DE273FD00089002 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA631DE273FD00089002 /* Section.swift */; };
 		93D9EA681DE342AC00089002 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA671DE342AC00089002 /* UIView.swift */; };
@@ -73,6 +74,7 @@
 		93BAD2F31E585EE6009DF853 /* RowHomeFutureActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowHomeFutureActivities.swift; sourceTree = "<group>"; };
 		93BAD2F51E586310009DF853 /* RowHomeSocial.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowHomeSocial.xib; sourceTree = "<group>"; };
 		93BAD2F71E586741009DF853 /* RowHomeSocial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowHomeSocial.swift; sourceTree = "<group>"; };
+		93BEB6D11E7E878300C68DE5 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		93D9EA5F1DE271E700089002 /* Section.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Section.xib; path = ../Section.xib; sourceTree = "<group>"; };
 		93D9EA631DE273FD00089002 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		93D9EA671DE342AC00089002 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				93BAD2F31E585EE6009DF853 /* RowHomeFutureActivities.swift */,
 				93BAD2F51E586310009DF853 /* RowHomeSocial.xib */,
 				93BAD2F71E586741009DF853 /* RowHomeSocial.swift */,
+				93BEB6D11E7E878300C68DE5 /* PostViewController.swift */,
 				937EA0281E5A267C00D0893A /* PostView.swift */,
 				937EA02A1E5A271F00D0893A /* PostView.xib */,
 				937EA02C1E5B8B5300D0893A /* UIApplcation.swift */,
@@ -248,6 +251,7 @@
 				937EA02D1E5B8B5300D0893A /* UIApplcation.swift in Sources */,
 				93D9EA641DE273FD00089002 /* Section.swift in Sources */,
 				93D9EA6A1DE3491100089002 /* HomeView.swift in Sources */,
+				93BEB6D21E7E878300C68DE5 /* PostViewController.swift in Sources */,
 				93BAD2F81E586741009DF853 /* RowHomeSocial.swift in Sources */,
 				93BAD2F01E585662009DF853 /* RowHomeBlog.swift in Sources */,
 				93294FFA1E337D0D00FDAF50 /* RowHomePastActivities.swift in Sources */,

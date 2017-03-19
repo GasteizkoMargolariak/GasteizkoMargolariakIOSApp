@@ -47,6 +47,7 @@ class PostView: UIView {
 
 	@IBOutlet weak var commentContent: UITextView!
 	
+	var id: Int = -1
 	
 	override init(frame: CGRect){
 		print("POST:DEBUG: Init cgrect")

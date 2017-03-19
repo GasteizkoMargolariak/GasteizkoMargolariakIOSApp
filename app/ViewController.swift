@@ -39,6 +39,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet weak var containerViewLocation: UIView!
 	@IBOutlet weak var containerViewHome: HomeView!
 	
+	var passId: Int = -1
+	
 	func getContext () -> NSManagedObjectContext {
 		//let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		//return appDelegate.persistentContainer.viewContext
@@ -47,7 +49,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	func showPost(id: Int){
 		print("CONTROLLER:DEBUG: showPost \(id)")
+		self.passId = id
 		performSegue(withIdentifier: "SeguePost", sender: nil)
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		print("CONTROLLER:DEBUG: preparing for segue \(segue.identifier) with id \(self.passId)")
+		if segue.identifier == "SeguePost"{
+			(segue.destination as! PostViewController).id = passId
+		}
 	}
 	
 	/**
