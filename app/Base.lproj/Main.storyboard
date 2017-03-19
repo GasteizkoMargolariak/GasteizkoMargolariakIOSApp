@@ -317,7 +317,7 @@
                         <viewControllerLayoutGuide type="top" id="yy6-d2-MRo"/>
                         <viewControllerLayoutGuide type="bottom" id="IxZ-up-5UO"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zcp-qV-FPt" customClass="PostView" customModule="app">
+                    <view key="view" contentMode="scaleToFill" id="zcp-qV-FPt" customClass="PostView" customModule="app" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.70980392156862748" green="0.82745098039215681" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

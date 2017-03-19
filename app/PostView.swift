@@ -29,28 +29,32 @@ class PostView: UIView {
 	//The main scroll view.
 	@IBOutlet weak var scrollView: UIScrollView!
 
-	
 	@IBOutlet weak var title: UILabel!
-	
+
 	@IBOutlet weak var image: UIImageView!
 	
 	@IBOutlet weak var text: UILabel!
-	
+
 	@IBOutlet weak var imageExtra: UIStackView!
 	
 	@IBOutlet weak var date: UILabel!
-	
+
 	@IBOutlet weak var commentCount: UILabel!
 	
 	@IBOutlet weak var commentList: UIStackView!
-	
+
 	@IBOutlet weak var commentUser: UITextField!
-	
+
 	@IBOutlet weak var commentContent: UITextView!
 	
 	
 	override init(frame: CGRect){
+		print("POST:DEBUG: Init cgrect")
 		super.init(frame: frame)
+		//Load the contents of the PostView.xib file.
+		Bundle.main.loadNibNamed("PostView", owner: self, options: nil)
+		self.addSubview(container)
+		container.frame = self.bounds
 	}
 	
 	/**
@@ -58,7 +62,7 @@ class PostView: UIView {
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		
-		print("POST:DEBUG: Init")
+		print("POST:DEBUG: Init coder")
 		
 		super.init(coder: aDecoder)
 		
@@ -70,19 +74,27 @@ class PostView: UIView {
 		
 	}
 	
-	func loadPost(id : Int){
+	open func lp(){
+		print("POST:DEBUG: Lp");
+	}
 	
-		// Show post
+	public func loadPost(id: Int) -> Bool{
+	
+		print("POST:DEBUG: Loading post \(id)")
+		
+		// TODO Show post
 		/*let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
-		fetchRequest.predicate = NSPredicate(format: "post == %i", id)
+		fetchRequest.predicate = NSPredicate(format: "post = %i", id)
+		
+		//title.text = "AAAAA"
 		
 		do {
 			//go get the results
-			let searchResults = try context.fetch(fetchRequest)
+			/*let searchResults = try context.fetch(fetchRequest)
 			
 			//I like to check the size of the returned results!
 			print ("Post: \(searchResults.count)")
@@ -125,20 +137,21 @@ class PostView: UIView {
 					print("Error getting image for post \(id): \(error)")
 				}
 				
-			}
+			}*/
 		} catch {
 			print("Error with request: \(error)")
 		}
 		
 		//Always at the end: update scrollview
-		var h: Int = 0
+		/*var h: Int = 0
 		for view in scrollView.subviews {
 			//contentRect = contentRect.union(view.frame);
 			h = h + Int(view.frame.height) + 30 //Why 30?
-			print("Blog curh: \(h)")
 		}
 		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 2500//CGFloat(h);*/
+		self.scrollView.contentSize.height = 2500//CGFloat(h);*/*/
+		
+		return true
 	}
 	
 	func getLanguage() -> String{

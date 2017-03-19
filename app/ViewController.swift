@@ -38,7 +38,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet weak var containerViewLablanca: UIView!
 	@IBOutlet weak var containerViewLocation: UIView!
 	@IBOutlet weak var containerViewHome: HomeView!
-	@IBOutlet weak var containerViewPost: PostView!
+	@IBOutlet var containerViewPost: PostView!
+	
+	var refViewPost: PostView!
 	
 	
 	func getContext () -> NSManagedObjectContext {
@@ -49,6 +51,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	func showPost(id: Int){
 		print("CONTROLLER:DEBUG: showPost \(id)")
+		
+		if self.containerViewPost == nil{
+			print("CONTROLLER:DEBUG: containerViewPost has been released")
+		}
+		
 		UIView.animate(withDuration: 0.5, animations: {
 			self.containerViewHome.alpha = 0
 			self.containerViewLocation.alpha = 0
@@ -58,6 +65,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			self.containerViewGallery.alpha = 0
 			self.containerViewPost.alpha = 1
 		})
+		
+		
+		//TODO get the uiview from the storyboard again
+		//self.storyboard?..instantiateViewController(withIdentifier: "PostView")
+		self.containerViewPost = PostView()
+		containerViewPost.title.text = "AAAAA"
+		//hself.refViewPost.loadPost(id: id)
 	}
 	
 	/**
@@ -71,7 +85,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewActivities.alpha = 0
 		self.containerViewBlog.alpha = 0
 		self.containerViewGallery.alpha = 0
-		self.containerViewPost.alpha = 0
+		self.containerViewPost.alpha = 0.2
+		
+		self.refViewPost = self.containerViewPost
+		
+		
 		
 		//self.containerViewBlog.isHidden = true
 				
@@ -86,6 +104,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 		delegate = UIApplication.shared.delegate as! AppDelegate
 		delegate?.controller = self
+		
+		
+		//self.containerViewPost.loadPost(id: 16)
+		print(type(of:containerViewPost))
+		5//self.containerViewPost.lp()
+		print(self.containerViewBlog.borderColor)
 	}
 
 	/**

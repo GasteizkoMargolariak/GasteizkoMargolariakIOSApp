@@ -9,9 +9,19 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostView" customModule="app" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostView" customModule="app">
             <connections>
+                <outlet property="commentContent" destination="kba-hh-hSu" id="9GT-ve-VVs"/>
+                <outlet property="commentCount" destination="w3V-dl-ijf" id="hGh-d8-JEX"/>
+                <outlet property="commentList" destination="For-Ru-u5Y" id="TgM-Zb-zEy"/>
+                <outlet property="commentUser" destination="4Rd-hH-5iP" id="5ri-0c-cz4"/>
                 <outlet property="container" destination="Zrz-uS-eQa" id="UV8-P9-jMA"/>
+                <outlet property="date" destination="lBQ-aX-qhL" id="esh-vp-DgK"/>
+                <outlet property="image" destination="vwR-EU-h1T" id="ir7-PQ-Awq"/>
+                <outlet property="imageExtra" destination="L5f-5R-97B" id="cUG-OH-etX"/>
+                <outlet property="scrollView" destination="8gP-MM-Wzw" id="ZMT-Yf-IoY"/>
+                <outlet property="text" destination="NoQ-Kc-oS7" id="dkU-HT-A7G"/>
+                <outlet property="title" destination="4ub-YM-i5l" id="Sfa-dT-b2M"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
