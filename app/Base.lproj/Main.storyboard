@@ -142,16 +142,9 @@
                                     <segue destination="Bxe-vP-zrv" kind="embed" id="ufh-fQ-2yF"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mlD-LQ-7rk" userLabel="Container View Post">
-                                <rect key="frame" x="0.0" y="110" width="320" height="458"/>
-                                <connections>
-                                    <segue destination="UkS-wI-Yhx" kind="embed" id="Ye2-qm-gxO"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47058823529411764" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mlD-LQ-7rk" firstAttribute="top" secondItem="Ikv-46-g2m" secondAttribute="bottom" id="0pt-jc-DqH"/>
                             <constraint firstItem="p8H-ai-kTU" firstAttribute="top" secondItem="Ikv-46-g2m" secondAttribute="bottom" id="1fj-8m-lWP"/>
                             <constraint firstItem="T4H-Rn-I4y" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="3Eh-im-76c"/>
                             <constraint firstItem="p8H-ai-kTU" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="3z5-Bs-qVY"/>
@@ -174,16 +167,13 @@
                             <constraint firstItem="T5i-d0-9I1" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="ZQY-pp-rDk"/>
                             <constraint firstItem="nhy-Gy-cgq" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="ZjH-ke-Gtv"/>
                             <constraint firstItem="T4H-Rn-I4y" firstAttribute="centerX" secondItem="Ikv-46-g2m" secondAttribute="centerX" id="a3W-7J-vjF"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mlD-LQ-7rk" secondAttribute="bottom" id="aRg-2c-Jny"/>
                             <constraint firstItem="nhy-Gy-cgq" firstAttribute="top" secondItem="Ikv-46-g2m" secondAttribute="bottom" id="dey-LW-WUE"/>
                             <constraint firstItem="3r9-W6-dmf" firstAttribute="centerX" secondItem="Ikv-46-g2m" secondAttribute="centerX" id="efu-E3-cv8"/>
                             <constraint firstItem="Ikv-46-g2m" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eln-ck-QcI"/>
                             <constraint firstItem="FfD-xR-Ufj" firstAttribute="top" secondItem="Ikv-46-g2m" secondAttribute="bottom" id="fwz-Vq-Hzc"/>
-                            <constraint firstItem="mlD-LQ-7rk" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="hjx-EG-jOT"/>
                             <constraint firstItem="Ikv-46-g2m" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="j8o-dm-xpa"/>
                             <constraint firstItem="FfD-xR-Ufj" firstAttribute="centerX" secondItem="Ikv-46-g2m" secondAttribute="centerX" id="kSp-hr-GIX"/>
                             <constraint firstItem="T5i-d0-9I1" firstAttribute="centerX" secondItem="Ikv-46-g2m" secondAttribute="centerX" id="psj-oK-zVR"/>
-                            <constraint firstItem="mlD-LQ-7rk" firstAttribute="centerX" secondItem="Ikv-46-g2m" secondAttribute="centerX" id="u90-c1-7kN"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="T4H-Rn-I4y" secondAttribute="bottom" id="vQE-x2-yf6"/>
                         </constraints>
                     </view>
@@ -194,7 +184,7 @@
                         <outlet property="containerViewHome" destination="FfD-xR-Ufj" id="EtF-qz-vWE"/>
                         <outlet property="containerViewLablanca" destination="nhy-Gy-cgq" id="bBa-2W-hjf"/>
                         <outlet property="containerViewLocation" destination="T4H-Rn-I4y" id="EFa-Km-WuR"/>
-                        <outlet property="containerViewPost" destination="mlD-LQ-7rk" id="vBh-WX-EhR"/>
+                        <segue destination="UkS-wI-Yhx" kind="show" identifier="SeguePost" id="gs2-jd-cPW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -309,16 +299,16 @@
             </objects>
             <point key="canvasLocation" x="1509" y="576"/>
         </scene>
-        <!--View Controller-->
+        <!--Post-->
         <scene sceneID="zgg-Cx-j75">
             <objects>
-                <viewController id="UkS-wI-Yhx" sceneMemberID="viewController">
+                <viewController title="Post" id="UkS-wI-Yhx" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yy6-d2-MRo"/>
                         <viewControllerLayoutGuide type="bottom" id="IxZ-up-5UO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zcp-qV-FPt" customClass="PostView" customModule="app" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.70980392156862748" green="0.82745098039215681" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
