@@ -130,13 +130,13 @@ class PostView: UIView {
 		
 		//Always at the end: update scrollview
 		// TODOs
-		/*var h: Int = 0
+		var h: Int = 0
 		for view in scrollView.subviews {
 			//contentRect = contentRect.union(view.frame);
 			h = h + Int(view.frame.height) + 30 //Why 30?
 		}
 		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 2500//CGFloat(h);*/
+		self.scrollView.contentSize.height = 3500//CGFloat(h);
 		
 		return true
 	}
