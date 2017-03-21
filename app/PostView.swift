@@ -136,7 +136,7 @@ class PostView: UIView {
 			h = h + Int(view.frame.height) + 30 //Why 30?
 		}
 		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 3500//CGFloat(h);
+		//self.scrollView.contentSize.height = 3500//CGFloat(h);
 		
 		return true
 	}
