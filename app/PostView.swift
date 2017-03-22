@@ -34,8 +34,6 @@ class PostView: UIView {
 	@IBOutlet weak var image: UIImageView!
 	
 	@IBOutlet weak var text: UILabel!
-
-	@IBOutlet weak var imageExtra: UIStackView!
 	
 	@IBOutlet weak var date: UILabel!
 
@@ -135,8 +133,9 @@ class PostView: UIView {
 			//contentRect = contentRect.union(view.frame);
 			h = h + Int(view.frame.height) + 30 //Why 30?
 		}
+		print("POST:DEBUG: Height: \(h)")
 		// TODO: Calculate at the end
-		//self.scrollView.contentSize.height = 3500//CGFloat(h);
+		self.scrollView.contentSize.height = 4500//CGFloat(h);
 		
 		return true
 	}
