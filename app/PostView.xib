@@ -36,8 +36,8 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </textAttributes>
                     <items>
-                        <navigationItem title="Gasteizko Margolariak" id="rxh-zx-B6G">
-                            <barButtonItem key="backBarButtonItem" title="Back" id="lPX-Uf-eO6"/>
+                        <navigationItem title="Gasteizko Margolariak" prompt="&lt;" id="rxh-zx-B6G">
+                            <barButtonItem key="backBarButtonItem" image="Logo" width="10" id="lPX-Uf-eO6"/>
                         </navigationItem>
                     </items>
                 </navigationBar>
@@ -45,7 +45,7 @@
                     <rect key="frame" x="0.0" y="65" width="320" height="415"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gP-MM-Wzw">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="1800"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="415"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAf-cL-nxv" userLabel="Section">
                                     <rect key="frame" x="10" y="10" width="300" height="995"/>
@@ -157,7 +157,6 @@
                             <constraints>
                                 <constraint firstItem="EAf-cL-nxv" firstAttribute="trailing" secondItem="8gP-MM-Wzw" secondAttribute="trailing" constant="10" id="Bs5-Ix-L7j"/>
                                 <constraint firstItem="EAf-cL-nxv" firstAttribute="centerX" secondItem="8gP-MM-Wzw" secondAttribute="centerX" id="Dqb-gr-992"/>
-                                <constraint firstAttribute="height" constant="1800" id="QSg-qh-3QS"/>
                                 <constraint firstAttribute="bottom" secondItem="EAf-cL-nxv" secondAttribute="bottom" constant="10" id="VEr-js-MFG"/>
                                 <constraint firstItem="EAf-cL-nxv" firstAttribute="leading" secondItem="8gP-MM-Wzw" secondAttribute="leading" constant="10" id="btd-tx-GDb"/>
                                 <constraint firstItem="EAf-cL-nxv" firstAttribute="top" secondItem="8gP-MM-Wzw" secondAttribute="top" constant="10" id="gEq-Ah-CKD"/>
@@ -172,6 +171,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="8gP-MM-Wzw" secondAttribute="bottom" id="0kq-Hc-MHr"/>
                         <constraint firstItem="8gP-MM-Wzw" firstAttribute="width" secondItem="ddf-jU-bmv" secondAttribute="width" id="4cp-Pu-rfb"/>
                         <constraint firstItem="8gP-MM-Wzw" firstAttribute="centerX" secondItem="ddf-jU-bmv" secondAttribute="centerX" id="B8m-AN-8nq"/>
                         <constraint firstItem="8gP-MM-Wzw" firstAttribute="top" secondItem="ddf-jU-bmv" secondAttribute="top" id="YeT-82-f8z"/>
@@ -202,6 +202,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Logo" width="83" height="83"/>
         <image name="PhotoPlaceholder" width="170" height="108"/>
     </resources>
 </document>

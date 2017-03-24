@@ -71,6 +71,7 @@ class PostView: UIView {
 		
 	}
 	
+
 	public func loadPost(id: Int) -> Bool{
 	
 		print("POST:DEBUG: Loading post \(id)")
@@ -97,8 +98,8 @@ class PostView: UIView {
 				
 				sTitle = r.value(forKey: "title_\(lang)")! as! String
 				sText = r.value(forKey: "text_\(lang)")! as! String
-				title.text = sTitle
-				text.text = sText
+				title.text = "  \(sTitle)"
+				text.text = sText.stripHtml()
 				
 				// Get main image
 				image = ""
