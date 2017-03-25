@@ -88,7 +88,7 @@ class Sync{
 			//let dataFestivalOffer : [String] = self.getTable(data: strData!, table: "festival_offer")
 			//let dataPeople : [String] = self.getTable(data: strData!, table: "people")
 			let dataPhoto : [String] = self.getTable(data: strData!, table: "photo")
-			//let dataPhotoAlbum : [String] = self.getTable(data: strData!, table: "photo_album")
+			let dataPhotoAlbum : [String] = self.getTable(data: strData!, table: "photo_album")
 			//let dataPhotoComment : [String] = self.getTable(data: strData!, table: "photo_comment")
 			let dataPlace : [String] = self.getTable(data: strData!, table: "place")
 			let dataPost : [String] = self.getTable(data: strData!, table: "post")
@@ -113,6 +113,7 @@ class Sync{
 			
 			self.saveTableAlbum(entries: dataAlbum)
 			self.saveTablePhoto(entries: dataPhoto)
+			self.saveTablePhotoAlbum(entries: dataPhotoAlbum)
 			
 			//DEBUG: Tester, Debug only
 			// Test if a entity has entries
@@ -1316,9 +1317,66 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Album with id \(id): \(error), \(error.userInfo).")
+				print("SYNC:ERROR: Could not store Photo with id \(id): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Album with id \(id).")
+				print("SYNC:ERROR: Could not store Photo with id \(id).")
+			}
+		}
+	}
+	
+	/**
+	Saves the data in the table.
+	:param: entries Array of strings containing the rows of the table, in JSON format.
+	*/
+	func saveTablePhotoAlbum(entries : [String]){
+		
+		print("SYNC:LOG: Saving table Photo_album.")
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.timeZone = TimeZone.ReferenceType.local
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Photo_album", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo_album")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			print("SYNC:ERROR: Could not clean up Photo_album: \(error), \(error.userInfo).")
+		} catch {
+			print("SYNC:ERROR: Could not clean up Photo_album entity.")
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			
+			//Get photo
+			var str = entry
+			let photo : Int = Int(str.subStr(start : str.indexOf(target : "\"photo\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(photo, forKey: "photo")
+			
+			//Get album
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let album : Int = Int(str.subStr(start : str.indexOf(target : "\"album\":")! + 9, end : str.length - 2))!
+			row.setValue(album, forKey: "album")
+			
+			//Save CoreData
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				print("SYNC:ERROR: Could not store Photo_album entry \(error.userInfo).")
+			} catch {
+				print("SYNC:ERROR: Could not store Photo_album entry.")
 			}
 		}
 	}
