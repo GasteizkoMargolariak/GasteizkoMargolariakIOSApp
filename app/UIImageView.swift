@@ -41,7 +41,8 @@ extension UIImageView {
 		let fileManager = FileManager.default
 		if fileManager.fileExists(atPath: filePath!) {
 			print("IMAGE:LOG: File available: \(filePath)")
-			//TODO Set image
+			
+			//Set image
 			do{
 				//let iurl = URL(string: filePath!)
 				let idata = try Data(contentsOf: URL(fileURLWithPath: filePath!))
@@ -49,18 +50,16 @@ extension UIImageView {
 			}
 			catch (let error){
 				print("IMAGE:ERROR: Error setting image: \(error.localizedDescription)")
+				return -1
 			}
 			return 0
 		} else {
 			print("IMAGE:LOG: File not available: \(filePath)")
 			print("IMAGE:LOG: Downloading from \(remotePath)")
-			//TODO Download
-			//TODO Set image
 			
 			//Create required directories
 			var fileFolderUrl = URL(fileURLWithPath: filePath!)
 			fileFolderUrl.deleteLastPathComponent()
-			print("IMAGE:DEBUG: Creating folder \(fileFolderUrl)")
 			do{
 				try fileManager.createDirectory(at:  fileFolderUrl, withIntermediateDirectories: true, attributes: nil)
 			}
@@ -69,8 +68,6 @@ extension UIImageView {
 			}
 			
 			// Create destination URL
-			let documentsUrl:URL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL!
-			//let destinationFileUrl = URL(string: filePath!)//documentsUrl.appendingPathComponent("downloadedFile.jpg")
 			let destinationFileUrl = URL(fileURLWithPath: filePath!)
 			
 			//Create URL to the source file you want to download
@@ -83,6 +80,7 @@ extension UIImageView {
 			
 			let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
 				if let tempLocalUrl = tempLocalUrl, error == nil {
+					
 					// Success
 					if let statusCode = (response as? HTTPURLResponse)?.statusCode {
 						print("IMAGE:LOG: Successfully downloaded. Status code: \(statusCode)")
@@ -92,6 +90,15 @@ extension UIImageView {
 						try FileManager.default.copyItem(at: tempLocalUrl, to: destinationFileUrl)
 					} catch (let writeError) {
 						print("IMAGE:ERROR: Error creating a file \(destinationFileUrl) : \(writeError)")
+					}
+					
+					// Set the image
+					do{
+						let idata = try Data(contentsOf: URL(fileURLWithPath: filePath!))
+						self.image = UIImage(data: idata as Data)
+					}
+					catch (let error){
+						print("IMAGE:ERROR: Error setting image: \(error.localizedDescription)")
 					}
 					
 				} else {
