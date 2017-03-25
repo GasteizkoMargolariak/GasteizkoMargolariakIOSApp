@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93075C6A1E59CAB000396389 /* BlogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93075C691E59CAB000396389 /* BlogView.xib */; };
+		93075C6C1E59CB6B00396389 /* BlogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93075C6B1E59CB6B00396389 /* BlogView.swift */; };
+		93075C701E59D04A00396389 /* RowBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93075C6F1E59D04A00396389 /* RowBlog.swift */; };
+		93075C721E59D06900396389 /* RowBlog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93075C711E59D06900396389 /* RowBlog.xib */; };
 		931AA5891E1AFF8C003A2290 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AA5881E1AFF8C003A2290 /* String.swift */; };
 		931AA58B1E1DA911003A2290 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 931AA58A1E1DA910003A2290 /* CoreData.framework */; };
 		931AA5AE1E218D0E003A2290 /* Entry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 931AA5AD1E218D0D003A2290 /* Entry.xib */; };
@@ -14,6 +18,7 @@
 		93294FF81E336FA000FDAF50 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93294FF71E336FA000FDAF50 /* Entry.swift */; };
 		93294FFA1E337D0D00FDAF50 /* RowHomePastActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93294FF91E337D0D00FDAF50 /* RowHomePastActivities.swift */; };
 		935892D01E493C2300E1CD5F /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935892CF1E493C2300E1CD5F /* UIImageView.swift */; };
+		937EA02D1E5B8B5300D0893A /* UIApplcation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937EA02C1E5B8B5300D0893A /* UIApplcation.swift */; };
 		93B408031D9ED44C000FBC99 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B408021D9ED44C000FBC99 /* MenuCollectionViewCell.swift */; };
 		93B84B9A1D9C31AB006C0F67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B84B991D9C31AB006C0F67 /* AppDelegate.swift */; };
 		93B84B9C1D9C31AB006C0F67 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B84B9B1D9C31AB006C0F67 /* ViewController.swift */; };
@@ -21,6 +26,13 @@
 		93B84BA21D9C31AB006C0F67 /* app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93B84BA01D9C31AB006C0F67 /* app.xcdatamodeld */; };
 		93B84BA41D9C31AB006C0F67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93B84BA31D9C31AB006C0F67 /* Assets.xcassets */; };
 		93B84BA71D9C31AB006C0F67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B84BA51D9C31AB006C0F67 /* LaunchScreen.storyboard */; };
+		93BAD2EE1E585578009DF853 /* RowHomeBlog.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93BAD2ED1E585578009DF853 /* RowHomeBlog.xib */; };
+		93BAD2F01E585662009DF853 /* RowHomeBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAD2EF1E585662009DF853 /* RowHomeBlog.swift */; };
+		93BAD2F21E585E88009DF853 /* RowHomeFutureActivities.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93BAD2F11E585E88009DF853 /* RowHomeFutureActivities.xib */; };
+		93BAD2F41E585EE6009DF853 /* RowHomeFutureActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAD2F31E585EE6009DF853 /* RowHomeFutureActivities.swift */; };
+		93BAD2F61E586310009DF853 /* RowHomeSocial.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93BAD2F51E586310009DF853 /* RowHomeSocial.xib */; };
+		93BAD2F81E586741009DF853 /* RowHomeSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAD2F71E586741009DF853 /* RowHomeSocial.swift */; };
+		93BEB6D21E7E878300C68DE5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BEB6D11E7E878300C68DE5 /* PostViewController.swift */; };
 		93D9EA601DE271E700089002 /* Section.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EA5F1DE271E700089002 /* Section.xib */; };
 		93D9EA641DE273FD00089002 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA631DE273FD00089002 /* Section.swift */; };
 		93D9EA681DE342AC00089002 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA671DE342AC00089002 /* UIView.swift */; };
@@ -31,6 +43,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		93075C691E59CAB000396389 /* BlogView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlogView.xib; sourceTree = "<group>"; };
+		93075C6B1E59CB6B00396389 /* BlogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogView.swift; sourceTree = "<group>"; };
+		93075C6F1E59D04A00396389 /* RowBlog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowBlog.swift; sourceTree = "<group>"; };
+		93075C711E59D06900396389 /* RowBlog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowBlog.xib; sourceTree = "<group>"; };
 		931AA5881E1AFF8C003A2290 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		931AA58A1E1DA910003A2290 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		931AA5AD1E218D0D003A2290 /* Entry.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Entry.xib; sourceTree = "<group>"; };
@@ -38,6 +54,7 @@
 		93294FF71E336FA000FDAF50 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		93294FF91E337D0D00FDAF50 /* RowHomePastActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowHomePastActivities.swift; sourceTree = "<group>"; };
 		935892CF1E493C2300E1CD5F /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		937EA02C1E5B8B5300D0893A /* UIApplcation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplcation.swift; sourceTree = "<group>"; };
 		93B408021D9ED44C000FBC99 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuCollectionViewCell.swift; path = ../MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		93B84B961D9C31AB006C0F67 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93B84B991D9C31AB006C0F67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +64,13 @@
 		93B84BA31D9C31AB006C0F67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93B84BA61D9C31AB006C0F67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		93B84BA81D9C31AB006C0F67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93BAD2ED1E585578009DF853 /* RowHomeBlog.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowHomeBlog.xib; sourceTree = "<group>"; };
+		93BAD2EF1E585662009DF853 /* RowHomeBlog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowHomeBlog.swift; sourceTree = "<group>"; };
+		93BAD2F11E585E88009DF853 /* RowHomeFutureActivities.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowHomeFutureActivities.xib; sourceTree = "<group>"; };
+		93BAD2F31E585EE6009DF853 /* RowHomeFutureActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowHomeFutureActivities.swift; sourceTree = "<group>"; };
+		93BAD2F51E586310009DF853 /* RowHomeSocial.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowHomeSocial.xib; sourceTree = "<group>"; };
+		93BAD2F71E586741009DF853 /* RowHomeSocial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowHomeSocial.swift; sourceTree = "<group>"; };
+		93BEB6D11E7E878300C68DE5 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		93D9EA5F1DE271E700089002 /* Section.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Section.xib; path = ../Section.xib; sourceTree = "<group>"; };
 		93D9EA631DE273FD00089002 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		93D9EA671DE342AC00089002 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -101,14 +125,26 @@
 				93D9EA631DE273FD00089002 /* Section.swift */,
 				931AA5AD1E218D0D003A2290 /* Entry.xib */,
 				93294FF71E336FA000FDAF50 /* Entry.swift */,
-				93D9EA6B1DE3498500089002 /* HomeView.xib */,
 				93D9EA691DE3491100089002 /* HomeView.swift */,
+				93D9EA6B1DE3498500089002 /* HomeView.xib */,
 				93D9EA751DE3ACBB00089002 /* Sync.swift */,
 				931AA5AF1E219006003A2290 /* RowHomePastActivities.xib */,
 				93294FF91E337D0D00FDAF50 /* RowHomePastActivities.swift */,
+				93BAD2ED1E585578009DF853 /* RowHomeBlog.xib */,
+				93BAD2EF1E585662009DF853 /* RowHomeBlog.swift */,
 				931AA5881E1AFF8C003A2290 /* String.swift */,
 				93D9EA671DE342AC00089002 /* UIView.swift */,
 				935892CF1E493C2300E1CD5F /* UIImageView.swift */,
+				93075C691E59CAB000396389 /* BlogView.xib */,
+				93075C6B1E59CB6B00396389 /* BlogView.swift */,
+				93075C6F1E59D04A00396389 /* RowBlog.swift */,
+				93075C711E59D06900396389 /* RowBlog.xib */,
+				93BAD2F11E585E88009DF853 /* RowHomeFutureActivities.xib */,
+				93BAD2F31E585EE6009DF853 /* RowHomeFutureActivities.swift */,
+				93BAD2F51E586310009DF853 /* RowHomeSocial.xib */,
+				93BAD2F71E586741009DF853 /* RowHomeSocial.swift */,
+				93BEB6D11E7E878300C68DE5 /* PostViewController.swift */,
+				937EA02C1E5B8B5300D0893A /* UIApplcation.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -183,10 +219,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				931AA5AE1E218D0E003A2290 /* Entry.xib in Resources */,
+				93075C721E59D06900396389 /* RowBlog.xib in Resources */,
 				93B84BA71D9C31AB006C0F67 /* LaunchScreen.storyboard in Resources */,
+				93BAD2F61E586310009DF853 /* RowHomeSocial.xib in Resources */,
+				93BAD2F21E585E88009DF853 /* RowHomeFutureActivities.xib in Resources */,
 				931AA5B01E219006003A2290 /* RowHomePastActivities.xib in Resources */,
 				93D9EA601DE271E700089002 /* Section.xib in Resources */,
+				93075C6A1E59CAB000396389 /* BlogView.xib in Resources */,
 				93B84BA41D9C31AB006C0F67 /* Assets.xcassets in Resources */,
+				93BAD2EE1E585578009DF853 /* RowHomeBlog.xib in Resources */,
 				93B84B9F1D9C31AB006C0F67 /* Main.storyboard in Resources */,
 				93D9EA6C1DE3498500089002 /* HomeView.xib in Resources */,
 			);
@@ -200,16 +241,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				93294FF81E336FA000FDAF50 /* Entry.swift in Sources */,
+				937EA02D1E5B8B5300D0893A /* UIApplcation.swift in Sources */,
 				93D9EA641DE273FD00089002 /* Section.swift in Sources */,
 				93D9EA6A1DE3491100089002 /* HomeView.swift in Sources */,
+				93BEB6D21E7E878300C68DE5 /* PostViewController.swift in Sources */,
+				93BAD2F81E586741009DF853 /* RowHomeSocial.swift in Sources */,
+				93BAD2F01E585662009DF853 /* RowHomeBlog.swift in Sources */,
 				93294FFA1E337D0D00FDAF50 /* RowHomePastActivities.swift in Sources */,
 				935892D01E493C2300E1CD5F /* UIImageView.swift in Sources */,
 				93D9EA761DE3ACBB00089002 /* Sync.swift in Sources */,
+				93BAD2F41E585EE6009DF853 /* RowHomeFutureActivities.swift in Sources */,
 				931AA5891E1AFF8C003A2290 /* String.swift in Sources */,
 				93B84B9C1D9C31AB006C0F67 /* ViewController.swift in Sources */,
+				93075C6C1E59CB6B00396389 /* BlogView.swift in Sources */,
 				93B84B9A1D9C31AB006C0F67 /* AppDelegate.swift in Sources */,
 				93B84BA21D9C31AB006C0F67 /* app.xcdatamodeld in Sources */,
 				93D9EA681DE342AC00089002 /* UIView.swift in Sources */,
+				93075C701E59D04A00396389 /* RowBlog.swift in Sources */,
 				93B408031D9ED44C000FBC99 /* MenuCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

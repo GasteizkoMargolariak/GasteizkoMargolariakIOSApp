@@ -53,6 +53,7 @@
         <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Album" representedClassName=".Album" syncable="YES" codeGenerationType="class">
+        <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -224,7 +225,7 @@
         <element name="Activity_image" positionX="-36" positionY="-3897" width="128" height="105"/>
         <element name="Activity_itinerary" positionX="-18" positionY="-3888" width="128" height="210"/>
         <element name="Activity_tag" positionX="0" positionY="-3852" width="128" height="75"/>
-        <element name="Album" positionX="18" positionY="-3861" width="128" height="180"/>
+        <element name="Album" positionX="18" positionY="-3861" width="128" height="195"/>
         <element name="Festival" positionX="36" positionY="-3852" width="128" height="180"/>
         <element name="Festival_day" positionX="-9" positionY="-3906" width="128" height="135"/>
         <element name="Festival_event" positionX="0" positionY="-3897" width="128" height="225"/>

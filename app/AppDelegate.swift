@@ -25,6 +25,8 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
+	
+	var controller: ViewController?
 
 	
 
@@ -120,5 +122,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			}
 		}
 	}
+	
 }
 
