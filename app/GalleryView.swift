@@ -62,7 +62,7 @@ class GalleryView: UIView {
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Album> = Album.fetchRequest()
-		let sortDescriptor = NSSortDescriptor(key: "dtime", ascending: false)
+		let sortDescriptor = NSSortDescriptor(key: "time", ascending: false)
 		let sortDescriptors = [sortDescriptor]
 		fetchRequest.sortDescriptors = sortDescriptors
 		
@@ -73,25 +73,24 @@ class GalleryView: UIView {
 			//I like to check the size of the returned results!
 			print ("GALLERY:DEBUG: Total albums: \(searchResults.count)")
 			
-			var row : RowBlog
+			var row : RowGallery
 			var count = 0
 			var id: Int
 			var title: String
-			var text: String
-			var image: String
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
 				print("GALLERY:DEBUG: album perm: \(r.value(forKey: "permalink"))")
 				
 				
 				//Create a new row
-				row = RowBlog.init(s: "rowBlog\(count)", i: count)
+				row = RowGallery.init(s: "rowGallery\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
-				title = r.value(forKey: "title_\(lang)")! as! String
-				text = r.value(forKey: "text_\(lang)")! as! String
-				row.setTitle(text: title)
-				row.setText(text: text)
 				
+				print("GALLERY:DEBUG: Setting title")
+				//title = r.value(forKey: "title_\(lang)")! as! String
+				//row.setTitle(text: title)
+				
+				/* TODO: Get 4 random images from the album
 				// Get main image
 				image = ""
 				let imgFetchRequest: NSFetchRequest<Post_image> = Post_image.fetchRequest()
@@ -108,10 +107,10 @@ class GalleryView: UIView {
 						row.setImage(filename: image)
 					}
 				} catch {
-					print("BLOG:ERROR: Error getting image for post \(id): \(error)")
+					print("GALLERY:ERROR: Error getting image for post \(id): \(error)")
 				}
-				
-				print("BLOG:DEBUG: Row height: \(row.frame.height)")
+
+				*/
 				
 				parent.addArrangedSubview(row)
 				row.setNeedsLayout()
