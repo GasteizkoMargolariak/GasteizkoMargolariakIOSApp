@@ -87,8 +87,8 @@ class GalleryView: UIView {
 				id = r.value(forKey: "id")! as! Int
 				
 				print("GALLERY:DEBUG: Setting title")
-				//title = r.value(forKey: "title_\(lang)")! as! String
-				//row.setTitle(text: title)
+				title = r.value(forKey: "title_\(lang)")! as! String
+				row.setTitle(text: title)
 				
 				/* TODO: Get 4 random images from the album
 				// Get main image

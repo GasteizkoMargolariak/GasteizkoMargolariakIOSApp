@@ -76,7 +76,7 @@ Extension of UIView to be formatted as sections.
 		
 		//Populate review array
 		//print("ROWGALLERY:DEBUG: Populating preview array")
-		//preview = [photo0, photo1, photo2, photo3]
+		preview = [photo0, photo1, photo2, photo3]
 		
 		// Set tap recognizer
 		/*print("ROW_BLOG:DEBUG: set tap recognizer")
@@ -99,8 +99,7 @@ Extension of UIView to be formatted as sections.
 	:param: text The new title.
 	*/
 	func setTitle(text: String){
-		print("ROWGALLERY:DEBUG: Setting title: \(title)")
-		title.text = text.stripHtml()
+		title.text = "  \(text.stripHtml())"
 	}
 	
 	/**
