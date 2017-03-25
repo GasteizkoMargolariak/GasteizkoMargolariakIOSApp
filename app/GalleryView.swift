@@ -69,28 +69,21 @@ class GalleryView: UIView {
 		do {
 			//Get the results
 			let searchResults = try context.fetch(fetchRequest)
-			
-			//I like to check the size of the returned results!
-			print ("GALLERY:DEBUG: Total albums: \(searchResults.count)")
-			
+
 			var row : RowGallery
 			var count = 0
 			var id: Int
 			var title: String
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
-				print("GALLERY:DEBUG: album perm: \(r.value(forKey: "permalink"))")
-				
 				
 				//Create a new row
 				row = RowGallery.init(s: "rowGallery\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
 				
-				print("GALLERY:DEBUG: Setting title")
 				title = r.value(forKey: "title_\(lang)")! as! String
 				row.setTitle(text: title)
 				
-				print("GALLERY:DEBUG: 1")
 				// Get 4 random images from the album
 				let imgFetchRequest: NSFetchRequest<Photo_album> = Photo_album.fetchRequest()
 				// TODO Order random
@@ -99,11 +92,11 @@ class GalleryView: UIView {
 				//simgFetchRequest.sortDescriptors = imgSortDescriptors
 				imgFetchRequest.predicate = NSPredicate(format: "album == %i", id)
 				imgFetchRequest.fetchLimit = 4
-				print("GALLERY:DEBUG: 2")
 				do{
 					let imgSearchResults = try context.fetch(imgFetchRequest)
 					
 					// Loop images
+					var imageIdx = 0
 					for imgR in imgSearchResults as [NSManagedObject]{
 						
 						let imageId = imgR.value(forKey: "photo")! as! Int
@@ -115,16 +108,13 @@ class GalleryView: UIView {
 						do{
 							let singleImgSearchResults = try context.fetch(singleImgFetchRequest)
 							
-							// Loop images
-							var imageIdx = 0
+							// Loop image
 							for sImgR in singleImgSearchResults as [NSManagedObject]{
 						
 								let image = sImgR.value(forKey: "file")! as! String
-								print ("GALLERY:DEBUG: Setting image \(imageIdx): \(image)")
 								row.setImage(idx: imageIdx, filename: image)
-						
-								imageIdx = imageIdx + 1
 							}
+							imageIdx = imageIdx + 1
 						}
 						catch {
 							print("GALLERY:ERROR: Error getting image from photo entity: \(error)")
@@ -156,7 +146,6 @@ class GalleryView: UIView {
 		for view in scrollView.subviews {
 			//contentRect = contentRect.union(view.frame);
 			h = h + Int(view.frame.height) + 30 //Why 30?
-			print("GALLERY:DEBUG: curh: \(h)")
 		}
 		// TODO: Calculate at the end
 		self.scrollView.contentSize.height = 2500//CGFloat(h);

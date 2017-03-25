@@ -59,7 +59,7 @@ Extension of UIView to be formatted as sections.
 	:param: i Custom identifier
 	*/
 	init(s: String, i: Int) {
-		print("ROWGALLERY:DEBUG: Init s, i")
+		print("ROWGALLERY:DEBUG: Init \(s), \(i)")
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
 		v = self
@@ -67,7 +67,6 @@ Extension of UIView to be formatted as sections.
 		v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		v.translatesAutoresizingMaskIntoConstraints = true
 		
-		print("ROWGALLERY:DEBUG: Setting container")
 		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		container.translatesAutoresizingMaskIntoConstraints = true
 		
@@ -109,7 +108,7 @@ Extension of UIView to be formatted as sections.
 	*/
 	func setImage(idx: Int, filename: String){
 		if (filename == ""){
-			print("No image")
+			print("ROWGALLERY:LOG: No image.")
 			//TODO hide the imageview
 		}
 		else{
