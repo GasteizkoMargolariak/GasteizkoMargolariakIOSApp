@@ -36,14 +36,10 @@ class PostView: UIView {
 	@IBOutlet weak var text: UILabel!
 	
 	@IBOutlet weak var date: UILabel!
-
-	@IBOutlet weak var commentCount: UILabel!
 	
-	@IBOutlet weak var commentList: UIStackView!
-
-	@IBOutlet weak var commentUser: UITextField!
-
-	@IBOutlet weak var commentContent: UITextView!
+	@IBOutlet weak var navigationBar: UINavigationBar!
+	
+	@IBOutlet weak var navigationBarItem: UINavigationItem!
 	
 	// Post id. Must be set pre-segue.
 	var id: Int = -1
@@ -52,9 +48,9 @@ class PostView: UIView {
 		print("POST:LOG: Init (cgrect). Id is \(self.id)")
 		super.init(frame: frame)
 		//Load the contents of the PostView.xib file.
-		Bundle.main.loadNibNamed("PostView", owner: self, options: nil)
-		self.addSubview(container)
-		container.frame = self.bounds
+		//Bundle.main.loadNibNamed("PostView", owner: self, options: nil)
+		//self.addSubview(container)
+		//container.frame = self.bounds
 	}
 	
 	/**
@@ -64,11 +60,20 @@ class PostView: UIView {
 		print("POST:LOG: Init (coder). Id is: \(self.id)")
 		super.init(coder: aDecoder)
 		//Load the contents of the PostView.xib file.
-		Bundle.main.loadNibNamed("PostView", owner: self, options: nil)
-		self.addSubview(container)
-		container.frame = self.bounds
+		//Bundle.main.loadNibNamed("PostView", owner: self, options: nil)
+		//self.addSubview(container)
+		//container.frame = self.bounds
+		
+		//Assign navigation bar items
+		//let backButton: UIBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(back))
+		//navigationBarItem.leftBarButtonItem = backButton;
 		
 		
+	}
+	
+	func back() {
+		print("POST:DEBUG: Back")
+		//self.dismiss(animated: true, completion: nil)
 	}
 	
 

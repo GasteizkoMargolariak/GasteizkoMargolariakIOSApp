@@ -15,6 +15,8 @@
                 <outlet property="container" destination="Zrz-uS-eQa" id="UV8-P9-jMA"/>
                 <outlet property="date" destination="lBQ-aX-qhL" id="esh-vp-DgK"/>
                 <outlet property="image" destination="vwR-EU-h1T" id="ir7-PQ-Awq"/>
+                <outlet property="navigationBar" destination="PAV-4K-mGS" id="N46-pC-GX2"/>
+                <outlet property="navigationBarItem" destination="rxh-zx-B6G" id="PGz-vk-ebK"/>
                 <outlet property="scrollView" destination="8gP-MM-Wzw" id="ZMT-Yf-IoY"/>
                 <outlet property="text" destination="NoQ-Kc-oS7" id="dkU-HT-A7G"/>
                 <outlet property="title" destination="4ub-YM-i5l" id="Sfa-dT-b2M"/>
@@ -36,9 +38,7 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </textAttributes>
                     <items>
-                        <navigationItem title="Gasteizko Margolariak" prompt="&lt;" id="rxh-zx-B6G">
-                            <barButtonItem key="backBarButtonItem" image="Logo" width="10" id="lPX-Uf-eO6"/>
-                        </navigationItem>
+                        <navigationItem title="Gasteizko Margolariak" id="rxh-zx-B6G"/>
                     </items>
                 </navigationBar>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddf-jU-bmv">
@@ -202,7 +202,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Logo" width="83" height="83"/>
         <image name="PhotoPlaceholder" width="170" height="108"/>
     </resources>
 </document>

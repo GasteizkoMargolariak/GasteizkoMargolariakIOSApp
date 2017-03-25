@@ -26,8 +26,13 @@ The view controller of the app.
 */
 class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	
-	@IBOutlet var postView: PostView!
+
 	
+	@IBOutlet weak var barTitle: UILabel!
+	@IBOutlet weak var barButton: UIButton!
+	@IBOutlet weak var postText: UILabel!
+	@IBOutlet weak var postTitle: UILabel!
+	@IBOutlet weak var postImage: UIImageView!
 	var id: Int = -1
 	var delegate: AppDelegate?
 	
@@ -41,12 +46,6 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 	}
 	
-	func showPost(id: Int){
-		print("POSTCONTROLLER:DEBUG: showPost \(id)")
-		self.postView.id = id
-		self.postView.loadPost(id: id)
-	}
-	
 	/**
 	Run when the app loads.
 	*/
@@ -55,14 +54,11 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 		print("POSTCONTROLLER:LOG: viewDidLoad()")
 		
 		super.viewDidLoad()
-		self.postView.loadPost(id: id)
+		self.loadPost(id: id)
 	}
 	
-	override func viewWillAppear(_ animated: Bool) {
-		let backButton: UIBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(back))
-		self.navigationItem.leftBarButtonItem = backButton;
-		super.viewWillAppear(animated);
-	}
+	//TODO implement all the logic for post loading here, including iboutlts
+	
 	
 	func back() {
 		self.dismiss(animated: true, completion: nil)
@@ -74,6 +70,84 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
+	}
+	
+	public func loadPost(id: Int){
+		
+		print("POSTCONTROLLER:DEBUG: Loading post \(id)")
+		
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let lang : String = getLanguage()
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
+		fetchRequest.predicate = NSPredicate(format: "id = %i", id)
+		
+		do {
+			//go get the results
+			let searchResults = try context.fetch(fetchRequest)
+			
+			var count = 0
+			var sTitle: String
+			var sText: String
+			var image: String
+			
+			//You need to convert to NSManagedObject to use 'for' loops
+			for r in searchResults as [NSManagedObject] {
+				count = count + 1
+				
+				sTitle = r.value(forKey: "title_\(lang)")! as! String
+				sText = r.value(forKey: "text_\(lang)")! as! String
+				postTitle.text = "  \(sTitle)"
+				postText.text = sText.stripHtml()
+				
+				// Get main image
+				image = ""
+				let imgFetchRequest: NSFetchRequest<Post_image> = Post_image.fetchRequest()
+				let imgSortDescriptor = NSSortDescriptor(key: "idx", ascending: true)
+				let imgSortDescriptors = [imgSortDescriptor]
+				imgFetchRequest.sortDescriptors = imgSortDescriptors
+				imgFetchRequest.predicate = NSPredicate(format: "post == %i", id)
+				imgFetchRequest.fetchLimit = 1
+				//TODO get more images
+				do{
+					let imgSearchResults = try context.fetch(imgFetchRequest)
+					for imgR in imgSearchResults as [NSManagedObject]{
+						image = imgR.value(forKey: "image")! as! String
+						print ("POST:LOG: Image: \(image)")
+						//TODO set image
+						//row.setImage(filename: image)
+					}
+				} catch {
+					print("POST:ERROR: Error getting image for post \(id): \(error)")
+				}
+				
+			}
+		} catch {
+			print("POST:ERROR: Error with request: \(error)")
+		}
+		
+		//Always at the end: update scrollview
+		// TODOs
+		//var h: Int = 0
+		//for view in scrollView.subviews {
+			//contentRect = contentRect.union(view.frame);
+		//	h = h + Int(view.frame.height) + 30 //Why 30?
+		//}
+		//print("POST:DEBUG: Height: \(h)")
+		// TODO: Calculate at the end
+		//self.scrollView.contentSize.height = 4500//CGFloat(h);
+
+	}
+	
+	func getLanguage() -> String{
+		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
+		if(pre == "es" || pre == "en" || pre == "eu"){
+			return pre
+		}
+		else{
+			return "es"
+		}
 	}
 	
 }
