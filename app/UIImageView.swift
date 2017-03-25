@@ -42,6 +42,14 @@ extension UIImageView {
 		if fileManager.fileExists(atPath: filePath!) {
 			print("IMAGE:LOG: File available: \(filePath)")
 			//TODO Set image
+			do{
+				//let iurl = URL(string: filePath!)
+				let idata = try Data(contentsOf: URL(fileURLWithPath: filePath!))
+				self.image = UIImage(data: idata as Data)
+			}
+			catch (let error){
+				print("IMAGE:ERROR: Error setting image: \(error.localizedDescription)")
+			}
 			return 0
 		} else {
 			print("IMAGE:LOG: File not available: \(filePath)")
