@@ -90,6 +90,7 @@ class GalleryView: UIView {
 				title = r.value(forKey: "title_\(lang)")! as! String
 				row.setTitle(text: title)
 				
+				print("GALLERY:DEBUG: 1")
 				// Get 4 random images from the album
 				let imgFetchRequest: NSFetchRequest<Photo_album> = Photo_album.fetchRequest()
 				// TODO Order random
@@ -98,18 +99,19 @@ class GalleryView: UIView {
 				//simgFetchRequest.sortDescriptors = imgSortDescriptors
 				imgFetchRequest.predicate = NSPredicate(format: "album == %i", id)
 				imgFetchRequest.fetchLimit = 4
+				print("GALLERY:DEBUG: 2")
 				do{
 					let imgSearchResults = try context.fetch(imgFetchRequest)
 					
 					// Loop images
 					for imgR in imgSearchResults as [NSManagedObject]{
 						
-						let imageId = imgR.value(forKey: "id")! as! Int
+						let imageId = imgR.value(forKey: "photo")! as! Int
 						
 						// For each image, I need a new query to fetch from photo entity.
 						let singleImgFetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
 						singleImgFetchRequest.predicate = NSPredicate(format: "id == %i", imageId)
-						singleImgFetchRequest.fetchLimit = 1
+						singleImgFetchRequest.fetchLimit = 4
 						do{
 							let singleImgSearchResults = try context.fetch(singleImgFetchRequest)
 							
@@ -117,9 +119,8 @@ class GalleryView: UIView {
 							var imageIdx = 0
 							for sImgR in singleImgSearchResults as [NSManagedObject]{
 						
-
 								let image = sImgR.value(forKey: "file")! as! String
-								print ("GALLERY:DEBUG: Setting image: \(image)")
+								print ("GALLERY:DEBUG: Setting image \(imageIdx): \(image)")
 								row.setImage(idx: imageIdx, filename: image)
 						
 								imageIdx = imageIdx + 1

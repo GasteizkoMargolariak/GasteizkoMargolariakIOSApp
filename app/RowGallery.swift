@@ -114,7 +114,7 @@ Extension of UIView to be formatted as sections.
 		}
 		else{
 			print("Set image \(filename)")
-			let path = "img/gallery/thumb/\(filename)"
+			let path = "img/galeria/thumb/\(filename)"
 			preview[idx].setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
 	}
