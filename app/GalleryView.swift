@@ -55,7 +55,7 @@ class GalleryView: UIView {
 		let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 		let controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		
-		// Show posts
+		// Show albums
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		self.delegate = appDelegate
@@ -67,7 +67,7 @@ class GalleryView: UIView {
 		fetchRequest.sortDescriptors = sortDescriptors
 		
 		do {
-			//go get the results
+			//Get the results
 			let searchResults = try context.fetch(fetchRequest)
 			
 			//I like to check the size of the returned results!
@@ -90,27 +90,48 @@ class GalleryView: UIView {
 				title = r.value(forKey: "title_\(lang)")! as! String
 				row.setTitle(text: title)
 				
-				/* TODO: Get 4 random images from the album
-				// Get main image
-				image = ""
-				let imgFetchRequest: NSFetchRequest<Post_image> = Post_image.fetchRequest()
-				let imgSortDescriptor = NSSortDescriptor(key: "idx", ascending: true)
-				let imgSortDescriptors = [imgSortDescriptor]
-				imgFetchRequest.sortDescriptors = imgSortDescriptors
-				imgFetchRequest.predicate = NSPredicate(format: "post == %i", id)
-				imgFetchRequest.fetchLimit = 1
+				// Get 4 random images from the album
+				let imgFetchRequest: NSFetchRequest<Photo_album> = Photo_album.fetchRequest()
+				// TODO Order random
+				//let imgSortDescriptor = NSSortDescriptor(key: "time", ascending: true)
+				//let imgSortDescriptors = [imgSortDescriptor]
+				//simgFetchRequest.sortDescriptors = imgSortDescriptors
+				imgFetchRequest.predicate = NSPredicate(format: "album == %i", id)
+				imgFetchRequest.fetchLimit = 4
 				do{
 					let imgSearchResults = try context.fetch(imgFetchRequest)
+					
+					// Loop images
 					for imgR in imgSearchResults as [NSManagedObject]{
-						image = imgR.value(forKey: "image")! as! String
-						print ("BLOG:DEBUG: Image: \(image)")
-						row.setImage(filename: image)
+						
+						let imageId = imgR.value(forKey: "id")! as! Int
+						
+						// For each image, I need a new query to fetch from photo entity.
+						let singleImgFetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+						singleImgFetchRequest.predicate = NSPredicate(format: "id == %i", imageId)
+						singleImgFetchRequest.fetchLimit = 1
+						do{
+							let singleImgSearchResults = try context.fetch(singleImgFetchRequest)
+							
+							// Loop images
+							var imageIdx = 0
+							for sImgR in singleImgSearchResults as [NSManagedObject]{
+						
+
+								let image = sImgR.value(forKey: "file")! as! String
+								print ("GALLERY:DEBUG: Setting image: \(image)")
+								row.setImage(idx: imageIdx, filename: image)
+						
+								imageIdx = imageIdx + 1
+							}
+						}
+						catch {
+							print("GALLERY:ERROR: Error getting image from photo entity: \(error)")
+						}
 					}
 				} catch {
 					print("GALLERY:ERROR: Error getting image for post \(id): \(error)")
 				}
-
-				*/
 				
 				parent.addArrangedSubview(row)
 				row.setNeedsLayout()
