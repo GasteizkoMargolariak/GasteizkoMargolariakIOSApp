@@ -87,7 +87,7 @@ class Sync{
 			//let dataFestivalEventImage : [String] = self.getTable(data: strData!, table: "festival_event_image")
 			//let dataFestivalOffer : [String] = self.getTable(data: strData!, table: "festival_offer")
 			//let dataPeople : [String] = self.getTable(data: strData!, table: "people")
-			//let dataPhoto : [String] = self.getTable(data: strData!, table: "photo")
+			let dataPhoto : [String] = self.getTable(data: strData!, table: "photo")
 			//let dataPhotoAlbum : [String] = self.getTable(data: strData!, table: "photo_album")
 			//let dataPhotoComment : [String] = self.getTable(data: strData!, table: "photo_comment")
 			let dataPlace : [String] = self.getTable(data: strData!, table: "place")
@@ -112,6 +112,7 @@ class Sync{
 			self.saveTablePlace(entries: dataPlace)
 			
 			self.saveTableAlbum(entries: dataAlbum)
+			self.saveTablePhoto(entries: dataPhoto)
 			
 			//DEBUG: Tester, Debug only
 			// Test if a entity has entries
@@ -1121,7 +1122,6 @@ class Sync{
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
 	*/
-	//CHECK: New (and probably better format than the others.)
 	func saveTableAlbum(entries : [String]){
 		
 		print("SYNC:LOG: Saving table Album.")
@@ -1201,6 +1201,116 @@ class Sync{
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let open : Int = Int(str.subStr(start : str.indexOf(target : "\"open\":")! + 8, end : str.length - 2))!
 			row.setValue(open, forKey: "open")
+			
+			//Save CoreData
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				print("SYNC:ERROR: Could not store Album with id \(id): \(error), \(error.userInfo).")
+			} catch {
+				print("SYNC:ERROR: Could not store Album with id \(id).")
+			}
+		}
+	}
+	
+	/**
+	Saves the data in the table.
+	:param: entries Array of strings containing the rows of the table, in JSON format.
+	*/
+	func saveTablePhoto(entries : [String]){
+		
+		print("SYNC:LOG: Saving table Photo.")
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.timeZone = TimeZone.ReferenceType.local
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Photo", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Photo")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			print("SYNC:ERROR: Could not clean up Photo: \(error), \(error.userInfo).")
+		} catch {
+			print("SYNC:ERROR: Could not clean up Photo entity.")
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			
+			//Get id
+			var str = entry
+			let id : Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(id, forKey: "id")
+			
+			//Get file
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let file : String = str.subStr(start : str.indexOf(target : "\"file\":")! + 8, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(file, forKey: "file")
+			
+			//Get permalink
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let permalink : String = str.subStr(start : str.indexOf(target : "\"permalink\":")! + 13, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(permalink, forKey: "permalink")
+			
+			//Get title_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let title_es : String = str.subStr(start : str.indexOf(target : "\"title_es\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(title_es, forKey: "title_es")
+			
+			//Get title_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let title_en : String = str.subStr(start : str.indexOf(target : "\"title_en\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(title_en, forKey: "title_en")
+			
+			//Get title_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let title_eu : String = str.subStr(start : str.indexOf(target : "\"title_eu\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(title_eu, forKey: "title_eu")
+			
+			//Get description_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let description_es : String = str.subStr(start : str.indexOf(target : "\"description_es\":")! + 18, end : str.indexOf(target : ",\"")! - 2)
+			if (description_es != "ul"){ //From "null"
+				row.setValue(description_es, forKey: "description_es")
+			}
+			
+			//Get description_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let description_en : String = str.subStr(start : str.indexOf(target : "\"description_en\":")! + 18, end : str.indexOf(target : ",\"")! - 2)
+			if (description_en != "ul"){ //From "null"
+				row.setValue(description_en, forKey: "description_en")
+			}
+			
+			//Get description_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let description_eu : String = str.subStr(start : str.indexOf(target : "\"description_eu\":")! + 18, end : str.indexOf(target : ",\"")! - 2)
+			if (description_eu != "ul"){ //From "null"
+				row.setValue(description_eu, forKey: "description_eu")
+			}
+			
+			//Get uploaded
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+			let uploaded = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"uploaded\":")! + 12, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(uploaded, forKey: "uploaded")
+			
+			//TODO: Ignoting place
+			//TODO: Ignoring width
+			//TODO: Ignoring height
+			//TODO: Ignoring size
+			//TODO: Ignoring username
 			
 			//Save CoreData
 			do {
