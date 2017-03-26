@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RowHomeGallery" customModule="app">
+            <connections>
+                <outlet property="container" destination="fQL-ej-f6f" id="gat-5m-Nlc"/>
+                <outlet property="photo0" destination="dnB-DT-XBi" id="Gcn-A3-qVV"/>
+                <outlet property="photo1" destination="WDB-y4-09J" id="yCC-HU-nfj"/>
+                <outlet property="photo2" destination="anB-pq-Srl" id="VWm-9P-5aK"/>
+                <outlet property="photo3" destination="fDa-I0-n0C" id="oyE-AI-yhP"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="RowHomeGallery" customModule="app">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQL-ej-f6f" userLabel="Container">
+                    <rect key="frame" x="-0.5" y="0.0" width="375" height="230"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wVc-lu-Pqh" userLabel="Entry">
+                            <rect key="frame" x="10" y="10" width="355" height="230"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="dnB-DT-XBi" userLabel="Photo0">
+                                    <rect key="frame" x="10" y="10" width="162.5" height="100"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="c49-em-SBK"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WDB-y4-09J" userLabel="Photo1">
+                                    <rect key="frame" x="182.5" y="10" width="162.5" height="100"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="PMB-24-syn"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="anB-pq-Srl" userLabel="Photo2">
+                                    <rect key="frame" x="10" y="120" width="162.5" height="100"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="A9o-VC-FHH"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="fDa-I0-n0C" userLabel="Photo3">
+                                    <rect key="frame" x="182.5" y="120" width="162.5" height="100"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="Lw8-Ie-YJH"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="dnB-DT-XBi" firstAttribute="width" secondItem="wVc-lu-Pqh" secondAttribute="width" multiplier="0.5" constant="-15" id="68Z-py-m5z"/>
+                                <constraint firstItem="anB-pq-Srl" firstAttribute="top" secondItem="dnB-DT-XBi" secondAttribute="bottom" constant="10" id="Bad-nG-5z5"/>
+                                <constraint firstItem="dnB-DT-XBi" firstAttribute="leading" secondItem="wVc-lu-Pqh" secondAttribute="leading" constant="10" id="D5O-yf-YW8"/>
+                                <constraint firstItem="fDa-I0-n0C" firstAttribute="top" secondItem="WDB-y4-09J" secondAttribute="bottom" constant="10" id="EAz-Ai-4fI"/>
+                                <constraint firstItem="anB-pq-Srl" firstAttribute="leading" secondItem="wVc-lu-Pqh" secondAttribute="leading" constant="10" id="EBa-JH-t1r"/>
+                                <constraint firstItem="anB-pq-Srl" firstAttribute="width" secondItem="wVc-lu-Pqh" secondAttribute="width" multiplier="0.5" constant="-15" id="EcJ-3D-reB"/>
+                                <constraint firstAttribute="height" constant="230" id="Ffn-YP-qLO"/>
+                                <constraint firstItem="WDB-y4-09J" firstAttribute="top" secondItem="wVc-lu-Pqh" secondAttribute="top" constant="10" id="NRB-ED-7lT"/>
+                                <constraint firstItem="fDa-I0-n0C" firstAttribute="width" secondItem="wVc-lu-Pqh" secondAttribute="width" multiplier="0.5" constant="-15" id="gYW-t2-gNJ"/>
+                                <constraint firstItem="WDB-y4-09J" firstAttribute="trailing" secondItem="wVc-lu-Pqh" secondAttribute="trailing" constant="-10" id="lWA-u1-9Oi"/>
+                                <constraint firstItem="dnB-DT-XBi" firstAttribute="top" secondItem="wVc-lu-Pqh" secondAttribute="top" constant="10" id="mWE-kd-0X9"/>
+                                <constraint firstItem="fDa-I0-n0C" firstAttribute="trailing" secondItem="wVc-lu-Pqh" secondAttribute="trailing" constant="-10" id="tJB-Qz-gmc"/>
+                                <constraint firstItem="WDB-y4-09J" firstAttribute="width" secondItem="wVc-lu-Pqh" secondAttribute="width" multiplier="0.5" constant="-15" id="tJI-ji-ciu"/>
+                            </constraints>
+                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" red="0.42745098039215684" green="0.41176470588235292" blue="0.56470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="wVc-lu-Pqh" firstAttribute="bottom" secondItem="fQL-ej-f6f" secondAttribute="bottom" constant="10" id="4Qm-4E-T6T"/>
+                        <constraint firstAttribute="trailing" secondItem="wVc-lu-Pqh" secondAttribute="trailing" constant="10" id="Gw9-3i-bdM"/>
+                        <constraint firstItem="wVc-lu-Pqh" firstAttribute="top" secondItem="fQL-ej-f6f" secondAttribute="top" constant="10" id="JpE-6m-QpJ"/>
+                        <constraint firstItem="wVc-lu-Pqh" firstAttribute="leading" secondItem="fQL-ej-f6f" secondAttribute="leading" constant="10" id="sx2-Al-2U2"/>
+                    </constraints>
+                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fQL-ej-f6f" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="D1e-8E-fga"/>
+                <constraint firstItem="fQL-ej-f6f" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="Pfz-ns-fxp"/>
+                <constraint firstItem="fQL-ej-f6f" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="r6U-3K-HqE"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="PhotoPlaceholder" width="170" height="108"/>
+    </resources>
+</document>
