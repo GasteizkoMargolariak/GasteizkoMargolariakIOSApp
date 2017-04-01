@@ -80,6 +80,7 @@ class HomeView: UIView {
 		setUpBlog(context: moc, delegate: appDelegate, lang: lang, parent: blogSection.getContentStack())
 		setUpFutureActivities(context: moc, delegate: appDelegate, lang: lang, parent: futureActivitiesSection.getContentStack())
 		setUpSocial(parent: socialSection.getContentStack())
+		setUpGallery(context: moc, delegate: appDelegate, parent: gallerySection.getContentStack())
 		
 		
 		pastActivitiesSection.expandSection()
@@ -316,6 +317,48 @@ class HomeView: UIView {
 		} catch {
 			print("Error with request: \(error)")
 		}
+	}
+	
+	func setUpGallery(context : NSManagedObjectContext, delegate: AppDelegate,parent: UIStackView){
+		print("HOME:LOG: Setting up gallery.")
+		
+		// Create the row
+		var row: RowHomeGallery
+		row = RowHomeGallery.init(s: "rowHomeGallery", i: 0)
+		parent.addArrangedSubview(row)
+		
+		
+		// Set images
+		let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+		let sortDescriptor = NSSortDescriptor(key: "uploaded", ascending: false)
+		let sortDescriptors = [sortDescriptor]
+		fetchRequest.sortDescriptors = sortDescriptors
+		fetchRequest.fetchLimit = 4
+		
+		do {
+			//go get the results
+			let searchResults = try context.fetch(fetchRequest)
+	
+			var id: Int
+			var image: String
+			
+			// Loop images
+			var i = 0
+			for r in searchResults as [NSManagedObject] {
+				
+				image = r.value(forKey: "file")! as! String
+				row.setImage(idx: i, filename: image)
+				
+				//TODO Set click listener
+				
+				i = i + 1
+			}
+			
+		}
+		catch{
+			print("HOME:ERROR: Error setting gallery up: \(error)")
+		}
+		
 	}
 	
 	func setUpSocial(parent : UIStackView){

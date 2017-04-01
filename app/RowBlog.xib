@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -77,7 +77,7 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="b17-mq-rbm" firstAttribute="leading" secondItem="fIu-6X-Tsy" secondAttribute="leading" constant="10" id="09K-4S-bco"/>
-                        <constraint firstItem="b17-mq-rbm" firstAttribute="top" secondItem="fIu-6X-Tsy" secondAttribute="top" constant="10" id="DRs-NG-UKY"/>
+                        <constraint firstAttribute="top" secondItem="b17-mq-rbm" secondAttribute="top" constant="-10" id="DRs-NG-UKY"/>
                         <constraint firstAttribute="trailing" secondItem="b17-mq-rbm" secondAttribute="trailing" constant="10" id="Qtu-G3-8IH"/>
                         <constraint firstAttribute="height" constant="120" id="W85-Qc-MWb"/>
                         <constraint firstItem="b17-mq-rbm" firstAttribute="bottom" secondItem="fIu-6X-Tsy" secondAttribute="bottom" constant="10" id="bcY-vf-soX"/>

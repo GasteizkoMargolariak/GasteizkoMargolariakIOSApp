@@ -290,10 +290,10 @@
                         <viewControllerLayoutGuide type="top" id="yvh-VS-RXe"/>
                         <viewControllerLayoutGuide type="bottom" id="tOB-l0-rCU"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="pPe-Xd-teA">
+                    <view key="view" contentMode="scaleToFill" id="pPe-Xd-teA" customClass="GalleryView" customModule="app" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.70980392160000005" green="0.82745098039999998" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vc-bF-Qwf" userLabel="First Responder" sceneMemberID="firstResponder"/>
