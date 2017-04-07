@@ -48,20 +48,24 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	func showPost(id: Int){
-		print("CONTROLLER:DEBUG: showPost \(id)")
+		print("CONTROLLER:DEBUG: Showing Post \(id)")
 		self.passId = id
 		performSegue(withIdentifier: "SeguePost", sender: nil)
 	}
 	
 	func showAlbum(id: Int){
-		print("CONTROLLER:DEBUG: showAlbum \(id)")
+		NSLog(":CONTROLLER:DEBUG: Showing album \(id)")
 		self.passId = id
-		performSegue(withIdentifier: "SegueAlbum", sender: nil)
+		// TODO: Uncomment when ready
+		//performSegue(withIdentifier: "SegueAlbum", sender: nil)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		print("CONTROLLER:DEBUG: preparing for segue \(segue.identifier) with id \(self.passId)")
+		NSLog(":CONTROLLER:DEBUG: preparing for segue '\(segue.identifier)' with id \(self.passId)")
 		if segue.identifier == "SeguePost"{
+			(segue.destination as! PostViewController).id = passId
+		}
+		if segue.identifier == "SegueAlbum"{
 			(segue.destination as! PostViewController).id = passId
 		}
 	}

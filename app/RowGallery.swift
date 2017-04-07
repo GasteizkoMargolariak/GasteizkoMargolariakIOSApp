@@ -26,9 +26,10 @@ Extension of UIView to be formatted as sections.
 */
 @IBDesignable class RowGallery: UIView {
 	
-	//This view
+	// This view
 	var v: UIView!
 	
+	// Outlets
 	@IBOutlet weak var container: UIView!
 	@IBOutlet weak var title: UILabel!
 	@IBOutlet weak var photo0: UIImageView!
@@ -36,9 +37,10 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var photo2: UIImageView!
 	@IBOutlet weak var photo3: UIImageView!
 	
-	//Array with the imageviews
+	// Array with the imageviews
 	var preview: [UIImageView] = []
 	
+	// Album ID
 	var id = -1
 	
 	
@@ -49,6 +51,9 @@ Extension of UIView to be formatted as sections.
 		super.init(coder: aDecoder)
 	}
 	
+	/**
+	Loads the view from the xib with the same name as the class.
+	*/
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
@@ -61,7 +66,7 @@ Extension of UIView to be formatted as sections.
 	:param: i Custom identifier
 	*/
 	init(s: String, i: Int) {
-		print("ROWGALLERY:DEBUG: Init \(s), \(i)")
+		NSLog(":ROWGALLERY:DEBUG: Init \(s), \(i)")
 		
 		super.init(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000))
 		loadViewFromNib()
@@ -77,20 +82,13 @@ Extension of UIView to be formatted as sections.
 		v.addSubview(container)
 		
 		//Populate review array
-		//print("ROWGALLERY:DEBUG: Populating preview array")
 		preview = [photo0, photo1, photo2, photo3]
 		
 		// Set tap recognizer
-		print("ROW_GALLERY:DEBUG: Row \(id) frame h \(self.frame.height) w \(self.frame.width)")
-		print("ROW_GALLERY:DEBUG: set tap recognizer")
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowGallery.openAlbum (_:)))
 		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
 		self.addGestureRecognizer(tapRecognizer)
 	}
-	
-	//override func viewDidLoad() {
-	//	print("ROW_GALLERY:DEBUG: LAYOUT Row \(id) frame h \(self.frame.height) w \(self.frame.width)")
-	//}
 	
 	/**
 	Default constructor for the interface builder
@@ -100,11 +98,9 @@ Extension of UIView to be formatted as sections.
 	}
 	
 	func openAlbum(_ sender:UITapGestureRecognizer? = nil){
-		print("ROW_GALLERY:DEBUG: getting delegate and showing album.")
+		NSLog(":ROW_GALLERY:DEBUG: Getting delegate and showing album \(self.id).")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		//id = (sender?.view as! RowGallery).id
 		delegate.controller?.showAlbum(id: self.id)
-		print("ROW_GALLERY:DEBUG: Album should be shown.")
 	}
 	
 	/**
@@ -122,11 +118,12 @@ Extension of UIView to be formatted as sections.
 	*/
 	func setImage(idx: Int, filename: String){
 		if (filename == ""){
-			print("ROWGALLERY:LOG: No image.")
+			NSLog(":ROWGALLERY:DEBUG: No image for album \(self.id) at index \(idx).")
+			preview[idx].isHidden = true
 			//TODO hide the imageview
 		}
 		else{
-			print("Set image \(filename)")
+			NSLog(":ROWGALLERY:DEBUG: Set image \(filename) for album \(self.id) at index \(idx).")
 			let path = "img/galeria/thumb/\(filename)"
 			preview[idx].setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
