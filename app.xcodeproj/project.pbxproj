@@ -22,6 +22,9 @@
 		935D6E2F1E86792000CED3A1 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D6E2E1E86792000CED3A1 /* GalleryView.swift */; };
 		935D6E311E867C5E00CED3A1 /* RowGallery.xib in Resources */ = {isa = PBXBuildFile; fileRef = 935D6E301E867C5E00CED3A1 /* RowGallery.xib */; };
 		935D6E331E867C7E00CED3A1 /* RowGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D6E321E867C7E00CED3A1 /* RowGallery.swift */; };
+		936966ED1E98445200A11055 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936966EC1E98445200A11055 /* AlbumViewController.swift */; };
+		936966EF1E9848D600A11055 /* RowAlbum.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936966EE1E9848D600A11055 /* RowAlbum.xib */; };
+		936966F11E984B5000A11055 /* RowAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936966F01E984B5000A11055 /* RowAlbum.swift */; };
 		937EA02D1E5B8B5300D0893A /* UIApplcation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937EA02C1E5B8B5300D0893A /* UIApplcation.swift */; };
 		93B408031D9ED44C000FBC99 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B408021D9ED44C000FBC99 /* MenuCollectionViewCell.swift */; };
 		93B5C01A1E872B4B0069BFF8 /* RowHomeGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B5C0191E872B4B0069BFF8 /* RowHomeGallery.swift */; };
@@ -64,6 +67,9 @@
 		935D6E2E1E86792000CED3A1 /* GalleryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		935D6E301E867C5E00CED3A1 /* RowGallery.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowGallery.xib; sourceTree = "<group>"; };
 		935D6E321E867C7E00CED3A1 /* RowGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowGallery.swift; sourceTree = "<group>"; };
+		936966EC1E98445200A11055 /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
+		936966EE1E9848D600A11055 /* RowAlbum.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowAlbum.xib; sourceTree = "<group>"; };
+		936966F01E984B5000A11055 /* RowAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowAlbum.swift; sourceTree = "<group>"; };
 		937EA02C1E5B8B5300D0893A /* UIApplcation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplcation.swift; sourceTree = "<group>"; };
 		93B408021D9ED44C000FBC99 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuCollectionViewCell.swift; path = ../MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		93B5C0191E872B4B0069BFF8 /* RowHomeGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowHomeGallery.swift; sourceTree = "<group>"; };
@@ -163,6 +169,9 @@
 				935D6E321E867C7E00CED3A1 /* RowGallery.swift */,
 				93B5C0191E872B4B0069BFF8 /* RowHomeGallery.swift */,
 				93B5C01B1E872B600069BFF8 /* RowHomeGallery.xib */,
+				936966EC1E98445200A11055 /* AlbumViewController.swift */,
+				936966EE1E9848D600A11055 /* RowAlbum.xib */,
+				936966F01E984B5000A11055 /* RowAlbum.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -242,6 +251,7 @@
 				93BAD2F61E586310009DF853 /* RowHomeSocial.xib in Resources */,
 				93BAD2F21E585E88009DF853 /* RowHomeFutureActivities.xib in Resources */,
 				931AA5B01E219006003A2290 /* RowHomePastActivities.xib in Resources */,
+				936966EF1E9848D600A11055 /* RowAlbum.xib in Resources */,
 				93D9EA601DE271E700089002 /* Section.xib in Resources */,
 				93075C6A1E59CAB000396389 /* BlogView.xib in Resources */,
 				93B84BA41D9C31AB006C0F67 /* Assets.xcassets in Resources */,
@@ -263,6 +273,7 @@
 			files = (
 				93294FF81E336FA000FDAF50 /* Entry.swift in Sources */,
 				937EA02D1E5B8B5300D0893A /* UIApplcation.swift in Sources */,
+				936966F11E984B5000A11055 /* RowAlbum.swift in Sources */,
 				93D9EA641DE273FD00089002 /* Section.swift in Sources */,
 				93D9EA6A1DE3491100089002 /* HomeView.swift in Sources */,
 				93BEB6D21E7E878300C68DE5 /* PostViewController.swift in Sources */,
@@ -279,6 +290,7 @@
 				93B84B9A1D9C31AB006C0F67 /* AppDelegate.swift in Sources */,
 				93B84BA21D9C31AB006C0F67 /* app.xcdatamodeld in Sources */,
 				935D6E331E867C7E00CED3A1 /* RowGallery.swift in Sources */,
+				936966ED1E98445200A11055 /* AlbumViewController.swift in Sources */,
 				93D9EA681DE342AC00089002 /* UIView.swift in Sources */,
 				93075C701E59D04A00396389 /* RowBlog.swift in Sources */,
 				93B408031D9ED44C000FBC99 /* MenuCollectionViewCell.swift in Sources */,
