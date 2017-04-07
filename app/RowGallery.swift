@@ -39,6 +39,8 @@ Extension of UIView to be formatted as sections.
 	//Array with the imageviews
 	var preview: [UIImageView] = []
 	
+	var id = -1
+	
 	
 	/**
 	Default constructor
@@ -60,7 +62,8 @@ Extension of UIView to be formatted as sections.
 	*/
 	init(s: String, i: Int) {
 		print("ROWGALLERY:DEBUG: Init \(s), \(i)")
-		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+		
+		super.init(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000))
 		loadViewFromNib()
 		v = self
 		v.frame = bounds
@@ -78,11 +81,16 @@ Extension of UIView to be formatted as sections.
 		preview = [photo0, photo1, photo2, photo3]
 		
 		// Set tap recognizer
-		/*print("ROW_BLOG:DEBUG: set tap recognizer")
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (self.openPost (_:)))
+		print("ROW_GALLERY:DEBUG: Row \(id) frame h \(self.frame.height) w \(self.frame.width)")
+		print("ROW_GALLERY:DEBUG: set tap recognizer")
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowGallery.openAlbum (_:)))
 		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
-		addGestureRecognizer(tapRecognizer)*/
+		self.addGestureRecognizer(tapRecognizer)
 	}
+	
+	//override func viewDidLoad() {
+	//	print("ROW_GALLERY:DEBUG: LAYOUT Row \(id) frame h \(self.frame.height) w \(self.frame.width)")
+	//}
 	
 	/**
 	Default constructor for the interface builder
@@ -91,7 +99,13 @@ Extension of UIView to be formatted as sections.
 		super.init(frame: frame)
 	}
 	
-	
+	func openAlbum(_ sender:UITapGestureRecognizer? = nil){
+		print("ROW_GALLERY:DEBUG: getting delegate and showing album.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		//id = (sender?.view as! RowGallery).id
+		delegate.controller?.showAlbum(id: self.id)
+		print("ROW_GALLERY:DEBUG: Album should be shown.")
+	}
 	
 	/**
 	Changes the title of the album. Decodes HTML.

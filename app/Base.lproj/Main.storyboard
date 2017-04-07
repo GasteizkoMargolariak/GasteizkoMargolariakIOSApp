@@ -64,7 +64,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="a4j-DF-epb" customClass="MenuCollectionViewCell" customModule="app" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-3" width="100" height="50"/>
+                                        <rect key="frame" x="0.0" y="-2.5" width="100" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>

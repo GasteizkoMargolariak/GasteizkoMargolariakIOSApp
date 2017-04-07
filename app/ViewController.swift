@@ -32,12 +32,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	var sectionCollection: UICollectionView!
 
 	//Each of the sections of the app.
-	@IBOutlet weak var containerViewGallery: UIView!
-	@IBOutlet weak var containerViewBlog: BlogView!
-	@IBOutlet weak var containerViewActivities: UIView!
-	@IBOutlet weak var containerViewLablanca: UIView!
-	@IBOutlet weak var containerViewLocation: UIView!
-	@IBOutlet weak var containerViewHome: HomeView!
+	@IBOutlet var containerViewGallery: GalleryView!
+	@IBOutlet var containerViewBlog: BlogView!
+	@IBOutlet var containerViewActivities: UIView!
+	@IBOutlet var containerViewLablanca: UIView!
+	@IBOutlet var containerViewLocation: UIView!
+	@IBOutlet var containerViewHome: HomeView!
 	
 	var passId: Int = -1
 	
@@ -51,6 +51,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		print("CONTROLLER:DEBUG: showPost \(id)")
 		self.passId = id
 		performSegue(withIdentifier: "SeguePost", sender: nil)
+	}
+	
+	func showAlbum(id: Int){
+		print("CONTROLLER:DEBUG: showAlbum \(id)")
+		self.passId = id
+		performSegue(withIdentifier: "SegueAlbum", sender: nil)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -73,7 +79,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewGallery.alpha = 0
 		
 		
-		
 		//self.containerViewBlog.isHidden = true
 				
 		print("CONTROLLER:LOG: viewDidLoad()")
@@ -82,6 +87,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
+
 		
 		//self.containerViewBlog.setController(controller: self as ViewController)
 		

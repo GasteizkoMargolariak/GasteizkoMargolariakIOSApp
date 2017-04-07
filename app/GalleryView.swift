@@ -31,8 +31,17 @@ class GalleryView: UIView {
 	@IBOutlet weak var section: Section!
 	var delegate: AppDelegate? = nil
 	
+	var idToOpen = -1
+	
+	// Row list
+	var rows: Array<RowGallery> = []
+	
 	override init(frame: CGRect){
 		super.init(frame: frame)
+	}
+	
+	func getRows() -> Array<RowGallery>{
+		return rows
 	}
 	
 	/**
@@ -82,7 +91,14 @@ class GalleryView: UIView {
 				id = r.value(forKey: "id")! as! Int
 				
 				title = r.value(forKey: "title_\(lang)")! as! String
+				row.id = id
 				row.setTitle(text: title)
+				
+				// Set tap recognizer
+				//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openAlbum(_:)))
+				//tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+				//row.isUserInteractionEnabled = true
+				//row.addGestureRecognizer(tapRecognizer)
 				
 				// Get 4 random images from the album
 				let imgFetchRequest: NSFetchRequest<Photo_album> = Photo_album.fetchRequest()
@@ -124,15 +140,19 @@ class GalleryView: UIView {
 					print("GALLERY:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
+				row.backgroundColor = UIColor.red
 				parent.addArrangedSubview(row)
-				row.setNeedsLayout()
-				row.layoutIfNeeded()
+				//row.setNeedsLayout()
+				//row.layoutIfNeeded()
+				
+				// Add to the rows array
+				rows.append(row)
 				
 				// TODO: Do this on the row didLoad method
 				// Set tap recognizer
-				//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPost(_:)))
-				//row.isUserInteractionEnabled = true
-				//row.addGestureRecognizer(tapRecognizer)
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openAlbum(_:)))
+				row.isUserInteractionEnabled = true
+				row.addGestureRecognizer(tapRecognizer)
 				
 				
 				
@@ -167,6 +187,18 @@ class GalleryView: UIView {
 		
 		
 		print("GALLERY:DEBUG: Finished loading GalleryView")
+		//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openAlbum(_:)))
+		//row.isUserInteractionEnabled = true
+		//container.addGestureRecognizer(tapRecognizer)
+		self.setUpRowsTapRecognizers()
+	}
+	
+	func openAlbum(_ sender:UITapGestureRecognizer? = nil){
+		print("GALLERY:DEBUG: getting delegate and showing album.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		let id = (sender?.view as! RowGallery).id
+		delegate.controller?.showAlbum(id: id)
+		print("GALLERY:DEBUG: Album should be shown.")
 	}
 	
 	func getLanguage() -> String{
@@ -176,6 +208,15 @@ class GalleryView: UIView {
 		}
 		else{
 			return "es"
+		}
+	}
+	
+	func setUpRowsTapRecognizers(){
+		print("GALLERY:DEBUG: Setting up tap recognizers")
+		for row in rows{
+			let tapRecognizer = UITapGestureRecognizer(target: row, action: #selector(openAlbum(_:)))
+			row.isUserInteractionEnabled = true
+			container.addGestureRecognizer(tapRecognizer)
 		}
 	}
 }
