@@ -52,7 +52,7 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 		NSLog(":GALLERYCONTROLLER:LOG: Init album.")
 		
 		super.viewDidLoad()
-		self.loadGallery(id: id)
+		self.loadAlbum(id: id)
 		
 		// Set button action
 		barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)

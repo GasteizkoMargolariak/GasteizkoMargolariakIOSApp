@@ -683,7 +683,6 @@
                         <outlet property="albumTitle" destination="YsV-il-CeR" id="t9S-NX-eaE"/>
                         <outlet property="barButton" destination="Thj-0t-rxK" id="6bX-xo-abt"/>
                         <outlet property="barTitle" destination="LLe-aQ-Sbj" id="bFR-jT-Xmq"/>
-                        <outlet property="postTitle" destination="YsV-il-CeR" id="Lg2-ea-EeY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLj-OZ-Cqc" userLabel="First Responder" sceneMemberID="firstResponder"/>

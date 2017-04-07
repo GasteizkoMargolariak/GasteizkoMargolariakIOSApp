@@ -57,7 +57,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		NSLog(":CONTROLLER:DEBUG: Showing album \(id)")
 		self.passId = id
 		// TODO: Uncomment when ready
-		//performSegue(withIdentifier: "SegueAlbum", sender: nil)
+		performSegue(withIdentifier: "SegueAlbum", sender: nil)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -66,7 +66,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			(segue.destination as! PostViewController).id = passId
 		}
 		if segue.identifier == "SegueAlbum"{
-			(segue.destination as! PostViewController).id = passId
+			(segue.destination as! AlbumViewController).id = passId
 		}
 	}
 	

@@ -27,10 +27,11 @@ Extension of UIView to be formatted as sections.
 @IBDesignable class RowAlbum: UIView {
 	
 	// Outlets
-	
 	@IBOutlet weak var photo0: UIImageView!
 	@IBOutlet weak var photo1: UIImageView!
 	
+	// Album ID
+	var id = -1
 	
 	// This view
 	var v: UIView!
@@ -65,7 +66,7 @@ Extension of UIView to be formatted as sections.
 		super.init(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000))
 		loadViewFromNib()
 		v = self
-		self.frame = bself.ounds
+		self.frame = self.bounds
 		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		self.translatesAutoresizingMaskIntoConstraints = true
 		
