@@ -59,13 +59,14 @@ Extension of UIView to be formatted as sections.
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
 		v = self
-		v.frame = bounds
-		v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		v.translatesAutoresizingMaskIntoConstraints = true
-		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		container.translatesAutoresizingMaskIntoConstraints = true
+		//v.frame = bounds
+		//v.bounds = v.frame
+		//v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		//v.translatesAutoresizingMaskIntoConstraints = true
+		//container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		//container.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.frame = v.bounds
+		//container.frame = v.bounds
 		v.addSubview(container)
 		
 		photos = [photo0, photo1, photo2, photo3]

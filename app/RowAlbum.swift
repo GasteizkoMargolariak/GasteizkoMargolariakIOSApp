@@ -24,26 +24,21 @@ import UIKit
 /**
 Extension of UIView to be formatted as sections.
 */
-@IBDesignable class RowGallery: UIView {
-	
-	// This view
-	var v: UIView!
+@IBDesignable class RowAlbum: UIView {
 	
 	// Outlets
-	@IBOutlet weak var container: UIView!
-	@IBOutlet weak var title: UILabel!
 	@IBOutlet weak var photo0: UIImageView!
 	@IBOutlet weak var photo1: UIImageView!
-	@IBOutlet weak var photo2: UIImageView!
-	@IBOutlet weak var photo3: UIImageView!
-	
-	// Array with the imageviews
-	var preview: [UIImageView] = []
 	
 	// Album ID
 	var id = -1
 	
+	// This view
+	var v: UIView!
 	
+	// Array with the imageviews
+	var preview: [UIImageView] = []
+
 	/**
 	Default constructor
 	*/
@@ -66,28 +61,23 @@ Extension of UIView to be formatted as sections.
 	:param: i Custom identifier
 	*/
 	init(s: String, i: Int) {
-		NSLog(":ROWGALLERY:DEBUG: Init \(s), \(i)")
+		NSLog(":ROWALBUM:DEBUG: Init \(s), \(i)")
 		
 		super.init(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000))
 		loadViewFromNib()
 		v = self
-		v.frame = bounds
-		v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		v.translatesAutoresizingMaskIntoConstraints = true
-		
-		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		container.translatesAutoresizingMaskIntoConstraints = true
-		
-		container.frame = v.bounds
-		v.addSubview(container)
+		self.frame = self.bounds
+		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.translatesAutoresizingMaskIntoConstraints = true
 		
 		//Populate review array
-		preview = [photo0, photo1, photo2, photo3]
+		preview = [photo0, photo1]
 		
-		// Set tap recognizer
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowGallery.openAlbum (_:)))
-		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
-		self.addGestureRecognizer(tapRecognizer)
+		// Set tap recognizers
+		// TODO
+		//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowAlbum.openPhoto(_:)))
+		//tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+		//self.addGestureRecognizer(tapRecognizer)
 	}
 	
 	/**
@@ -97,33 +87,27 @@ Extension of UIView to be formatted as sections.
 		super.init(frame: frame)
 	}
 	
-	func openAlbum(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROW_GALLERY:DEBUG: Getting delegate and showing album \(self.id).")
-		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showAlbum(id: self.id)
+	func openPhoto(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":ROWALBUM:DEBUG: Getting delegate and showing photo.")
+		// TODO
+		//let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		//delegate.controller?.showAlbum(id: self.id)
 	}
 	
 	/**
-	Changes the title of the album. Decodes HTML.
-	:param: text The new title.
-	*/
-	func setTitle(text: String){
-		title.text = "  \(text.stripHtml())"
-	}
-	
-	/**
-	Changes the preview image of the album.
+	Changes the preview image of the photos.
 	If null or empty, the igage is hidden.
-	:param: path The new text.
+	:param: idx Id of the image in the row. 0 for left, 1 for right.
+	:param: filename Filename of the image.
 	*/
 	func setImage(idx: Int, filename: String){
 		if (filename == ""){
-			NSLog(":ROWGALLERY:DEBUG: No image for album \(self.id) at index \(idx).")
+			NSLog(":ROWALBUM:DEBUG: No image for album \(self.id) at index \(idx).")
 			preview[idx].isHidden = true
 			//TODO hide the imageview
 		}
 		else{
-			NSLog(":ROWGALLERY:DEBUG: Set image \(filename) for album \(self.id) at index \(idx).")
+			NSLog(":ROWALBUM:DEBUG: Set image \(filename) for at index \(idx).")
 			let path = "img/galeria/thumb/\(filename)"
 			preview[idx].setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}

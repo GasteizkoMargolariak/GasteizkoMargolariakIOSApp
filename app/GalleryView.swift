@@ -26,11 +26,20 @@ Class to handle the home view.
 */
 class GalleryView: UIView {
 	
+	// Outlets
 	@IBOutlet var container: UIView!
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var section: Section!
+	
+	// App delegate
 	var delegate: AppDelegate? = nil
 	
+	// Section row list
+	var rows: Array<RowGallery> = []
+	
+	/**
+	Run when the view is started.
+	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}
@@ -42,7 +51,7 @@ class GalleryView: UIView {
 		
 		super.init(coder: aDecoder)
 		
-		print("GALLERY:DEBUG: init.")
+		NSLog(":GALLERY:LOG: Init gallery section.")
 		
 		//Load the contents of the HomeView.xib file.
 		Bundle.main.loadNibNamed("GalleryView", owner: self, options: nil)
@@ -82,6 +91,7 @@ class GalleryView: UIView {
 				id = r.value(forKey: "id")! as! Int
 				
 				title = r.value(forKey: "title_\(lang)")! as! String
+				row.id = id
 				row.setTitle(text: title)
 				
 				// Get 4 random images from the album
@@ -117,28 +127,23 @@ class GalleryView: UIView {
 							imageIdx = imageIdx + 1
 						}
 						catch {
-							print("GALLERY:ERROR: Error getting image from photo entity: \(error)")
+							NSLog(":GALLERY:ERROR: Error getting image from photo entity: \(error)")
 						}
 					}
 				} catch {
-					print("GALLERY:ERROR: Error getting image for post \(id): \(error)")
+					NSLog(":GALLERY:ERROR: Error getting image for album \(id): \(error)")
 				}
 				
 				parent.addArrangedSubview(row)
-				row.setNeedsLayout()
-				row.layoutIfNeeded()
 				
-				// TODO: Do this on the row didLoad method
-				// Set tap recognizer
-				//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPost(_:)))
-				//row.isUserInteractionEnabled = true
-				//row.addGestureRecognizer(tapRecognizer)
+				// Add to the rows array
+				self.rows.append(row)
 				
 				
 				
 			}
 		} catch {
-			print("GALLERY:ERROR: Error with request: \(error)")
+			NSLog(":GALLERY:ERROR: Error with request: \(error)")
 		}
 		
 		//Always at the end: update scrollview
@@ -150,23 +155,15 @@ class GalleryView: UIView {
 		// TODO: Calculate at the end
 		self.scrollView.contentSize.height = 2500//CGFloat(h);
 		
-		// The view controller
-		//var viewController: ViewController  = self.window?.rootViewController as! ViewController
-		
-		
-		//let viewController = UIApplication.topViewController() as! ViewController
-		
-		//viewController.showPost(id: 4)
-		
-		//print("BLOG:DEBUG: Show post on load.")
-		//self.delegate?.controller?.showPost(id: 4)
-		
-		//controller.showPost(id: 4)
-		
-		
-		
-		
-		print("GALLERY:DEBUG: Finished loading GalleryView")
+		self.setUpRowsTapRecognizers()
+		NSLog(":GALLERY:LOG: Finished loading gallery section.")
+	}
+	
+	func openAlbum(_ sender:UITapGestureRecognizer? = nil){
+		let id = (sender?.view as! RowGallery).id
+		NSLog(":GALLERY:DEBUG: getting delegate and showing album \(id).")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showAlbum(id: id)
 	}
 	
 	func getLanguage() -> String{
@@ -176,6 +173,15 @@ class GalleryView: UIView {
 		}
 		else{
 			return "es"
+		}
+	}
+	
+	func setUpRowsTapRecognizers(){
+		NSLog(":GALLERY:DEBUG: Setting up tap recognizers")
+		for row in self.rows{
+			let tapRecognizer = UITapGestureRecognizer(target: row, action: #selector(openAlbum(_:)))
+			row.isUserInteractionEnabled = true
+			container.addGestureRecognizer(tapRecognizer)
 		}
 	}
 }
