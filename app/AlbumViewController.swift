@@ -49,7 +49,7 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	override func viewDidLoad() {
 		
-		NSLog(":GALLERYCONTROLLER:LOG: Init album.")
+		NSLog(":ALBUMCONTROLLER:LOG: Init album.")
 		
 		super.viewDidLoad()
 		self.loadAlbum(id: id)
@@ -62,7 +62,7 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	Returns to the main view controller.
 	*/
 	func back() {
-		NSLog(":GALLERYCONTROLLER:DEBUG: Back")
+		NSLog(":ALBUMCONTROLLER:DEBUG: Back")
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -79,59 +79,63 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	public func loadAlbum(id: Int){
 		
-		NSLog(":GALLERYCONTROLLER:DEBUG: Loading post \(id)")
+		NSLog(":ALBUMCONTROLLER:DEBUG: Loading album \(id)")
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-		/*let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
-		fetchRequest.predicate = NSPredicate(format: "id = %i", id)
+		let fetchRequest: NSFetchRequest<Photo_album> = Photo_album.fetchRequest()
+		fetchRequest.predicate = NSPredicate(format: "album = %i", id)
 		
 		do {
-			//go get the results
-			let searchResults = try context.fetch(fetchRequest)
 			
-			var count = 0
-			var sTitle: String
-			var sText: String
+			// Get the photo list
+			let searchResults = try context.fetch(fetchRequest)
 			var image: String
 			
-			//You need to convert to NSManagedObject to use 'for' loops
-			for r in searchResults as [NSManagedObject] {
-				count = count + 1
+			NSLog(":GALLERYCONTROLLER:DEBUG: Total photos: \(searchResults.count)")
+			for i in (0..<searchResults.count) where i % 2 == 0 {
 				
-				sTitle = r.value(forKey: "title_\(lang)")! as! String
-				sText = r.value(forKey: "text_\(lang)")! as! String
-				postTitle.text = "  \(sTitle)"
-				postText.text = sText.stripHtml()
+				var r = searchResults[i]
+				var photoId = r.value(forKey: "photo")! as! Int
 				
-				// Get main image
-				image = ""
-				let imgFetchRequest: NSFetchRequest<Post_image> = Post_image.fetchRequest()
-				let imgSortDescriptor = NSSortDescriptor(key: "idx", ascending: true)
+				// Get photo info from Photo entity
+				let imgFetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+				let imgSortDescriptor = NSSortDescriptor(key: "uploaded", ascending: true)
 				let imgSortDescriptors = [imgSortDescriptor]
 				imgFetchRequest.sortDescriptors = imgSortDescriptors
-				imgFetchRequest.predicate = NSPredicate(format: "post == %i", id)
+				imgFetchRequest.predicate = NSPredicate(format: "id == %i", photoId)
 				imgFetchRequest.fetchLimit = 1
-				//TODO get more images
 				do{
-					let imgSearchResults = try context.fetch(imgFetchRequest)
-					for imgR in imgSearchResults as [NSManagedObject]{
-						image = imgR.value(forKey: "image")! as! String
-						print ("POST:LOG: Image: \(image)")
-						//TODO set image
-						//row.setImage(filename: image)
+					var imgSearchResults = try context.fetch(imgFetchRequest)
+					var imgR = imgSearchResults[0]
+					image = imgR.value(forKey: "file")! as! String
+					NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) left: \(image)")
+					if i + 1 < searchResults.count {
+						r = searchResults[i + 1]
+						photoId = r.value(forKey: "photo")! as! Int
+						imgFetchRequest.predicate = NSPredicate(format: "id == %i", photoId)
+						imgSearchResults = try context.fetch(imgFetchRequest)
+						
+						
+						imgR = imgSearchResults[0]
+						image = imgR.value(forKey: "file")! as! String
+						NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: \(image)")
 					}
+					else{
+						NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: none")
+					}
+					//TODO create row, add images (L+R), add row to container.
+					//row.setImage(filename: image)
 				} catch {
-					print("POST:ERROR: Error getting image for post \(id): \(error)")
+					print(":GALLERYCONTROLLER:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
 			}
 		} catch {
 			print("POST:ERROR: Error with request: \(error)")
 		}
-		*/
 		
 		//Always at the end: update scrollview
 		// TODOs
