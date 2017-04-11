@@ -64,7 +64,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="a4j-DF-epb" customClass="MenuCollectionViewCell" customModule="app" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-2.5" width="100" height="50"/>
+                                        <rect key="frame" x="0.0" y="-3" width="100" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
@@ -556,10 +556,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEW-3s-kOI">
                                 <rect key="frame" x="0.0" y="50" width="320" height="518"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kmd-tW-XIB">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kmd-tW-XIB">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sej-1q-hlq" userLabel="Section">
+                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sej-1q-hlq" userLabel="Section">
                                                 <rect key="frame" x="10" y="10" width="300" height="1046"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="Title" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YsV-il-CeR" userLabel="Title">
@@ -572,13 +572,13 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NlX-b5-vyb" userLabel="Content">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NlX-b5-vyb" userLabel="Content">
                                                         <rect key="frame" x="0.0" y="30" width="300" height="1016"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YEF-04-q7Y" userLabel="Album">
+                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YEF-04-q7Y" userLabel="Album">
                                                                 <rect key="frame" x="8" y="8" width="284" height="1000"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WRD-IZ-JpU">
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WRD-IZ-JpU">
                                                                         <rect key="frame" x="0.0" y="0.0" width="284" height="1000"/>
                                                                     </stackView>
                                                                 </subviews>
@@ -586,7 +586,6 @@
                                                                 <constraints>
                                                                     <constraint firstItem="WRD-IZ-JpU" firstAttribute="centerY" secondItem="YEF-04-q7Y" secondAttribute="centerY" id="HMS-4q-ns8"/>
                                                                     <constraint firstItem="WRD-IZ-JpU" firstAttribute="width" secondItem="YEF-04-q7Y" secondAttribute="width" id="Im5-F6-vGb"/>
-                                                                    <constraint firstAttribute="height" constant="1000" id="Ix6-5u-agq"/>
                                                                     <constraint firstItem="WRD-IZ-JpU" firstAttribute="height" secondItem="YEF-04-q7Y" secondAttribute="height" id="U7o-HF-khX"/>
                                                                     <constraint firstItem="WRD-IZ-JpU" firstAttribute="centerX" secondItem="YEF-04-q7Y" secondAttribute="centerX" id="jKg-n6-Kko"/>
                                                                 </constraints>
@@ -681,6 +680,7 @@
                     <connections>
                         <outlet property="albumContainer" destination="WRD-IZ-JpU" id="tSP-7c-APp"/>
                         <outlet property="albumTitle" destination="YsV-il-CeR" id="t9S-NX-eaE"/>
+                        <outlet property="albumView" destination="YEF-04-q7Y" id="7tR-Lr-9nh"/>
                         <outlet property="barButton" destination="Thj-0t-rxK" id="6bX-xo-abt"/>
                         <outlet property="barTitle" destination="LLe-aQ-Sbj" id="bFR-jT-Xmq"/>
                     </connections>

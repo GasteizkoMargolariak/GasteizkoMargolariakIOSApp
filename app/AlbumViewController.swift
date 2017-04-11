@@ -30,6 +30,7 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	@IBOutlet weak var barTitle: UILabel!
 	@IBOutlet weak var albumTitle: UILabel!
 	@IBOutlet weak var albumContainer: UIStackView!
+	@IBOutlet weak var albumView: UIView!
 
 	// Album ID
 	var id: Int = -1
@@ -81,12 +82,18 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 		
 		NSLog(":ALBUMCONTROLLER:DEBUG: Loading album \(id)")
 		
+		albumContainer.backgroundColor = UIColor.red
+		
+		var row : RowAlbum
+		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Photo_album> = Photo_album.fetchRequest()
 		fetchRequest.predicate = NSPredicate(format: "album = %i", id)
+		
+		var rowcount = 0
 		
 		do {
 			
@@ -95,10 +102,13 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 			var image: String
 			
 			NSLog(":GALLERYCONTROLLER:DEBUG: Total photos: \(searchResults.count)")
+			
 			for i in (0..<searchResults.count) where i % 2 == 0 {
 				
 				var r = searchResults[i]
 				var photoId = r.value(forKey: "photo")! as! Int
+				
+				row = RowAlbum.init(s: "rowAlbum\(i)", i: i)
 				
 				// Get photo info from Photo entity
 				let imgFetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
@@ -112,6 +122,7 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 					var imgR = imgSearchResults[0]
 					image = imgR.value(forKey: "file")! as! String
 					NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) left: \(image)")
+					row.setImage(idx: 0, filename: image)
 					if i + 1 < searchResults.count {
 						r = searchResults[i + 1]
 						photoId = r.value(forKey: "photo")! as! Int
@@ -122,6 +133,7 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 						imgR = imgSearchResults[0]
 						image = imgR.value(forKey: "file")! as! String
 						NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: \(image)")
+						row.setImage(idx: 1, filename: image)
 					}
 					else{
 						NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: none")
@@ -132,22 +144,14 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 					print(":GALLERYCONTROLLER:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
+				NSLog(":GALLERYCONTROLLER:DEBUG: Adding row: height: \(row.frame.height)")
+				albumContainer.addArrangedSubview(row)
+				
+				rowcount = rowcount + 1
 			}
 		} catch {
 			print("POST:ERROR: Error with request: \(error)")
 		}
-		
-		//Always at the end: update scrollview
-		// TODOs
-		//var h: Int = 0
-		//for view in scrollView.subviews {
-		//contentRect = contentRect.union(view.frame);
-		//	h = h + Int(view.frame.height) + 30 //Why 30?
-		//}
-		//print("POST:DEBUG: Height: \(h)")
-		// TODO: Calculate at the end
-		//self.scrollView.contentSize.height = 4500//CGFloat(h);
-		
 	}
 	
 	/**

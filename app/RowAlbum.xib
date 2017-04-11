@@ -12,54 +12,66 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RowAlbum" customModule="app" customModuleProvider="target">
             <connections>
-                <outlet property="image0" destination="STJ-Gn-fSb" id="jMa-Hj-9ea"/>
-                <outlet property="image1" destination="BRb-br-Rb9" id="mNJ-gK-1D1"/>
+                <outlet property="container" destination="HdV-Po-yYe" id="J6E-n0-STQ"/>
+                <outlet property="photo0" destination="STJ-Gn-fSb" id="KnJ-xP-W5E"/>
+                <outlet property="photo1" destination="BRb-br-Rb9" id="GSz-Ba-URb"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="RowAlbum">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="RowAlbum" customClass="RowAlbum" customModule="app">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="STJ-Gn-fSb" userLabel="PhotoL">
-                    <rect key="frame" x="10" y="10" width="172.5" height="108"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HdV-Po-yYe">
+                    <rect key="frame" x="-0.5" y="269" width="375" height="128"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="STJ-Gn-fSb" userLabel="PhotoL">
+                            <rect key="frame" x="10" y="10" width="172.5" height="108"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="108" id="adJ-vY-QZ4"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="BRb-br-Rb9" userLabel="PhotoR">
+                            <rect key="frame" x="192.5" y="10" width="172.5" height="108"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="108" id="LVi-0V-kFe"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="108" id="adJ-vY-QZ4"/>
+                        <constraint firstItem="STJ-Gn-fSb" firstAttribute="width" secondItem="HdV-Po-yYe" secondAttribute="width" multiplier="0.5" constant="-15" id="4OG-wC-zDi"/>
+                        <constraint firstAttribute="trailing" secondItem="BRb-br-Rb9" secondAttribute="trailing" constant="10" id="52p-oq-lor"/>
+                        <constraint firstItem="BRb-br-Rb9" firstAttribute="centerY" secondItem="HdV-Po-yYe" secondAttribute="centerY" id="BdD-2d-ZcG"/>
+                        <constraint firstItem="STJ-Gn-fSb" firstAttribute="leading" secondItem="HdV-Po-yYe" secondAttribute="leading" constant="10" id="DAf-JG-dgr"/>
+                        <constraint firstItem="STJ-Gn-fSb" firstAttribute="centerY" secondItem="HdV-Po-yYe" secondAttribute="centerY" id="LpQ-Cf-UpA"/>
+                        <constraint firstItem="BRb-br-Rb9" firstAttribute="width" secondItem="HdV-Po-yYe" secondAttribute="width" multiplier="0.5" constant="-15" id="hFK-eR-Cdf"/>
+                        <constraint firstAttribute="height" constant="128" id="i8w-5X-QWB"/>
                     </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="1"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="BRb-br-Rb9" userLabel="PhotoR">
-                    <rect key="frame" x="197.5" y="10" width="172.5" height="108"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="108" id="LVi-0V-kFe"/>
-                    </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="1"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </imageView>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="BRb-br-Rb9" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.5" constant="-15" id="Nsh-ju-JXC"/>
-                <constraint firstItem="BRb-br-Rb9" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" constant="-5" id="Phu-9W-VdZ"/>
-                <constraint firstItem="STJ-Gn-fSb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="jbT-nH-OfC"/>
-                <constraint firstItem="STJ-Gn-fSb" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.5" constant="-15" id="nGe-Uj-Yhh"/>
-                <constraint firstItem="STJ-Gn-fSb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="uhv-Ju-fhw"/>
-                <constraint firstItem="BRb-br-Rb9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="vo9-a0-KTz"/>
+                <constraint firstItem="HdV-Po-yYe" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="4Aa-Fb-Ugf"/>
+                <constraint firstItem="HdV-Po-yYe" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="bFu-54-Zel"/>
+                <constraint firstItem="HdV-Po-yYe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jRe-xq-gcl"/>
             </constraints>
         </view>
     </objects>

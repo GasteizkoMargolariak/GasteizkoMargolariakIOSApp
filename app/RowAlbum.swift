@@ -27,8 +27,10 @@ Extension of UIView to be formatted as sections.
 @IBDesignable class RowAlbum: UIView {
 	
 	// Outlets
+	@IBOutlet weak var container: UIView!
 	@IBOutlet weak var photo0: UIImageView!
 	@IBOutlet weak var photo1: UIImageView!
+
 	
 	// Album ID
 	var id = -1
@@ -53,6 +55,18 @@ Extension of UIView to be formatted as sections.
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
 		nib.instantiate(withOwner: self, options: nil).first as! UIView
+		
+		v = self
+		self.frame = self.bounds
+		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.translatesAutoresizingMaskIntoConstraints = true
+		
+		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		container.translatesAutoresizingMaskIntoConstraints = true
+		
+		container.frame = self.bounds
+		self.addSubview(container)
+
 	}
 	
 	/**
@@ -63,7 +77,7 @@ Extension of UIView to be formatted as sections.
 	init(s: String, i: Int) {
 		NSLog(":ROWALBUM:DEBUG: Init \(s), \(i)")
 		
-		super.init(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000))
+		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
 		v = self
 		self.frame = self.bounds
