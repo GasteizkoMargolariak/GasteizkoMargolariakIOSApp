@@ -81,8 +81,8 @@ class Sync{
 			let dataActivityTag : [String] = self.getTable(data: strData!, table: "activity_tag")
 			let dataActivityItinerary : [String] = self.getTable(data: strData!, table: "activity_itinerary")
 			let dataAlbum : [String] = self.getTable(data: strData!, table: "album")
-			//let dataFestival : [String] = self.getTable(data: strData!, table: "festival")
-			//let dataFestivalDay : [String] = self.getTable(data: strData!, table: "festival_day")
+			let dataFestival : [String] = self.getTable(data: strData!, table: "festival")
+			let dataFestivalDay : [String] = self.getTable(data: strData!, table: "festival_day")
 			//let dataFestivalEvent : [String] = self.getTable(data: strData!, table: "festival_event")
 			//let dataFestivalEventImage : [String] = self.getTable(data: strData!, table: "festival_event_image")
 			//let dataFestivalOffer : [String] = self.getTable(data: strData!, table: "festival_offer")
@@ -115,6 +115,9 @@ class Sync{
 			self.saveTableAlbum(entries: dataAlbum)
 			self.saveTablePhoto(entries: dataPhoto)
 			self.saveTablePhotoAlbum(entries: dataPhotoAlbum)
+			
+			self.saveTableFestival(entries: dataFestival)
+			self.saveTableFestivalDay(entries: dataFestivalDay)
 			
 			self.saveSettings(entries: dataSettings)
 			
@@ -1380,6 +1383,173 @@ class Sync{
 				NSLog(":SYNC:ERROR: Could not store Photo_album entry \(error.userInfo).")
 			} catch {
 				NSLog(":SYNC:ERROR: Could not store Photo_album entry.")
+			}
+		}
+	}
+	
+	/**
+	Saves the data in the table.
+	:param: entries Array of strings containing the rows of the table, in JSON format.
+	*/
+	func saveTableFestival(entries : [String]){
+		
+		NSLog(":SYNC:LOG: Saving table Festival.")
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Festival", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Festival")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			NSLog(":SYNC:ERROR: Could not clean up Festival: \(error), \(error.userInfo).")
+		} catch {
+			NSLog(":SYNC:ERROR: Could not clean up Festival entity.")
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			
+			//Get id
+			var str = entry
+			let id: Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(id, forKey: "id")
+			
+			//Get year
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let file: Int = Int(str.subStr(start : str.indexOf(target : "\"year\":")! + 8, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(file, forKey: "year")
+			
+			//Get text_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text_es: String = str.subStr(start : str.indexOf(target : "\"text_es\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(text_es, forKey: "text_es")
+			
+			//Get text_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text_en: String = str.subStr(start : str.indexOf(target : "\"text_en\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(text_en, forKey: "text_en")
+			
+			//Get text_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text_eu: String = str.subStr(start : str.indexOf(target : "\"text_eu\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(text_eu, forKey: "text_eu")
+			
+			//Get summary_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let summary_es: String = str.subStr(start : str.indexOf(target : "\"summary_es\":")! + 14, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(summary_es, forKey: "summary_es")
+			
+			//Get summary_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let summary_en: String = str.subStr(start : str.indexOf(target : "\"summary_en\":")! + 14, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(summary_en, forKey: "summary_en")
+			
+			//Get summary_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let summary_eu: String = str.subStr(start : str.indexOf(target : "\"summary_eu\":")! + 14, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(summary_eu, forKey: "summary_eu")
+			
+			//Get img
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let img: String = str.subStr(start : str.indexOf(target : "\"img\":")! + 7, end : str.length - 2)
+			row.setValue(img, forKey: "img")
+			
+			//Save CoreData
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				NSLog(":SYNC:ERROR: Could not store Festival entry \(error.userInfo).")
+			} catch {
+				NSLog(":SYNC:ERROR: Could not store Festival entry.")
+			}
+		}
+	}
+	
+	/**
+	Saves the data in the table.
+	:param: entries Array of strings containing the rows of the table, in JSON format.
+	*/
+	func saveTableFestivalDay(entries : [String]){
+		
+		NSLog(":SYNC:LOG: Saving table FestivalDay.")
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.timeZone = TimeZone.ReferenceType.local
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Festival_day", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Festival_day")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			NSLog(":SYNC:ERROR: Could not clean up Festival: \(error), \(error.userInfo).")
+		} catch {
+			NSLog(":SYNC:ERROR: Could not clean up Festival entity.")
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			
+			//Get id
+			var str = entry
+			let id: Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(id, forKey: "id")
+			
+			//Get date
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			dateFormatter.dateFormat = "yyyy-MM-dd"
+			let date = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"date\":")! + 8, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(date, forKey: "date")
+			
+			//Get name_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let name_es: String = str.subStr(start : str.indexOf(target : "\"name_es\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(name_es, forKey: "name_es")
+			
+			//Get name_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let name_en: String = str.subStr(start : str.indexOf(target : "\"name_en\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(name_en, forKey: "name_en")
+			
+			//Get name_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let name_eu: String = str.subStr(start : str.indexOf(target : "\"name_eu\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(name_eu, forKey: "name_eu")
+			
+			//Get price
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let price: Int = Int(str.subStr(start : str.indexOf(target : "\"price\":")! + 9, end : str.length - 2))!
+			row.setValue(price, forKey: "price")
+			
+			//Save CoreData
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				NSLog(":SYNC:ERROR: Could not store Festival_day entry \(error.userInfo).")
+			} catch {
+				NSLog(":SYNC:ERROR: Could not store Festival_day entry.")
 			}
 		}
 	}
