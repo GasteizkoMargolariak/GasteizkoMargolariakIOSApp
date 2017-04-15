@@ -52,20 +52,20 @@ class Sync{
 	*/
 	func sync(url: URL){
 		
-		print("SYNC:LOG: Sync started.")
+		NSLog(":SYNC:LOG: Sync started.")
 		
 		//Synchronously get data
 		let task = URLSession.shared.dataTask(with: url) { data, response, error in
 			guard error == nil else {
-				print("SYNC:ERROR: Unknown error.")
+				NSLog(":SYNC:ERROR: Unknown error.")
 				return
 			}
 			guard let data = data else {
-				print("SYNC:ERROR: Data is empty.")
+				NSLog(":SYNC:ERROR: Data is empty.")
 				return
 			}
 			
-			print("SYNC:LOG: Data received.")
+			NSLog(":SYNC:LOG: Data received.")
 			
 			var strData = String(data:data, encoding: String.Encoding.utf8)
 			
@@ -121,7 +121,7 @@ class Sync{
 			
 			//DEBUG: Tester, Debug only
 			// Test if a entity has entries
-			let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+			/*let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 			let appDelegate = UIApplication.shared.delegate as! AppDelegate
 			context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 			let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()  //Entity to debug
@@ -130,13 +130,13 @@ class Sync{
 				//go get the results
 				let searchResults = try context.fetch(fetchRequest)
 				
-				print("SYNC:DEBUG: Num of results = \(searchResults.count).")
+				NSLog(":SYNC:DEBUG: Num of results = \(searchResults.count).")
 				for r in searchResults as [NSManagedObject] {
-					print("SYNC:DEBUG: id: \(r.value(forKey: "id")).")
+					NSLog(":SYNC:DEBUG: id: \(r.value(forKey: "id")).")
 				}
 			} catch {
-				print("SYNC:DEBUG: Error with request: \(error).")
-			}
+				NSLog(":SYNC:DEBUG: Error with request: \(error).")
+			}*/
 			//End tester
 		}
 		
@@ -153,7 +153,7 @@ class Sync{
 	func getTable(data: String, table: String) -> [String]{
 		//Does the table exists?
 		if data.indexOf(target: "\"\(table)\":[") == nil{
-			print("SYNC:LOG: Empty table: \(table).")
+			NSLog(":SYNC:LOG: Empty table: \(table).")
 			return [String]()
 		}
 		let iS : Int? = data.indexOf(target: "\"\(table)\":[")
@@ -169,7 +169,7 @@ class Sync{
 		entries[0] = entries[0].subStr(start: 1, end: entries[0].length - 1)
 		entries[entries.count - 1] = entries[entries.count - 1].subStr(start: 0, end: entries[entries.count - 1].length - 2)
 		
-		print("SYNC:LOG: Table \(table) has \(entries.count) rows.")
+		NSLog(":SYNC:LOG: Table \(table) has \(entries.count) rows.")
 		
 		//Return the array
 		return entries
@@ -181,7 +181,7 @@ class Sync{
 	*/
 	func saveTablePeople(entries : [String]){
 		
-		print("SYNC:LOG: Saving table People.")
+		NSLog(":SYNC:LOG: Saving table People.")
 		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -198,9 +198,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up People entity: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up People entity: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up People entity")
+			NSLog(":SYNC:ERROR: Could not clean up People entity")
 		}
 		
 		//Loop new entries
@@ -261,9 +261,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Place with id \(id): \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Place with id \(id): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Place with id \(id).")
+				NSLog(":SYNC:ERROR: Could not store Place with id \(id).")
 			}
 		}
 	}
@@ -274,7 +274,7 @@ class Sync{
 	*/
 	func saveTablePlace(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Place.")
+		NSLog(":SYNC:LOG: Saving table Place.")
 		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -291,9 +291,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Places entity: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Places entity: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Places entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Places entity.")
 		}
 		
 		//Loop new entries
@@ -354,9 +354,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Place with id \(id): \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Place with id \(id): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Place with id \(id).")
+				NSLog(":SYNC:ERROR: Could not store Place with id \(id).")
 			}
 		}
 	}
@@ -367,7 +367,7 @@ class Sync{
 	*/
 	func saveTablePost(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Post.")
+		NSLog(":SYNC:LOG: Saving table Post.")
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
@@ -387,9 +387,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Post entity: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Post entity: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Post entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Post entity.")
 		}
 		
 		//Loop new entries
@@ -458,9 +458,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Post with id \(id): \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Post with id \(id): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Post with id \(id).")
+				NSLog(":SYNC:ERROR: Could not store Post with id \(id).")
 			}
 		}
 	}
@@ -471,7 +471,7 @@ class Sync{
 	*/
 	func saveTablePostComment(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Post_comment.")
+		NSLog(":SYNC:LOG: Saving table Post_comment.")
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
@@ -491,9 +491,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Post_comment entity: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Post_comment entity: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Post_comment entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Post_comment entity.")
 		}
 		
 		//Loop new entries
@@ -535,9 +535,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Activity_comment with id \(id): \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Activity_comment with id \(id): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Activity_comment with id \(id).")
+				NSLog(":SYNC:ERROR: Could not store Activity_comment with id \(id).")
 			}
 			
 		}
@@ -549,7 +549,7 @@ class Sync{
 	*/
 	func saveTablePostImage(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Post_image.")
+		NSLog(":SYNC:LOG: Saving table Post_image.")
 		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -566,9 +566,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Post_comment entity: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Post_comment entity: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Post_comment entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Post_comment entity.")
 		}
 		
 		//Loop new entries
@@ -599,9 +599,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Post_image with id \(id): \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Post_image with id \(id): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Post_image with id \(id).")
+				NSLog(":SYNC:ERROR: Could not store Post_image with id \(id).")
 			}
 		}
 	}
@@ -612,7 +612,7 @@ class Sync{
 	*/
 	func saveTablePostTag(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Post_tag.")
+		NSLog(":SYNC:LOG: Saving table Post_tag.")
 		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -629,9 +629,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Post_tag entity: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Post_tag entity: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Post_tag entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Post_tag entity.")
 		}
 		
 		//Loop new entries
@@ -652,9 +652,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Post_tag for post: \(post), tag: \(tag): \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Post_tag for post: \(post), tag: \(tag): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Post_tag for post: \(post), tag: \(tag).")
+				NSLog(":SYNC:ERROR: Could not store Post_tag for post: \(post), tag: \(tag).")
 			}
 		}
 	}
@@ -665,7 +665,7 @@ class Sync{
 	*/
 	func saveTableActivity(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Activity.")
+		NSLog(":SYNC:LOG: Saving table Activity.")
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
@@ -685,9 +685,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Activity entity: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Activity entity: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Activity entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Activity entity.")
 		}
 		
 		//Loop new entries
@@ -808,9 +808,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Activity with id \(id): \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Activity with id \(id): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Activity with id \(id).")
+				NSLog(":SYNC:ERROR: Could not store Activity with id \(id).")
 			}
 			
 		}
@@ -822,7 +822,7 @@ class Sync{
 	*/
 	func saveTableActivityComment(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Activity_comment.")
+		NSLog(":SYNC:LOG: Saving table Activity_comment.")
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
@@ -842,9 +842,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Activity_comment entity: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Activity_comment entity: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Activity_comment entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Activity_comment entity.")
 		}
 		
 		//Loop new entries
@@ -886,9 +886,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Activity_comment with id \(id): \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Activity_comment with id \(id): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Activity_comment with id \(id).")
+				NSLog(":SYNC:ERROR: Could not store Activity_comment with id \(id).")
 			}
 			
 		}
@@ -900,7 +900,7 @@ class Sync{
 	*/
 	func saveTableActivityImage(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Activity_image.")
+		NSLog(":SYNC:LOG: Saving table Activity_image.")
 		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -917,9 +917,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Activity_comment entity: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Activity_comment entity: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Activity_comment entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Activity_comment entity.")
 		}
 		
 		//Loop new entries
@@ -950,9 +950,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Activity_image with id \(id): \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Activity_image with id \(id): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Activity_image with id \(id).")
+				NSLog(":SYNC:ERROR: Could not store Activity_image with id \(id).")
 			}
 		}
 	}
@@ -963,7 +963,7 @@ class Sync{
 	*/
 	func saveTableActivityTag(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Activity_tag.")
+		NSLog(":SYNC:LOG: Saving table Activity_tag.")
 		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -980,9 +980,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Activity_tag entity: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Activity_tag entity: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Activity_tag entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Activity_tag entity.")
 		}
 		
 		//Loop new entries
@@ -1003,9 +1003,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Activity_tag for activity \(activity), tag: \(tag): Error: \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Activity_tag for activity \(activity), tag: \(tag): Error: \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Activity_tag for activity \(activity), tag: \(tag).")
+				NSLog(":SYNC:ERROR: Could not store Activity_tag for activity \(activity), tag: \(tag).")
 			}
 		}
 	}
@@ -1017,7 +1017,7 @@ class Sync{
 	//CHECK: New (and probably better format than the others.)
 	func saveTableActivityItinerary(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Activity_itinerary.")
+		NSLog(":SYNC:LOG: Saving table Activity_itinerary.")
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
@@ -1037,9 +1037,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Activity_itinerary entity: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Activity_itinerary entity: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Activity_itinerary entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Activity_itinerary entity.")
 		}
 		
 		//Loop new entries
@@ -1115,9 +1115,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Activity_itinerary with id \(id): \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Activity_itinerary with id \(id): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Activity_itinerary with id \(id).")
+				NSLog(":SYNC:ERROR: Could not store Activity_itinerary with id \(id).")
 			}
 		}
 	}
@@ -1128,7 +1128,7 @@ class Sync{
 	*/
 	func saveTableAlbum(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Album.")
+		NSLog(":SYNC:LOG: Saving table Album.")
 		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -1145,9 +1145,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Album: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Album: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Album entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Album entity.")
 		}
 		
 		//Loop new entries
@@ -1210,9 +1210,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Album with id \(id): \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Album with id \(id): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Album with id \(id).")
+				NSLog(":SYNC:ERROR: Could not store Album with id \(id).")
 			}
 		}
 	}
@@ -1223,7 +1223,7 @@ class Sync{
 	*/
 	func saveTablePhoto(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Photo.")
+		NSLog(":SYNC:LOG: Saving table Photo.")
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
@@ -1243,9 +1243,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Photo: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Photo: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Photo entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Photo entity.")
 		}
 		
 		//Loop new entries
@@ -1320,9 +1320,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Photo with id \(id): \(error), \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Photo with id \(id): \(error), \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Photo with id \(id).")
+				NSLog(":SYNC:ERROR: Could not store Photo with id \(id).")
 			}
 		}
 	}
@@ -1333,7 +1333,7 @@ class Sync{
 	*/
 	func saveTablePhotoAlbum(entries : [String]){
 		
-		print("SYNC:LOG: Saving table Photo_album.")
+		NSLog(":SYNC:LOG: Saving table Photo_album.")
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
@@ -1353,9 +1353,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			print("SYNC:ERROR: Could not clean up Photo_album: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Photo_album: \(error), \(error.userInfo).")
 		} catch {
-			print("SYNC:ERROR: Could not clean up Photo_album entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Photo_album entity.")
 		}
 		
 		//Loop new entries
@@ -1377,9 +1377,9 @@ class Sync{
 			do {
 				try context.save()
 			} catch let error as NSError  {
-				print("SYNC:ERROR: Could not store Photo_album entry \(error.userInfo).")
+				NSLog(":SYNC:ERROR: Could not store Photo_album entry \(error.userInfo).")
 			} catch {
-				print("SYNC:ERROR: Could not store Photo_album entry.")
+				NSLog(":SYNC:ERROR: Could not store Photo_album entry.")
 			}
 		}
 	}
@@ -1406,7 +1406,7 @@ class Sync{
 			
 			// Save only the needed settings
 			if ["festivals", "comments", "photos"].contains(name){
-				NSLog(":SYNC:DEBUG: Setting \(name) \(value)")
+				NSLog(":SYNC:LOG: Setting \(name) \(value)")
 				defaults.set(value, forKey: name)
 			}
 
