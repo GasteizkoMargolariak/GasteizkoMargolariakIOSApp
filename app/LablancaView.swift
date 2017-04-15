@@ -26,9 +26,18 @@ Class to handle the home view.
 */
 class LablancaView: UIView {
 
-	@IBOutlet var container: UIView!
-	@IBOutlet weak var nfWindow: UIView!
-	@IBOutlet weak var fWindow: UIView!
+	@IBOutlet var container: UIView!			// Top container of the view.
+	@IBOutlet weak var nfWindow: UIView!		// The section to show when no festivals.
+	@IBOutlet weak var fWindow: UIView!			// The window to show while the festivals.
+	@IBOutlet weak var fTitle: UILabel!			// The title of the year festivals.
+	@IBOutlet weak var fImage: UIImageView!		// The festivals image
+	@IBOutlet weak var fText: UILabel!			// The festivals description.
+	@IBOutlet weak var fBtSchedule: UIButton!	// Button to show the city schedule.
+	@IBOutlet weak var fBtGMSchedule: UIButton!	// Button to show the Margolari schedule
+	@IBOutlet weak var fOfferList: UIStackView!	// Stack view to hold the offer list.
+	@IBOutlet weak var fDayList: UIStackView!	// Stack view to hold the single days price list.
+	
+	
 	
 	// App delegate
 	var delegate: AppDelegate? = nil
@@ -175,12 +184,68 @@ class LablancaView: UIView {
 		// TODO: Get current year
 		let year = 2016
 		
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let lang : String = getLanguage()
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let fetchRequest: NSFetchRequest<Festival> = Festival.fetchRequest()
+		fetchRequest.predicate = NSPredicate(format: "year = %i", year)
+		
+		do {
+			
+			// Get info from festivals
+			let searchResults = try context.fetch(fetchRequest)
+			let r = searchResults[0]
+			
+			// Set description
+			self.fText.text = r.value(forKey: "text_\(lang)") as! String?
+			
+			/*// Get photo info from Photo entity
+
+			do{
+				var imgSearchResults = try context.fetch(imgFetchRequest)
+				var imgR = imgSearchResults[0]
+				image = imgR.value(forKey: "file")! as! String
+				NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) left: \(image)")
+				row.setImage(idx: 0, filename: image)
+				if i + 1 < searchResults.count {
+					r = searchResults[i + 1]
+					photoId = r.value(forKey: "photo")! as! Int
+					imgFetchRequest.predicate = NSPredicate(format: "id == %i", photoId)
+					imgSearchResults = try context.fetch(imgFetchRequest)
+					
+					imgR = imgSearchResults[0]
+					image = imgR.value(forKey: "file")! as! String
+					NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: \(image)")
+					row.setImage(idx: 1, filename: image)
+				}
+				else{
+					NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: none")
+				}
+				//TODO create row, add images (L+R), add row to container.
+				//row.setImage(filename: image)
+			} catch {
+				print(":GALLERYCONTROLLER:ERROR: Error getting image for post \(id): \(error)")
+			}
+			
+			NSLog(":GALLERYCONTROLLER:DEBUG: Adding row: height: \(row.frame.height)")
+			albumContainer.addArrangedSubview(row)
+
+		*/
+		} catch {
+			NSLog(":LABLANCA:ERROR: Error with request: \(error)")
+		}
+		
+		
+		
 		
 	}
 	
 	func showNoFestivals(){
 		NSLog(":LABLANCA:LOG: Showing no festivals section.")
 		self.fWindow.isHidden = true
+		// Nothing else to be done.
 	}
 	
 	func getLanguage() -> String{
