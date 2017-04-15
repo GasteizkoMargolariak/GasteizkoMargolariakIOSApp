@@ -96,6 +96,7 @@ class Sync{
 			let dataPostImage : [String] = self.getTable(data: strData!, table: "post_image")
 			let dataPostTag : [String] = self.getTable(data: strData!, table: "post_tag")
 			//let dataSponsor : [String] = self.getTable(data: strData!, table: "sponsor")
+			let dataSettings: [String] = self.getTable(data: strData!, table: "settings")
 			
 			//One by one, save the received data
 			self.saveTableActivity(entries : dataActivity)
@@ -114,6 +115,9 @@ class Sync{
 			self.saveTableAlbum(entries: dataAlbum)
 			self.saveTablePhoto(entries: dataPhoto)
 			self.saveTablePhotoAlbum(entries: dataPhotoAlbum)
+			
+			self.saveSettings(entries: dataSettings)
+			
 			
 			//DEBUG: Tester, Debug only
 			// Test if a entity has entries
@@ -171,7 +175,6 @@ class Sync{
 		return entries
 	}
 	
-	// FIX: ERROR in API.
 	/**
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
@@ -1378,6 +1381,35 @@ class Sync{
 			} catch {
 				print("SYNC:ERROR: Could not store Photo_album entry.")
 			}
+		}
+	}
+	
+	/**
+	Saves the received settings.
+	:param: entries Array of strings containing the rows of the table, in JSON format.
+	*/
+	func saveSettings(entries : [String]){
+		
+		NSLog(":SYNC:LOG: Saving settings.")
+		let defaults = UserDefaults.standard
+		
+		// Loop new entries
+		for entry in entries{
+			
+			// Get setting name
+			var str = entry
+			let name: String = str.subStr(start : str.indexOf(target : "\"name\":")! + 8, end : str.indexOf(target : ",\"")! - 2)
+			
+			// Get setting value
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let value: Int = Int(str.subStr(start : str.indexOf(target : "\"value\":")! + 9, end : str.length - 2))!
+			
+			// Save only the needed settings
+			if ["festivals", "comments", "photos"].contains(name){
+				NSLog(":SYNC:DEBUG: Setting \(name) \(value)")
+				defaults.set(value, forKey: name)
+			}
+
 		}
 	}
 }
