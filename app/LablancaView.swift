@@ -27,6 +27,8 @@ Class to handle the home view.
 class LablancaView: UIView {
 
 	@IBOutlet var container: UIView!
+	@IBOutlet weak var nfWindow: UIView!
+	@IBOutlet weak var fWindow: UIView!
 	
 	// App delegate
 	var delegate: AppDelegate? = nil
@@ -59,6 +61,17 @@ class LablancaView: UIView {
 		// Get viewController from StoryBoard
 		let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 		let controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
+		
+		// Read settings and show the required sections
+		let defaults = UserDefaults.standard
+		let festivals: Int = 1 //TODO defaults.integer(forKey: "festivals")
+		
+		if festivals == 1{
+			showFestivals()
+		}
+		else{
+			showNoFestivals()
+		}
 		
 		// Show albums
 		/*let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -153,6 +166,21 @@ class LablancaView: UIView {
 		
 		self.setUpRowsTapRecognizers()
 		NSLog(":GALLERY:LOG: Finished loading gallery section.")*/
+	}
+	
+	func showFestivals(){
+		NSLog(":LABLANCA:LOG: Showing festivals section.")
+		self.nfWindow.isHidden = true
+		
+		// TODO: Get current year
+		let year = 2016
+		
+		
+	}
+	
+	func showNoFestivals(){
+		NSLog(":LABLANCA:LOG: Showing no festivals section.")
+		self.fWindow.isHidden = true
 	}
 	
 	func getLanguage() -> String{
