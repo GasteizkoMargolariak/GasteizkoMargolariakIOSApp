@@ -17,6 +17,7 @@
                 <outlet property="name" destination="Bq6-IK-wMo" id="f8D-Fk-GR1"/>
                 <outlet property="number" destination="fyr-yz-Mdw" id="tbR-wz-NFB"/>
                 <outlet property="price" destination="EBl-yy-csC" id="iW2-CE-0GB"/>
+                <outlet property="separator" destination="jGw-ai-rD9" id="qZ8-a1-fSi"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -33,34 +34,34 @@
                                 <constraint firstAttribute="height" constant="50" id="B8H-ex-mmQ"/>
                                 <constraint firstAttribute="width" constant="60" id="VZe-Ub-0PF"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agosto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qr-iE-jB1" userLabel="Month">
-                            <rect key="frame" x="0.0" y="50" width="80" height="24"/>
+                            <rect key="frame" x="0.0" y="50" width="80" height="20.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="RZL-5X-uNW"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Margo Txiki" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bq6-IK-wMo" userLabel="Name">
-                            <rect key="frame" x="80" y="0.0" width="160" height="30"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Margo Txiki" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bq6-IK-wMo" userLabel="Name">
+                            <rect key="frame" x="80" y="0.0" width="160" height="60"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="INd-c0-4oI"/>
+                                <constraint firstAttribute="height" constant="60" id="INd-c0-4oI"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60E" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBl-yy-csC" userLabel="Price">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60 E" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBl-yy-csC" userLabel="Price">
                             <rect key="frame" x="240" y="0.0" width="70" height="85"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="E4j-HZ-ldc"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                             <color key="textColor" red="0.0" green="0.47058823529999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>

@@ -228,12 +228,47 @@ class LablancaView: UIView {
 			// Get info from festivals
 			let daySearchResults = try context.fetch(dayFetchRequest)
 			
+			var row: RowLablancaDay
+			var count: Int = 0
+			
 			for day in daySearchResults as [NSManagedObject]{
+				
 				let date: NSDate = day.value(forKey: "date")! as! NSDate
+				let dateString: String = dateFormatter.string(from: date as Date)
+				//NSLog(":LABLANCA:DEBUG: dateString: \(dateString)")
+				//let nDay: Int = Int(dateString.subStr(start: 8, end: 9))!
+				let nDay: String = dateString.subStr(start: 8, end: 9)
+				//NSLog(":LABLANCA:DEBUG: nDay: \(nDay)")
+				//NSLog(":LABLANCA:DEBUG: dateString: \(dateString)")
+				let month: String = dateString.subStr(start: 5, end: 6)
+				var nMonth: String = "Agosto"
+				if month == "07"{
+					nMonth = "Julio"
+				}
 				let name: String = day.value(forKey: "name_\(lang)")! as! String
 				let price: Int = day.value(forKey: "price")! as! Int
-				NSLog(":LABLANCA:DEBUG: Day \(name): \(price)")
-				//row.setImage(filename: image)
+				
+				
+				row = RowLablancaDay.init(s: "rowLablancaDay\(count)", i: count)
+				row.name.text = name
+				row.price.text = "\(price) €"
+				row.number.text = "\(Int(nDay)!)"
+				row.month.text = nMonth
+				
+				// TODO date day and month
+				
+				fDayList.addArrangedSubview(row)
+				row.setNeedsLayout()
+				row.layoutIfNeeded()
+				
+				NSLog(":LABLANCA:DEBUG: \(nDay) of \(month): Day \(name): \(price)")
+				
+				// Hide the separator of the last row
+				if count == daySearchResults.count - 1 {
+					row.separator.isHidden = true
+				}
+				
+				count = count + 1
 			}
 			
 		} catch {

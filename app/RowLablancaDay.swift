@@ -32,6 +32,7 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var month: UILabel!
 	@IBOutlet weak var name: UILabel!
 	@IBOutlet weak var price: UILabel!
+	@IBOutlet weak var separator: UIView!
 	
 	
 	
