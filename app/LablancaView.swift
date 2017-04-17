@@ -189,6 +189,7 @@ class LablancaView: UIView {
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 		
+		// Get info about festivals
 		let fetchRequest: NSFetchRequest<Festival> = Festival.fetchRequest()
 		fetchRequest.predicate = NSPredicate(format: "year = %i", year)
 		
@@ -200,43 +201,44 @@ class LablancaView: UIView {
 			
 			// Set description
 			self.fText.text = r.value(forKey: "text_\(lang)") as! String?
-			
-			/*// Get photo info from Photo entity
 
-			do{
-				var imgSearchResults = try context.fetch(imgFetchRequest)
-				var imgR = imgSearchResults[0]
-				image = imgR.value(forKey: "file")! as! String
-				NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) left: \(image)")
-				row.setImage(idx: 0, filename: image)
-				if i + 1 < searchResults.count {
-					r = searchResults[i + 1]
-					photoId = r.value(forKey: "photo")! as! Int
-					imgFetchRequest.predicate = NSPredicate(format: "id == %i", photoId)
-					imgSearchResults = try context.fetch(imgFetchRequest)
-					
-					imgR = imgSearchResults[0]
-					image = imgR.value(forKey: "file")! as! String
-					NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: \(image)")
-					row.setImage(idx: 1, filename: image)
-				}
-				else{
-					NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: none")
-				}
-				//TODO create row, add images (L+R), add row to container.
-				//row.setImage(filename: image)
-			} catch {
-				print(":GALLERYCONTROLLER:ERROR: Error getting image for post \(id): \(error)")
-			}
-			
-			NSLog(":GALLERYCONTROLLER:DEBUG: Adding row: height: \(row.frame.height)")
-			albumContainer.addArrangedSubview(row)
-
-		*/
 		} catch {
-			NSLog(":LABLANCA:ERROR: Error with request: \(error)")
+			NSLog(":LABLANCA:ERROR: Error getting festivals info: \(error)")
 		}
 		
+		// Get info about the day prices.
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd"
+		dateFormatter.locale = Locale.init(identifier: "en_GB")
+		
+		// First date of year
+		var dateString = "\(year)-01-01"
+		let sDate = dateFormatter.date(from: dateString)
+		
+		// Last date of year
+		dateString = "\(year)-12-31"
+		let eDate = dateFormatter.date(from: dateString)
+		
+		// Get days
+		let dayFetchRequest: NSFetchRequest<Festival_day> = Festival_day.fetchRequest()
+		dayFetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", argumentArray: [sDate, eDate])
+		
+		do {
+			
+			// Get info from festivals
+			let daySearchResults = try context.fetch(dayFetchRequest)
+			
+			for day in daySearchResults as [NSManagedObject]{
+				let date: NSDate = day.value(forKey: "date")! as! NSDate
+				let name: String = day.value(forKey: "name_\(lang)")! as! String
+				let price: Int = day.value(forKey: "price")! as! Int
+				NSLog(":LABLANCA:DEBUG: Day \(name): \(price)")
+				//row.setImage(filename: image)
+			}
+			
+		} catch {
+			NSLog(":LABLANCA:ERROR: Error getting festival days info: \(error)")
+		}
 		
 		
 		
