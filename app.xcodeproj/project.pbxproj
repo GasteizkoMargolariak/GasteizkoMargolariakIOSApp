@@ -229,7 +229,7 @@
 				TargetAttributes = {
 					93B84B951D9C31AB006C0F67 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = Z2WQ2CQN52;
+						DevelopmentTeam = 9F9ER4X7TG;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -434,11 +434,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Z2WQ2CQN52;
+				DEVELOPMENT_TEAM = 9F9ER4X7TG;
 				INFOPLIST_FILE = app/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.margolariak.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.margolariak.iosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -449,11 +449,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Z2WQ2CQN52;
+				DEVELOPMENT_TEAM = 9F9ER4X7TG;
 				INFOPLIST_FILE = app/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.margolariak.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.margolariak.iosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
