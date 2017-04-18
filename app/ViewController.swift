@@ -24,23 +24,50 @@ import CoreData
 /**
   The view controller of the app.
  */
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate {
+	
+	var delegate: AppDelegate?
 	
 	//The menu collection.
 	var sectionCollection: UICollectionView!
 
 	//Each of the sections of the app.
-	@IBOutlet weak var containerViewGallery: UIView!
-	@IBOutlet weak var containerViewBlog: UIView!
-	@IBOutlet weak var containerViewActivities: UIView!
-	@IBOutlet weak var containerViewLablanca: UIView!
-	@IBOutlet weak var containerViewLocation: UIView!
-	@IBOutlet weak var containerViewHome: HomeView!
+	@IBOutlet var containerViewGallery: GalleryView!
+	@IBOutlet var containerViewBlog: BlogView!
+	@IBOutlet var containerViewActivities: UIView!
+	@IBOutlet var containerViewLablanca: LablancaView!
+	@IBOutlet var containerViewLocation: UIView!
+	@IBOutlet var containerViewHome: HomeView!
+	
+	var passId: Int = -1
 	
 	func getContext () -> NSManagedObjectContext {
 		//let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		//return appDelegate.persistentContainer.viewContext
 		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+	}
+	
+	func showPost(id: Int){
+		print("CONTROLLER:DEBUG: Showing Post \(id)")
+		self.passId = id
+		performSegue(withIdentifier: "SeguePost", sender: nil)
+	}
+	
+	func showAlbum(id: Int){
+		NSLog(":CONTROLLER:DEBUG: Showing album \(id)")
+		self.passId = id
+		// TODO: Uncomment when ready
+		performSegue(withIdentifier: "SegueAlbum", sender: nil)
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		NSLog(":CONTROLLER:DEBUG: preparing for segue '\(segue.identifier)' with id \(self.passId)")
+		if segue.identifier == "SeguePost"{
+			(segue.destination as! PostViewController).id = passId
+		}
+		if segue.identifier == "SegueAlbum"{
+			(segue.destination as! AlbumViewController).id = passId
+		}
 	}
 	
 	/**
@@ -54,12 +81,23 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewActivities.alpha = 0
 		self.containerViewBlog.alpha = 0
 		self.containerViewGallery.alpha = 0
+		
+		
+		//self.containerViewBlog.isHidden = true
 				
-		print("ViewController:viewDidLoad()")
-		Sync()
+		print("CONTROLLER:LOG: viewDidLoad()")
+		print("CONTROLLER:DEBUG: Skyp sync")
+		//Sync()
 		
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
+
+		
+		//self.containerViewBlog.setController(controller: self as ViewController)
+		
+		delegate = UIApplication.shared.delegate as! AppDelegate
+		delegate?.controller = self
+		
 	}
 
 	/**
