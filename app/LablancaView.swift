@@ -64,8 +64,6 @@ class LablancaView: UIView {
 		Bundle.main.loadNibNamed("LablancaView", owner: self, options: nil)
 		self.addSubview(container)
 		container.frame = self.bounds
-		//section.setTitle(text: "Gallery")
-		//let parent = section.getContentStack()
 		
 		// Get viewController from StoryBoard
 		let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -81,100 +79,6 @@ class LablancaView: UIView {
 		else{
 			showNoFestivals()
 		}
-		
-		// Show albums
-		/*let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		let appDelegate = UIApplication.shared.delegate as! AppDelegate
-		self.delegate = appDelegate
-		let lang : String = getLanguage()
-		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-		let fetchRequest: NSFetchRequest<Album> = Album.fetchRequest()
-		let sortDescriptor = NSSortDescriptor(key: "time", ascending: false)
-		let sortDescriptors = [sortDescriptor]
-		fetchRequest.sortDescriptors = sortDescriptors
-		
-		do {
-			//Get the results
-			let searchResults = try context.fetch(fetchRequest)
-			
-			var row : RowGallery
-			var count = 0
-			var id: Int
-			var title: String
-			for r in searchResults as [NSManagedObject] {
-				count = count + 1
-				
-				//Create a new row
-				row = RowGallery.init(s: "rowGallery\(count)", i: count)
-				id = r.value(forKey: "id")! as! Int
-				
-				title = r.value(forKey: "title_\(lang)")! as! String
-				row.id = id
-				row.setTitle(text: title)
-				
-				// Get 4 random images from the album
-				let imgFetchRequest: NSFetchRequest<Photo_album> = Photo_album.fetchRequest()
-				// TODO Order random
-				//let imgSortDescriptor = NSSortDescriptor(key: "time", ascending: true)
-				//let imgSortDescriptors = [imgSortDescriptor]
-				//simgFetchRequest.sortDescriptors = imgSortDescriptors
-				imgFetchRequest.predicate = NSPredicate(format: "album == %i", id)
-				imgFetchRequest.fetchLimit = 4
-				do{
-					let imgSearchResults = try context.fetch(imgFetchRequest)
-					
-					// Loop images
-					var imageIdx = 0
-					for imgR in imgSearchResults as [NSManagedObject]{
-						
-						let imageId = imgR.value(forKey: "photo")! as! Int
-						
-						// For each image, I need a new query to fetch from photo entity.
-						let singleImgFetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
-						singleImgFetchRequest.predicate = NSPredicate(format: "id == %i", imageId)
-						singleImgFetchRequest.fetchLimit = 4
-						do{
-							let singleImgSearchResults = try context.fetch(singleImgFetchRequest)
-							
-							// Loop image
-							for sImgR in singleImgSearchResults as [NSManagedObject]{
-								
-								let image = sImgR.value(forKey: "file")! as! String
-								row.setImage(idx: imageIdx, filename: image)
-							}
-							imageIdx = imageIdx + 1
-						}
-						catch {
-							NSLog(":GALLERY:ERROR: Error getting image from photo entity: \(error)")
-						}
-					}
-				} catch {
-					NSLog(":GALLERY:ERROR: Error getting image for album \(id): \(error)")
-				}
-				
-				parent.addArrangedSubview(row)
-				
-				// Add to the rows array
-				self.rows.append(row)
-				
-				
-				
-			}
-		} catch {
-			NSLog(":GALLERY:ERROR: Error with request: \(error)")
-		}
-		
-		//Always at the end: update scrollview
-		var h: Int = 0
-		for view in scrollView.subviews {
-			//contentRect = contentRect.union(view.frame);
-			h = h + Int(view.frame.height) + 30 //Why 30?
-		}
-		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 2500//CGFloat(h);
-		
-		self.setUpRowsTapRecognizers()
-		NSLog(":GALLERY:LOG: Finished loading gallery section.")*/
 	}
 	
 	func showFestivals(){
@@ -235,33 +139,26 @@ class LablancaView: UIView {
 				
 				let date: NSDate = day.value(forKey: "date")! as! NSDate
 				let dateString: String = dateFormatter.string(from: date as Date)
-				//NSLog(":LABLANCA:DEBUG: dateString: \(dateString)")
-				//let nDay: Int = Int(dateString.subStr(start: 8, end: 9))!
 				let nDay: String = dateString.subStr(start: 8, end: 9)
-				//NSLog(":LABLANCA:DEBUG: nDay: \(nDay)")
-				//NSLog(":LABLANCA:DEBUG: dateString: \(dateString)")
 				let month: String = dateString.subStr(start: 5, end: 6)
-				var nMonth: String = "Agosto"
+				var nMonth: String = "Agosto" // TODO: Reference
 				if month == "07"{
-					nMonth = "Julio"
+					nMonth = "Julio" // TODO: Reference
 				}
 				let name: String = day.value(forKey: "name_\(lang)")! as! String
 				let price: Int = day.value(forKey: "price")! as! Int
 				
-				
+				// Create the row and set data.
 				row = RowLablancaDay.init(s: "rowLablancaDay\(count)", i: count)
 				row.name.text = name
 				row.price.text = "\(price) €"
 				row.number.text = "\(Int(nDay)!)"
 				row.month.text = nMonth
 				
-				// TODO date day and month
-				
+				// Add the row
 				fDayList.addArrangedSubview(row)
 				row.setNeedsLayout()
 				row.layoutIfNeeded()
-				
-				NSLog(":LABLANCA:DEBUG: \(nDay) of \(month): Day \(name): \(price)")
 				
 				// Hide the separator of the last row
 				if count == daySearchResults.count - 1 {
