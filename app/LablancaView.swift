@@ -101,10 +101,13 @@ class LablancaView: UIView {
 			
 			// Get info from festivals
 			let searchResults = try context.fetch(fetchRequest)
-			let r = searchResults[0]
 			
-			// Set description
-			self.fText.text = r.value(forKey: "text_\(lang)") as! String?
+			if searchResults.count > 0 {
+				let r = searchResults[0]
+			
+				// Set description
+				self.fText.text = r.value(forKey: "text_\(lang)") as! String?
+			}
 
 		} catch {
 			NSLog(":LABLANCA:ERROR: Error getting festivals info: \(error)")
