@@ -27,10 +27,26 @@ Class to handle server sync.
 */
 class Sync{
 	
+	var initial: Bool = false
+	
 	/**
 	Starts the sync process.
+	Always asynchronously.
 	*/
 	init(){
+		let url = buildUrl();
+		sync(url: url)
+	}
+	
+	/**
+	Starts the sync process, synchronously or asynchronously.
+	:param: synchronous True for synchronous sync, false for asynchronously
+	*/
+	init(synchronous: Bool){
+		if synchronous == true{
+			NSLog(":SYNC:LOG: Synchronous sync started.")
+			self.initial = true
+		}
 		let url = buildUrl();
 		sync(url: url)
 	}
@@ -141,6 +157,14 @@ class Sync{
 				NSLog(":SYNC:DEBUG: Error with request: \(error).")
 			}*/
 			//End tester
+			
+			// If it's the initial sync, hide the segue
+			if self.initial == true{
+				NSLog(":SYNC:LOG: Finishing synchronous sync.")
+				let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+				delegate.controller?.initialSync(showScreen: false)
+				
+			}
 		}
 		
 		task.resume()
