@@ -80,9 +80,11 @@ class HomeView: UIView {
 		setUpBlog(context: moc, delegate: appDelegate, lang: lang, parent: blogSection.getContentStack())
 		setUpFutureActivities(context: moc, delegate: appDelegate, lang: lang, parent: futureActivitiesSection.getContentStack())
 		setUpSocial(parent: socialSection.getContentStack())
+		setUpGallery(context: moc, delegate: appDelegate, parent: gallerySection.getContentStack())
 		
 		
 		pastActivitiesSection.expandSection()
+		
 		
 		//Always at the end: update scrollview
 		var h: Int = 0
@@ -190,7 +192,7 @@ class HomeView: UIView {
 			//I like to check the size of the returned results!
 			print ("Post: \(searchResults.count)")
 			
-			var row : RowHomePastActivities
+			var row : RowHomeBlog
 			var count = 0
 			var id: Int
 			var title: String
@@ -205,11 +207,12 @@ class HomeView: UIView {
 				
 				
 				//Create a new row
-				row = RowHomePastActivities.init(s: "rowHomeBlog\(count)", i: count)
+				row = RowHomeBlog.init(s: "rowHomeBlog\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
-				print(title)
+				
+				row.id = id
 				row.setTitle(text: title)
 				row.setText(text: text)
 				
@@ -235,6 +238,10 @@ class HomeView: UIView {
 				print("Row height: \(row.frame.height)")
 				
 				parent.addArrangedSubview(row)
+				
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPost(_:)))
+				row.isUserInteractionEnabled = true
+				row.addGestureRecognizer(tapRecognizer)
 				
 			}
 		} catch {
@@ -278,7 +285,8 @@ class HomeView: UIView {
 				id = r.value(forKey: "id")! as! Int
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
-				print(title)
+				
+				
 				row.setTitle(text: title)
 				row.setText(text: text)
 				
@@ -311,6 +319,48 @@ class HomeView: UIView {
 		}
 	}
 	
+	func setUpGallery(context : NSManagedObjectContext, delegate: AppDelegate,parent: UIStackView){
+		print("HOME:LOG: Setting up gallery.")
+		
+		// Create the row
+		var row: RowHomeGallery
+		row = RowHomeGallery.init(s: "rowHomeGallery", i: 0)
+		parent.addArrangedSubview(row)
+		
+		
+		// Set images
+		let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+		let sortDescriptor = NSSortDescriptor(key: "uploaded", ascending: false)
+		let sortDescriptors = [sortDescriptor]
+		fetchRequest.sortDescriptors = sortDescriptors
+		fetchRequest.fetchLimit = 4
+		
+		do {
+			//go get the results
+			let searchResults = try context.fetch(fetchRequest)
+	
+			var id: Int
+			var image: String
+			
+			// Loop images
+			var i = 0
+			for r in searchResults as [NSManagedObject] {
+				
+				image = r.value(forKey: "file")! as! String
+				row.setImage(idx: i, filename: image)
+				
+				//TODO Set click listener
+				
+				i = i + 1
+			}
+			
+		}
+		catch{
+			print("HOME:ERROR: Error setting gallery up: \(error)")
+		}
+		
+	}
+	
 	func setUpSocial(parent : UIStackView){
 		print("SETING UP SOCIAL")
 		//Create a new row
@@ -318,5 +368,12 @@ class HomeView: UIView {
 		row = RowHomeSocial.init(s: "rowHomeSocial", i: 0)
 		print("ROW CREATED")
 		parent.addArrangedSubview(row)
+	}
+	
+	func openPost(_ sender:UITapGestureRecognizer? = nil){
+		print("HOME:DEBUG: getting delegate and showing post.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPost(id: (sender?.view as! RowHomeBlog).id)
+		print("HOME:DEBUG: Post should be shown.")
 	}
 }

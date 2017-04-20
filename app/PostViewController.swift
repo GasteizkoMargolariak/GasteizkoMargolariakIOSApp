@@ -1,3 +1,4 @@
+// Copyright (C) 2016 Inigo Valentin
 //
 // This file is part of the Gasteizko Margolariak IOS app.
 //
@@ -17,84 +18,92 @@
 // License along with the Gasteizko Margolariak IOS app.
 // If not, see <http://www.gnu.org/licenses/>.
 
-import Foundation
-import CoreData
 import UIKit
+import CoreData
+
 /**
-Class to handle the post view.
+The view controller of the app.
 */
-class PostView: UIView {
+class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	
-	//The main scroll view.
-	@IBOutlet weak var scrollView: UIScrollView!
+
 	
-	//The container of the view.
-	@IBOutlet var container: UIView!
+	@IBOutlet weak var barTitle: UILabel!
+	@IBOutlet weak var barButton: UIButton!
+	@IBOutlet weak var postText: UILabel!
+	@IBOutlet weak var postTitle: UILabel!
+	@IBOutlet weak var postImage: UIImageView!
+	var id: Int = -1
+	var delegate: AppDelegate?
 	
-	//Each of the sections of the view.
-	@IBOutlet weak var section: Section!
+	//Each of the sections of the app.
 	
+	var passId: Int = -1
 	
-	override init(frame: CGRect){
-		super.init(frame: frame)
+	func getContext () -> NSManagedObjectContext {
+		//let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		//return appDelegate.persistentContainer.viewContext
+		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 	}
 	
 	/**
-	Run when the view is started.
+	Run when the app loads.
 	*/
-	required init?(coder aDecoder: NSCoder) {
+	override func viewDidLoad() {
 		
-		super.init(coder: aDecoder)
+		print("POSTCONTROLLER:LOG: viewDidLoad()")
 		
-		//Load the contents of the HomeView.xib file.
-		Bundle.main.loadNibNamed("BlogView", owner: self, options: nil)
-		self.addSubview(container)
-		container.frame = self.bounds
+		super.viewDidLoad()
+		self.loadPost(id: id)
 		
-		
+		// Set button action
+		barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
 	}
 	
-	func loadPost(id : Int){
+	//TODO implement all the logic for post loading here, including iboutlts
 	
-		// Show posts
+	
+	func back() {
+		print("POSTCONTROLLER:DEBUG: Back")
+		self.dismiss(animated: true, completion: nil)
+	}
+	
+	
+	/**
+	Dispose of any resources that can be recreated.
+	*/
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+	}
+	
+	public func loadPost(id: Int){
+		
+		print("POSTCONTROLLER:DEBUG: Loading post \(id)")
+		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
-		let sortDescriptor = NSSortDescriptor(key: "dtime", ascending: false)
-		let sortDescriptors = [sortDescriptor]
-		fetchRequest.sortDescriptors = sortDescriptors
+		fetchRequest.predicate = NSPredicate(format: "id = %i", id)
 		
 		do {
 			//go get the results
 			let searchResults = try context.fetch(fetchRequest)
 			
-			//I like to check the size of the returned results!
-			print ("Post: \(searchResults.count)")
-			
-			var row : RowBlog
 			var count = 0
-			var id: Int
-			var title: String
-			var text: String
+			var sTitle: String
+			var sText: String
 			var image: String
 			
 			//You need to convert to NSManagedObject to use 'for' loops
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
-				//get the Key Value pairs (although there may be a better way to do that...
-				print("Perm: \(r.value(forKey: "permalink"))")
 				
-				
-				//Create a new row
-				row = RowBlog.init(s: "rowBlog\(count)", i: count)
-				id = r.value(forKey: "id")! as! Int
-				title = r.value(forKey: "title_\(lang)")! as! String
-				text = r.value(forKey: "text_\(lang)")! as! String
-				print(title)
-				row.setTitle(text: title)
-				row.setText(text: text)
+				sTitle = r.value(forKey: "title_\(lang)")! as! String
+				sText = r.value(forKey: "text_\(lang)")! as! String
+				postTitle.text = "  \(sTitle)"
+				postText.text = sText.stripHtml()
 				
 				// Get main image
 				image = ""
@@ -104,35 +113,35 @@ class PostView: UIView {
 				imgFetchRequest.sortDescriptors = imgSortDescriptors
 				imgFetchRequest.predicate = NSPredicate(format: "post == %i", id)
 				imgFetchRequest.fetchLimit = 1
+				//TODO get more images
 				do{
 					let imgSearchResults = try context.fetch(imgFetchRequest)
 					for imgR in imgSearchResults as [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
-						print ("IMAGE: \(image)")
-						row.setImage(filename: image)
+						print ("POST:LOG: Image: \(image)")
+						//TODO set image
+						//row.setImage(filename: image)
 					}
 				} catch {
-					print("Error getting image for post \(id): \(error)")
+					print("POST:ERROR: Error getting image for post \(id): \(error)")
 				}
-				
-				print("Row height: \(row.frame.height)")
-				
-				parent.addArrangedSubview(row)
 				
 			}
 		} catch {
-			print("Error with request: \(error)")
+			print("POST:ERROR: Error with request: \(error)")
 		}
 		
 		//Always at the end: update scrollview
-		var h: Int = 0
-		for view in scrollView.subviews {
+		// TODOs
+		//var h: Int = 0
+		//for view in scrollView.subviews {
 			//contentRect = contentRect.union(view.frame);
-			h = h + Int(view.frame.height) + 30 //Why 30?
-			print("Blog curh: \(h)")
-		}
+		//	h = h + Int(view.frame.height) + 30 //Why 30?
+		//}
+		//print("POST:DEBUG: Height: \(h)")
 		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 2500//CGFloat(h);
+		//self.scrollView.contentSize.height = 4500//CGFloat(h);
+
 	}
 	
 	func getLanguage() -> String{
@@ -144,4 +153,6 @@ class PostView: UIView {
 			return "es"
 		}
 	}
+	
 }
+

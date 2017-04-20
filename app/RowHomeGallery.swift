@@ -24,27 +24,18 @@ import UIKit
 /**
 Extension of UIView to be formatted as sections.
 */
-@IBDesignable class RowHomeBlog: UIView {
+@IBDesignable class RowHomeGallery: UIView {
 	
 	//This view
 	var v: UIView!
 	
-	var id: Int!
-	
-	//The container.
 	@IBOutlet weak var container: UIView!
+	@IBOutlet weak var photo0: UIImageView!
+	@IBOutlet weak var photo1: UIImageView!
+	@IBOutlet weak var photo2: UIImageView!
+	@IBOutlet weak var photo3: UIImageView!
 	
-	//The entry
-	@IBOutlet weak var entry: UIView!
-	
-	//The post title.
-	@IBOutlet weak var title: UILabel!
-	
-	//The post text.
-	@IBOutlet weak var descrip: UILabel!
-	
-	//The image.
-	@IBOutlet weak var image: UIImageView!
+	var photos: [UIImageView] = []
 	
 	/**
 	Default constructor
@@ -68,14 +59,21 @@ Extension of UIView to be formatted as sections.
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
 		v = self
-		v.frame = bounds
-		v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		v.translatesAutoresizingMaskIntoConstraints = true
-		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		container.translatesAutoresizingMaskIntoConstraints = true
+		//v.frame = bounds
+		//v.bounds = v.frame
+		//v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		//v.translatesAutoresizingMaskIntoConstraints = true
+		//container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		//container.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.frame = v.bounds
+		//container.frame = v.bounds
 		v.addSubview(container)
+		
+		photos = [photo0, photo1, photo2, photo3]
+		
+
+		
+		//TODO Set click listeners
 	}
 	
 	/**
@@ -86,35 +84,19 @@ Extension of UIView to be formatted as sections.
 	}
 	
 	/**
-	Changes the title of the post. Decodes HTML.
-	:param: text The new title.
-	*/
-	func setTitle(text: String){
-		title.text = text.stripHtml()
-	}
-	
-	/**
-	Changes the text of the text. Decodes HTML.
-	:param: text The new text.
-	*/
-	func setText(text: String){
-		descrip.text = text.stripHtml()
-	}
-	
-	/**
-	Changes the image of the activity.
+	Changes the preview image.
 	If null or empty, the igage is hidden.
 	:param: path The new text.
 	*/
-	func setImage(filename: String){
+	func setImage(idx: Int, filename: String){
 		if (filename == ""){
-			print("No image")
+			print("ROWHOMEGALLERY:LOG: No image.")
 			//TODO hide the imageview
 		}
 		else{
-			print("Set image \(filename)")
-			let path = "img/blog/thumb/\(filename)"
-			image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+			let path = "img/galeria/thumb/\(filename)"
+			photos[idx].setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
 	}
+	
 }
