@@ -44,33 +44,48 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	var passId: Int = -1
 	
-	//required init() {
-	//	delegate = UIApplication.shared.delegate as! AppDelegate
-	//	super.init()
-	//}
-	
+	/**
+	 Controller initializer.
+	*/
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	
+	/**
+	 Retrieves the application context.
+	 :return: The application context.
+	*/
 	func getContext () -> NSManagedObjectContext {
 		//let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		//return appDelegate.persistentContainer.viewContext
 		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 	}
 	
+	/**
+	 Shows a post by loading the controller.
+	 :param: id The post id.
+	*/
 	func showPost(id: Int){
-		print("CONTROLLER:DEBUG: Showing Post \(id)")
+		NSLog(":CONTROLLER:DEBUG: Showing Post \(id)")
 		self.passId = id
 		performSegue(withIdentifier: "SeguePost", sender: nil)
 	}
 	
+	/**
+	 Shows a post by loading the controller.
+	 :param: id The album id.
+	*/
 	func showAlbum(id: Int){
 		NSLog(":CONTROLLER:DEBUG: Showing album \(id)")
 		self.passId = id
 		performSegue(withIdentifier: "SegueAlbum", sender: nil)
 	}
 	
+	/**
+	 Handles the initial sync process.
+	 It can start it, showing the sync screen, or finish it, hidding the screen.
+	 :param: showScreen True to start the sync, false to end it.
+	*/
 	func initialSync(showScreen: Bool){
 		if showScreen == true{
 			NSLog(":CONTROLLER:DEBUG: Showing initial sync screen.")
@@ -83,6 +98,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		}
 	}
 	
+	/**
+	 Run before performing a segue.
+	 Assigns id if neccessary.
+	 :param: segue The segue to perform.
+	 :sender: The calling view.
+	*/
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		NSLog(":CONTROLLER:DEBUG: preparing for segue '\(segue.identifier)' with id \(self.passId)")
 		if segue.identifier == "SeguePost"{
@@ -107,20 +128,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewActivities.alpha = 0
 		self.containerViewBlog.alpha = 0
 		self.containerViewGallery.alpha = 0
-		
-		
-		//self.containerViewBlog.isHidden = true
 				
 		NSLog(":CONTROLLER:LOG: viewDidLoad()")
 		NSLog(":CONTROLLER:DEBUG: Skyp sync")
 		//Sync()
 		
-		
-		
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
 
-		
 		//self.containerViewBlog.setController(controller: self as ViewController)
 		
 		delegate = UIApplication.shared.delegate as! AppDelegate
@@ -129,27 +143,42 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 	}
 	
+	/**
+	 Executed when the view is actually shown.
+	 Performs the initial sync in the first run.
+	 It also generates a user id if none exists.
+	 :param: animated Wether the controller appearance must be animated or not.
+	*/
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		
-		// Try to read user id
-		//let defaults = UserDefaults.standard
-		//let uid: String? = defaults.string(forKey: "userId")
-		
-		//NSLog(":CONTROLLER:DEBUG: userId \(uid)")
-		
-		//if uid! == nil{
 		if UserDefaults.standard.object(forKey: "userId") == nil{
-			let newUid = "123456789123"
+			let newUid = randomString(length: 16)
 			let defaults = UserDefaults.standard
 			defaults.set(newUid, forKey: "userId")
 			initialSync(showScreen: true)
 		}
 		
+	}
+	
+	/**
+	 Generates a random string to be used as a user identifier.
+	 :param: length The length of the generated string.
+	 :return: A random alphanumeric string with the indicated length.
+	*/
+	func randomString(length: Int) -> String {
 		
+		let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+		let len = UInt32(letters.length)
 		
-		// TODO: Only if neccessary
+		var randomString = ""
 		
+		for _ in 0 ..< length {
+			let rand = arc4random_uniform(len)
+			var nextChar = letters.character(at: Int(rand))
+			randomString += NSString(characters: &nextChar, length: 1) as String
+		}
+		
+		return randomString
 	}
 
 	/**

@@ -31,19 +31,21 @@ class Sync{
 	
 	/**
 	Starts the sync process.
+	Always asynchronously.
 	*/
 	init(){
 		let url = buildUrl();
 		sync(url: url)
 	}
 	
+	/**
+	Starts the sync process, synchronously or asynchronously.
+	:param: synchronous True for synchronous sync, false for asynchronously
+	*/
 	init(synchronous: Bool){
 		if synchronous == true{
 			NSLog(":SYNC:LOG: Synchronous sync started.")
 			self.initial = true
-			// TODO: Shfow the controller
-			//let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-			//delegate.controller?.initialSync()
 		}
 		let url = buildUrl();
 		sync(url: url)
