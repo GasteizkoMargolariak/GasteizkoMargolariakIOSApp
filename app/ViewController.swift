@@ -30,6 +30,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	//The menu collection.
 	var sectionCollection: UICollectionView!
+	
+	// Need to save the sync segue.
+	var syncSegue: UIStoryboardSegue?
 
 	//Each of the sections of the app.
 	@IBOutlet var containerViewGallery: GalleryView!
@@ -40,6 +43,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet var containerViewHome: HomeView!
 	
 	var passId: Int = -1
+	
+	//required init() {
+	//	delegate = UIApplication.shared.delegate as! AppDelegate
+	//	super.init()
+	//}
+	
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
 	
 	func getContext () -> NSManagedObjectContext {
 		//let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -56,8 +68,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	func showAlbum(id: Int){
 		NSLog(":CONTROLLER:DEBUG: Showing album \(id)")
 		self.passId = id
-		// TODO: Uncomment when ready
 		performSegue(withIdentifier: "SegueAlbum", sender: nil)
+	}
+	
+	func initialSync(showScreen: Bool){
+		if showScreen == true{
+			NSLog(":CONTROLLER:DEBUG: Showing initial sync screen.")
+			performSegue(withIdentifier: "SegueSync", sender: nil)
+			Sync(synchronous: true)
+		}
+		else{
+			NSLog(":CONTROLLER:DEBUG: Hidding initial sync screen.")
+			syncSegue?.destination.dismiss(animated: true, completion: nil)
+		}
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,6 +90,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		}
 		if segue.identifier == "SegueAlbum"{
 			(segue.destination as! AlbumViewController).id = passId
+		}
+		if segue.identifier == "SegueSync"{
+			self.syncSegue = segue
 		}
 	}
 	
@@ -85,9 +111,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 		//self.containerViewBlog.isHidden = true
 				
-		print("CONTROLLER:LOG: viewDidLoad()")
-		print("CONTROLLER:DEBUG: Skyp sync")
+		NSLog(":CONTROLLER:LOG: viewDidLoad()")
+		NSLog(":CONTROLLER:DEBUG: Skyp sync")
 		//Sync()
+		
+		
 		
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
@@ -97,6 +125,30 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 		delegate = UIApplication.shared.delegate as! AppDelegate
 		delegate?.controller = self
+		
+		
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		// Try to read user id
+		//let defaults = UserDefaults.standard
+		//let uid: String? = defaults.string(forKey: "userId")
+		
+		//NSLog(":CONTROLLER:DEBUG: userId \(uid)")
+		
+		//if uid! == nil{
+		if UserDefaults.standard.object(forKey: "userId") == nil{
+			let newUid = "123456789123"
+			let defaults = UserDefaults.standard
+			defaults.set(newUid, forKey: "userId")
+			initialSync(showScreen: true)
+		}
+		
+		
+		
+		// TODO: Only if neccessary
 		
 	}
 

@@ -187,6 +187,7 @@
                         <outlet property="containerViewLocation" destination="T4H-Rn-I4y" id="EFa-Km-WuR"/>
                         <segue destination="UkS-wI-Yhx" kind="show" identifier="SeguePost" id="gs2-jd-cPW"/>
                         <segue destination="k0M-Sk-DZM" kind="show" identifier="SegueAlbum" id="Puc-tv-vaD"/>
+                        <segue destination="3o1-ab-AT4" kind="show" identifier="SegueSync" id="E96-mK-gE9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
