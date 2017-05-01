@@ -21,24 +21,20 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2d-fd-cjO">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2d-fd-cjO">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <subviews>
-                        <stackView contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Iqa-PQ-TOo">
+                        <stackView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Iqa-PQ-TOo">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="2200"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlt-p5-m6w" customClass="Section" customModule="app">
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xlt-p5-m6w" customClass="Section" customModule="app">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="2200"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="2200" id="dig-UC-mt1" userLabel="height = 2200"/>
-                                    </constraints>
                                     <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                 </view>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="xlt-p5-m6w" firstAttribute="top" secondItem="Iqa-PQ-TOo" secondAttribute="top" id="ARG-5x-hIU"/>
                                 <constraint firstAttribute="bottom" secondItem="xlt-p5-m6w" secondAttribute="bottom" id="EIU-Wo-4hn"/>
-                                <constraint firstAttribute="height" constant="2200" id="FSh-mk-71J"/>
                                 <constraint firstItem="xlt-p5-m6w" firstAttribute="centerX" secondItem="Iqa-PQ-TOo" secondAttribute="centerX" id="cHf-jr-BYh"/>
                                 <constraint firstItem="xlt-p5-m6w" firstAttribute="width" secondItem="Iqa-PQ-TOo" secondAttribute="width" id="i9f-Kl-gsH"/>
                             </constraints>
