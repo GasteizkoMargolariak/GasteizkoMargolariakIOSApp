@@ -37,7 +37,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	//Each of the sections of the app.
 	@IBOutlet var containerViewGallery: GalleryView!
 	@IBOutlet var containerViewBlog: BlogView!
-	@IBOutlet var containerViewActivities: UIView!
+	@IBOutlet var containerViewActivities: ActivitiesView!
 	@IBOutlet var containerViewLablanca: LablancaView!
 	@IBOutlet var containerViewLocation: UIView!
 	@IBOutlet var containerViewHome: HomeView!
