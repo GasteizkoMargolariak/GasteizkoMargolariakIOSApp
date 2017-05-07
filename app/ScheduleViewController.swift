@@ -27,6 +27,12 @@ The view controller of the app.
 class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 
 	// Outlets
+	@IBOutlet weak var btPrev: UIButton!
+	@IBOutlet weak var btNext: UIButton!
+	@IBOutlet weak var lbDayNumber: UILabel!
+	@IBOutlet weak var lbDayMonth: UILabel!
+	@IBOutlet weak var lbDayName: UILabel!
+	@IBOutlet weak var svScheduleList: UIStackView!
 	
 	// Margolari schedule indicator
 	var margolari: Bool = false
@@ -43,12 +49,14 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	override func viewDidLoad() {
 		
-		NSLog(":SCHEDULECONTROLLER:LOG: Init album.")
+		NSLog(":SCHEDULECONTROLLER:LOG: Init schedule.")
 		
 		super.viewDidLoad()
 		self.loadSchedule(margolari: margolari)
 		
-		// Set button action TODO
+		//TODO Title
+		
+		// TODO Set button action
 		//barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
 	}
 	
@@ -69,83 +77,88 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	}
 	
 	/**
-	Loads the photos of the album
+	Loads the schedule.
 	*/
 	public func loadSchedule(margolari: Bool){
 		
 		NSLog(":SCHEDULECONTROLLER:DEBUG: Loading schedule: Margolariak \(margolari)")
 		
-		/*
-		var row : RowAlbum
+		var rowcount = 0
+		var row: RowSchedule
+		var start: NSDate
+		var title: String
+		var text: String
+		var locationId: Int
+		var location: String
 		
+		NSLog(":SCHEDULECONTROLLER:DEBUG: 1")
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let lang : String = getLanguage()
+		NSLog(":SCHEDULECONTROLLER:DEBUG: 2")
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-		let fetchRequest: NSFetchRequest<Photo_album> = Photo_album.fetchRequest()
-		fetchRequest.predicate = NSPredicate(format: "album = %i", id)
+		let fetchRequest: NSFetchRequest<Festival_event> = Festival_event.fetchRequest()
+		let sortDescriptor = NSSortDescriptor(key: "start", ascending: false)
+		let sortDescriptors = [sortDescriptor]
+		NSLog(":SCHEDULECONTROLLER:DEBUG: 3")
+		fetchRequest.sortDescriptors = sortDescriptors
 		
-		var rowcount = 0
+		if margolari == true{
+			fetchRequest.predicate = NSPredicate(format: "gm = %i", 1)
+		}
+		else{
+			fetchRequest.predicate = NSPredicate(format: "gm = %i", 0)
+		}
+		
+		// TODO: filter by date, not by number
+		fetchRequest.fetchLimit = 20
+		
+		NSLog(":SCHEDULECONTROLLER:DEBUG: 4")
 		
 		do {
 			
-			// Get the photo list
+			// Get the result
 			let searchResults = try context.fetch(fetchRequest)
-			var image: String
+			NSLog(":SCHEDULECONTROLLER:DEBUG: 5")
 			
-			NSLog(":GALLERYCONTROLLER:DEBUG: Total photos: \(searchResults.count)")
+			NSLog(":SCHEDULECONTROLLER:DEBUG: Total events: \(searchResults.count)")
 			
-			for i in (0..<searchResults.count) where i % 2 == 0 {
+			for r in searchResults as [NSManagedObject] {
 				
-				var r = searchResults[i]
-				var photoId = r.value(forKey: "photo")! as! Int
+				title = r.value(forKey: "title_\(lang)") as! String
+				text = r.value(forKey: "description_\(lang)") as! String
+				start = r.value(forKey: "start")! as! NSDate
+				locationId = r.value(forKey: "place")! as! Int
+				row = RowSchedule.init(s: "rowSchedule\(rowcount)", i: rowcount)
 				
-				row = RowAlbum.init(s: "rowAlbum\(i)", i: i)
+				row.setTitle(text: title)
+				row.setText(text: text)
+				row.setTime(dtime: start)
 				
-				// Get photo info from Photo entity
-				let imgFetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
-				let imgSortDescriptor = NSSortDescriptor(key: "uploaded", ascending: true)
-				let imgSortDescriptors = [imgSortDescriptor]
-				imgFetchRequest.sortDescriptors = imgSortDescriptors
-				imgFetchRequest.predicate = NSPredicate(format: "id == %i", photoId)
-				imgFetchRequest.fetchLimit = 1
+				// Get location info from Place entity
+				let locationFetchRequest: NSFetchRequest<Place> = Place.fetchRequest()
+				locationFetchRequest.predicate = NSPredicate(format: "id == %i", locationId)
+				locationFetchRequest.fetchLimit = 1
 				do{
-					var imgSearchResults = try context.fetch(imgFetchRequest)
-					var imgR = imgSearchResults[0]
-					image = imgR.value(forKey: "file")! as! String
-					NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) left: \(image)")
-					row.setImage(idx: 0, filename: image)
-					if i + 1 < searchResults.count {
-						r = searchResults[i + 1]
-						photoId = r.value(forKey: "photo")! as! Int
-						imgFetchRequest.predicate = NSPredicate(format: "id == %i", photoId)
-						imgSearchResults = try context.fetch(imgFetchRequest)
-						
-						
-						imgR = imgSearchResults[0]
-						image = imgR.value(forKey: "file")! as! String
-						NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: \(image)")
-						row.setImage(idx: 1, filename: image)
-					}
-					else{
-						NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: none")
-					}
-					//TODO create row, add images (L+R), add row to container.
-					//row.setImage(filename: image)
+					var locationSearchResults = try context.fetch(locationFetchRequest)
+					var locationR = locationSearchResults[0]
+					location = locationR.value(forKey: "name_\(lang)")! as! String
+					
+					row.setLocation(text: location)
 				} catch {
-					print(":GALLERYCONTROLLER:ERROR: Error getting image for post \(id): \(error)")
+					NSLog(":SCHEDULECONTROLLER:ERROR: Error getting location: \(error)")
 				}
 				
-				NSLog(":GALLERYCONTROLLER:DEBUG: Adding row: height: \(row.frame.height)")
-				albumContainer.addArrangedSubview(row)
+				NSLog(":SCHEDULECONTROLLER:DEBUG: Adding row: height: \(row.frame.height)")
+				svScheduleList.addArrangedSubview(row)
+				row.setNeedsLayout()
+				row.layoutIfNeeded()
 				
 				rowcount = rowcount + 1
 			}
 		} catch {
-			print("POST:ERROR: Error with request: \(error)")
+			NSLog(":SCHEDULECONTROLLER:ERROR: Error with request: \(error)")
 		}
-
-		*/
 
 	}
 	

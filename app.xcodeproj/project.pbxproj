@@ -54,6 +54,8 @@
 		93D9EA711DE37C7900089002 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D9EA701DE37C7900089002 /* libsqlite3.tbd */; };
 		93D9EA761DE3ACBB00089002 /* Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA751DE3ACBB00089002 /* Sync.swift */; };
 		93E0C5F41EBE306900905811 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E0C5F31EBE306900905811 /* ScheduleViewController.swift */; };
+		93EB2F0C1EBF5AEB00F64186 /* RowSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EB2F0B1EBF5AEB00F64186 /* RowSchedule.swift */; };
+		93EB2F0E1EBF5BF500F64186 /* RowSchedule.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EB2F0D1EBF5BF500F64186 /* RowSchedule.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +108,8 @@
 		93D9EA701DE37C7900089002 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		93D9EA751DE3ACBB00089002 /* Sync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sync.swift; sourceTree = "<group>"; };
 		93E0C5F31EBE306900905811 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		93EB2F0B1EBF5AEB00F64186 /* RowSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowSchedule.swift; sourceTree = "<group>"; };
+		93EB2F0D1EBF5BF500F64186 /* RowSchedule.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowSchedule.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +191,8 @@
 				9326C4F31EA51C39007DF2A4 /* RowLablancaDay.xib */,
 				9326C4F51EA5279D007DF2A4 /* RowLablancaDay.swift */,
 				93E0C5F31EBE306900905811 /* ScheduleViewController.swift */,
+				93EB2F0B1EBF5AEB00F64186 /* RowSchedule.swift */,
+				93EB2F0D1EBF5BF500F64186 /* RowSchedule.xib */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -272,6 +278,7 @@
 				93075C6A1E59CAB000396389 /* BlogView.xib in Resources */,
 				93B84BA41D9C31AB006C0F67 /* Assets.xcassets in Resources */,
 				935D6E2D1E8678B700CED3A1 /* GalleryView.xib in Resources */,
+				93EB2F0E1EBF5BF500F64186 /* RowSchedule.xib in Resources */,
 				93BAD2EE1E585578009DF853 /* RowHomeBlog.xib in Resources */,
 				9326C4F41EA51C39007DF2A4 /* RowLablancaDay.xib in Resources */,
 				935D6E311E867C5E00CED3A1 /* RowGallery.xib in Resources */,
@@ -309,6 +316,7 @@
 				93B84B9A1D9C31AB006C0F67 /* AppDelegate.swift in Sources */,
 				93B84BA21D9C31AB006C0F67 /* app.xcdatamodeld in Sources */,
 				935D6E331E867C7E00CED3A1 /* RowGallery.swift in Sources */,
+				93EB2F0C1EBF5AEB00F64186 /* RowSchedule.swift in Sources */,
 				936966ED1E98445200A11055 /* AlbumViewController.swift in Sources */,
 				93D9EA681DE342AC00089002 /* UIView.swift in Sources */,
 				938D211F1EA2306300C47EC3 /* LablancaView.swift in Sources */,
