@@ -1663,8 +1663,11 @@ class Sync{
 			
 			//Get host
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let host: Int = Int(str.subStr(start : str.indexOf(target : "\"host\":")! + 8, end : str.indexOf(target : ",\"")! - 2))!
-			row.setValue(host, forKey: "host")
+			let strHost: String = str.subStr(start : str.indexOf(target : "\"host\":")! + 8, end : str.indexOf(target : ",\"")! - 2)
+			if (strHost != "ul"){ //From "null"
+				let host: Int = Int(strHost)!
+				row.setValue(host, forKey: "host")
+			}
 			
 			//Get place
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
@@ -1680,8 +1683,11 @@ class Sync{
 			//Get end
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-			let end = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"end\":")! + 7, end : str.length - 2))!
-			row.setValue(end, forKey: "end")
+			let strEnd: String =  str.subStr(start : str.indexOf(target : "\"end\":")! + 7, end : str.length - 2)
+			if (strEnd != "ul"){ //From "null"
+				let end = dateFormatter.date(from: strEnd)!
+				row.setValue(end, forKey: "end")
+			}
 			
 			//Save CoreData
 			do {

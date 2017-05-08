@@ -126,7 +126,12 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 			for r in searchResults as [NSManagedObject] {
 				
 				title = r.value(forKey: "title_\(lang)") as! String
-				text = r.value(forKey: "description_\(lang)") as! String
+				if let tx = r.value(forKey: "description_\(lang)"){
+					text = r.value(forKey: "description_\(lang)") as! String
+				}
+				else{
+					text = ""
+				}
 				start = r.value(forKey: "start")! as! NSDate
 				locationId = r.value(forKey: "place")! as! Int
 				row = RowSchedule.init(s: "rowSchedule\(rowcount)", i: rowcount)
