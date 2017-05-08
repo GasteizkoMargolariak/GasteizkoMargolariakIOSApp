@@ -93,6 +93,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		performSegue(withIdentifier: "SegueSchedule", sender: nil)
 	}
 	
+	/**
+	 Handles the initial sync process.
+	 It can start it, showing the sync screen, or finish it, hidding the screen.
+	 :param: showScreen True to start the sync, false to end it.
+	*/
+	func initialSync(showScreen: Bool){
+		if showScreen == true{
+			NSLog(":CONTROLLER:DEBUG: Showing initial sync screen.")
+			performSegue(withIdentifier: "SegueSync", sender: nil)
+			Sync(synchronous: true)
+		}
+		else{
+			NSLog(":CONTROLLER:DEBUG: Hidding initial sync screen.")
+			syncSegue?.destination.dismiss(animated: true, completion: nil)
+		}
+	}
+	
+	/**
+	 Run before performing a segue.
+	 Assigns id if neccessary.
+	 :param: segue The segue to perform.
+	 :sender: The calling view.
+	*/
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		NSLog(":CONTROLLER:DEBUG: preparing for segue '\(segue.identifier)' with id \(self.passId)")
 		if segue.identifier == "SeguePost"{
@@ -108,6 +131,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			else{
 				(segue.destination as! ScheduleViewController).margolari = false
 			}
+		}
+		if segue.identifier == "SegueSync"{
+			self.syncSegue = segue
 		}
 	}
 	
