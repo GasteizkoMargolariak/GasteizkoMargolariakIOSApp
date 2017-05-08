@@ -1680,8 +1680,11 @@ class Sync{
 			//Get end
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-			let end = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"end\":")! + 7, end : str.length - 2))!
-			row.setValue(end, forKey: "end")
+			let strEnd =  str.subStr(start : str.indexOf(target : "\"end\":")! + 7, end : str.length - 2)
+			if (strEnd != "ul"){ //From "null"
+				let end = dateFormatter.date(from: strEnd)!
+				row.setValue(end, forKey: "end")
+			}
 			
 			//Save CoreData
 			do {
