@@ -955,6 +955,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Logo" width="83" height="83"/>
         <image name="PhotoPlaceholder" width="170" height="108"/>
     </resources>
 </document>
