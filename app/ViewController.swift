@@ -131,6 +131,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			else{
 				(segue.destination as! ScheduleViewController).margolari = false
 			}
+		}
 		if segue.identifier == "SegueSync"{
 			self.syncSegue = segue
 		}

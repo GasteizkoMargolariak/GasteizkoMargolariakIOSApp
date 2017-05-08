@@ -953,6 +953,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rq0-MV-vyl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2839" y="1801"/>
+        </scene>
         <!--Sync-->
         <scene sceneID="cqg-BI-2xm">
             <objects>
