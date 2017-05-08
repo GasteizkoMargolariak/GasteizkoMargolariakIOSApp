@@ -99,7 +99,7 @@ class Sync{
 			let dataAlbum : [String] = self.getTable(data: strData!, table: "album")
 			let dataFestival : [String] = self.getTable(data: strData!, table: "festival")
 			let dataFestivalDay : [String] = self.getTable(data: strData!, table: "festival_day")
-			//let dataFestivalEvent : [String] = self.getTable(data: strData!, table: "festival_event")
+			let dataFestivalEvent : [String] = self.getTable(data: strData!, table: "festival_event")
 			//let dataFestivalEventImage : [String] = self.getTable(data: strData!, table: "festival_event_image")
 			//let dataFestivalOffer : [String] = self.getTable(data: strData!, table: "festival_offer")
 			//let dataPeople : [String] = self.getTable(data: strData!, table: "people")
@@ -134,6 +134,7 @@ class Sync{
 			
 			self.saveTableFestival(entries: dataFestival)
 			self.saveTableFestivalDay(entries: dataFestivalDay)
+			self.saveTableFestivalEvent(entries: dataFestivalEvent)
 			
 			self.saveSettings(entries: dataSettings)
 			
@@ -1574,6 +1575,121 @@ class Sync{
 				NSLog(":SYNC:ERROR: Could not store Festival_day entry \(error.userInfo).")
 			} catch {
 				NSLog(":SYNC:ERROR: Could not store Festival_day entry.")
+			}
+		}
+	}
+	
+	/**
+	Saves the data in the table.
+	:param: entries Array of strings containing the rows of the table, in JSON format.
+	*/
+	func saveTableFestivalEvent(entries : [String]){
+		
+		NSLog(":SYNC:LOG: Saving table FestivalEvent.")
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.timeZone = TimeZone.ReferenceType.local
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Festival_event", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Festival_event")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			NSLog(":SYNC:ERROR: Could not clean up Festival_event: \(error), \(error.userInfo).")
+		} catch {
+			NSLog(":SYNC:ERROR: Could not clean up Festival_event entity.")
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			
+			//Get id
+			var str = entry
+			let id: Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(id, forKey: "id")
+			
+			//Get gm
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let gm: Int = Int(str.subStr(start : str.indexOf(target : "\"gm\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(gm, forKey: "gm")
+			
+			//Get title_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let title_es : String = str.subStr(start : str.indexOf(target : "\"title_es\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(title_es, forKey: "title_es")
+			
+			//Get title_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let title_en : String = str.subStr(start : str.indexOf(target : "\"title_en\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(title_en, forKey: "title_en")
+			
+			//Get title_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let title_eu : String = str.subStr(start : str.indexOf(target : "\"title_eu\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(title_eu, forKey: "title_eu")
+			
+			//Get description_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let description_es : String = str.subStr(start : str.indexOf(target : "\"description_es\":")! + 18, end : str.indexOf(target : ",\"")! - 2)
+			if (description_es != "ul"){ //From "null"
+				row.setValue(description_es, forKey: "description_es")
+			}
+			
+			//Get description_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let description_en : String = str.subStr(start : str.indexOf(target : "\"description_en\":")! + 18, end : str.indexOf(target : ",\"")! - 2)
+			if (description_en != "ul"){ //From "null"
+				row.setValue(description_en, forKey: "description_en")
+			}
+			
+			//Get description_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let description_eu : String = str.subStr(start : str.indexOf(target : "\"description_eu\":")! + 18, end : str.indexOf(target : ",\"")! - 2)
+			if (description_eu != "ul"){ //From "null"
+				row.setValue(description_eu, forKey: "description_eu")
+			}
+			
+			//Get host
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let host: Int = Int(str.subStr(start : str.indexOf(target : "\"host\":")! + 8, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(host, forKey: "host")
+			
+			//Get place
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let place: Int = Int(str.subStr(start : str.indexOf(target : "\"place\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(place, forKey: "place")
+			
+			//Get start
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+			let start = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(start, forKey: "start")
+			
+			//Get end
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+			let end = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"end\":")! + 7, end : str.length - 2))!
+			row.setValue(end, forKey: "end")
+			
+			//Save CoreData
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				NSLog(":SYNC:ERROR: Could not store Festival_event entry \(error.userInfo).")
+			} catch {
+				NSLog(":SYNC:ERROR: Could not store Festival_event entry.")
 			}
 		}
 	}
