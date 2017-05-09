@@ -160,7 +160,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		delegate = UIApplication.shared.delegate as! AppDelegate
 		delegate?.controller = self
 		
-		
+	}
+
+	func populate(){
+		self.containerViewHome.populate()
+		//self.containerLocation.populate()
+		//self.containerLablanca.populate()
+		//self.containerActivities.populate()
+		//self.containerBlog.populate()
+		//self.containerGallery.populate()
 	}
 	
 	/**

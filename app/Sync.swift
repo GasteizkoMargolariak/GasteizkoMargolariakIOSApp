@@ -101,8 +101,8 @@ class Sync{
 			let dataFestivalDay : [String] = self.getTable(data: strData!, table: "festival_day")
 			let dataFestivalEvent : [String] = self.getTable(data: strData!, table: "festival_event")
 			//let dataFestivalEventImage : [String] = self.getTable(data: strData!, table: "festival_event_image")
-			//let dataFestivalOffer : [String] = self.getTable(data: strData!, table: "festival_offer")
-			//let dataPeople : [String] = self.getTable(data: strData!, table: "people")
+			let dataFestivalOffer : [String] = self.getTable(data: strData!, table: "festival_offer")
+			let dataPeople : [String] = self.getTable(data: strData!, table: "people")
 			let dataPhoto : [String] = self.getTable(data: strData!, table: "photo")
 			let dataPhotoAlbum : [String] = self.getTable(data: strData!, table: "photo_album")
 			//let dataPhotoComment : [String] = self.getTable(data: strData!, table: "photo_comment")
@@ -111,7 +111,7 @@ class Sync{
 			let dataPostComment : [String] = self.getTable(data: strData!, table: "post_comment")
 			let dataPostImage : [String] = self.getTable(data: strData!, table: "post_image")
 			let dataPostTag : [String] = self.getTable(data: strData!, table: "post_tag")
-			//let dataSponsor : [String] = self.getTable(data: strData!, table: "sponsor")
+			let dataSponsor : [String] = self.getTable(data: strData!, table: "sponsor")
 			let dataSettings: [String] = self.getTable(data: strData!, table: "settings")
 			
 			//One by one, save the received data
@@ -127,6 +127,7 @@ class Sync{
 			self.saveTablePostTag(entries: dataPostTag)
 			
 			self.saveTablePlace(entries: dataPlace)
+			self.saveTablePeople(entries: dataPeople)
 			
 			self.saveTableAlbum(entries: dataAlbum)
 			self.saveTablePhoto(entries: dataPhoto)
@@ -134,7 +135,10 @@ class Sync{
 			
 			self.saveTableFestival(entries: dataFestival)
 			self.saveTableFestivalDay(entries: dataFestivalDay)
+			self.saveTableFestivalOffer(entries: dataFestivalOffer)
 			self.saveTableFestivalEvent(entries: dataFestivalEvent)
+			
+			self.saveTableSponsor(entries: dataSponsor)
 			
 			self.saveSettings(entries: dataSettings)
 			
@@ -201,99 +205,6 @@ class Sync{
 		
 		//Return the array
 		return entries
-	}
-	
-	/**
-	Saves the data in the table.
-	:param: entries Array of strings containing the rows of the table, in JSON format.
-	*/
-	func saveTablePeople(entries : [String]){
-		
-		NSLog(":SYNC:LOG: Saving table People.")
-		
-		//Set up context
-		let appDelegate = UIApplication.shared.delegate as! AppDelegate
-		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-		
-		let entity =  NSEntityDescription.entity(forEntityName: "People", in: context)
-		
-		var row: NSManagedObject
-		
-		//Delete all previous entries
-		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "People")
-		let request = NSBatchDeleteRequest(fetchRequest: fetch)
-		do {
-			try context.execute(request)
-		} catch let error as NSError  {
-			NSLog(":SYNC:ERROR: Could not clean up People entity: \(error), \(error.userInfo).")
-		} catch {
-			NSLog(":SYNC:ERROR: Could not clean up People entity")
-		}
-		
-		//Loop new entries
-		for entry in entries{
-			
-			//Get id
-			var str = entry
-			let id : Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
-			
-			//Get name_es
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let name_es : String = str.subStr(start : str.indexOf(target : "\"name_es\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get name_en
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let name_en : String = str.subStr(start : str.indexOf(target : "\"name_en\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get name_eu
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let name_eu : String = str.subStr(start : str.indexOf(target : "\"name_eu\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get address_es
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let address_es : String = str.subStr(start : str.indexOf(target : "\"address_es\":")! + 14, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get address_en
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let address_en : String = str.subStr(start : str.indexOf(target : "\"address_en\":")! + 14, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get address_eu
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let address_eu : String = str.subStr(start : str.indexOf(target : "\"address_eu\":")! + 14, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get cp
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let cp : String = str.subStr(start : str.indexOf(target : "\"cp\":")! + 6, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get lat
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let lat : Float = Float(str.subStr(start : str.indexOf(target : "\"lat\":")! + 7, end : str.indexOf(target : ",\"")! - 2))!
-			
-			//Get lon
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let lon : Float = Float(str.subStr(start : str.indexOf(target : "\"lon\":")! + 7, end : str.length - 2))!
-			
-			//Save CoreData
-			row = NSManagedObject(entity: entity!, insertInto: context)
-			row.setValue(id, forKey: "id")
-			row.setValue(name_es, forKey: "name_es")
-			row.setValue(name_en, forKey: "name_en")
-			row.setValue(name_eu, forKey: "name_eu")
-			row.setValue(address_es, forKey: "address_es")
-			row.setValue(address_en, forKey: "address_en")
-			row.setValue(address_eu, forKey: "address_eu")
-			row.setValue(cp, forKey: "cp")
-			row.setValue(lat, forKey: "lat")
-			row.setValue(lon, forKey: "lon")
-			do {
-				try context.save()
-			} catch let error as NSError  {
-				NSLog(":SYNC:ERROR: Could not store Place with id \(id): \(error), \(error.userInfo).")
-			} catch {
-				NSLog(":SYNC:ERROR: Could not store Place with id \(id).")
-			}
-		}
 	}
 	
 	/**
@@ -379,6 +290,75 @@ class Sync{
 			row.setValue(cp, forKey: "cp")
 			row.setValue(lat, forKey: "lat")
 			row.setValue(lon, forKey: "lon")
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				NSLog(":SYNC:ERROR: Could not store Place with id \(id): \(error), \(error.userInfo).")
+			} catch {
+				NSLog(":SYNC:ERROR: Could not store Place with id \(id).")
+			}
+		}
+	}
+	
+	/**
+	Saves the data in the table.
+	:param: entries Array of strings containing the rows of the table, in JSON format.
+	*/
+	func saveTablePeople(entries : [String]){
+		
+		NSLog(":SYNC:LOG: Saving table People.")
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "People", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "People")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			NSLog(":SYNC:ERROR: Could not clean up People entity: \(error), \(error.userInfo).")
+		} catch {
+			NSLog(":SYNC:ERROR: Could not clean up People entity.")
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			
+			//Get id
+			var str = entry
+			let id: Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(id, forKey: "id")
+			
+			//Get name_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let name_es: String = str.subStr(start : str.indexOf(target : "\"name_es\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(name_es, forKey: "name_es")
+			
+			//Get name_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let name_en: String = str.subStr(start : str.indexOf(target : "\"name_en\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(name_en, forKey: "name_en")
+			
+			//Get name_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let name_eu : String = str.subStr(start : str.indexOf(target : "\"name_eu\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(name_eu, forKey: "name_eu")
+			
+			//Get link
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let link : String = str.subStr(start : str.indexOf(target : "\"link\":")! + 8, end : str.length - 2)
+			row.setValue(link, forKey: "link")
+			
+			//Save CoreData
 			do {
 				try context.save()
 			} catch let error as NSError  {
@@ -1126,7 +1106,7 @@ class Sync{
 			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 			let start = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
 			row.setValue(start, forKey: "start")
-			
+
 			//Get end
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let end = str.subStr(start : str.indexOf(target : "\"end\":")! + 7, end : str.indexOf(target : ",\"")! - 2)
@@ -1527,9 +1507,9 @@ class Sync{
 		do {
 			try context.execute(request)
 		} catch let error as NSError  {
-			NSLog(":SYNC:ERROR: Could not clean up Festival: \(error), \(error.userInfo).")
+			NSLog(":SYNC:ERROR: Could not clean up Festival_day: \(error), \(error.userInfo).")
 		} catch {
-			NSLog(":SYNC:ERROR: Could not clean up Festival entity.")
+			NSLog(":SYNC:ERROR: Could not clean up Festival_day entity.")
 		}
 		
 		//Loop new entries
@@ -1575,6 +1555,106 @@ class Sync{
 				NSLog(":SYNC:ERROR: Could not store Festival_day entry \(error.userInfo).")
 			} catch {
 				NSLog(":SYNC:ERROR: Could not store Festival_day entry.")
+			}
+		}
+	}
+	
+	/**
+	Saves the data in the table.
+	:param: entries Array of strings containing the rows of the table, in JSON format.
+	*/
+	func saveTableFestivalOffer(entries : [String]){
+		
+		NSLog(":SYNC:LOG: Saving table FestivalOffer.")
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Festival_offer", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Festival_offer")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			NSLog(":SYNC:ERROR: Could not clean up Festival_offer: \(error), \(error.userInfo).")
+		} catch {
+			NSLog(":SYNC:ERROR: Could not clean up Festival_offer entity.")
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			
+			// Get id
+			var str = entry
+			let id: Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(id, forKey: "id")
+			
+			// Get year
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let year: Int = Int(str.subStr(start : str.indexOf(target : "\"year\":")! + 8, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(year, forKey: "year")
+			
+			// Get name_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let name_es: String = str.subStr(start : str.indexOf(target : "\"name_es\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(name_es, forKey: "name_es")
+			
+			// Get name_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let name_en: String = str.subStr(start : str.indexOf(target : "\"name_en\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(name_en, forKey: "name_en")
+			
+			// Get name_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let name_eu: String = str.subStr(start : str.indexOf(target : "\"name_eu\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(name_eu, forKey: "name_eu")
+			
+			// Get description_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let description_es : String = str.subStr(start : str.indexOf(target : "\"description_es\":")! + 18, end : str.indexOf(target : ",\"")! - 2)
+			if (description_es != "ul"){ //From "null"
+				row.setValue(description_es, forKey: "description_es")
+			}
+			
+			// Get description_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let description_en : String = str.subStr(start : str.indexOf(target : "\"description_en\":")! + 18, end : str.indexOf(target : ",\"")! - 2)
+			if (description_en != "ul"){ //From "null"
+				row.setValue(description_en, forKey: "description_en")
+			}
+			
+			// Get description_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let description_eu : String = str.subStr(start : str.indexOf(target : "\"description_eu\":")! + 18, end : str.indexOf(target : ",\"")! - 2)
+			if (description_eu != "ul"){ //From "null"
+				row.setValue(description_eu, forKey: "description_eu")
+			}
+			
+			// Get days
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let days: Int = Int(str.subStr(start : str.indexOf(target : "\"days\":")! + 8, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(days, forKey: "days")
+			
+			//Get price
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let price: Int = Int(str.subStr(start : str.indexOf(target : "\"price\":")! + 9, end : str.length - 2))!
+			row.setValue(price, forKey: "price")
+			
+			//Save CoreData
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				NSLog(":SYNC:ERROR: Could not store Festival_offer entry \(error.userInfo).")
+			} catch {
+				NSLog(":SYNC:ERROR: Could not store Festival_offer entry.")
 			}
 		}
 	}
@@ -1679,6 +1759,20 @@ class Sync{
 			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 			let start = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
 			row.setValue(start, forKey: "start")
+
+			// Get day
+			// Special item, not in the sync content
+			dateFormatter.dateFormat = "yyyy-MM-dd"
+			var day = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
+			// If on the first hours of the next day...
+			let calendar = Calendar.current
+			let hours = calendar.component(.hour, from: day as! Date)
+			// ... the event belongs to the previous day.
+			if hours < 6{
+				day = Calendar.current.date(byAdding: .day, value: -1, to: day)!	
+			}
+			row.setValue(day, forKey: "day")
+
 			
 			//Get end
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
@@ -1696,6 +1790,136 @@ class Sync{
 				NSLog(":SYNC:ERROR: Could not store Festival_event entry \(error.userInfo).")
 			} catch {
 				NSLog(":SYNC:ERROR: Could not store Festival_event entry.")
+			}
+		}
+	}
+	
+	/**
+	Saves the data in the table.
+	:param: entries Array of strings containing the rows of the table, in JSON format.
+	*/
+	func saveTableSponsor(entries : [String]){
+		
+		NSLog(":SYNC:LOG: Saving table Sponsor.")
+		
+		//Set up context
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		
+		let entity =  NSEntityDescription.entity(forEntityName: "Sponsor", in: context)
+		
+		var row: NSManagedObject
+		
+		//Delete all previous entries
+		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Sponsor")
+		let request = NSBatchDeleteRequest(fetchRequest: fetch)
+		do {
+			try context.execute(request)
+		} catch let error as NSError  {
+			NSLog(":SYNC:ERROR: Could not clean up Sponsor: \(error), \(error.userInfo).")
+		} catch {
+			NSLog(":SYNC:ERROR: Could not clean up Sponsor entity.")
+		}
+		
+		//Loop new entries
+		for entry in entries{
+			
+			row = NSManagedObject(entity: entity!, insertInto: context)
+			
+			//Get id
+			var str = entry
+			let id: Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
+			row.setValue(id, forKey: "id")
+			
+			// Get name_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let name_es: String = str.subStr(start : str.indexOf(target : "\"name_es\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(name_es, forKey: "name_es")
+			
+			// Get name_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let name_en: String = str.subStr(start : str.indexOf(target : "\"name_en\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(name_en, forKey: "name_en")
+			
+			// Get name_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let name_eu: String = str.subStr(start : str.indexOf(target : "\"name_eu\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(name_eu, forKey: "name_eu")
+			
+			// Get text_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text_es: String = str.subStr(start : str.indexOf(target : "\"text_es\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(text_es, forKey: "text_es")
+			
+			// Get text_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text_en: String = str.subStr(start : str.indexOf(target : "\"text_en\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(text_en, forKey: "text_en")
+			
+			// Get text_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let text_eu: String = str.subStr(start : str.indexOf(target : "\"text_eu\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
+			row.setValue(text_eu, forKey: "text_eu")
+			
+			// Get image
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let image: String = str.subStr(start : str.indexOf(target : "\"image\":")! + 9, end : str.indexOf(target : ",\"")! - 2)
+			if (image != "ul"){ //From "null"
+				row.setValue(image, forKey: "image")
+			}
+			
+			// Get address_es
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let address_es: String = str.subStr(start : str.indexOf(target : "\"address_es\":")! + 14, end : str.indexOf(target : ",\"")! - 2)
+			if (address_es != "ul"){ //From "null"
+				row.setValue(address_es, forKey: "address_es")
+			}
+			
+			// Get address_en
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let address_en: String = str.subStr(start : str.indexOf(target : "\"address_en\":")! + 14, end : str.indexOf(target : ",\"")! - 2)
+			if (address_en != "ul"){ //From "null"
+				row.setValue(address_en, forKey: "address_en")
+			}
+			
+			// Get address_eu
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let address_eu: String = str.subStr(start : str.indexOf(target : "\"address_eu\":")! + 14, end : str.indexOf(target : ",\"")! - 2)
+			if (address_eu != "ul"){ //From "null"
+				row.setValue(address_eu, forKey: "address_eu")
+			}
+			
+			//Get link
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let link: String = str.subStr(start : str.indexOf(target : "\"link\":")! + 8, end : str.indexOf(target : ",\"")! - 2)
+			if (link != "ul"){ //From "null"
+				row.setValue(link, forKey: "link")
+			}
+			
+			//Get lat
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let strLat: String = str.subStr(start : str.indexOf(target : "\"lat\":")! + 7, end : str.indexOf(target : ",\"")! - 2)
+			if (strLat != "ul"){ //From "null"
+				let lat: Float = Float(str.subStr(start : str.indexOf(target : "\"lat\":")! + 7, end : str.indexOf(target : ",\"")! - 2))!
+				row.setValue(lat, forKey: "lat")
+			}
+			
+			//Get lon
+			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
+			let strLon: String = str.subStr(start : str.indexOf(target : "\"lon\":")! + 7, end : str.length - 2)
+			if (strLon != "ul"){ //From "null"
+				let lon: Float = Float(str.subStr(start : str.indexOf(target : "\"lon\":")! + 7, end : str.length - 2))!
+				row.setValue(lon, forKey: "lon")
+			}
+			
+			//Save CoreData
+			do {
+				try context.save()
+			} catch let error as NSError  {
+				NSLog(":SYNC:ERROR: Could not store Sponsor entry \(error.userInfo).")
+			} catch {
+				NSLog(":SYNC:ERROR: Could not store Sponsor entry.")
 			}
 		}
 	}
