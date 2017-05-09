@@ -41,9 +41,9 @@ class HomeView: UIView {
 	@IBOutlet weak var pastActivitiesSection: Section!
 	@IBOutlet weak var socialSection: Section!
 
-	let lang: String
-	let moc: NSManagedObjectContext
-	let appDelegate: AppDelegate
+	var lang: String? = nil
+	var moc: NSManagedObjectContext? = nil
+	var appDelegate: AppDelegate? = nil
 	
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -74,7 +74,7 @@ class HomeView: UIView {
 		//Get info to populate sections
 		self.moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		self.appDelegate = UIApplication.shared.delegate as! AppDelegate
-		self.moc.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		self.moc?.persistentStoreCoordinator = appDelegate?.persistentStoreCoordinator
 		self.lang = getLanguage()
 		
 		//Populate sections
@@ -98,11 +98,11 @@ class HomeView: UIView {
 	func populate(){
 		
 		//Populate sections
-		self.setUpPastActivities(context: self.moc, delegate: appDelegate, lang: self.lang, parent: self.pastActivitiesSection.getContentStack())
-		self.setUpBlog(context: self.moc, delegate: self.appDelegate, lang: self.lang, parent: self.blogSection.getContentStack())
-		self.setUpFutureActivities(context: self.moc, delegate: self.appDelegate, lang: self.lang, parent: self.futureActivitiesSection.getContentStack())
+		self.setUpPastActivities(context: self.moc!, delegate: appDelegate!, lang: self.lang!, parent: self.pastActivitiesSection.getContentStack())
+		self.setUpBlog(context: self.moc!, delegate: self.appDelegate!, lang: self.lang!, parent: self.blogSection.getContentStack())
+		self.setUpFutureActivities(context: self.moc!, delegate: self.appDelegate!, lang: self.lang!, parent: self.futureActivitiesSection.getContentStack())
 		self.setUpSocial(parent: self.socialSection.getContentStack())
-		self.setUpGallery(context: self.moc, delegate: self.appDelegate, parent: self.gallerySection.getContentStack())
+		self.setUpGallery(context: self.moc!, delegate: self.appDelegate!, parent: self.gallerySection.getContentStack())
 		self.pastActivitiesSection.expandSection()
 	}
 	

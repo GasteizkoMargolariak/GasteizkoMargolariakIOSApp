@@ -211,99 +211,6 @@ class Sync{
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
 	*/
-	func saveTablePeople(entries : [String]){
-		
-		NSLog(":SYNC:LOG: Saving table People.")
-		
-		//Set up context
-		let appDelegate = UIApplication.shared.delegate as! AppDelegate
-		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-		
-		let entity =  NSEntityDescription.entity(forEntityName: "People", in: context)
-		
-		var row: NSManagedObject
-		
-		//Delete all previous entries
-		let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "People")
-		let request = NSBatchDeleteRequest(fetchRequest: fetch)
-		do {
-			try context.execute(request)
-		} catch let error as NSError  {
-			NSLog(":SYNC:ERROR: Could not clean up People entity: \(error), \(error.userInfo).")
-		} catch {
-			NSLog(":SYNC:ERROR: Could not clean up People entity")
-		}
-		
-		//Loop new entries
-		for entry in entries{
-			
-			//Get id
-			var str = entry
-			let id : Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
-			
-			//Get name_es
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let name_es : String = str.subStr(start : str.indexOf(target : "\"name_es\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get name_en
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let name_en : String = str.subStr(start : str.indexOf(target : "\"name_en\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get name_eu
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let name_eu : String = str.subStr(start : str.indexOf(target : "\"name_eu\":")! + 11, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get address_es
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let address_es : String = str.subStr(start : str.indexOf(target : "\"address_es\":")! + 14, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get address_en
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let address_en : String = str.subStr(start : str.indexOf(target : "\"address_en\":")! + 14, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get address_eu
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let address_eu : String = str.subStr(start : str.indexOf(target : "\"address_eu\":")! + 14, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get cp
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let cp : String = str.subStr(start : str.indexOf(target : "\"cp\":")! + 6, end : str.indexOf(target : ",\"")! - 2)
-			
-			//Get lat
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let lat : Float = Float(str.subStr(start : str.indexOf(target : "\"lat\":")! + 7, end : str.indexOf(target : ",\"")! - 2))!
-			
-			//Get lon
-			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let lon : Float = Float(str.subStr(start : str.indexOf(target : "\"lon\":")! + 7, end : str.length - 2))!
-			
-			//Save CoreData
-			row = NSManagedObject(entity: entity!, insertInto: context)
-			row.setValue(id, forKey: "id")
-			row.setValue(name_es, forKey: "name_es")
-			row.setValue(name_en, forKey: "name_en")
-			row.setValue(name_eu, forKey: "name_eu")
-			row.setValue(address_es, forKey: "address_es")
-			row.setValue(address_en, forKey: "address_en")
-			row.setValue(address_eu, forKey: "address_eu")
-			row.setValue(cp, forKey: "cp")
-			row.setValue(lat, forKey: "lat")
-			row.setValue(lon, forKey: "lon")
-			do {
-				try context.save()
-			} catch let error as NSError  {
-				NSLog(":SYNC:ERROR: Could not store Place with id \(id): \(error), \(error.userInfo).")
-			} catch {
-				NSLog(":SYNC:ERROR: Could not store Place with id \(id).")
-			}
-		}
-	}
-	
-	/**
-	Saves the data in the table.
-	:param: entries Array of strings containing the rows of the table, in JSON format.
-	*/
 	func saveTablePlace(entries : [String]){
 		
 		NSLog(":SYNC:LOG: Saving table Place.")
@@ -1856,15 +1763,15 @@ class Sync{
 			// Get day
 			// Special item, not in the sync content
 			dateFormatter.dateFormat = "yyyy-MM-dd"
-			var day = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - $
+			var day = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
 			// If on the first hours of the next day...
 			let calendar = Calendar.current
-			let hours = calendar.component(.hour, from: day as Date)
+			let hours = calendar.component(.hour, from: day as! Date)
 			// ... the event belongs to the previous day.
 			if hours < 6{
-				day = Calendar.current.date(byAdding: .day, value: -1, to: day)	
+				day = Calendar.current.date(byAdding: .day, value: -1, to: day)!	
 			}
-                        row.setValue(day, forKey: "day")
+			row.setValue(day, forKey: "day")
 
 			
 			//Get end
