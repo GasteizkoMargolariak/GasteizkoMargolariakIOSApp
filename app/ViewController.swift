@@ -167,7 +167,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		//self.containerLocation.populate()
 		//self.containerLablanca.populate()
 		//self.containerActivities.populate()
-		//self.containerBlog.populate()
+		self.containerBlog.populate()
 		//self.containerGallery.populate()
 	}
 	

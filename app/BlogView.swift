@@ -65,6 +65,14 @@ class BlogView: UIView {
 		self.delegate = UIApplication.shared.delegate as! AppDelegate
 		self.lang = getLanguage()
 		self.context?.persistentStoreCoordinator = delegate?.persistentStoreCoordinator
+		
+		populate()
+		
+		NSLog(":BLOG:DEBUG: Finished loading BlogView")
+		
+	}
+	
+	func populate(){
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "dtime", ascending: false)
 		let sortDescriptors = [sortDescriptor]
@@ -75,7 +83,7 @@ class BlogView: UIView {
 			let searchResults = try self.context?.fetch(fetchRequest)
 			
 			//I like to check the size of the returned results!
-			NSLog("BLOG:DEBUG: Total posts: \(searchResults?.count)")
+			NSLog(":BLOG:DEBUG: Total posts: \(searchResults?.count)")
 			
 			var row : RowBlog
 			var count = 0
@@ -88,14 +96,14 @@ class BlogView: UIView {
 			for r in searchResults as! [NSManagedObject] {
 				count = count + 1
 				//get the Key Value pairs (although there may be a better way to do that...
-				print("BLOG:DEBUG: Post perm: \(r.value(forKey: "permalink"))")
+				NSLog(":BLOG:DEBUG: Post perm: \(r.value(forKey: "permalink"))")
 				
 				
 				//Create a new row
 				row = RowBlog.init(s: "rowBlog\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
-				title = r.value(forKey: "title_\(lang)")! as! String
-				text = r.value(forKey: "text_\(lang)")! as! String
+				title = r.value(forKey: "title_\(lang!)")! as! String
+				text = r.value(forKey: "text_\(lang!)")! as! String
 				row.setTitle(text: title)
 				row.setText(text: text)
 				
@@ -111,11 +119,11 @@ class BlogView: UIView {
 					let imgSearchResults = try context?.fetch(imgFetchRequest)
 					for imgR in imgSearchResults as! [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
-						print ("BLOG:DEBUG: Image: \(image)")
+						NSLog(":BLOG:DEBUG: Image: \(image)")
 						row.setImage(filename: image)
 					}
 				} catch {
-					print("BLOG:ERROR: Error getting image for post \(id): \(error)")
+					NSLog(":BLOG:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
 				print("BLOG:DEBUG: Row height: \(row.frame.height)")
@@ -134,18 +142,18 @@ class BlogView: UIView {
 				
 			}
 		} catch {
-			print("BLOG:ERROR: Error with request: \(error)")
+			NSLog(":BLOG:ERROR: Error with request: \(error)")
 		}
 		
 		//Always at the end: update scrollview
-		var h: Int = 0
-		for view in scrollView.subviews {
-			//contentRect = contentRect.union(view.frame);
-			h = h + Int(view.frame.height) + 30 //Why 30?
-			print("BLOG:DEBUG: curh: \(h)")
-		}
+		//var h: Int = 0
+		//for view in scrollView.subviews {
+		//	//contentRect = contentRect.union(view.frame);
+		//	h = h + Int(view.frame.height) + 30 //Why 30?
+		//	NSLog(":BLOG:DEBUG: curh: \(h)")
+		//}
 		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 2500//CGFloat(h);
+		//self.scrollView.contentSize.height = 2500//CGFloat(h);
 		
 		// The view controller
 		//var viewController: ViewController  = self.window?.rootViewController as! ViewController
@@ -163,7 +171,7 @@ class BlogView: UIView {
 		
 		
 		
-		print("BLOG:DEBUG: Finished loading BlogView")
+		NSLog(":BLOG:DEBUG: Finished populating BlogView")
 	}
 	
 	/*func openPost(){//(_ sender:UITapGestureRecognizer? = nil){
@@ -188,10 +196,5 @@ class BlogView: UIView {
 		else{
 			return "es"
 		}
-	}
-	
-	func setController(controller: ViewController){
-		
-		//self.controller = controller
 	}
 }
