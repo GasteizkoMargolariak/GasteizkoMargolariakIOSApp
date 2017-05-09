@@ -30,33 +30,110 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	//The menu collection.
 	var sectionCollection: UICollectionView!
+	
+	// Need to save the sync segue.
+	var syncSegue: UIStoryboardSegue?
 
 	//Each of the sections of the app.
-	@IBOutlet weak var containerViewGallery: UIView!
-	@IBOutlet weak var containerViewBlog: BlogView!
-	@IBOutlet weak var containerViewActivities: UIView!
-	@IBOutlet weak var containerViewLablanca: UIView!
-	@IBOutlet weak var containerViewLocation: UIView!
-	@IBOutlet weak var containerViewHome: HomeView!
+	@IBOutlet var containerViewGallery: GalleryView!
+	@IBOutlet var containerViewBlog: BlogView!
+	@IBOutlet var containerViewActivities: UIView!
+	@IBOutlet var containerViewLablanca: LablancaView!
+	@IBOutlet var containerViewLocation: UIView!
+	@IBOutlet var containerViewHome: HomeView!
 	
 	var passId: Int = -1
 	
+	/**
+	 Controller initializer.
+	*/
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
+	
+	/**
+	 Retrieves the application context.
+	 :return: The application context.
+	*/
 	func getContext () -> NSManagedObjectContext {
 		//let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		//return appDelegate.persistentContainer.viewContext
 		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 	}
 	
+	/**
+	 Shows a post by loading the controller.
+	 :param: id The post id.
+	*/
 	func showPost(id: Int){
-		print("CONTROLLER:DEBUG: showPost \(id)")
+		NSLog(":CONTROLLER:DEBUG: Showing Post \(id)")
 		self.passId = id
 		performSegue(withIdentifier: "SeguePost", sender: nil)
 	}
 	
+	/**
+	 Shows a post by loading the controller.
+	 :param: id The album id.
+	*/
+	func showAlbum(id: Int){
+		NSLog(":CONTROLLER:DEBUG: Showing album \(id)")
+		self.passId = id
+		performSegue(withIdentifier: "SegueAlbum", sender: nil)
+	}
+	
+	func showSchedule(margolari: Bool){
+		NSLog(":CONTROLLER:DEBUG: Showing schedule. Margolari: \(margolari)")
+		if margolari == true{
+			self.passId = 1
+		}
+		else{
+			self.passId = 0
+		}
+		// TODO: Uncomment when ready
+		performSegue(withIdentifier: "SegueSchedule", sender: nil)
+	}
+	
+	/**
+	 Handles the initial sync process.
+	 It can start it, showing the sync screen, or finish it, hidding the screen.
+	 :param: showScreen True to start the sync, false to end it.
+	*/
+	func initialSync(showScreen: Bool){
+		if showScreen == true{
+			NSLog(":CONTROLLER:DEBUG: Showing initial sync screen.")
+			performSegue(withIdentifier: "SegueSync", sender: nil)
+			Sync(synchronous: true)
+		}
+		else{
+			NSLog(":CONTROLLER:DEBUG: Hidding initial sync screen.")
+			syncSegue?.destination.dismiss(animated: true, completion: nil)
+		}
+	}
+	
+	/**
+	 Run before performing a segue.
+	 Assigns id if neccessary.
+	 :param: segue The segue to perform.
+	 :sender: The calling view.
+	*/
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		print("CONTROLLER:DEBUG: preparing for segue \(segue.identifier) with id \(self.passId)")
+		NSLog(":CONTROLLER:DEBUG: preparing for segue '\(segue.identifier)' with id \(self.passId)")
 		if segue.identifier == "SeguePost"{
 			(segue.destination as! PostViewController).id = passId
+		}
+		if segue.identifier == "SegueAlbum"{
+			(segue.destination as! AlbumViewController).id = passId
+		}
+		if segue.identifier == "SegueSchedule"{
+			if passId == 1{
+				(segue.destination as! ScheduleViewController).margolari = true
+			}
+			else{
+				(segue.destination as! ScheduleViewController).margolari = false
+			}
+		}
+		if segue.identifier == "SegueSync"{
+			self.syncSegue = segue
 		}
 	}
 	
@@ -71,23 +148,65 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewActivities.alpha = 0
 		self.containerViewBlog.alpha = 0
 		self.containerViewGallery.alpha = 0
-		
-		
-		
-		//self.containerViewBlog.isHidden = true
 				
-		print("CONTROLLER:LOG: viewDidLoad()")
-		print("CONTROLLER:DEBUG: Skyp sync")
+		NSLog(":CONTROLLER:LOG: viewDidLoad()")
+		NSLog(":CONTROLLER:DEBUG: Skyp sync")
 		//Sync()
 		
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
-		
+
 		//self.containerViewBlog.setController(controller: self as ViewController)
 		
 		delegate = UIApplication.shared.delegate as! AppDelegate
 		delegate?.controller = self
 		
+	}
+
+	func populate(){
+		self.containerViewHome.populate()
+		//self.containerLocation.populate()
+		//self.containerLablanca.populate()
+		//self.containerActivities.populate()
+		//self.containerBlog.populate()
+		//self.containerGallery.populate()
+	}
+	
+	/**
+	 Executed when the view is actually shown.
+	 Performs the initial sync in the first run.
+	 It also generates a user id if none exists.
+	 :param: animated Wether the controller appearance must be animated or not.
+	*/
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		if UserDefaults.standard.object(forKey: "userId") == nil{
+			let newUid = randomString(length: 16)
+			let defaults = UserDefaults.standard
+			defaults.set(newUid, forKey: "userId")
+			initialSync(showScreen: true)
+		}
+		
+	}
+	
+	/**
+	 Generates a random string to be used as a user identifier.
+	 :param: length The length of the generated string.
+	 :return: A random alphanumeric string with the indicated length.
+	*/
+	func randomString(length: Int) -> String {
+		
+		let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+		let len = UInt32(letters.length)
+		
+		var randomString = ""
+		
+		for _ in 0 ..< length {
+			let rand = arc4random_uniform(len)
+			var nextChar = letters.character(at: Int(rand))
+			randomString += NSString(characters: &nextChar, length: 1) as String
+		}
+		
+		return randomString
 	}
 
 	/**
