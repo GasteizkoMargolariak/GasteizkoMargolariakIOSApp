@@ -26,20 +26,18 @@ Class to handle the home view.
 */
 class BlogView: UIView {
 	
-	//var window:UIWindow?
 	
-	//The main scroll view.
+	// Outlets
 	@IBOutlet weak var scrollView: UIScrollView!
-	
-	//The container of the view.
 	@IBOutlet var container: UIView!
-	
-	//Each of the sections of the view.
 	@IBOutlet weak var section: Section!
 	
-	//var controller : ViewController
-	
 	var delegate: AppDelegate? = nil
+	var postList: UIStackView? = nil
+	var storyboard: UIStoryboard? = nil
+	var controller: ViewController? = nil
+	var context: NSManagedObjectContext? = nil;
+	var lang: String? = nil
 	
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -51,26 +49,22 @@ class BlogView: UIView {
 	required init?(coder aDecoder: NSCoder) {
 		
 		super.init(coder: aDecoder)
+		NSLog(":BLOG:DEBUG: init (coder).")
 		
-		print("BLOG:DEBUG: init.")
-		
-		//Load the contents of the HomeView.xib file.
+		// Load the contents of the HomeView.xib file.
 		Bundle.main.loadNibNamed("BlogView", owner: self, options: nil)
-		self.addSubview(container)
-		container.frame = self.bounds
-		section.setTitle(text: "Blog")
-		let parent = section.getContentStack()
+		self.addSubview(self.container)
+		self.container.frame = self.bounds
+		self.section.setTitle(text: "Blog")
+		self.postList = self.section.getContentStack()
 		
 		// Get viewController from StoryBoard
-		let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-		let controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
-		
-		// Show posts
-		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		let appDelegate = UIApplication.shared.delegate as! AppDelegate
-		self.delegate = appDelegate
-		let lang : String = getLanguage()
-		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+		self.controller = storyboard?.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
+		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		self.delegate = UIApplication.shared.delegate as! AppDelegate
+		self.lang = getLanguage()
+		self.context?.persistentStoreCoordinator = delegate?.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "dtime", ascending: false)
 		let sortDescriptors = [sortDescriptor]
@@ -78,10 +72,10 @@ class BlogView: UIView {
 		
 		do {
 			//go get the results
-			let searchResults = try context.fetch(fetchRequest)
+			let searchResults = try self.context?.fetch(fetchRequest)
 			
 			//I like to check the size of the returned results!
-			print ("BLOG:DEBUG: Total posts: \(searchResults.count)")
+			NSLog("BLOG:DEBUG: Total posts: \(searchResults?.count)")
 			
 			var row : RowBlog
 			var count = 0
@@ -91,7 +85,7 @@ class BlogView: UIView {
 			var image: String
 			
 			//You need to convert to NSManagedObject to use 'for' loops
-			for r in searchResults as [NSManagedObject] {
+			for r in searchResults as! [NSManagedObject] {
 				count = count + 1
 				//get the Key Value pairs (although there may be a better way to do that...
 				print("BLOG:DEBUG: Post perm: \(r.value(forKey: "permalink"))")
@@ -114,8 +108,8 @@ class BlogView: UIView {
 				imgFetchRequest.predicate = NSPredicate(format: "post == %i", id)
 				imgFetchRequest.fetchLimit = 1
 				do{
-					let imgSearchResults = try context.fetch(imgFetchRequest)
-					for imgR in imgSearchResults as [NSManagedObject]{
+					let imgSearchResults = try context?.fetch(imgFetchRequest)
+					for imgR in imgSearchResults as! [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
 						print ("BLOG:DEBUG: Image: \(image)")
 						row.setImage(filename: image)
@@ -126,7 +120,7 @@ class BlogView: UIView {
 				
 				print("BLOG:DEBUG: Row height: \(row.frame.height)")
 				
-				parent.addArrangedSubview(row)
+				self.postList?.addArrangedSubview(row)
 				row.setNeedsLayout()
 				row.layoutIfNeeded()
 				
