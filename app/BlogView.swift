@@ -79,10 +79,13 @@ class BlogView: UIView {
 		fetchRequest.sortDescriptors = sortDescriptors
 		
 		do {
-			//go get the results
-			let searchResults = try self.context?.fetch(fetchRequest)
+			// Clear the list
+			for v in self.postList?.subviews{
+				v.removeFromSuperview()
+			}
 			
-			//I like to check the size of the returned results!
+			// Get the results
+			let searchResults = try self.context?.fetch(fetchRequest)			
 			NSLog(":BLOG:DEBUG: Total posts: \(searchResults?.count)")
 			
 			var row : RowBlog
@@ -92,13 +95,10 @@ class BlogView: UIView {
 			var text: String
 			var image: String
 			
-			//You need to convert to NSManagedObject to use 'for' loops
 			for r in searchResults as! [NSManagedObject] {
 				count = count + 1
-				//get the Key Value pairs (although there may be a better way to do that...
 				NSLog(":BLOG:DEBUG: Post perm: \(r.value(forKey: "permalink"))")
-				
-				
+								
 				//Create a new row
 				row = RowBlog.init(s: "rowBlog\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
@@ -126,11 +126,10 @@ class BlogView: UIView {
 					NSLog(":BLOG:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
-				print("BLOG:DEBUG: Row height: \(row.frame.height)")
 				
 				self.postList?.addArrangedSubview(row)
-				row.setNeedsLayout()
-				row.layoutIfNeeded()
+				//row.setNeedsLayout()
+				//row.layoutIfNeeded()
 				
 				// TODO: Do this on the row didLoad method
 				// Set tap recognizer
@@ -141,6 +140,11 @@ class BlogView: UIView {
 				
 				
 			}
+
+			// Trigger a layout update
+			postList?.setNeedsLayout()
+			postList?.layoutIfNeeded()
+
 		} catch {
 			NSLog(":BLOG:ERROR: Error with request: \(error)")
 		}
