@@ -35,7 +35,7 @@ class ActivitiesView: UIView {
 	var controller: ViewController? = nil
 	var lang: String? = nil
 	var futureList: UIStackView? = nil
-	var pastList: UiStackView? = nil
+	var pastList: UIStackView? = nil
 	var context: NSManagedObjectContext? = nil
 	
 	override init(frame: CGRect){
@@ -62,11 +62,11 @@ class ActivitiesView: UIView {
 		
 		// Get viewController from StoryBoard
 		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
-		self.controller = self.storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
+		self.controller = self.storyboard?.instantiateViewController(withIdentifier: "GMViewController") as? ViewController
 		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		self.delegate = UIApplication.shared.delegate as! AppDelegate
+		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.lang = self.getLanguage()
-		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		self.context?.persistentStoreCoordinator = self.delegate?.persistentStoreCoordinator
 
 		// Populate activity lists.
 		populate()
@@ -82,12 +82,12 @@ class ActivitiesView: UIView {
 		
 		do {
 			let searchResults = try self.context?.fetch(fetchRequest)
-			NSLog(":ACTIVITIES:DEBUG: Total future activities: \(searchResults?.count)")
+			NSLog(":ACTIVITIES:DEBUG: Total future activities: \(String(describing: searchResults?.count))")
 			if searchResults?.count == 0{
-				NSLog(":ACTIVITIES:DEBUG: No future activities: \(searchResults?.count)")
+				NSLog(":ACTIVITIES:DEBUG: No future activities: \(String(describing: searchResults?.count))")
 				let row: RowLabel = RowLabel.init(s: "rowFutureActivity0", i: 0)
 				row.setText(text: "No hay actividades planeadas proximamente. Pronto organizaremos algo!")
-				self.futureList.addArrangedSubview(row)
+				self.futureList?.addArrangedSubview(row)
 			}
 			else{
 			
@@ -101,15 +101,15 @@ class ActivitiesView: UIView {
 				var price: Int
 				var date: NSDate
 			
-				for r in searchResults? as [NSManagedObject] {
+				for r in searchResults! {
 					count = count + 1
-					NSLog(":ACTIVITIES:DEBUG: Activity perm: \(r.value(forKey: "permalink"))")
+					NSLog(":ACTIVITIES:DEBUG: Activity perm: \(String(describing: r.value(forKey: "permalink")))")
 				
 					// Create a new row
 					row = RowFutureActivity.init(s: "rowFutureActivity\(count)", i: count)
 					id = r.value(forKey: "id")! as! Int
-					title = r.value(forKey: "title_\(lang)")! as! String
-					text = r.value(forKey: "text_\(lang)")! as! String
+					title = r.value(forKey: "title_\(lang!)")! as! String
+					text = r.value(forKey: "text_\(lang!)")! as! String
 					city = r.value(forKey: "city")! as! String
 					price = r.value(forKey: "price")! as! Int
 					date = r.value(forKey: "date")! as! NSDate
@@ -117,7 +117,7 @@ class ActivitiesView: UIView {
 					row.setText(text: text)
 					row.setPrice(price: price)
 					row.setCity(text: city)
-					row.setDate(date: date, lang: lang)
+					row.setDate(date: date, lang: lang!)
 				
 					// Get main image
 					image = ""
@@ -128,8 +128,8 @@ class ActivitiesView: UIView {
 					imgFetchRequest.predicate = NSPredicate(format: "activity == %i", id)
 					imgFetchRequest.fetchLimit = 1
 					do{
-						let imgSearchResults = try context.fetch(imgFetchRequest)
-						for imgR in imgSearchResults as [NSManagedObject]{
+						let imgSearchResults = try self.context?.fetch(imgFetchRequest)
+						for imgR in imgSearchResults!{
 							image = imgR.value(forKey: "image")! as! String
 							NSLog(":ACTIVITIES:DEBUG: Image: \(image)")
 							row.setImage(filename: image)
@@ -138,7 +138,7 @@ class ActivitiesView: UIView {
 						NSLog(":ACTIVITIES:ERROR: Error getting image for activity \(id): \(error)")
 					}
 				
-					self.futureList.addArrangedSubview(row)
+					self.futureList?.addArrangedSubview(row)
 					//row.setNeedsLayout()
 					//row.layoutIfNeeded()
 				
@@ -148,8 +148,8 @@ class ActivitiesView: UIView {
 					//row.isUserInteractionEnabled = true
 					//row.addGestureRecognizer(tapRecognizer)
 				}
-				self.futureList.setNeedsLayout()
-				self.futureList.layoutIfNeeded()
+				self.futureList?.setNeedsLayout()
+				self.futureList?.layoutIfNeeded()
 			}
 		}
 		catch {
@@ -166,8 +166,8 @@ class ActivitiesView: UIView {
 		fetchRequest.predicate = NSPredicate(format: "date < %@", NSDate())
 		
 		do {
-			let searchResults = try self.context.fetch(fetchRequest)
-			NSLog(":ACTIVITIES:DEBUG: Total past activities: \(searchResults?.count)")
+			let searchResults = try self.context?.fetch(fetchRequest)
+			NSLog(":ACTIVITIES:DEBUG: Total past activities: \(String(describing: searchResults?.count))")
 			
 			var row: RowPastActivity
 			var count: Int = 0
@@ -176,15 +176,15 @@ class ActivitiesView: UIView {
 			var text: String
 			var image: String
 			
-			for r in searchResults as [NSManagedObject] {
+			for r in searchResults! {
 				count = count + 1
-				NSLog(":ACTIVITIES:DEBUG: Activity perm: \(r.value(forKey: "permalink"))")
+				NSLog(":ACTIVITIES:DEBUG: Activity perm: \(String(describing: r.value(forKey: "permalink")))")
 				
 				// Create a new row
 				row = RowPastActivity.init(s: "rowPastActivity\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
-				title = r.value(forKey: "title_\(lang)")! as! String
-				text = r.value(forKey: "text_\(lang)")! as! String
+				title = r.value(forKey: "title_\(lang!)")! as! String
+				text = r.value(forKey: "text_\(lang!)")! as! String
 				row.setTitle(text: title)
 				row.setText(text: text)
 				
@@ -197,8 +197,8 @@ class ActivitiesView: UIView {
 				imgFetchRequest.predicate = NSPredicate(format: "activity == %i", id)
 				imgFetchRequest.fetchLimit = 1
 				do{
-					let imgSearchResults = try self.context.fetch(imgFetchRequest)
-					for imgR in imgSearchResults? as [NSManagedObject]{
+					let imgSearchResults = try self.context?.fetch(imgFetchRequest)
+					for imgR in imgSearchResults!{
 						image = imgR.value(forKey: "image")! as! String
 						NSLog(":ACTIVITIES:DEBUG: Image: \(image)")
 						row.setImage(filename: image)
@@ -210,7 +210,7 @@ class ActivitiesView: UIView {
 				
 				NSLog(":ACTIVITIES:DEBUG: Row height: \(row.frame.height)")
 				
-				self.pastList.addArrangedSubview(row)
+				self.pastList?.addArrangedSubview(row)
 				//row.setNeedsLayout()
 				//row.layoutIfNeeded()
 				
@@ -220,8 +220,8 @@ class ActivitiesView: UIView {
 				//row.isUserInteractionEnabled = true
 				//row.addGestureRecognizer(tapRecognizer)
 			}
-			self.pastList.setNeedsLayout()
-			self.pastList.layoutIfNeeded()
+			self.pastList?.setNeedsLayout()
+			self.pastList?.layoutIfNeeded()
 		} catch {
 			NSLog(":ACTIVITIES:ERROR: Error with request: \(error)")
 		}
