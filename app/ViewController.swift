@@ -37,7 +37,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	//Each of the sections of the app.
 	@IBOutlet var containerViewGallery: GalleryView!
 	@IBOutlet var containerViewBlog: BlogView!
-	@IBOutlet var containerViewActivities: UIView!
+	@IBOutlet var containerViewActivities: ActivitiesView!
 	@IBOutlet var containerViewLablanca: LablancaView!
 	@IBOutlet var containerViewLocation: UIView!
 	@IBOutlet var containerViewHome: HomeView!
@@ -166,7 +166,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewHome.populate()
 		//self.containerLocation.populate()
 		//self.containerLablanca.populate()
-		//self.containerActivities.populate()
+		self.containerViewActivities.populate()
 		//self.containerBlog.populate()
 		//self.containerGallery.populate()
 	}
