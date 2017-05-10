@@ -148,7 +148,6 @@ class BlogView: UIView {
 		} catch {
 			NSLog(":BLOG:ERROR: Error with request: \(error)")
 		}
-
 		NSLog(":BLOG:DEBUG: Finished populating BlogView")
 	}
 	
