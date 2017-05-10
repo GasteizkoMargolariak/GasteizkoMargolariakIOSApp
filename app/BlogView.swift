@@ -26,20 +26,18 @@ Class to handle the home view.
 */
 class BlogView: UIView {
 	
-	//var window:UIWindow?
 	
-	//The main scroll view.
+	// Outlets
 	@IBOutlet weak var scrollView: UIScrollView!
-	
-	//The container of the view.
 	@IBOutlet var container: UIView!
-	
-	//Each of the sections of the view.
 	@IBOutlet weak var section: Section!
 	
-	//var controller : ViewController
-	
 	var delegate: AppDelegate? = nil
+	var postList: UIStackView? = nil
+	var storyboard: UIStoryboard? = nil
+	var controller: ViewController? = nil
+	var context: NSManagedObjectContext? = nil;
+	var lang: String? = nil
 	
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -51,37 +49,44 @@ class BlogView: UIView {
 	required init?(coder aDecoder: NSCoder) {
 		
 		super.init(coder: aDecoder)
+		NSLog(":BLOG:DEBUG: init (coder).")
 		
-		print("BLOG:DEBUG: init.")
-		
-		//Load the contents of the HomeView.xib file.
+		// Load the contents of the HomeView.xib file.
 		Bundle.main.loadNibNamed("BlogView", owner: self, options: nil)
-		self.addSubview(container)
-		container.frame = self.bounds
-		section.setTitle(text: "Blog")
-		let parent = section.getContentStack()
+		self.addSubview(self.container)
+		self.container.frame = self.bounds
+		self.section.setTitle(text: "Blog")
+		self.postList = self.section.getContentStack()
 		
 		// Get viewController from StoryBoard
-		let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-		let controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
+		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+		self.controller = storyboard?.instantiateViewController(withIdentifier: "GMViewController") as? ViewController
+		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		self.delegate = UIApplication.shared.delegate as? AppDelegate
+		self.lang = getLanguage()
+		self.context?.persistentStoreCoordinator = delegate?.persistentStoreCoordinator
 		
-		// Show posts
-		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		let appDelegate = UIApplication.shared.delegate as! AppDelegate
-		self.delegate = appDelegate
-		let lang : String = getLanguage()
-		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		populate()
+		
+		NSLog(":BLOG:DEBUG: Finished loading BlogView")
+		
+	}
+	
+	func populate(){
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "dtime", ascending: false)
 		let sortDescriptors = [sortDescriptor]
 		fetchRequest.sortDescriptors = sortDescriptors
 		
 		do {
-			//go get the results
-			let searchResults = try context.fetch(fetchRequest)
+			// Clear the list
+			for v in (self.postList?.subviews)!{
+				v.removeFromSuperview()
+			}
 			
-			//I like to check the size of the returned results!
-			print ("BLOG:DEBUG: Total posts: \(searchResults.count)")
+			// Get the results
+			let searchResults = try self.context?.fetch(fetchRequest)			
+			NSLog(":BLOG:DEBUG: Total posts: \(String(describing: searchResults?.count))")
 			
 			var row : RowBlog
 			var count = 0
@@ -90,18 +95,15 @@ class BlogView: UIView {
 			var text: String
 			var image: String
 			
-			//You need to convert to NSManagedObject to use 'for' loops
-			for r in searchResults as [NSManagedObject] {
+			for r in searchResults! {
 				count = count + 1
-				//get the Key Value pairs (although there may be a better way to do that...
-				print("BLOG:DEBUG: Post perm: \(r.value(forKey: "permalink"))")
-				
-				
+				NSLog(":BLOG:DEBUG: Post perm: \(String(describing: r.value(forKey: "permalink")))")
+								
 				//Create a new row
 				row = RowBlog.init(s: "rowBlog\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
-				title = r.value(forKey: "title_\(lang)")! as! String
-				text = r.value(forKey: "text_\(lang)")! as! String
+				title = r.value(forKey: "title_\(lang!)")! as! String
+				text = r.value(forKey: "text_\(lang!)")! as! String
 				row.setTitle(text: title)
 				row.setText(text: text)
 				
@@ -114,21 +116,20 @@ class BlogView: UIView {
 				imgFetchRequest.predicate = NSPredicate(format: "post == %i", id)
 				imgFetchRequest.fetchLimit = 1
 				do{
-					let imgSearchResults = try context.fetch(imgFetchRequest)
-					for imgR in imgSearchResults as [NSManagedObject]{
+					let imgSearchResults = try context?.fetch(imgFetchRequest)
+					for imgR in imgSearchResults!{
 						image = imgR.value(forKey: "image")! as! String
-						print ("BLOG:DEBUG: Image: \(image)")
+						NSLog(":BLOG:DEBUG: Image: \(image)")
 						row.setImage(filename: image)
 					}
 				} catch {
-					print("BLOG:ERROR: Error getting image for post \(id): \(error)")
+					NSLog(":BLOG:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
-				print("BLOG:DEBUG: Row height: \(row.frame.height)")
 				
-				parent.addArrangedSubview(row)
-				row.setNeedsLayout()
-				row.layoutIfNeeded()
+				self.postList?.addArrangedSubview(row)
+				//row.setNeedsLayout()
+				//row.layoutIfNeeded()
 				
 				// TODO: Do this on the row didLoad method
 				// Set tap recognizer
@@ -139,37 +140,15 @@ class BlogView: UIView {
 				
 				
 			}
+
+			// Trigger a layout update
+			postList?.setNeedsLayout()
+			postList?.layoutIfNeeded()
+
 		} catch {
-			print("BLOG:ERROR: Error with request: \(error)")
+			NSLog(":BLOG:ERROR: Error with request: \(error)")
 		}
-		
-		//Always at the end: update scrollview
-		var h: Int = 0
-		for view in scrollView.subviews {
-			//contentRect = contentRect.union(view.frame);
-			h = h + Int(view.frame.height) + 30 //Why 30?
-			print("BLOG:DEBUG: curh: \(h)")
-		}
-		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 2500//CGFloat(h);
-		
-		// The view controller
-		//var viewController: ViewController  = self.window?.rootViewController as! ViewController
-		
-		
-		//let viewController = UIApplication.topViewController() as! ViewController
-		
-		//viewController.showPost(id: 4)
-		
-		//print("BLOG:DEBUG: Show post on load.")
-		//self.delegate?.controller?.showPost(id: 4)
-		
-		//controller.showPost(id: 4)
-		
-		
-		
-		
-		print("BLOG:DEBUG: Finished loading BlogView")
+		NSLog(":BLOG:DEBUG: Finished populating BlogView")
 	}
 	
 	/*func openPost(){//(_ sender:UITapGestureRecognizer? = nil){
@@ -194,10 +173,5 @@ class BlogView: UIView {
 		else{
 			return "es"
 		}
-	}
-	
-	func setController(controller: ViewController){
-		
-		//self.controller = controller
 	}
 }

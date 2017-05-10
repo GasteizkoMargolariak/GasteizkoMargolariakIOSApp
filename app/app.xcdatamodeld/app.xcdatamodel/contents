@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Activity" representedClassName=".Activity" syncable="YES" codeGenerationType="class">
         <attribute name="after_en" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="after_es" optional="YES" attributeType="String" syncable="YES"/>
@@ -84,11 +84,12 @@
         <attribute name="price" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="Festival_event" representedClassName=".Festival_event" syncable="YES" codeGenerationType="class">
+        <attribute name="day" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="gm" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="gm" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="host" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="place" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -133,6 +134,13 @@
         <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="People" representedClassName="People" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Photo" representedClassName=".Photo" syncable="YES" codeGenerationType="class">
         <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
@@ -228,7 +236,7 @@
         <element name="Album" positionX="18" positionY="-3861" width="128" height="195"/>
         <element name="Festival" positionX="36" positionY="-3852" width="128" height="180"/>
         <element name="Festival_day" positionX="-9" positionY="-3906" width="128" height="135"/>
-        <element name="Festival_event" positionX="0" positionY="-3897" width="128" height="225"/>
+        <element name="Festival_event" positionX="0" positionY="-3897" width="128" height="240"/>
         <element name="Festival_event_image" positionX="9" positionY="-3888" width="128" height="105"/>
         <element name="Festival_offer" positionX="18" positionY="-3879" width="128" height="195"/>
         <element name="Location" positionX="27" positionY="-3870" width="128" height="90"/>
@@ -242,5 +250,6 @@
         <element name="Post_tag" positionX="45" positionY="-3852" width="128" height="75"/>
         <element name="Sponsor" positionX="-9" positionY="-3906" width="128" height="255"/>
         <element name="Version" positionX="-9" positionY="-3906" width="128" height="75"/>
+        <element name="People" positionX="-9" positionY="-3906" width="128" height="120"/>
     </elements>
 </model>

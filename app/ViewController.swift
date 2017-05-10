@@ -37,7 +37,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	//Each of the sections of the app.
 	@IBOutlet var containerViewGallery: GalleryView!
 	@IBOutlet var containerViewBlog: BlogView!
-	@IBOutlet var containerViewActivities: UIView!
+	@IBOutlet var containerViewActivities: ActivitiesView!
 	@IBOutlet var containerViewLablanca: LablancaView!
 	@IBOutlet var containerViewLocation: UIView!
 	@IBOutlet var containerViewHome: HomeView!
@@ -81,6 +81,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		performSegue(withIdentifier: "SegueAlbum", sender: nil)
 	}
 	
+	func showSchedule(margolari: Bool){
+		NSLog(":CONTROLLER:DEBUG: Showing schedule. Margolari: \(margolari)")
+		if margolari == true{
+			self.passId = 1
+		}
+		else{
+			self.passId = 0
+		}
+		// TODO: Uncomment when ready
+		performSegue(withIdentifier: "SegueSchedule", sender: nil)
+	}
+	
 	/**
 	 Handles the initial sync process.
 	 It can start it, showing the sync screen, or finish it, hidding the screen.
@@ -93,7 +105,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			Sync(synchronous: true)
 		}
 		else{
-			NSLog(":CONTROLLER:DEBUG: Hidding initial sync screen.")
+			NSLog(":CONTROLLER:DEBUG: Re-populating views and hidding initial sync screen.")
+			NSLog(":CONTROLLER:DEBUG: Re-populating disabled: Throws error.")
+			//populate()
 			syncSegue?.destination.dismiss(animated: true, completion: nil)
 		}
 	}
@@ -111,6 +125,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		}
 		if segue.identifier == "SegueAlbum"{
 			(segue.destination as! AlbumViewController).id = passId
+		}
+		if segue.identifier == "SegueSchedule"{
+			if passId == 1{
+				(segue.destination as! ScheduleViewController).margolari = true
+			}
+			else{
+				(segue.destination as! ScheduleViewController).margolari = false
+			}
 		}
 		if segue.identifier == "SegueSync"{
 			self.syncSegue = segue
@@ -140,7 +162,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		delegate = UIApplication.shared.delegate as! AppDelegate
 		delegate?.controller = self
 		
-		
+	}
+
+	func populate(){
+		//self.containerViewHome.populate()
+		//self.containerLocation.populate()
+		//self.containerLablanca.populate()
+		self.containerViewActivities.populate()
+		self.containerViewBlog.populate()
+		//self.containerGallery.populate()
 	}
 	
 	/**
