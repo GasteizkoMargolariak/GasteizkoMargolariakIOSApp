@@ -156,11 +156,15 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 				
 				NSLog(":SCHEDULECONTROLLER:DEBUG: Adding row: height: \(row.frame.height)")
 				svScheduleList.addArrangedSubview(row)
-				row.setNeedsLayout()
-				row.layoutIfNeeded()
+				//row.setNeedsLayout()
+				//row.layoutIfNeeded()
 				
 				rowcount = rowcount + 1
 			}
+
+			svScheduleList.setNeedsLayout()
+			svScheduleList.layoutIfNeeded()
+
 		} catch {
 			NSLog(":SCHEDULECONTROLLER:ERROR: Error with request: \(error)")
 		}
