@@ -1763,7 +1763,7 @@ class Sync{
 			// Get day
 			// Special item, not in the sync content
 			dateFormatter.dateFormat = "yyyy-MM-dd"
-			var day = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
+			var day = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 11))!
 			// If on the first hours of the next day...
 			let calendar = Calendar.current
 			let hours = calendar.component(.hour, from: day as! Date)

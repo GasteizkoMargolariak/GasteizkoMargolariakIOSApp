@@ -105,7 +105,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			Sync(synchronous: true)
 		}
 		else{
-			NSLog(":CONTROLLER:DEBUG: Hidding initial sync screen.")
+			NSLog(":CONTROLLER:DEBUG: Re-populating views and hidding initial sync screen.")
+			NSLog(":CONTROLLER:DEBUG: Re-populating disabled: Throws error.")
+			//populate()
 			syncSegue?.destination.dismiss(animated: true, completion: nil)
 		}
 	}
@@ -163,7 +165,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 
 	func populate(){
-		self.containerViewHome.populate()
+		//self.containerViewHome.populate()
 		//self.containerLocation.populate()
 		//self.containerLablanca.populate()
 		self.containerViewActivities.populate()
