@@ -93,7 +93,14 @@ Extension of UIView to be formatted as sections.
 	:param: minutes Minutes of the event start.
 	*/
 	func setTime(hours: Int, minutes: Int){
-		self.lbTime.text = "\(hours):\(minutes)"
+		var strMinutes: String = ""
+		if "\(minutes)".length == 1{
+			strMinutes = "0\(minutes)"
+		}
+		else{
+			strMinutes = "\(minutes)"
+		}
+		self.lbTime.text = "\(hours):\(strMinutes)"
 	}
 	
 	/**
@@ -101,11 +108,17 @@ Extension of UIView to be formatted as sections.
 	:param: dtime Datetime of the event start.
 	*/
 	func setTime(dtime: NSDate){
-		let dateformatter = DateFormatter()
 		let calendar = Calendar.current
 		let hours = calendar.component(.hour, from: dtime as Date)
 		let minutes = calendar.component(.minute, from: dtime as Date)
-		self.lbTime.text = "\(hours):\(minutes)"
+		var strMinutes: String = ""
+		if "\(minutes)".length == 1{
+			strMinutes = "0\(minutes)"
+		}
+		else{
+			strMinutes = "\(minutes)"
+		}
+		self.lbTime.text = "\(hours):\(strMinutes)"
 	}
 	
 	/**
