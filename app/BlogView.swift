@@ -142,33 +142,6 @@ class BlogView: UIView {
 		} catch {
 			print("BLOG:ERROR: Error with request: \(error)")
 		}
-		
-		//Always at the end: update scrollview
-		var h: Int = 0
-		for view in scrollView.subviews {
-			//contentRect = contentRect.union(view.frame);
-			h = h + Int(view.frame.height) + 30 //Why 30?
-			print("BLOG:DEBUG: curh: \(h)")
-		}
-		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 2500//CGFloat(h);
-		
-		// The view controller
-		//var viewController: ViewController  = self.window?.rootViewController as! ViewController
-		
-		
-		//let viewController = UIApplication.topViewController() as! ViewController
-		
-		//viewController.showPost(id: 4)
-		
-		//print("BLOG:DEBUG: Show post on load.")
-		//self.delegate?.controller?.showPost(id: 4)
-		
-		//controller.showPost(id: 4)
-		
-		
-		
-		
 		print("BLOG:DEBUG: Finished loading BlogView")
 	}
 	
