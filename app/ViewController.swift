@@ -81,6 +81,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		performSegue(withIdentifier: "SegueAlbum", sender: nil)
 	}
 	
+	func showSchedule(margolari: Bool){
+		NSLog(":CONTROLLER:DEBUG: Showing schedule. Margolari: \(margolari)")
+		if margolari == true{
+			self.passId = 1
+		}
+		else{
+			self.passId = 0
+		}
+		// TODO: Uncomment when ready
+		performSegue(withIdentifier: "SegueSchedule", sender: nil)
+	}
+	
 	/**
 	 Handles the initial sync process.
 	 It can start it, showing the sync screen, or finish it, hidding the screen.
@@ -112,6 +124,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		if segue.identifier == "SegueAlbum"{
 			(segue.destination as! AlbumViewController).id = passId
 		}
+		if segue.identifier == "SegueSchedule"{
+			if passId == 1{
+				(segue.destination as! ScheduleViewController).margolari = true
+			}
+			else{
+				(segue.destination as! ScheduleViewController).margolari = false
+			}
+		}
 		if segue.identifier == "SegueSync"{
 			self.syncSegue = segue
 		}
@@ -140,7 +160,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		delegate = UIApplication.shared.delegate as! AppDelegate
 		delegate?.controller = self
 		
-		
+	}
+
+	func populate(){
+		self.containerViewHome.populate()
+		//self.containerLocation.populate()
+		//self.containerLablanca.populate()
+		//self.containerActivities.populate()
+		//self.containerBlog.populate()
+		//self.containerGallery.populate()
 	}
 	
 	/**

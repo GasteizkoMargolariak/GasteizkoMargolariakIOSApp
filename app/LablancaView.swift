@@ -113,6 +113,12 @@ class LablancaView: UIView {
 			NSLog(":LABLANCA:ERROR: Error getting festivals info: \(error)")
 		}
 		
+		// Set up schedule buttons
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openSchedule(_:)))
+		fBtSchedule.isUserInteractionEnabled = true
+		fBtSchedule.addGestureRecognizer(tapRecognizer)
+		
+		
 		// Get info about the day prices.
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -183,6 +189,13 @@ class LablancaView: UIView {
 		NSLog(":LABLANCA:LOG: Showing no festivals section.")
 		self.fWindow.isHidden = true
 		// Nothing else to be done.
+	}
+	
+	func openSchedule(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":LABLANCA:DEBUG: Getting delegate and showing schedule.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showSchedule(margolari: false)
+		NSLog(":LABLANCA:DEBUG: Schedule should be shown.")
 	}
 	
 	func getLanguage() -> String{
