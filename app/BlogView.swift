@@ -60,9 +60,9 @@ class BlogView: UIView {
 		
 		// Get viewController from StoryBoard
 		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
-		self.controller = storyboard?.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
+		self.controller = storyboard?.instantiateViewController(withIdentifier: "GMViewController") as? ViewController
 		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		self.delegate = UIApplication.shared.delegate as! AppDelegate
+		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.lang = getLanguage()
 		self.context?.persistentStoreCoordinator = delegate?.persistentStoreCoordinator
 		
@@ -86,7 +86,7 @@ class BlogView: UIView {
 			
 			// Get the results
 			let searchResults = try self.context?.fetch(fetchRequest)			
-			NSLog(":BLOG:DEBUG: Total posts: \(searchResults?.count)")
+			NSLog(":BLOG:DEBUG: Total posts: \(String(describing: searchResults?.count))")
 			
 			var row : RowBlog
 			var count = 0
@@ -95,9 +95,9 @@ class BlogView: UIView {
 			var text: String
 			var image: String
 			
-			for r in searchResults as! [NSManagedObject] {
+			for r in searchResults! {
 				count = count + 1
-				NSLog(":BLOG:DEBUG: Post perm: \(r.value(forKey: "permalink"))")
+				NSLog(":BLOG:DEBUG: Post perm: \(String(describing: r.value(forKey: "permalink")))")
 								
 				//Create a new row
 				row = RowBlog.init(s: "rowBlog\(count)", i: count)
@@ -117,7 +117,7 @@ class BlogView: UIView {
 				imgFetchRequest.fetchLimit = 1
 				do{
 					let imgSearchResults = try context?.fetch(imgFetchRequest)
-					for imgR in imgSearchResults as! [NSManagedObject]{
+					for imgR in imgSearchResults!{
 						image = imgR.value(forKey: "image")! as! String
 						NSLog(":BLOG:DEBUG: Image: \(image)")
 						row.setImage(filename: image)
@@ -149,7 +149,6 @@ class BlogView: UIView {
 			NSLog(":BLOG:ERROR: Error with request: \(error)")
 		}
 		NSLog(":BLOG:DEBUG: Finished populating BlogView")
-
 	}
 	
 	/*func openPost(){//(_ sender:UITapGestureRecognizer? = nil){
