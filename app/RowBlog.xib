@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RowBlog" customModule="app" customModuleProvider="target">
+            <connections>
+                <outlet property="container" destination="fIu-6X-Tsy" id="sdT-5k-azi"/>
+                <outlet property="descrip" destination="rzM-vF-gOY" id="uQp-Za-gam"/>
+                <outlet property="entry" destination="b17-mq-rbm" id="3Ac-n2-qLr"/>
+                <outlet property="image" destination="6hA-MD-OsD" id="VNd-1E-Ztc"/>
+                <outlet property="title" destination="WSL-LM-04R" id="qKn-Xk-cEN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="yLg-4E-qlC" userLabel="RowBlog" customClass="RowBlog" customModule="app">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fIu-6X-Tsy" userLabel="Container">
+                    <rect key="frame" x="0.0" y="273.5" width="375" height="120"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b17-mq-rbm" userLabel="Entry">
+                            <rect key="frame" x="10" y="10" width="355" height="120"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WSL-LM-04R" userLabel="Title">
+                                    <rect key="frame" x="10" y="10" width="335" height="22"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                    <color key="textColor" red="0.1529411765" green="0.33333333329999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="6hA-MD-OsD" userLabel="Image">
+                                    <rect key="frame" x="10" y="40" width="71" height="64"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="64" id="68z-jj-fIa"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzM-vF-gOY" userLabel="Text">
+                                    <rect key="frame" x="97" y="40" width="248" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="WSL-LM-04R" firstAttribute="top" secondItem="b17-mq-rbm" secondAttribute="top" constant="10" id="4og-BI-wpQ"/>
+                                <constraint firstItem="6hA-MD-OsD" firstAttribute="width" secondItem="b17-mq-rbm" secondAttribute="width" multiplier="0.2" id="BYW-Hr-dje"/>
+                                <constraint firstItem="rzM-vF-gOY" firstAttribute="top" secondItem="b17-mq-rbm" secondAttribute="top" constant="40" id="O3L-O9-b6V"/>
+                                <constraint firstItem="6hA-MD-OsD" firstAttribute="leading" secondItem="b17-mq-rbm" secondAttribute="leading" constant="10" id="gNm-O7-qNU"/>
+                                <constraint firstItem="6hA-MD-OsD" firstAttribute="top" secondItem="b17-mq-rbm" secondAttribute="top" constant="40" id="mvQ-pc-ApL"/>
+                                <constraint firstAttribute="trailing" secondItem="WSL-LM-04R" secondAttribute="trailing" constant="10" id="pco-U6-EWQ"/>
+                                <constraint firstItem="WSL-LM-04R" firstAttribute="leading" secondItem="b17-mq-rbm" secondAttribute="leading" constant="10" id="trs-wK-NuZ"/>
+                                <constraint firstAttribute="trailing" secondItem="rzM-vF-gOY" secondAttribute="trailing" constant="10" id="vlK-IJ-OrY"/>
+                                <constraint firstItem="rzM-vF-gOY" firstAttribute="width" secondItem="b17-mq-rbm" secondAttribute="width" multiplier="0.7" id="ww4-WB-msV"/>
+                            </constraints>
+                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" red="0.42745098040000001" green="0.41176470590000003" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="b17-mq-rbm" firstAttribute="leading" secondItem="fIu-6X-Tsy" secondAttribute="leading" constant="10" id="09K-4S-bco"/>
+                        <constraint firstAttribute="top" secondItem="b17-mq-rbm" secondAttribute="top" constant="-10" id="DRs-NG-UKY"/>
+                        <constraint firstAttribute="trailing" secondItem="b17-mq-rbm" secondAttribute="trailing" constant="10" id="Qtu-G3-8IH"/>
+                        <constraint firstAttribute="height" constant="120" id="W85-Qc-MWb"/>
+                        <constraint firstItem="b17-mq-rbm" firstAttribute="bottom" secondItem="fIu-6X-Tsy" secondAttribute="bottom" constant="10" id="bcY-vf-soX"/>
+                    </constraints>
+                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="fIu-6X-Tsy" firstAttribute="width" secondItem="yLg-4E-qlC" secondAttribute="width" id="6xh-OR-L3E"/>
+                <constraint firstItem="fIu-6X-Tsy" firstAttribute="centerX" secondItem="yLg-4E-qlC" secondAttribute="centerX" id="Rel-sh-SrL"/>
+                <constraint firstItem="fIu-6X-Tsy" firstAttribute="centerY" secondItem="yLg-4E-qlC" secondAttribute="centerY" id="X8l-Z5-R9M"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="image" destination="6hA-MD-OsD" id="AvA-3b-lxb"/>
+            </connections>
+            <point key="canvasLocation" x="45.5" y="-43.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="PhotoPlaceholder" width="170" height="108"/>
+    </resources>
+</document>

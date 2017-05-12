@@ -24,27 +24,16 @@ import UIKit
 /**
 Extension of UIView to be formatted as sections.
 */
-@IBDesignable class RowHomeBlog: UIView {
+@IBDesignable class RowPastActivity: UIView {
 	
 	//This view
 	var v: UIView!
 	
-	var id: Int!
-	
-	//The container.
+	// Outlets
 	@IBOutlet weak var container: UIView!
-	
-	//The entry
-	@IBOutlet weak var entry: UIView!
-	
-	//The post title.
 	@IBOutlet weak var title: UILabel!
-	
-	//The post text.
-	@IBOutlet weak var descrip: UILabel!
-	
-	//The image.
 	@IBOutlet weak var image: UIImageView!
+	@IBOutlet weak var descript: UILabel!
 	
 	/**
 	Default constructor
@@ -68,14 +57,20 @@ Extension of UIView to be formatted as sections.
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
 		v = self
-		v.frame = bounds
-		v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		v.translatesAutoresizingMaskIntoConstraints = true
+		self.frame = self.bounds
+		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.translatesAutoresizingMaskIntoConstraints = true
 		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		container.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.frame = v.bounds
-		v.addSubview(container)
+		container.frame = self.bounds
+		self.addSubview(container)
+		
+		// Set tap recognizer
+		/*print("ROW_PAST_ACTIVITY:DEBUG: set tap recognizer")
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (self.openActivity (_:)))
+		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+		addGestureRecognizer(tapRecognizer)*/
 	}
 	
 	/**
@@ -85,8 +80,10 @@ Extension of UIView to be formatted as sections.
 		super.init(frame: frame)
 	}
 	
+	
+	
 	/**
-	Changes the title of the post. Decodes HTML.
+	Changes the title of the activity. Decodes HTML.
 	:param: text The new title.
 	*/
 	func setTitle(text: String){
@@ -94,11 +91,11 @@ Extension of UIView to be formatted as sections.
 	}
 	
 	/**
-	Changes the text of the text. Decodes HTML.
+	Changes the description of the activity. Decodes HTML.
 	:param: text The new text.
 	*/
 	func setText(text: String){
-		descrip.text = text.stripHtml()
+		descript.text = text.stripHtml()
 	}
 	
 	/**
@@ -108,13 +105,17 @@ Extension of UIView to be formatted as sections.
 	*/
 	func setImage(filename: String){
 		if (filename == ""){
-			print("No image")
+			NSLog("ROW_PAST_ACTIVITY:DEBUG: No image")
 			//TODO hide the imageview
 		}
 		else{
-			print("Set image \(filename)")
-			let path = "img/blog/thumb/\(filename)"
+			NSLog(":ROW_PAST_ACTIVITY:DEBUG: Set image \(filename)")
+			let path = "img/actividades/thumb/\(filename)"
 			image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
+	}
+	
+	func openActivity(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":ROW_PAST_ACTIVITY:DEBUG: open activity")
 	}
 }

@@ -40,6 +40,10 @@ class HomeView: UIView {
 	@IBOutlet weak var gallerySection: Section!
 	@IBOutlet weak var pastActivitiesSection: Section!
 	@IBOutlet weak var socialSection: Section!
+
+	var lang: String? = nil
+	var moc: NSManagedObjectContext? = nil
+	var appDelegate: AppDelegate? = nil
 	
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -58,7 +62,6 @@ class HomeView: UIView {
 		container.frame = self.bounds
 		
 
-		
 		//Set titles for each section
 		locationSection.setTitle(text: "Encuentranos")
 		lablancaSection.setTitle(text: "La Blanca")
@@ -69,30 +72,38 @@ class HomeView: UIView {
 		socialSection.setTitle(text: "Siguenos")
 		
 		//Get info to populate sections
-		let moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		
-		let appDelegate = UIApplication.shared.delegate as! AppDelegate
-		moc.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-		let lang : String = getLanguage()
+		self.moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		self.appDelegate = UIApplication.shared.delegate as! AppDelegate
+		self.moc?.persistentStoreCoordinator = appDelegate?.persistentStoreCoordinator
+		self.lang = getLanguage()
 		
 		//Populate sections
-		setUpPastActivities(context: moc, delegate: appDelegate, lang: lang, parent: pastActivitiesSection.getContentStack())
-		setUpBlog(context: moc, delegate: appDelegate, lang: lang, parent: blogSection.getContentStack())
-		setUpFutureActivities(context: moc, delegate: appDelegate, lang: lang, parent: futureActivitiesSection.getContentStack())
-		setUpSocial(parent: socialSection.getContentStack())
+		self.populate()
 		
-		
-		pastActivitiesSection.expandSection()
 		
 		//Always at the end: update scrollview
-		var h: Int = 0
-		for view in scrollView.subviews {
-			//contentRect = contentRect.union(view.frame);
-			h = h + Int(view.frame.height) + 30 //Why 30?
-			print("curh: \(h)")
-		}
+		//var h: Int = 0
+		//for view in scrollView.subviews {
+		//	//contentRect = contentRect.union(view.frame);
+		//	h = h + Int(view.frame.height) + 30 //Why 30?
+		//	print("curh: \(h)")
+		//}
 		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 1300// CGFloat(h);
+		//self.scrollView.contentSize.height = 1300// CGFloat(h);
+	}
+
+	/**
+	 Triggers a reloading (or initial loading) of all sections.
+	*/
+	func populate(){
+		
+		//Populate sections
+		self.setUpPastActivities(context: self.moc!, delegate: appDelegate!, lang: self.lang!, parent: self.pastActivitiesSection.getContentStack())
+		self.setUpBlog(context: self.moc!, delegate: self.appDelegate!, lang: self.lang!, parent: self.blogSection.getContentStack())
+		self.setUpFutureActivities(context: self.moc!, delegate: self.appDelegate!, lang: self.lang!, parent: self.futureActivitiesSection.getContentStack())
+		self.setUpSocial(parent: self.socialSection.getContentStack())
+		self.setUpGallery(context: self.moc!, delegate: self.appDelegate!, parent: self.gallerySection.getContentStack())
+		self.pastActivitiesSection.expandSection()
 	}
 	
 	func getLanguage() -> String{
@@ -190,7 +201,7 @@ class HomeView: UIView {
 			//I like to check the size of the returned results!
 			print ("Post: \(searchResults.count)")
 			
-			var row : RowHomePastActivities
+			var row : RowHomeBlog
 			var count = 0
 			var id: Int
 			var title: String
@@ -205,11 +216,12 @@ class HomeView: UIView {
 				
 				
 				//Create a new row
-				row = RowHomePastActivities.init(s: "rowHomeBlog\(count)", i: count)
+				row = RowHomeBlog.init(s: "rowHomeBlog\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
-				print(title)
+				
+				row.id = id
 				row.setTitle(text: title)
 				row.setText(text: text)
 				
@@ -235,6 +247,10 @@ class HomeView: UIView {
 				print("Row height: \(row.frame.height)")
 				
 				parent.addArrangedSubview(row)
+				
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPost(_:)))
+				row.isUserInteractionEnabled = true
+				row.addGestureRecognizer(tapRecognizer)
 				
 			}
 		} catch {
@@ -278,7 +294,8 @@ class HomeView: UIView {
 				id = r.value(forKey: "id")! as! Int
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
-				print(title)
+				
+				
 				row.setTitle(text: title)
 				row.setText(text: text)
 				
@@ -311,6 +328,48 @@ class HomeView: UIView {
 		}
 	}
 	
+	func setUpGallery(context : NSManagedObjectContext, delegate: AppDelegate,parent: UIStackView){
+		print("HOME:LOG: Setting up gallery.")
+		
+		// Create the row
+		var row: RowHomeGallery
+		row = RowHomeGallery.init(s: "rowHomeGallery", i: 0)
+		parent.addArrangedSubview(row)
+		
+		
+		// Set images
+		let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+		let sortDescriptor = NSSortDescriptor(key: "uploaded", ascending: false)
+		let sortDescriptors = [sortDescriptor]
+		fetchRequest.sortDescriptors = sortDescriptors
+		fetchRequest.fetchLimit = 4
+		
+		do {
+			//go get the results
+			let searchResults = try context.fetch(fetchRequest)
+	
+			var id: Int
+			var image: String
+			
+			// Loop images
+			var i = 0
+			for r in searchResults as [NSManagedObject] {
+				
+				image = r.value(forKey: "file")! as! String
+				row.setImage(idx: i, filename: image)
+				
+				//TODO Set click listener
+				
+				i = i + 1
+			}
+			
+		}
+		catch{
+			print("HOME:ERROR: Error setting gallery up: \(error)")
+		}
+		
+	}
+	
 	func setUpSocial(parent : UIStackView){
 		print("SETING UP SOCIAL")
 		//Create a new row
@@ -318,5 +377,12 @@ class HomeView: UIView {
 		row = RowHomeSocial.init(s: "rowHomeSocial", i: 0)
 		print("ROW CREATED")
 		parent.addArrangedSubview(row)
+	}
+	
+	func openPost(_ sender:UITapGestureRecognizer? = nil){
+		print("HOME:DEBUG: getting delegate and showing post.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPost(id: (sender?.view as! RowHomeBlog).id)
+		print("HOME:DEBUG: Post should be shown.")
 	}
 }

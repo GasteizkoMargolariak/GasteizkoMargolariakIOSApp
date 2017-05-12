@@ -24,26 +24,24 @@ import UIKit
 /**
 Extension of UIView to be formatted as sections.
 */
-@IBDesignable class RowHomeBlog: UIView {
+@IBDesignable class RowBlog: UIView {
 	
 	//This view
 	var v: UIView!
-	
-	var id: Int!
 	
 	//The container.
 	@IBOutlet weak var container: UIView!
 	
 	//The entry
 	@IBOutlet weak var entry: UIView!
-	
+
 	//The post title.
 	@IBOutlet weak var title: UILabel!
 	
-	//The post text.
+	//The post description.
 	@IBOutlet weak var descrip: UILabel!
-	
-	//The image.
+
+	//The post image.
 	@IBOutlet weak var image: UIImageView!
 	
 	/**
@@ -76,6 +74,12 @@ Extension of UIView to be formatted as sections.
 		
 		container.frame = v.bounds
 		v.addSubview(container)
+		
+		// Set tap recognizer
+		/*print("ROW_BLOG:DEBUG: set tap recognizer")
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (self.openPost (_:)))
+		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+		addGestureRecognizer(tapRecognizer)*/
 	}
 	
 	/**
@@ -84,6 +88,8 @@ Extension of UIView to be formatted as sections.
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}
+	
+
 	
 	/**
 	Changes the title of the post. Decodes HTML.
@@ -94,7 +100,7 @@ Extension of UIView to be formatted as sections.
 	}
 	
 	/**
-	Changes the text of the text. Decodes HTML.
+	Changes the description of the post. Decodes HTML.
 	:param: text The new text.
 	*/
 	func setText(text: String){
@@ -102,7 +108,7 @@ Extension of UIView to be formatted as sections.
 	}
 	
 	/**
-	Changes the image of the activity.
+	Changes the image of the post.
 	If null or empty, the igage is hidden.
 	:param: path The new text.
 	*/
@@ -116,5 +122,9 @@ Extension of UIView to be formatted as sections.
 			let path = "img/blog/thumb/\(filename)"
 			image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
+	}
+	
+	func openPost(_ sender:UITapGestureRecognizer? = nil){
+		print("ROW_BLOG:DEBUG: openpost")
 	}
 }

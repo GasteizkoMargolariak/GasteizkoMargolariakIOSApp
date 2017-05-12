@@ -40,14 +40,74 @@ extension UIImageView {
 		let filePath = url.appendingPathComponent(localPath)?.path
 		let fileManager = FileManager.default
 		if fileManager.fileExists(atPath: filePath!) {
-			print("FILE AVAILABLE: \(filePath)")
-			//TODO Set image
+			print("IMAGE:LOG: File available: \(filePath)")
+			
+			//Set image
+			do{
+				//let iurl = URL(string: filePath!)
+				let idata = try Data(contentsOf: URL(fileURLWithPath: filePath!))
+				self.image = UIImage(data: idata as Data)
+			}
+			catch (let error){
+				print("IMAGE:ERROR: Error setting image: \(error.localizedDescription)")
+				return -1
+			}
 			return 0
 		} else {
-			print("FILE NOT AVAILABLE: \(filePath)")
-			print("Downloading from \(remotePath)")
-			//TODO Download
-			//TODO Set image
+			print("IMAGE:LOG: File not available: \(filePath)")
+			print("IMAGE:LOG: Downloading from \(remotePath)")
+			
+			//Create required directories
+			var fileFolderUrl = URL(fileURLWithPath: filePath!)
+			fileFolderUrl.deleteLastPathComponent()
+			do{
+				try fileManager.createDirectory(at:  fileFolderUrl, withIntermediateDirectories: true, attributes: nil)
+			}
+			catch(let error){
+				print("IMAGE:ERROR: Error creating directories at \(fileFolderUrl.path): \(error.localizedDescription)")
+			}
+			
+			// Create destination URL
+			let destinationFileUrl = URL(fileURLWithPath: filePath!)
+			
+			//Create URL to the source file you want to download
+			let fileURL = URL(string: remotePath)
+			
+			let sessionConfig = URLSessionConfiguration.default
+			let session = URLSession(configuration: sessionConfig)
+			
+			let request = URLRequest(url:fileURL!)
+			
+			let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
+				if let tempLocalUrl = tempLocalUrl, error == nil {
+					
+					// Success
+					if let statusCode = (response as? HTTPURLResponse)?.statusCode {
+						print("IMAGE:LOG: Successfully downloaded. Status code: \(statusCode)")
+					}
+					
+					do {
+						try FileManager.default.copyItem(at: tempLocalUrl, to: destinationFileUrl)
+					} catch (let writeError) {
+						print("IMAGE:ERROR: Error creating a file \(destinationFileUrl) : \(writeError)")
+					}
+					
+					// Set the image
+					do{
+						let idata = try Data(contentsOf: URL(fileURLWithPath: filePath!))
+						self.image = UIImage(data: idata as Data)
+					}
+					catch (let error){
+						print("IMAGE:ERROR: Error setting image: \(error.localizedDescription)")
+					}
+					
+				} else {
+					print("IMAGE:ERROR: Error took place while downloading a file: %@", error?.localizedDescription);
+				}
+			}
+			task.resume()
+		
+		
 			return 1
 		}
 
