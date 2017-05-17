@@ -29,19 +29,21 @@ Class to handle the home view.
 class HomeView: UIView {
 	
 	// Outlets
-	@IBOutlet weak var scrollView: UIScrollView!
-	@IBOutlet weak var container: UIView!
-	@IBOutlet weak var locationSection: Section!
-	@IBOutlet weak var lablancaSection: Section!
-	@IBOutlet weak var futureActivitiesSection: Section!
-	@IBOutlet weak var blogSection: Section!
-	@IBOutlet weak var gallerySection: Section!
-	@IBOutlet weak var pastActivitiesSection: Section!
-	@IBOutlet weak var socialSection: Section!
+	@IBOutlet var scrollView: UIScrollView!
+	@IBOutlet var container: UIView!
+	@IBOutlet var locationSection: Section!
+	@IBOutlet var lablancaSection: Section!
+	@IBOutlet var futureActivitiesSection: Section!
+	@IBOutlet var blogSection: Section!
+	@IBOutlet var gallerySection: Section!
+	@IBOutlet var pastActivitiesSection: Section!
+	@IBOutlet var socialSection: Section!
 
 	var lang: String? = nil
 	var moc: NSManagedObjectContext? = nil
 	var appDelegate: AppDelegate? = nil
+	
+	let dbgTxt = "IVV"
 	
 	
 	/**
@@ -64,7 +66,7 @@ class HomeView: UIView {
 		// Load the contents of the HomeView.xib file.
 		Bundle.main.loadNibNamed("HomeView", owner: self, options: nil)
 		self.addSubview(container)
-		container.frame = self.bounds
+		self.container.frame = self.bounds
 		
 
 		// Set titles for each section
@@ -98,10 +100,14 @@ class HomeView: UIView {
 	}
 
 	
+	func populate2(){
+		NSLog(":HOME:DEBUG: Dummy Populating home view.")
+	}
+	
 	/**
 	Triggers a reloading (or initial loading) of all sections.
 	*/
-	func populate(){
+	open func populate(){
 		
 		NSLog(":HOME:DEBUG: Populating home view.")
 		
