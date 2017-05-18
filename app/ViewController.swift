@@ -107,8 +107,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		}
 		else{
 			NSLog(":CONTROLLER:DEBUG: Re-populating views and hidding initial sync screen.")
-			//NSLog(":CONTROLLER:DEBUG: Re-populating disabled: Throws error.")
-			self.populate()
+			NSLog(":CONTROLLER:DEBUG: Re-populating disabled: Throws error.")
+			//self.populate()
 			syncSegue?.destination.dismiss(animated: true, completion: nil)
 		}
 	}
@@ -161,7 +161,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.delegate?.controller = self
 		
-		NSLog(":CONTROLLER:DEBUG: Forcing a call to populate")
+		NSLog(":CONTROLLER:DEBUG: NOT Forcing a call to populate")
 		//self.populate()
 		
 		super.viewDidLoad()
