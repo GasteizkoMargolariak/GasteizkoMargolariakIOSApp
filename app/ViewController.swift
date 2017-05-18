@@ -37,7 +37,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	//Each of the sections of the app.
 	@IBOutlet var containerViewGallery: GalleryView!
 	@IBOutlet var containerViewBlog: BlogView!
-	@IBOutlet var containerViewActivities: UIView!
+	@IBOutlet var containerViewActivities: ActivitiesView!
 	@IBOutlet var containerViewLablanca: LablancaView!
 	@IBOutlet var containerViewLocation: UIView!
 	@IBOutlet var containerViewHome: HomeView!
@@ -48,6 +48,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	 Controller initializer.
 	*/
 	required init?(coder aDecoder: NSCoder) {
+		NSLog(":CONTROLLER:DEBUG: Init!")
 		super.init(coder: aDecoder)
 	}
 	
@@ -105,7 +106,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			Sync(synchronous: true)
 		}
 		else{
-			NSLog(":CONTROLLER:DEBUG: Hidding initial sync screen.")
+			NSLog(":CONTROLLER:DEBUG: Re-populating views and hidding initial sync screen.")
+			NSLog(":CONTROLLER:DEBUG: Re-populating disabled: Throws error.")
+			//self.populate()
 			syncSegue?.destination.dismiss(animated: true, completion: nil)
 		}
 	}
@@ -141,7 +144,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	 Run when the app loads.
 	*/
 	override func viewDidLoad() {
-				
+						
 		//Hide all sections, except for the first one
 		self.containerViewLocation.alpha = 0
 		self.containerViewLablanca.alpha = 0
@@ -152,15 +155,33 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		NSLog(":CONTROLLER:LOG: viewDidLoad()")
 		NSLog(":CONTROLLER:DEBUG: Skyp sync")
 		//Sync()
-		
-		super.viewDidLoad()
 
 		//self.containerViewBlog.setController(controller: self as ViewController)
 		
-		delegate = UIApplication.shared.delegate as! AppDelegate
-		delegate?.controller = self
+		self.delegate = UIApplication.shared.delegate as? AppDelegate
+		self.delegate?.controller = self
 		
+		NSLog(":CONTROLLER:DEBUG: NOT Forcing a call to populate")
+		//self.populate()
 		
+		super.viewDidLoad()
+		
+	}
+
+	func populate(){
+		if (self.containerViewHome != nil){
+			//(self.containerViewHome as HomeView).populate2()
+			let ng = self.containerViewHome.dbgTxt
+			NSLog("AAAAA \(ng)")
+		}
+		else{
+			NSLog("CONTROLLER:ERROR: containerViewHome couldn't be populated: It is nil.")
+		}
+		//self.containerLocation.populate()
+		//self.containerLablanca.populate()
+		//self.containerViewActivities.populate()
+		//self.containerViewBlog.populate()
+		//self.containerGallery.populate()
 	}
 	
 	/**

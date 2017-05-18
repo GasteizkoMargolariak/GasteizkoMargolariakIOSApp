@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RowLabel" customModule="app">
+            <connections>
+                <outlet property="container" destination="sWl-jd-g1w" id="uN3-0d-wln"/>
+                <outlet property="text" destination="cAu-3X-Tbx" id="J1F-St-t3M"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sWl-jd-g1w" userLabel="Container">
+                    <rect key="frame" x="0.0" y="313.5" width="375" height="40.5"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9wy-u8-pKj" userLabel="Entry">
+                            <rect key="frame" x="10" y="10" width="355" height="40.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAu-3X-Tbx" userLabel="Text">
+                                    <rect key="frame" x="10" y="10" width="335" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="cAu-3X-Tbx" firstAttribute="width" secondItem="9wy-u8-pKj" secondAttribute="width" constant="-20" id="8vk-yq-iYR"/>
+                                <constraint firstItem="cAu-3X-Tbx" firstAttribute="centerY" secondItem="9wy-u8-pKj" secondAttribute="centerY" id="gGp-W9-8FT"/>
+                                <constraint firstItem="cAu-3X-Tbx" firstAttribute="height" secondItem="9wy-u8-pKj" secondAttribute="height" constant="-20" id="if1-Pg-hNH"/>
+                                <constraint firstItem="cAu-3X-Tbx" firstAttribute="centerX" secondItem="9wy-u8-pKj" secondAttribute="centerX" id="mED-iI-aHq"/>
+                            </constraints>
+                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" red="0.42745098040000001" green="0.41176470590000003" blue="0.56470588239999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="top" secondItem="9wy-u8-pKj" secondAttribute="top" constant="-10" id="E6z-L4-kxl"/>
+                        <constraint firstItem="9wy-u8-pKj" firstAttribute="bottom" secondItem="sWl-jd-g1w" secondAttribute="bottom" constant="10" id="mr3-wn-Fhg"/>
+                        <constraint firstAttribute="trailing" secondItem="9wy-u8-pKj" secondAttribute="trailing" constant="10" id="qfZ-sB-04Y"/>
+                        <constraint firstItem="9wy-u8-pKj" firstAttribute="leading" secondItem="sWl-jd-g1w" secondAttribute="leading" constant="10" id="wlF-xl-Kb8"/>
+                    </constraints>
+                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="sWl-jd-g1w" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="i65-Nb-Seg"/>
+                <constraint firstItem="sWl-jd-g1w" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="q8B-3g-WjE"/>
+                <constraint firstItem="sWl-jd-g1w" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="z0m-TJ-Jig"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
