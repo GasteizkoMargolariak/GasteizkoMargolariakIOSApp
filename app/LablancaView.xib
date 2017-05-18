@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,13 +33,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="onh-i9-8Tz">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="1255.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1395.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tl-Rf-vmM">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1255.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1395.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANk-4K-DBn" userLabel="NoFestivals">
-                                            <rect key="frame" x="10" y="10" width="355" height="1235.5"/>
+                                            <rect key="frame" x="10" y="10" width="355" height="1375.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="NFTitle" text="NoFestivals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbu-EN-1UC" userLabel="NFTitle">
                                                     <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
@@ -52,13 +52,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="61P-J5-lJc">
-                                                    <rect key="frame" x="0.0" y="30" width="355" height="1205.5"/>
+                                                    <rect key="frame" x="0.0" y="30" width="355" height="1345.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMm-Rh-0GJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="1205.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="1345.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSe-pA-fF3" userLabel="NFText">
-                                                                    <rect key="frame" x="8" y="8" width="339" height="1189.5"/>
+                                                                    <rect key="frame" x="8" y="8" width="339" height="1329.5"/>
                                                                     <string key="text">Las Fiestas de La Blanca. Esos días, del 4 al 9 de agosto, en los que Vitoria-Gasteiz se transforma. Se llena de color y alegría, y en cada esquina puedes encontrar actividades y espectáculos.
 
 Nosotros, como cuadrilla de Blusas y Nescas, ya estamos trabajando en ello. Tan pronto como vayamos sabiendo más, aquí iremos publicando nuestro programa y otra información sobre las fiestas.
@@ -119,10 +119,10 @@ Margolaris: Todo lo demás no sirve de nada si en una cuadrilla no hay buen ambi
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O30-vI-Tga" userLabel="Festivals">
-                                            <rect key="frame" x="10" y="10" width="355" height="1235.5"/>
+                                            <rect key="frame" x="10" y="10" width="355" height="1375.5"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zWn-KM-9py">
-                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="1235.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="1375.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trj-oS-RaI" userLabel="FestivalsIntro">
                                                             <rect key="frame" x="0.0" y="0.0" width="355" height="300"/>
@@ -260,7 +260,7 @@ Margolaris: Todo lo demás no sirve de nada si en una cuadrilla no hay buen ambi
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feb-ob-HAK" userLabel="FestivalsPrices">
-                                                            <rect key="frame" x="0.0" y="410" width="355" height="825.5"/>
+                                                            <rect key="frame" x="0.0" y="410" width="355" height="965.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Programas de Fiestas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swA-jU-3wo" userLabel="FesivalsPricesTitle">
                                                                     <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
@@ -277,27 +277,27 @@ Margolaris: Todo lo demás no sirve de nada si en una cuadrilla no hay buen ambi
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="lCP-xA-gT6"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                    <color key="textColor" red="0.1529411765" green="0.33333333329999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rcX-IS-Hmj" userLabel="StackOffers">
-                                                                    <rect key="frame" x="13" y="70" width="330" height="200"/>
+                                                                    <rect key="frame" x="13" y="70" width="330" height="330"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="200" id="YNZ-ap-Ful"/>
+                                                                        <constraint firstAttribute="height" constant="330" id="YNZ-ap-Ful"/>
                                                                     </constraints>
                                                                 </stackView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dias sueltos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xp7-EC-6OW">
-                                                                    <rect key="frame" x="8" y="285" width="339" height="20.5"/>
+                                                                    <rect key="frame" x="8" y="425" width="339" height="20.5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="Ecc-N8-k3S"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                    <color key="textColor" red="0.1529411765" green="0.33333333329999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qKn-wk-VDT" userLabel="StackDays">
-                                                                    <rect key="frame" x="12.5" y="315.5" width="330" height="510"/>
+                                                                    <rect key="frame" x="12.5" y="455.5" width="330" height="510"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="510" id="Hzw-0S-h69"/>
                                                                     </constraints>
@@ -306,7 +306,7 @@ Margolaris: Todo lo demás no sirve de nada si en una cuadrilla no hay buen ambi
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstItem="swA-jU-3wo" firstAttribute="top" secondItem="feb-ob-HAK" secondAttribute="top" id="7hg-wz-EVN"/>
-                                                                <constraint firstItem="xp7-EC-6OW" firstAttribute="top" secondItem="rcX-IS-Hmj" secondAttribute="bottom" constant="15" id="EiC-Rv-Dog"/>
+                                                                <constraint firstItem="xp7-EC-6OW" firstAttribute="top" secondItem="rcX-IS-Hmj" secondAttribute="bottom" constant="25" id="EiC-Rv-Dog"/>
                                                                 <constraint firstItem="xp7-EC-6OW" firstAttribute="width" secondItem="feb-ob-HAK" secondAttribute="width" constant="-16" id="Gg5-Ev-py5"/>
                                                                 <constraint firstItem="swA-jU-3wo" firstAttribute="width" secondItem="feb-ob-HAK" secondAttribute="width" id="Gj1-HV-kbf"/>
                                                                 <constraint firstItem="xp7-EC-6OW" firstAttribute="centerX" secondItem="feb-ob-HAK" secondAttribute="centerX" id="HFH-0V-hcn"/>
