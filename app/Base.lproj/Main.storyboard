@@ -64,7 +64,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="a4j-DF-epb" customClass="MenuCollectionViewCell" customModule="app" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-3" width="100" height="50"/>
+                                        <rect key="frame" x="0.0" y="-2.5" width="100" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
@@ -959,7 +959,7 @@
         <!--Sync-->
         <scene sceneID="cqg-BI-2xm">
             <objects>
-                <viewController title="Sync" id="3o1-ab-AT4" sceneMemberID="viewController">
+                <viewController title="Sync" id="3o1-ab-AT4" customClass="SyncController" customModule="app" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RYy-ax-Nya"/>
                         <viewControllerLayoutGuide type="bottom" id="rXD-89-8EQ"/>
@@ -1006,6 +1006,10 @@
                             <constraint firstItem="pgU-dx-MvQ" firstAttribute="top" secondItem="VkR-DT-y3S" secondAttribute="bottom" constant="8" id="wts-Yk-LsB"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lb" destination="pgU-dx-MvQ" id="ATL-SS-rxd"/>
+                        <outlet property="pb" destination="VkR-DT-y3S" id="NMd-7R-Rlc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRm-1Y-Xmm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

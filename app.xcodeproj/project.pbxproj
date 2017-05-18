@@ -20,6 +20,7 @@
 		93294FF81E336FA000FDAF50 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93294FF71E336FA000FDAF50 /* Entry.swift */; };
 		93294FFA1E337D0D00FDAF50 /* RowHomePastActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93294FF91E337D0D00FDAF50 /* RowHomePastActivities.swift */; };
 		935892D01E493C2300E1CD5F /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935892CF1E493C2300E1CD5F /* UIImageView.swift */; };
+		935AE18A1EC6138D0055E71F /* SyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935AE1891EC6138D0055E71F /* SyncController.swift */; };
 		935D6E2D1E8678B700CED3A1 /* GalleryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 935D6E2C1E8678B700CED3A1 /* GalleryView.xib */; };
 		935D6E2F1E86792000CED3A1 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D6E2E1E86792000CED3A1 /* GalleryView.swift */; };
 		935D6E311E867C5E00CED3A1 /* RowGallery.xib in Resources */ = {isa = PBXBuildFile; fileRef = 935D6E301E867C5E00CED3A1 /* RowGallery.xib */; };
@@ -80,6 +81,7 @@
 		93294FF71E336FA000FDAF50 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		93294FF91E337D0D00FDAF50 /* RowHomePastActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowHomePastActivities.swift; sourceTree = "<group>"; };
 		935892CF1E493C2300E1CD5F /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		935AE1891EC6138D0055E71F /* SyncController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncController.swift; sourceTree = "<group>"; };
 		935D6E2C1E8678B700CED3A1 /* GalleryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryView.xib; sourceTree = "<group>"; };
 		935D6E2E1E86792000CED3A1 /* GalleryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		935D6E301E867C5E00CED3A1 /* RowGallery.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowGallery.xib; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				93E0C5F31EBE306900905811 /* ScheduleViewController.swift */,
 				93EB2F0B1EBF5AEB00F64186 /* RowSchedule.swift */,
 				93EB2F0D1EBF5BF500F64186 /* RowSchedule.xib */,
+				935AE1891EC6138D0055E71F /* SyncController.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				93E0C5EA1EBDFFB400905811 /* RowPastActivity.swift in Sources */,
 				93BAD2F41E585EE6009DF853 /* RowHomeFutureActivities.swift in Sources */,
 				931AA5891E1AFF8C003A2290 /* String.swift in Sources */,
+				935AE18A1EC6138D0055E71F /* SyncController.swift in Sources */,
 				93B84B9C1D9C31AB006C0F67 /* ViewController.swift in Sources */,
 				93075C6C1E59CB6B00396389 /* BlogView.swift in Sources */,
 				93B84B9A1D9C31AB006C0F67 /* AppDelegate.swift in Sources */,
