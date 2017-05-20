@@ -127,7 +127,7 @@ Margolaris: Todo lo demás no sirve de nada si en una cuadrilla no hay buen ambi
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trj-oS-RaI" userLabel="FestivalsIntro">
                                                             <rect key="frame" x="0.0" y="0.0" width="355" height="300"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="FTitle" text="Festivals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uf0-CR-dfk" userLabel="FTitle">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="FTitle" text=" Fiestas de La Blanca" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uf0-CR-dfk" userLabel="FTitle">
                                                                     <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
                                                                     <color key="backgroundColor" red="0.0" green="0.47058823529999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
@@ -262,7 +262,7 @@ Margolaris: Todo lo demás no sirve de nada si en una cuadrilla no hay buen ambi
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feb-ob-HAK" userLabel="FestivalsPrices">
                                                             <rect key="frame" x="0.0" y="410" width="355" height="965.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Programas de Fiestas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swA-jU-3wo" userLabel="FesivalsPricesTitle">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Precios y ofertas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swA-jU-3wo" userLabel="FesivalsPricesTitle">
                                                                     <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
                                                                     <color key="backgroundColor" red="0.0" green="0.47058823529999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
