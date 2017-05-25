@@ -21,12 +21,16 @@
 import Foundation
 import CoreData
 import UIKit
+import GoogleMaps
 /**
 Class to handle the home view.
 */
 class LocationView: UIView {
 	
 	@IBOutlet var container: UIView!
+	@IBOutlet weak var map: GMSMapView!
+	
+	var didFindMyLocation = false
 	
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -44,6 +48,12 @@ class LocationView: UIView {
 		Bundle.main.loadNibNamed("LocationView", owner: self, options: nil)
 		self.addSubview(self.container)
 		self.container.frame = self.bounds
+		
+		// Set map up
+		map.isMyLocationEnabled = true
+		//map.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
+		let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 42.846399, longitude: -2.673365, zoom: 12.0)
+		map.camera = camera
 		/*self.postList = self.section.getContentStack()
 		
 		// Get viewController from StoryBoard
@@ -59,4 +69,21 @@ class LocationView: UIView {
 		NSLog(":LOCATION:DEBUG: Finished loading LocationView")
 		
 	}
+	
+	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+		if status == CLAuthorizationStatus.authorizedWhenInUse {
+			map.isMyLocationEnabled = true
+		}
+	}
+	
+	/*func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutableRawPointer) {
+		if !didFindMyLocation {
+			let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as CLLocation
+			map.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 10.0)
+			map.settings.myLocationButton = true
+			
+			didFindMyLocation = true
+		}
+	}
+	*/
 }

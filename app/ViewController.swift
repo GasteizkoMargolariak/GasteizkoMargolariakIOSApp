@@ -20,11 +20,12 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 /**
   The view controller of the app.
  */
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, CLLocationManagerDelegate {
 	
 	var delegate: AppDelegate?
 	
@@ -43,6 +44,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet var containerViewHome: HomeView!
 	
 	var passId: Int = -1
+	
+	// Location-related variables
+	var locationManager = CLLocationManager()
+	var didFindMyLocation = false
 	
 	/**
 	 Controller initializer.
@@ -144,7 +149,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	 Run when the app loads.
 	*/
 	override func viewDidLoad() {
-						
+		
+		// Ask for location permissions.
+		locationManager.delegate = self
+		locationManager.requestWhenInUseAuthorization()
+		
 		//Hide all sections, except for the first one
 		self.containerViewLocation.alpha = 0
 		self.containerViewLablanca.alpha = 0
