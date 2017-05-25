@@ -27,12 +27,15 @@ The controller of the schedule view.
 class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 
 	// Outlets
+	@IBOutlet weak var lbWindowTitle: UILabel!
 	@IBOutlet weak var btPrev: UIButton!
 	@IBOutlet weak var btNext: UIButton!
 	@IBOutlet weak var lbDayNumber: UILabel!
 	@IBOutlet weak var lbDayMonth: UILabel!
 	@IBOutlet weak var lbDayName: UILabel!
 	@IBOutlet weak var svScheduleList: UIStackView!
+	@IBOutlet weak var lbToolbarTitle: UILabel!
+	@IBOutlet weak var btToolbarButton: UIButton!
 	
 	var context: NSManagedObjectContext? = nil
 	var lang: String? = nil
@@ -42,7 +45,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	var margolari: Bool = false
 
 	// Day indicator
-	var days: [String] = [String]()
+	var days: [NSDate] = [NSDate]()
 	var selectedDay: Int = 0
 
 	/**
@@ -63,10 +66,18 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		super.viewDidLoad()
 		self.loadSchedule(margolari: margolari)
 		
-		//TODO Title
+		// Set titles
+		if margolari == true{
+			lbToolbarTitle.text = " Programa Margolari"
+			lbWindowTitle.text = " Programa Margolari"
+		}
+		else{
+			lbToolbarTitle.text = " Programa de Fiestas"
+			lbWindowTitle.text = " Programa de Fiestas"
+		}
 		
-		// TODO Set button action
-		//barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
+		// Set back button action
+		btToolbarButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
 	}
 	
 	/**
@@ -106,25 +117,45 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		self.context?.persistentStoreCoordinator = self.delegate?.persistentStoreCoordinator
 
 		// Get days
+		// TODO: Get current year
+		let year = 2016
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd"
+		dateFormatter.locale = Locale.init(identifier: "en_GB")
+		var dateString = "\(year)-01-01"
+		let sDate = dateFormatter.date(from: dateString)
+		dateString = "\(year)-12-31"
+		let eDate = dateFormatter.date(from: dateString)
 		let dayFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Festival_event")
 		dayFetchRequest.propertiesToFetch = ["day"]
 		if self.margolari == true{
-			dayFetchRequest.predicate = NSPredicate(format: "gm = %i", 1)
+			dayFetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (start >= %@) AND (start <= %@)", argumentArray: [1, sDate, eDate])
 		}
 		else{
-			dayFetchRequest.predicate = NSPredicate(format: "gm = %i", 0)
+			dayFetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (start >= %@) AND (start <= %@)", argumentArray: [0, sDate, eDate])
 		}
 
 		dayFetchRequest.returnsDistinctResults = true
-		dayFetchRequest.resultType = NSFetchRequestResultType.dictionaryResultType
+		//dayFetchRequest.resultType = NSFetchRequestResultType.dictionaryResultType
 
 		do {
 			let results = try self.context?.fetch(dayFetchRequest)
-
-				let resultsDict = results as! [[String: String]]
-				for r in resultsDict {
-					self.days.append(r["name"]!)
+			
+			for r in results as! [NSManagedObject] {
+				let day: NSDate = r.value(forKey: "day") as! NSDate
+				// Don't add duplicates
+				if self.days.contains(day) == false{
+					NSLog(":SCHEDULECONTROLLER:DEBUG: Day \(day)")
+					self.days.append(day)
 				}
+			}
+
+			/*let resultsDict = results as! [[String: String]]
+			for r in resultsDict {
+				//let dayStr: String = r.value(forKey: "day") as! String
+				NSLog(":SCHEDULECONTROLLER:DEBUG: Day \(r["day"])")
+				//self.days.append(r.value(forKey: "day") as! NSDate)
+			}*/
 
 		}
 		catch let err as NSError {
@@ -154,8 +185,64 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	func loadDay(){
 		
-		// TODO: Clear list.
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd"
+		dateFormatter.locale = Locale.init(identifier: "en_GB")
+		
+		// Clear list.
+		for v in (self.svScheduleList?.subviews)!{
+			v.removeFromSuperview()
+		}
+		
 		// TODO: Set toolbar elements.
+		if margolari == true{
+			let dayFetchRequest: NSFetchRequest<Festival_day> = Festival_day.fetchRequest()
+			dayFetchRequest.predicate = NSPredicate(format: "date = %@", argumentArray: [days[selectedDay]])
+			var name: String = ""
+			do {
+				let daySearchResults = try self.context?.fetch(dayFetchRequest)
+				for r in daySearchResults as! [NSManagedObject] {
+					name = r.value(forKey: "name_\(lang!)") as! String
+				}
+				self.lbDayName.text = name
+			}
+			catch {
+				NSLog(":SCHEDULECONTROLLER:ERROR: Error getting info about days: \(error)")
+			}
+		}
+		else{
+			self.lbDayName.text = ""
+		}
+		let dateString: String = dateFormatter.string(from: days[selectedDay] as Date)
+		let nDay: String = dateString.subStr(start: 8, end: 9)
+		let month: String = dateString.subStr(start: 5, end: 6)
+		var nMonth: String = "Agosto" // TODO: Reference
+		if month == "07"{
+			nMonth = "Julio" // TODO: Reference
+		}
+		self.lbDayMonth.text = nMonth
+		self.lbDayNumber.text = "\(Int(nDay)!)"
+		
+		// Enable or disable buttons
+		if self.selectedDay <= 0{
+			self.btPrev.alpha = 0.5
+			self.btPrev.isUserInteractionEnabled = false
+		}
+		else{
+			self.btPrev.alpha = 1
+			self.btPrev.isUserInteractionEnabled = true
+		}
+		if self.selectedDay >= (days.count - 1){
+			self.btNext.alpha = 0.5
+			self.btNext.isUserInteractionEnabled = false
+		}
+		else{
+			self.btNext.alpha = 1
+			self.btNext.isUserInteractionEnabled = true
+		}
+
+		
+		
 		
 		var rowcount = 0
 		var row: RowSchedule
@@ -166,15 +253,15 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		var location: String
 
 		let fetchRequest: NSFetchRequest<Festival_event> = Festival_event.fetchRequest()
-		let sortDescriptor = NSSortDescriptor(key: "start", ascending: false)
+		let sortDescriptor = NSSortDescriptor(key: "start", ascending: true)
 		let sortDescriptors = [sortDescriptor]
 		fetchRequest.sortDescriptors = sortDescriptors
 		
 		if margolari == true{
-			fetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (day = @)", argumentArray: [1, days[selectedDay]])
+			fetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (day = %@)", argumentArray: [1, days[selectedDay]])
 		}
 		else{
-			fetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (day = @)", argumentArray: [0, days[selectedDay]])
+			fetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (day = %@)", argumentArray: [0, days[selectedDay]])
 		}
 				
 		do {
@@ -186,9 +273,9 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 			
 			for r in searchResults as! [NSManagedObject] {
 				
-				title = r.value(forKey: "title_\(lang)") as! String
-				if let tx = r.value(forKey: "description_\(lang)"){
-					text = r.value(forKey: "description_\(lang)") as! String
+				title = r.value(forKey: "title_\(lang!)") as! String
+				if let tx = r.value(forKey: "description_\(lang!)"){
+					text = r.value(forKey: "description_\(lang!)") as! String
 				}
 				else{
 					text = ""
@@ -208,14 +295,13 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 				do{
 					var locationSearchResults = try self.context?.fetch(locationFetchRequest)
 					var locationR = locationSearchResults?[0]
-					location = locationR?.value(forKey: "name_\(lang)")! as! String
+					location = locationR?.value(forKey: "name_\(lang!)")! as! String
 					
 					row.setLocation(text: location)
 				} catch {
 					NSLog(":SCHEDULECONTROLLER:ERROR: Error getting location: \(error)")
 				}
 				
-				NSLog(":SCHEDULECONTROLLER:DEBUG: Adding row: height: \(row.frame.height)")
 				svScheduleList.addArrangedSubview(row)
 				
 				rowcount = rowcount + 1
@@ -255,12 +341,13 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	:param: increment Days to advance the schedule. Negative values to back it up.
 	*/
 	func changeDay(increment: Int){
-		selectedDay = selectedDay + increment
-		if selectedDay <= -1{
-			selectedDay = 0
+		NSLog(":SCHEDULECONTROLLER:DEBUG: Change day increment: \(increment)")
+		self.selectedDay = self.selectedDay + increment
+		if self.selectedDay <= -1{
+			self.selectedDay = 0
 		}
 		if self.selectedDay >= self.days.count{
-			selectedDay = (self.days.count - 1)
+			self.selectedDay = (self.days.count - 1)
 		}
 		loadDay()
 	}

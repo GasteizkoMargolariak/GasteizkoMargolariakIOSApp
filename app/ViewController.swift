@@ -171,8 +171,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	func populate(){
 		if (self.containerViewHome != nil){
 			//(self.containerViewHome as HomeView).populate2()
-			let ng = self.containerViewHome.dbgTxt
-			NSLog("AAAAA \(ng)")
+			//let ng = self.containerViewHome.dbgTxt
+			//NSLog("AAAAA \(ng)")
 		}
 		else{
 			NSLog("CONTROLLER:ERROR: containerViewHome couldn't be populated: It is nil.")
