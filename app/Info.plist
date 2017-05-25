@@ -8,6 +8,8 @@
 	<string>Gasteizko Margolariak</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Permitiendo acceso a tu ubicación, podrás conocer la distancia a la cuadrilla y a determinados eventos.</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
