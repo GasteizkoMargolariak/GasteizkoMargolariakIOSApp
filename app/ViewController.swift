@@ -39,7 +39,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet var containerViewBlog: BlogView!
 	@IBOutlet var containerViewActivities: ActivitiesView!
 	@IBOutlet var containerViewLablanca: LablancaView!
-	@IBOutlet var containerViewLocation: UIView!
+	@IBOutlet var containerViewLocation: LocationView!
 	@IBOutlet var containerViewHome: HomeView!
 	
 	var passId: Int = -1
