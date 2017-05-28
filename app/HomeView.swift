@@ -41,8 +41,13 @@ class HomeView: UIView {
 	@IBOutlet weak var pastActivitiesSection: Section!
 	@IBOutlet weak var socialSection: Section!
 	
+	var moc: NSManagedObjectContext? = nil
+	var delegate: AppDelegate? = nil
+	var lang: String? = nil
+	
 	override init(frame: CGRect){
 		super.init(frame: frame)
+		
 	}
 	
 	/**
@@ -69,32 +74,37 @@ class HomeView: UIView {
 		socialSection.setTitle(text: "Siguenos")
 		
 		//Get info to populate sections
-		let moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		self.moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		
-		let appDelegate = UIApplication.shared.delegate as! AppDelegate
-		moc.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-		let lang : String = getLanguage()
+		self.delegate = UIApplication.shared.delegate as! AppDelegate
+		self.moc?.persistentStoreCoordinator = self.delegate?.persistentStoreCoordinator
+		self.lang = getLanguage()
 		
-		//Populate sections
-		setUpPastActivities(context: moc, delegate: appDelegate, lang: lang, parent: pastActivitiesSection.getContentStack())
-		setUpBlog(context: moc, delegate: appDelegate, lang: lang, parent: blogSection.getContentStack())
-		setUpFutureActivities(context: moc, delegate: appDelegate, lang: lang, parent: futureActivitiesSection.getContentStack())
-		setUpSocial(parent: socialSection.getContentStack())
-		setUpGallery(context: moc, delegate: appDelegate, parent: gallerySection.getContentStack())
+		populate()
 		
-		
-		pastActivitiesSection.expandSection()
-		
-		
-		//Always at the end: update scrollview
+		/*//Always at the end: update scrollview
 		var h: Int = 0
 		for view in scrollView.subviews {
-			//contentRect = contentRect.union(view.frame);
-			h = h + Int(view.frame.height) + 30 //Why 30?
-			print("curh: \(h)")
+		//contentRect = contentRect.union(view.frame);
+		h = h + Int(view.frame.height) + 30 //Why 30?
+		print("curh: \(h)")
 		}
 		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 1300// CGFloat(h);
+		self.scrollView.contentSize.height = 1300// CGFloat(h);*/
+	}
+	
+	func populate(){
+	
+		//Populate sections
+		setUpPastActivities(context: self.moc!, delegate: self.delegate!, lang: self.lang!, parent: self.pastActivitiesSection.getContentStack())
+		setUpBlog(context: self.moc!, delegate: self.delegate!, lang: self.lang!, parent: self.blogSection.getContentStack())
+		setUpFutureActivities(context: self.moc!, delegate: self.delegate!, lang: self.lang!, parent: self.futureActivitiesSection.getContentStack())
+		setUpSocial(parent: self.socialSection.getContentStack())
+		setUpGallery(context: self.moc!, delegate: self.delegate!, parent: self.gallerySection.getContentStack())
+		
+		
+		//pastActivitiesSection.expandSection()
+
 	}
 	
 	func getLanguage() -> String{
@@ -135,7 +145,7 @@ class HomeView: UIView {
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
 				//get the Key Value pairs (although there may be a better way to do that...
-				print("Perm: \(r.value(forKey: "permalink"))")
+				print("Perm: \(String(describing: r.value(forKey: "permalink")))")
 				
 				
 				//Create a new row

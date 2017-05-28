@@ -34,9 +34,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		
+		// Google Mapas API KEY
 		GMSServices.provideAPIKey("AIzaSyBfIiBM_YSBlxybmI_Uz_fGoUFN4wacR80")
 		
+		// Background mode.
+		UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+		
 		return true
+	}
+	
+	func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+		Sync()
+		completionHandler(UIBackgroundFetchResult.newData)
+		/*if let tabBarController = window?.rootViewController as? UITabBarController, let viewControllers = tabBarController.viewControllers {
+			for viewController in viewControllers {
+				if let fetchViewController = viewController as? FetchViewController {
+					fetchViewController.fetch {
+						fetchViewController.updateUI()
+						completionHandler(.newData)
+					}
+				}
+			}
+		}*/
 	}
 
 	func applicationWillResignActive(_ application: UIApplication) {

@@ -145,6 +145,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		}
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		NSLog(":CONTROLLER:DEBUG: Forcing a call to populate")
+		self.populate()
+		super.viewWillAppear(animated)
+	}
+	
 	/**
 	 Run when the app loads.
 	*/
@@ -170,16 +176,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.delegate?.controller = self
 		
-		NSLog(":CONTROLLER:DEBUG: NOT Forcing a call to populate")
-		//self.populate()
-		
 		super.viewDidLoad()
 		
 	}
 
 	func populate(){
 		if (self.containerViewHome != nil){
-			//(self.containerViewHome as HomeView).populate2()
+			//(self.containerViewHome as HomeView).populate()
 			//let ng = self.containerViewHome.dbgTxt
 			//NSLog("AAAAA \(ng)")
 		}
