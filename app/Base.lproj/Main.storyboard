@@ -221,7 +221,7 @@
                         <viewControllerLayoutGuide type="top" id="pcm-Ee-gOc"/>
                         <viewControllerLayoutGuide type="bottom" id="3Ws-3b-fnx"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hp8-jo-hEx">
+                    <view key="view" contentMode="scaleToFill" id="hp8-jo-hEx" customClass="LocationView" customModule="app">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.055437682639999999" blue="0.9161184698" alpha="1" colorSpace="calibratedRGB"/>
@@ -783,7 +783,7 @@
                                                                     <constraint firstAttribute="width" constant="45" id="0J5-54-fFO"/>
                                                                     <constraint firstAttribute="height" constant="45" id="bRL-x7-mQS"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -946,9 +946,12 @@
                     <connections>
                         <outlet property="btNext" destination="gEL-Ik-UfU" id="yfe-ny-2eZ"/>
                         <outlet property="btPrev" destination="ean-uL-e8X" id="8ah-gF-AV8"/>
+                        <outlet property="btToolbarButton" destination="cV9-gT-2OC" id="NLD-kG-O3O"/>
                         <outlet property="lbDayMonth" destination="g7M-sJ-teh" id="Wwr-mS-Y3D"/>
                         <outlet property="lbDayName" destination="TH3-vv-4wy" id="hbO-Yb-NUo"/>
                         <outlet property="lbDayNumber" destination="EUB-BM-L7c" id="UjL-xN-CcE"/>
+                        <outlet property="lbToolbarTitle" destination="RJE-Hu-oDM" id="nCW-fh-Pst"/>
+                        <outlet property="lbWindowTitle" destination="663-n7-Jwn" id="0p7-02-Veb"/>
                         <outlet property="svScheduleList" destination="bHp-Km-KNL" id="aSi-lC-w6H"/>
                     </connections>
                 </viewController>
