@@ -27,13 +27,13 @@ import UIKit
 class Section: UIView {
 	
 	//The container.
-	@IBOutlet weak var container: UIView!
+	@IBOutlet var container: UIView!
 	
 	//The section title.
-	@IBOutlet weak var title: UITextView!
+	@IBOutlet var title: UITextView!
 	
 	//The content of the section.
-	@IBOutlet weak var content: UIStackView!
+	@IBOutlet var content: UIStackView!
 	
 	
 	
