@@ -41,16 +41,20 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	// Id received from segue.
 	var passId: Int = -1
 	
+	
+	/**
+	Gets the app context.
+	:return: Application context.
+	*/
 	func getContext () -> NSManagedObjectContext {
 		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 	}
+	
 	
 	/**
 	Run when the app loads.
 	*/
 	override func viewDidLoad() {
-		
-		NSLog(":ALBUMCONTROLLER:LOG: Init album.")
 		
 		super.viewDidLoad()
 		self.loadAlbum(id: id)
@@ -59,11 +63,11 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 		barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
 	}
 	
+	
 	/**
 	Returns to the main view controller.
 	*/
 	func back() {
-		NSLog(":ALBUMCONTROLLER:DEBUG: Back")
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -75,14 +79,11 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 		super.didReceiveMemoryWarning()
 	}
 	
+	
 	/**
 	Loads the photos of the album
 	*/
 	public func loadAlbum(id: Int){
-		
-		NSLog(":ALBUMCONTROLLER:DEBUG: Loading album \(id)")
-		
-		albumContainer.backgroundColor = UIColor.red
 		
 		var row : RowAlbum
 		
@@ -141,7 +142,7 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 					//TODO create row, add images (L+R), add row to container.
 					//row.setImage(filename: image)
 				} catch {
-					print(":GALLERYCONTROLLER:ERROR: Error getting image for post \(id): \(error)")
+					NSLog(":GALLERYCONTROLLER:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
 				NSLog(":GALLERYCONTROLLER:DEBUG: Adding row: height: \(row.frame.height)")
@@ -150,13 +151,15 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 				rowcount = rowcount + 1
 			}
 		} catch {
-			print("POST:ERROR: Error with request: \(error)")
+			NSLog(":GALLERYCONTROLLER:ERROR: Error with request: \(error)")
 		}
 	}
 	
+	
 	/**
-	Gets the device language.
-	:return: Two letter language code of the device.
+	Gets the device language. The only recognized languages are Spanish, English and Basque.
+	If the device has another language, Spanish will be selected by default.
+	:return: Two-letter language code.
 	*/
 	func getLanguage() -> String{
 		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)

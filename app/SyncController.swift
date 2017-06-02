@@ -51,6 +51,10 @@ class SyncController: UIViewController{
 		
 	}
 	
+	
+	/**
+	Signal to update the progressbar and, maybe, the tag.
+	*/
 	func progress(){
 		
 		if (Int(completion * 100) % 20) == 0 {
@@ -64,9 +68,6 @@ class SyncController: UIViewController{
 			completion = 0.0
 		}
 		pb.progress = completion
-		
-		
-		
 	}
 	
 }
