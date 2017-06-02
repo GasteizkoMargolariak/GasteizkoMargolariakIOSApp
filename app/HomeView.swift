@@ -124,7 +124,7 @@ class HomeView: UIView {
 			//I like to check the size of the returned results!
 			print ("Activities: \(searchResults.count)")
 			
-			var row : RowHomePastActivities
+			var row : RowHomeFutureActivities
 			var count = 0
 			var id: Int
 			var title: String
@@ -139,13 +139,13 @@ class HomeView: UIView {
 				
 				
 				//Create a new row
-				row = RowHomePastActivities.init(s: "rowHomeFutureActivities\(count)", i: count)
+				row = RowHomeFutureActivities.init(s: "rowHomeFutureActivities\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
 				print(title)
 				row.setTitle(text: title)
-				row.setText(text: text)
+				row.setText(text: text.decode())
 				
 				// Get main image
 				image = ""

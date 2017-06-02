@@ -78,6 +78,6 @@ Extension of UIView to be formatted as sections.
 	:param: text The new text.
 	*/
 	func setText(text: String){
-		self.text.text = text.stripHtml()
+		self.text.text = text.decode().stripHtml()
 	}
 }

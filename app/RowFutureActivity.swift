@@ -90,7 +90,7 @@ Extension of UIView to be formatted as sections.
 	:param: text The new title.
 	*/
 	func setTitle(text: String){
-		self.title.text = text.stripHtml()
+		self.title.text = text.decode().stripHtml()
 	}
 	
 	/**
@@ -98,7 +98,7 @@ Extension of UIView to be formatted as sections.
 	:param: text The city.
 	*/
 	func setCity(text: String){
-		self.city.text = text
+		self.city.text = text.decode().stripHtml()
 	}
 	
 	/**
@@ -119,7 +119,7 @@ Extension of UIView to be formatted as sections.
 	:param: text The new text.
 	*/
 	func setText(text: String){
-		self.descript.text = text.stripHtml()
+		self.descript.text = text.decode().stripHtml()
 	}
 	
 	/**

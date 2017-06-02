@@ -88,7 +88,7 @@ class LablancaView: UIView {
 		self.nfWindow.isHidden = true
 		
 		// TODO: Get current year
-		let year = 2016
+		let year = 2017
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -108,7 +108,7 @@ class LablancaView: UIView {
 				let r = searchResults[0]
 			
 				// Set description
-				self.fText.text = r.value(forKey: "text_\(lang)") as! String?
+				self.fText.text = (r.value(forKey: "text_\(lang)") as! String?)?.decode().stripHtml()
 			}
 
 		}
@@ -198,7 +198,7 @@ class LablancaView: UIView {
 				
 				let date: NSDate = day.value(forKey: "date")! as! NSDate
 				let dateString: String = dateFormatter.string(from: date as Date)
-				let nDay: String = dateString.subStr(start: 8, end: 9)
+				let nDay: Int = Int(dateString.subStr(start: 8, end: 9))!
 				let month: String = dateString.subStr(start: 5, end: 6)
 				var nMonth: String = "Agosto" // TODO: Reference
 				if month == "07"{
@@ -209,10 +209,7 @@ class LablancaView: UIView {
 				
 				// Create the row and set data.
 				row = RowLablancaDay.init(s: "rowLablancaDay\(count)", i: count)
-				row.name.text = name
-				row.price.text = "\(price) €"
-				row.number.text = "\(Int(nDay)!)"
-				row.month.text = nMonth
+				row.setDay(number: nDay, month: nMonth, name: name, price: price)
 				
 				// Add the row
 				fDayList.addArrangedSubview(row)

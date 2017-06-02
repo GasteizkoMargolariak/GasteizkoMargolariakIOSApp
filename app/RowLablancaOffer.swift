@@ -96,7 +96,7 @@ Extension of UIView to be formatted as sections.
 	:param: name The name of the offer.
 	*/
 	func setName(name: String){
-		self.lbName.text = name
+		self.lbName.text = name.decode().stripHtml()
 	}
 	
 	/**
@@ -104,7 +104,7 @@ Extension of UIView to be formatted as sections.
 	:param: description The description of the offer.
 	*/
 	func setDescription(description: String){
-		self.lbDescription.text = description
+		self.lbDescription.text = description.decode().stripHtml()
 	}
 	
 	/**

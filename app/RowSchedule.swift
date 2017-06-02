@@ -126,7 +126,7 @@ Extension of UIView to be formatted as sections.
 	:param: text The title of the event.
 	*/
 	func setTitle(text: String){
-		self.lbTitle.text = text
+		self.lbTitle.text = text.decode().stripHtml()
 	}
 	
 	/**
@@ -134,7 +134,7 @@ Extension of UIView to be formatted as sections.
 	:param: text The location of the event.
 	*/
 	func setLocation(text: String){
-		self.lbLocation.text = text
+		self.lbLocation.text = text.decode().stripHtml()
 	}
 	
 	/**
@@ -142,13 +142,13 @@ Extension of UIView to be formatted as sections.
 	:param: text The new text.
 	*/
 	func setText(text: String){
-		self.lbText.text = text.stripHtml()
+		self.lbText.text = text.decode().stripHtml()
 	}
 	
 	/**
 	Opens an event dialog.
 	*/
 	func openEvent(_ sender:UITapGestureRecognizer? = nil){
-		print("ROW_BLOG:DEBUG: openpost")
+		print("ROW_BLOG:DEBUG: Open Event")
 	}
 }

@@ -110,4 +110,17 @@ extension String {
 		//return self
 		
 	}
+	
+	/**
+	Removes escaped characters and unicode symbols from the string.
+	:return: Escaped string.
+	*/
+	func decode() -> String {
+		
+		let transform: NSString = "Any-Hex/Java"
+		let convertedString: NSMutableString = (self as NSString).mutableCopy() as! NSMutableString
+		
+		CFStringTransform(convertedString, nil, transform, true)
+		return (convertedString as String).replacingOccurrences(of: "\\/", with: "/")
+	}
 }

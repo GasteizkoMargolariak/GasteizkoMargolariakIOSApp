@@ -88,7 +88,7 @@ Extension of UIView to be formatted as sections.
 	:param: text The new title.
 	*/
 	func setTitle(text: String){
-		title.text = text.stripHtml()
+		title.text = text.decode().stripHtml()
 	}
 	
 	/**
@@ -96,7 +96,7 @@ Extension of UIView to be formatted as sections.
 	:param: text The new text.
 	*/
 	func setText(text: String){
-		descrip.text = text.stripHtml()
+		descrip.text = text.decode().stripHtml()
 	}
 	
 	/**

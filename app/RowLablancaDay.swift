@@ -34,9 +34,6 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var price: UILabel!
 	@IBOutlet weak var separator: UIView!
 	
-	
-	
-	
 	/**
 	Default constructor
 	*/
@@ -84,6 +81,13 @@ Extension of UIView to be formatted as sections.
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
+	}
+	
+	func setDay(number: Int, month: String, name: String, price: Int){
+		self.number.text = "\(Int(number))"
+		self.month.text = month.decode().stripHtml()
+		self.name.text = name.decode().stripHtml()
+		self.price.text = "\(price) €"
 	}
 	
 }
