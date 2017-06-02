@@ -42,14 +42,13 @@ class ActivitiesView: UIView {
 		super.init(frame: frame)
 	}
 	
+	
 	/**
 	Run when the view is started.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		
 		super.init(coder: aDecoder)
-		
-		NSLog(":ACTIVITIES:DEBUG: init.")
 		
 		//Load the contents of the HomeView.xib file.
 		Bundle.main.loadNibNamed("ActivitiesView", owner: self, options: nil)
@@ -71,7 +70,11 @@ class ActivitiesView: UIView {
 		// Populate activity lists.
 		populate()
 	}
-		
+	
+	
+	/**
+	Actually populates the section.
+	*/
 	func populate(){
 		// Show future activities
 		var fetchRequest: NSFetchRequest<Activity> = Activity.fetchRequest()
@@ -82,7 +85,6 @@ class ActivitiesView: UIView {
 		
 		do {
 			let searchResults = try self.context?.fetch(fetchRequest)
-			NSLog(":ACTIVITIES:DEBUG: Total future activities: \(String(describing: searchResults?.count))")
 			if searchResults?.count == 0{
 				NSLog(":ACTIVITIES:DEBUG: No future activities: \(String(describing: searchResults?.count))")
 				let row: RowLabel = RowLabel.init(s: "rowFutureActivity0", i: 0)
@@ -103,7 +105,6 @@ class ActivitiesView: UIView {
 			
 				for r in searchResults! {
 					count = count + 1
-					NSLog(":ACTIVITIES:DEBUG: Activity perm: \(String(describing: r.value(forKey: "permalink")))")
 				
 					// Create a new row
 					row = RowFutureActivity.init(s: "rowFutureActivity\(count)", i: count)
@@ -131,7 +132,6 @@ class ActivitiesView: UIView {
 						let imgSearchResults = try self.context?.fetch(imgFetchRequest)
 						for imgR in imgSearchResults!{
 							image = imgR.value(forKey: "image")! as! String
-							NSLog(":ACTIVITIES:DEBUG: Image: \(image)")
 							row.setImage(filename: image)
 						}
 					} catch {
@@ -139,9 +139,7 @@ class ActivitiesView: UIView {
 					}
 				
 					self.futureList?.addArrangedSubview(row)
-					//row.setNeedsLayout()
-					//row.layoutIfNeeded()
-				
+					
 					// TODO: Do this on the row didLoad method
 					// Set tap recognizer
 					//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openActivity(_:)))
@@ -167,7 +165,6 @@ class ActivitiesView: UIView {
 		
 		do {
 			let searchResults = try self.context?.fetch(fetchRequest)
-			NSLog(":ACTIVITIES:DEBUG: Total past activities: \(String(describing: searchResults?.count))")
 			
 			var row: RowPastActivity
 			var count: Int = 0
@@ -178,7 +175,6 @@ class ActivitiesView: UIView {
 			
 			for r in searchResults! {
 				count = count + 1
-				NSLog(":ACTIVITIES:DEBUG: Activity perm: \(String(describing: r.value(forKey: "permalink")))")
 				
 				// Create a new row
 				row = RowPastActivity.init(s: "rowPastActivity\(count)", i: count)
@@ -200,7 +196,6 @@ class ActivitiesView: UIView {
 					let imgSearchResults = try self.context?.fetch(imgFetchRequest)
 					for imgR in imgSearchResults!{
 						image = imgR.value(forKey: "image")! as! String
-						NSLog(":ACTIVITIES:DEBUG: Image: \(image)")
 						row.setImage(filename: image)
 					}
 				}
@@ -208,11 +203,8 @@ class ActivitiesView: UIView {
 					NSLog(":ACTIVITIES:ERROR: Error getting image for activity \(id): \(error)")
 				}
 				
-				NSLog(":ACTIVITIES:DEBUG: Row height: \(row.frame.height)")
 				
 				self.pastList?.addArrangedSubview(row)
-				//row.setNeedsLayout()
-				//row.layoutIfNeeded()
 				
 				// TODO: Do this on the row didLoad method
 				// Set tap recognizer
@@ -228,12 +220,14 @@ class ActivitiesView: UIView {
 		NSLog(":ACTIVITIES:DEBUG: Finished loading ActivitiesView")
 	}
 	
+	
 	/*func openActivity(){//(_ sender:UITapGestureRecognizer? = nil){
 		NSLog(":ACTIVITIES:DEBUG: getting delegate and showing activity.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showActivity(id: 4)
 		NSLog(":ACTIVITIES:DEBUG: Activity should be shown.")
 	}
+	
 	
 	func openActivity(_ sender:UITapGestureRecognizer? = nil){
 		NSLog(":ACTIVITIES:DEBUG: getting delegate and showing activity.")
@@ -242,6 +236,12 @@ class ActivitiesView: UIView {
 		NSLog(":ACTIVITIES:DEBUG: Activity should be shown.")
 	}*/
 	
+	
+	/**
+	Gets the device language. The only recognized languages are Spanish, English and Basque.
+	If the device has another language, Spanish will be selected by default.
+	:return: Two-letter language code.
+	*/
 	func getLanguage() -> String{
 		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
 		if(pre == "es" || pre == "en" || pre == "eu"){

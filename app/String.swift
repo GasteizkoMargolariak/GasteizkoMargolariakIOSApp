@@ -26,12 +26,14 @@ Extension of String to include custom utilities.
 */
 extension String {
 	
+	
 	/**
 	The length of the string.
 	*/
 	var length:Int {
 		return self.characters.count
 	}
+	
 	
 	/**
 	Finds the first position of a substring.
@@ -49,6 +51,7 @@ extension String {
 		return range.location
 		
 	}
+	
 	
 	/**
 	Finds the last position of a substring.
@@ -69,6 +72,7 @@ extension String {
 		
 	}
 	
+	
 	/**
 	Checks for a substring
 	:param: target Ths substring to look for.
@@ -77,6 +81,7 @@ extension String {
 	func contains(s: String) -> Bool {
 		return (self.range(of: s) != nil) ? true : false
 	}
+	
 	
 	/**
 	Gets a subset of the string.
@@ -93,6 +98,7 @@ extension String {
 		return self[range]
 	}
 	
+	
 	/**
 	Removes HTML symbolf from the string. It also decodes HTML symbols.
 	:return: The string eithout the HTML symbols.
@@ -105,11 +111,8 @@ extension String {
 			print(error.localizedDescription)
 			return self
 		}
-		
-		// TODO implement
-		//return self
-		
 	}
+	
 	
 	/**
 	Removes escaped characters and unicode symbols from the string.

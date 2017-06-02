@@ -26,9 +26,6 @@ Extension of UIView to be formatted as sections.
 */
 @IBDesignable class RowGallery: UIView {
 	
-	// This view
-	var v: UIView!
-	
 	// Outlets
 	@IBOutlet weak var container: UIView!
 	@IBOutlet weak var title: UILabel!
@@ -51,14 +48,16 @@ Extension of UIView to be formatted as sections.
 		super.init(coder: aDecoder)
 	}
 	
+	
 	/**
 	Loads the view from the xib with the same name as the class.
 	*/
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first as! UIView
+		nib.instantiate(withOwner: self, options: nil).first
 	}
+	
 	
 	/**
 	Default constructor.
@@ -66,29 +65,28 @@ Extension of UIView to be formatted as sections.
 	:param: i Custom identifier
 	*/
 	init(s: String, i: Int) {
-		NSLog(":ROWGALLERY:DEBUG: Init \(s), \(i)")
 		
 		super.init(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000))
 		loadViewFromNib()
-		v = self
-		v.frame = bounds
-		v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		v.translatesAutoresizingMaskIntoConstraints = true
+		self.frame = self.bounds
+		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		container.translatesAutoresizingMaskIntoConstraints = true
+		self.container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.container.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.frame = v.bounds
-		v.addSubview(container)
+		self.container.frame = self.bounds
+		self.addSubview(self.container)
 		
 		//Populate review array
-		preview = [photo0, photo1, photo2, photo3]
+		self.preview = [photo0, photo1, photo2, photo3]
 		
 		// Set tap recognizer
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowGallery.openAlbum (_:)))
 		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
 		self.addGestureRecognizer(tapRecognizer)
 	}
+	
 	
 	/**
 	Default constructor for the interface builder
@@ -97,19 +95,25 @@ Extension of UIView to be formatted as sections.
 		super.init(frame: frame)
 	}
 	
+	
+	/**
+	Opens an album.
+	*/
 	func openAlbum(_ sender:UITapGestureRecognizer? = nil){
 		NSLog(":ROW_GALLERY:DEBUG: Getting delegate and showing album \(self.id).")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showAlbum(id: self.id)
 	}
 	
+	
 	/**
 	Changes the title of the album. Decodes HTML.
 	:param: text The new title.
 	*/
 	func setTitle(text: String){
-		title.text = "  \(text.decode().stripHtml())"
+		self.title.text = "  \(text.decode().stripHtml())"
 	}
+	
 	
 	/**
 	Changes the preview image of the album.
@@ -119,13 +123,11 @@ Extension of UIView to be formatted as sections.
 	func setImage(idx: Int, filename: String){
 		if (filename == ""){
 			NSLog(":ROWGALLERY:DEBUG: No image for album \(self.id) at index \(idx).")
-			preview[idx].isHidden = true
-			//TODO hide the imageview
+			self.preview[idx].isHidden = true
 		}
 		else{
-			NSLog(":ROWGALLERY:DEBUG: Set image \(filename) for album \(self.id) at index \(idx).")
 			let path = "img/galeria/thumb/\(filename)"
-			preview[idx].setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+			self.preview[idx].setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
 	}
 	

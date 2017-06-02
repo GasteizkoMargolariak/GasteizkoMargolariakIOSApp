@@ -34,6 +34,7 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var lbText: UILabel!
 	@IBOutlet weak var lbLocation: UILabel!
 	
+	
 	/**
 	Default constructor
 	*/
@@ -41,11 +42,16 @@ Extension of UIView to be formatted as sections.
 		super.init(coder: aDecoder)
 	}
 	
+	
+	/**
+	Loads the view from the xib with the same name as the class.
+	*/
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first as! UIView
+		nib.instantiate(withOwner: self, options: nil).first
 	}
+	
 	
 	/**
 	Default constructor.
@@ -72,12 +78,14 @@ Extension of UIView to be formatted as sections.
 		addGestureRecognizer(tapRecognizer)*/
 	}
 	
+	
 	/**
 	Default constructor for the interface builder
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}
+	
 	
 	/**
 	Sets the time of the event.
@@ -86,6 +94,7 @@ Extension of UIView to be formatted as sections.
 	func setTime(str: String){
 		self.lbTime.text = str
 	}
+	
 	
 	/**
 	Sets the time of the event.
@@ -102,6 +111,7 @@ Extension of UIView to be formatted as sections.
 		}
 		self.lbTime.text = "\(hours):\(strMinutes)"
 	}
+	
 	
 	/**
 	Sets the time of the event.
@@ -121,6 +131,7 @@ Extension of UIView to be formatted as sections.
 		self.lbTime.text = "\(hours):\(strMinutes)"
 	}
 	
+	
 	/**
 	Sets the title of the event.
 	:param: text The title of the event.
@@ -128,6 +139,7 @@ Extension of UIView to be formatted as sections.
 	func setTitle(text: String){
 		self.lbTitle.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Sets the location of the event.
@@ -137,6 +149,7 @@ Extension of UIView to be formatted as sections.
 		self.lbLocation.text = text.decode().stripHtml()
 	}
 	
+	
 	/**
 	Sets the description of the event. Decodes HTML.
 	:param: text The new text.
@@ -145,10 +158,12 @@ Extension of UIView to be formatted as sections.
 		self.lbText.text = text.decode().stripHtml()
 	}
 	
+	
 	/**
 	Opens an event dialog.
 	*/
 	func openEvent(_ sender:UITapGestureRecognizer? = nil){
+		// TODO implement openEvent.
 		print("ROW_BLOG:DEBUG: Open Event")
 	}
 }

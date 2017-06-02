@@ -30,7 +30,7 @@ class Entry: UIView {
 	@IBOutlet weak var entry: UIView!
 	
 	/**
-	Run when the section is loaded.
+	Run when the entry is loaded.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
@@ -40,12 +40,5 @@ class Entry: UIView {
 		self.addSubview(entry)
 		entry.frame = self.bounds
 	}
-	
-	/**
-	Chancges the title of the section.
-	:param: title The new title.
-	*/
-	//func setTitle(text: String){
-	//	title.text = text
-	//}
+
 }

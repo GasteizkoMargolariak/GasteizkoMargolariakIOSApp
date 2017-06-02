@@ -36,7 +36,6 @@ class Section: UIView {
 	@IBOutlet var content: UIStackView!
 	
 	
-	
 	/**
 	 Run when the section is loaded.
 	*/
@@ -49,31 +48,41 @@ class Section: UIView {
 		container.frame = self.bounds
 	}
 	
+	/**
+	Gets the stack view to be populated.
+	:return: The stack view of the seciton.
+	*/
 	func getContentStack() -> UIStackView {
 		return content
 	}
 	
 	/**
-	 Chancges the title of the section.
-	 :param: title The new title.
+	Chancges the title of the section.
+	:param: title The new title.
 	*/
 	func setTitle(text: String){
-		title.text = text
+		title.text = text.decode().stripHtml()
 	}
 	
+	/**
+	Recalculates the size of the section.
+	*/
 	func expandSection(){
-		print("Bounds: \(self.bounds)")
-		print("Frame: \(self.frame)")
-		print("Subviews: \(self.subviews)")
 		sizeToFit()
 	}
 	
+	/**
+	Adds a view to the section.
+	:param: view View to be added.
+	*/
 	func addEntry(view : UIView){
 		let lbl = UILabel()
-		lbl.text = "ABBA"
 		content.addSubview(lbl)
 	}
 	
+	/**
+	Recalculates the size of the section.
+	*/
 	func resizeToFitSubviews() {
 		var width: CGFloat = 0
 		var height: CGFloat = 0

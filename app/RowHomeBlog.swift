@@ -25,10 +25,7 @@ import UIKit
 Extension of UIView to be formatted as sections.
 */
 @IBDesignable class RowHomeBlog: UIView {
-	
-	//This view
-	var v: UIView!
-	
+
 	var id: Int!
 	
 	//The container.
@@ -46,6 +43,7 @@ Extension of UIView to be formatted as sections.
 	//The image.
 	@IBOutlet weak var image: UIImageView!
 	
+	
 	/**
 	Default constructor
 	*/
@@ -53,11 +51,16 @@ Extension of UIView to be formatted as sections.
 		super.init(coder: aDecoder)
 	}
 	
+	
+	/**
+	Loads the view in the xib file with the same name.
+	*/
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first as! UIView
+		nib.instantiate(withOwner: self, options: nil).first
 	}
+	
 	
 	/**
 	Default constructor.
@@ -67,16 +70,16 @@ Extension of UIView to be formatted as sections.
 	init(s: String, i: Int) {
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
-		v = self
-		v.frame = bounds
-		v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		v.translatesAutoresizingMaskIntoConstraints = true
+		self.frame = self.bounds
+		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.translatesAutoresizingMaskIntoConstraints = true
 		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		container.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.frame = v.bounds
-		v.addSubview(container)
+		container.frame = self.bounds
+		self.addSubview(container)
 	}
+	
 	
 	/**
 	Default constructor for the interface builder
@@ -85,21 +88,24 @@ Extension of UIView to be formatted as sections.
 		super.init(frame: frame)
 	}
 	
+	
 	/**
 	Changes the title of the post. Decodes HTML.
 	:param: text The new title.
 	*/
 	func setTitle(text: String){
-		title.text = text.decode().stripHtml()
+		self.title.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Changes the text of the text. Decodes HTML.
 	:param: text The new text.
 	*/
 	func setText(text: String){
-		descrip.text = text.decode().stripHtml()
+		self.descrip.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Changes the image of the activity.
@@ -108,13 +114,12 @@ Extension of UIView to be formatted as sections.
 	*/
 	func setImage(filename: String){
 		if (filename == ""){
-			print("No image")
-			//TODO hide the imageview
+			// Hide the imageview
+			self.image.isHidden = true
 		}
 		else{
-			print("Set image \(filename)")
 			let path = "img/blog/thumb/\(filename)"
-			image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+			self.image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
 	}
 }

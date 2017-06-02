@@ -36,13 +36,13 @@ class LocationView: UIView {
 		super.init(frame: frame)
 	}
 	
+	
 	/**
 	Run when the view is started.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		
 		super.init(coder: aDecoder)
-		NSLog(":LOCATION:DEBUG: init (coder).")
 		
 		// Load the contents of the HomeView.xib file.
 		Bundle.main.loadNibNamed("LocationView", owner: self, options: nil)
@@ -54,22 +54,12 @@ class LocationView: UIView {
 		//map.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
 		let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 42.846399, longitude: -2.673365, zoom: 12.0)
 		map.camera = camera
-		/*self.postList = self.section.getContentStack()
-		
-		// Get viewController from StoryBoard
-		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
-		self.controller = storyboard?.instantiateViewController(withIdentifier: "GMViewController") as? ViewController
-		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		self.delegate = UIApplication.shared.delegate as? AppDelegate
-		self.lang = getLanguage()
-		self.context?.persistentStoreCoordinator = delegate?.persistentStoreCoordinator
-		
-		populate()*/
-		
-		NSLog(":LOCATION:DEBUG: Finished loading LocationView")
-		
 	}
 	
+	
+	/**
+	I am not sure what does this do...
+	*/
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
 		if status == CLAuthorizationStatus.authorizedWhenInUse {
 			map.isMyLocationEnabled = true
