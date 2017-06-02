@@ -33,14 +33,13 @@ extension UIImageView {
 	:param: remotePath Url of the image to download (if not cached).
 	:return: 0 if the file was set form the local path, 1 if the file was downloaded, other for error.
 	*/
-	func setImage(localPath: String, remotePath: String) -> Int{
+	func setImage(localPath: String, remotePath: String){
 		//Check if the local image exists.
 		let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
 		let url = NSURL(fileURLWithPath: path)
 		let filePath = url.appendingPathComponent(localPath)?.path
 		let fileManager = FileManager.default
 		if fileManager.fileExists(atPath: filePath!) {
-			print("IMAGE:LOG: File available: \(filePath)")
 			
 			//Set image
 			do{
@@ -49,13 +48,12 @@ extension UIImageView {
 				self.image = UIImage(data: idata as Data)
 			}
 			catch (let error){
-				print("IMAGE:ERROR: Error setting image: \(error.localizedDescription)")
-				return -1
+				NSLog(":IMAGE:ERROR: Error setting image: \(error.localizedDescription)")
+				return
 			}
-			return 0
+			return
 		} else {
-			print("IMAGE:LOG: File not available: \(filePath)")
-			print("IMAGE:LOG: Downloading from \(remotePath)")
+			NSLog(":IMAGE:LOG: Downloading image from \(remotePath)")
 			
 			//Create required directories
 			var fileFolderUrl = URL(fileURLWithPath: filePath!)
@@ -64,7 +62,7 @@ extension UIImageView {
 				try fileManager.createDirectory(at:  fileFolderUrl, withIntermediateDirectories: true, attributes: nil)
 			}
 			catch(let error){
-				print("IMAGE:ERROR: Error creating directories at \(fileFolderUrl.path): \(error.localizedDescription)")
+				NSLog(":IMAGE:ERROR: Error creating directories at \(fileFolderUrl.path): \(error.localizedDescription)")
 			}
 			
 			// Create destination URL
@@ -83,13 +81,13 @@ extension UIImageView {
 					
 					// Success
 					if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-						print("IMAGE:LOG: Successfully downloaded. Status code: \(statusCode)")
+						// TODO something.
 					}
 					
 					do {
 						try FileManager.default.copyItem(at: tempLocalUrl, to: destinationFileUrl)
 					} catch (let writeError) {
-						print("IMAGE:ERROR: Error creating a file \(destinationFileUrl) : \(writeError)")
+						NSLog(":IMAGE:ERROR: Error creating a file \(destinationFileUrl) : \(writeError)")
 					}
 					
 					// Set the image
@@ -98,17 +96,17 @@ extension UIImageView {
 						self.image = UIImage(data: idata as Data)
 					}
 					catch (let error){
-						print("IMAGE:ERROR: Error setting image: \(error.localizedDescription)")
+						NSLog(":IMAGE:ERROR: Error setting image: \(error.localizedDescription)")
 					}
 					
 				} else {
-					print("IMAGE:ERROR: Error took place while downloading a file: %@", error?.localizedDescription);
+					NSLog(":IMAGE:ERROR: Error took place while downloading a file.");
 				}
 			}
 			task.resume()
 		
 		
-			return 1
+			return
 		}
 
 	}

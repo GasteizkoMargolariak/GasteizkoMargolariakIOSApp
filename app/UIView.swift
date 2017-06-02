@@ -60,18 +60,16 @@ import UIKit
 		}
 	}
 	
+	
 	var parentViewController: ViewController? {
 		var parentResponder: UIResponder? = self
 		var i = 0
 		while parentResponder != nil {
-			print("UIVIEW:DEBUG: parentViewController level \(i)")
 			parentResponder = parentResponder!.next
 			if let viewController = parentResponder as? ViewController {
-				print("UIVIEW:DEBUG: parentViewController found  controller.")
 				return viewController
 			}
 		}
-		print("UIVIEW:DEBUG: parentViewController no controller found.")
 		return nil
 	}
 	

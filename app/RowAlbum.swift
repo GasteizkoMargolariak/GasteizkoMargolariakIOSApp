@@ -31,12 +31,8 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var photo0: UIImageView!
 	@IBOutlet weak var photo1: UIImageView!
 
-	
 	// Album ID
 	var id = -1
-	
-	// This view
-	var v: UIView!
 	
 	// Array with the imageviews
 	var preview: [UIImageView] = []
@@ -54,20 +50,19 @@ Extension of UIView to be formatted as sections.
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first as! UIView
+		nib.instantiate(withOwner: self, options: nil).first
 		
-		v = self
 		self.frame = self.bounds
 		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		self.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		container.translatesAutoresizingMaskIntoConstraints = true
+		self.container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.container.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.frame = self.bounds
-		self.addSubview(container)
-
+		self.container.frame = self.bounds
+		self.addSubview(self.container)
 	}
+	
 	
 	/**
 	Default constructor.
@@ -79,13 +74,12 @@ Extension of UIView to be formatted as sections.
 		
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
-		v = self
 		self.frame = self.bounds
 		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		self.translatesAutoresizingMaskIntoConstraints = true
 		
 		//Populate review array
-		preview = [photo0, photo1]
+		self.preview = [self.photo0, self.photo1]
 		
 		// Set tap recognizers
 		// TODO
@@ -108,6 +102,7 @@ Extension of UIView to be formatted as sections.
 		//delegate.controller?.showAlbum(id: self.id)
 	}
 	
+	
 	/**
 	Changes the preview image of the photos.
 	If null or empty, the igage is hidden.
@@ -116,14 +111,12 @@ Extension of UIView to be formatted as sections.
 	*/
 	func setImage(idx: Int, filename: String){
 		if (filename == ""){
-			NSLog(":ROWALBUM:DEBUG: No image for album \(self.id) at index \(idx).")
-			preview[idx].isHidden = true
+			self.preview[idx].isHidden = true
 			//TODO hide the imageview
 		}
 		else{
-			NSLog(":ROWALBUM:DEBUG: Set image \(filename) for at index \(idx).")
 			let path = "img/galeria/thumb/\(filename)"
-			preview[idx].setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+			self.preview[idx].setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
 	}
 	

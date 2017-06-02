@@ -37,12 +37,14 @@ class GalleryView: UIView {
 	// Section row list
 	var rows: Array<RowGallery> = []
 	
+	
 	/**
 	Run when the view is started.
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}
+	
 	
 	/**
 	Run when the view is started.
@@ -138,9 +140,6 @@ class GalleryView: UIView {
 				
 				// Add to the rows array
 				self.rows.append(row)
-				
-				
-				
 			}
 		} catch {
 			NSLog(":GALLERY:ERROR: Error with request: \(error)")
@@ -150,15 +149,19 @@ class GalleryView: UIView {
 		var h: Int = 0
 		for view in scrollView.subviews {
 			//contentRect = contentRect.union(view.frame);
-			h = h + Int(view.frame.height) + 30 //Why 30?
+			h = h + Int(view.frame.height) + 30 // TODO Why 30?
 		}
 		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 2500//CGFloat(h);
+		self.scrollView.contentSize.height = 2500 //CGFloat(h);
 		
 		self.setUpRowsTapRecognizers()
 		NSLog(":GALLERY:LOG: Finished loading gallery section.")
 	}
 	
+	
+	/**
+	Opens an album.
+	*/
 	func openAlbum(_ sender:UITapGestureRecognizer? = nil){
 		let id = (sender?.view as! RowGallery).id
 		NSLog(":GALLERY:DEBUG: getting delegate and showing album \(id).")
@@ -166,6 +169,12 @@ class GalleryView: UIView {
 		delegate.controller?.showAlbum(id: id)
 	}
 	
+	
+	/**
+	Gets the device language. The only recognized languages are Spanish, English and Basque.
+	If the device has another language, Spanish will be selected by default.
+	:return: Two-letter language code.
+	*/
 	func getLanguage() -> String{
 		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
 		if(pre == "es" || pre == "en" || pre == "eu"){
@@ -176,6 +185,10 @@ class GalleryView: UIView {
 		}
 	}
 	
+	
+	/**
+	Handles the click events to open albums.
+	*/
 	func setUpRowsTapRecognizers(){
 		NSLog(":GALLERY:DEBUG: Setting up tap recognizers")
 		for row in self.rows{

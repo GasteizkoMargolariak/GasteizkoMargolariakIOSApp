@@ -25,9 +25,6 @@ import UIKit
 Extension of UIView to be formatted as sections.
 */
 @IBDesignable class RowFutureActivity: UIView {
-	
-	//This view
-	var v: UIView!
 
 	// Outlets
 	@IBOutlet weak var container: UIView!
@@ -38,17 +35,21 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var city: UILabel!
 	@IBOutlet weak var price: UILabel!
 	
+	
 	/**
 	Default constructor
+	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	
+	
+	
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first as! UIView
+		nib.instantiate(withOwner: self, options: nil).first
 	}
 	
 	/**
@@ -59,7 +60,6 @@ Extension of UIView to be formatted as sections.
 	init(s: String, i: Int) {
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
-		v = self
 		self.frame = self.bounds
 		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		self.translatesAutoresizingMaskIntoConstraints = true
@@ -90,7 +90,7 @@ Extension of UIView to be formatted as sections.
 	:param: text The new title.
 	*/
 	func setTitle(text: String){
-		self.title.text = text.stripHtml()
+		self.title.text = text.decode().stripHtml()
 	}
 	
 	/**
@@ -98,7 +98,7 @@ Extension of UIView to be formatted as sections.
 	:param: text The city.
 	*/
 	func setCity(text: String){
-		self.city.text = text
+		self.city.text = text.decode().stripHtml()
 	}
 	
 	/**
@@ -119,7 +119,7 @@ Extension of UIView to be formatted as sections.
 	:param: text The new text.
 	*/
 	func setText(text: String){
-		self.descript.text = text.stripHtml()
+		self.descript.text = text.decode().stripHtml()
 	}
 	
 	/**
@@ -128,9 +128,7 @@ Extension of UIView to be formatted as sections.
 	:param: lang Device language.
 	*/
 	func setDate(date: NSDate, lang: String){
-		
-		let dateformatter = DateFormatter()
-		
+				
 		let months_es = ["0index", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
 		let months_en = ["0index", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 		let months_eu = ["0index", "urtarrilaren", "otsailaren", "martxoaren", "abrilaren", "maiatzaren", "ekainaren", "ustailaren", "abustuaren", "irailaren", "urriaren", "azaroaren", "abenduaren"]
