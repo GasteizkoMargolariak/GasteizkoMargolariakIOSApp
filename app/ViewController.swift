@@ -51,6 +51,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	var didFindMyLocation = false
 	
 	
+	var locationTimer: Timer? = nil
+	
+	
 	/**
 	Controller initializer.
 	:param: coder Coder.
@@ -58,6 +61,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	required init?(coder aDecoder: NSCoder) {
 		NSLog(":CONTROLLER:DEBUG: Init!")
 		super.init(coder: aDecoder)
+		
+	}
+	
+	func getLocation() -> CLLocationCoordinate2D {
+		return (locationManager.location?.coordinate)!
 	}
 	
 	
@@ -171,6 +179,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewActivities.alpha = 0
 		self.containerViewBlog.alpha = 0
 		self.containerViewGallery.alpha = 0
+		
+		// Start the location schedule
+		self.locationTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(fetchLocation), userInfo: nil, repeats: true)
 				
 		NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
 		Sync()
@@ -184,6 +195,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 		super.viewDidLoad()
 		
+	}
+	
+	func fetchLocation(){
+		FetchLocation()
 	}
 
 	/**

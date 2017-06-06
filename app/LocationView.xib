@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationView" customModule="app">
             <connections>
                 <outlet property="container" destination="iN0-l3-epB" id="HCq-e3-37n"/>
+                <outlet property="lbDistance" destination="lB5-i1-GOe" id="50S-QH-XrM"/>
                 <outlet property="map" destination="guk-vu-ykd" id="zo6-Wc-NCg"/>
             </connections>
         </placeholder>
