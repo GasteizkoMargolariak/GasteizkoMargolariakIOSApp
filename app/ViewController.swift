@@ -181,7 +181,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewGallery.alpha = 0
 		
 		// Start the location schedule
-		self.locationTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(fetchLocation), userInfo: nil, repeats: true)
+		fetchLocation()
+		self.locationTimer = Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(fetchLocation), userInfo: nil, repeats: true)
 				
 		NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
 		Sync()

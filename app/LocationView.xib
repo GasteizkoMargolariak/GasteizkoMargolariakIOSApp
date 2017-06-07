@@ -13,6 +13,8 @@
             <connections>
                 <outlet property="container" destination="iN0-l3-epB" id="HCq-e3-37n"/>
                 <outlet property="lbDistance" destination="lB5-i1-GOe" id="50S-QH-XrM"/>
+                <outlet property="lbNo" destination="hMd-9C-Onm" id="v1m-XE-RIG"/>
+                <outlet property="lbTitle" destination="jwp-Sd-GF5" id="aU9-kg-OHt"/>
                 <outlet property="map" destination="guk-vu-ykd" id="zo6-Wc-NCg"/>
             </connections>
         </placeholder>
@@ -43,11 +45,17 @@
                                     <color key="textColor" red="0.1529411765" green="0.33333333329999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A X metros de ti." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lB5-i1-GOe" userLabel="Message">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lB5-i1-GOe" userLabel="Message">
                                     <rect key="frame" x="11.5" y="42" width="311" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="ann-h3-NzS"/>
                                     </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gasteizko Margolariak no está reportando localización." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMd-9C-Onm" userLabel="MessageNo">
+                                    <rect key="frame" x="12" y="10" width="311" height="53"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -72,9 +80,13 @@
                             <constraints>
                                 <constraint firstItem="jwp-Sd-GF5" firstAttribute="centerX" secondItem="3aZ-8G-e8X" secondAttribute="centerX" id="6vZ-Ex-Gdp"/>
                                 <constraint firstItem="lB5-i1-GOe" firstAttribute="centerX" secondItem="3aZ-8G-e8X" secondAttribute="centerX" id="8VC-kx-sMo"/>
+                                <constraint firstItem="hMd-9C-Onm" firstAttribute="top" secondItem="jwp-Sd-GF5" secondAttribute="top" id="DMM-cd-pay"/>
+                                <constraint firstItem="hMd-9C-Onm" firstAttribute="bottom" secondItem="lB5-i1-GOe" secondAttribute="bottom" id="IYr-qB-csg"/>
                                 <constraint firstItem="lB5-i1-GOe" firstAttribute="width" secondItem="3aZ-8G-e8X" secondAttribute="width" constant="-24" id="MQn-K0-SK5"/>
                                 <constraint firstItem="jwp-Sd-GF5" firstAttribute="top" secondItem="3aZ-8G-e8X" secondAttribute="top" constant="10" id="Ni3-zk-KAJ"/>
                                 <constraint firstItem="guk-vu-ykd" firstAttribute="width" secondItem="3aZ-8G-e8X" secondAttribute="width" constant="-20" id="OK6-Tx-KhU"/>
+                                <constraint firstItem="hMd-9C-Onm" firstAttribute="width" secondItem="3aZ-8G-e8X" secondAttribute="width" constant="-24" id="Pg4-Ng-sSd"/>
+                                <constraint firstItem="hMd-9C-Onm" firstAttribute="centerX" secondItem="3aZ-8G-e8X" secondAttribute="centerX" id="Pw4-7b-hDi"/>
                                 <constraint firstItem="guk-vu-ykd" firstAttribute="top" secondItem="lB5-i1-GOe" secondAttribute="bottom" constant="10" id="Q8e-BQ-NFd"/>
                                 <constraint firstItem="lB5-i1-GOe" firstAttribute="top" secondItem="jwp-Sd-GF5" secondAttribute="bottom" constant="10" id="i7u-s7-Fz0"/>
                                 <constraint firstItem="guk-vu-ykd" firstAttribute="centerX" secondItem="3aZ-8G-e8X" secondAttribute="centerX" id="ifj-50-FJg"/>

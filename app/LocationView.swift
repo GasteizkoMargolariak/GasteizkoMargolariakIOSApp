@@ -29,7 +29,9 @@ class LocationView: UIView {
 	
 	@IBOutlet var container: UIView!
 	@IBOutlet weak var map: GMSMapView!
+	@IBOutlet weak var lbTitle: UILabel!
 	@IBOutlet weak var lbDistance: UILabel!
+	@IBOutlet weak var lbNo: UILabel!
 	
 	var controller: ViewController
 	var storyboard: UIStoryboard
@@ -70,7 +72,9 @@ class LocationView: UIView {
 		let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 42.846399, longitude: -2.673365, zoom: 12.0)
 		map.camera = camera
 		
-		Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(getNewLocation), userInfo: nil, repeats: true)
+		// Schedule location fetches
+		getNewLocation()
+		Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(getNewLocation), userInfo: nil, repeats: true)
 	}
 	
 	
@@ -94,25 +98,38 @@ class LocationView: UIView {
 			let lat = defaults.value(forKey: "GMLocLat") as! Double
 			let lon = defaults.value(forKey: "GMLocLon") as! Double
 			let time = defaults.value(forKey: "GMLocTime") as! Date
-			// TODO compare time
-			let marker = GMSMarker()
-			marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-			marker.title = "Gasteizko Margolariak"
-			//marker.snippet = "Australia"
-			marker.map = self.map
-			NSLog(":LOCATION:DEBUG: Marker set.")
+			let cTime = Date()
+			let minutes = Calendar.current.dateComponents([.minute], from: time, to: cTime).minute
+			if (minutes! < 30){
+				self.map.isHidden = false
+				self.lbTitle.isHidden = false
+				self.lbDistance.isHidden = false
+				self.lbNo.isHidden = true
+				let marker = GMSMarker()
+				marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+				marker.title = "Gasteizko Margolariak"
+				//marker.snippet = "Australia"
+				marker.map = self.map
+				NSLog(":LOCATION:DEBUG: Marker set.")
 			
-			let location = self.controller.getLocation()
-			if location != nil {
-				let d: Int = calculateDistance(lat1: location.latitude, lon1: location.longitude, lat2: lat, lon2: lon)
-				NSLog(":LOCATION:LOG: Distance (m): \(d)")
+				let location = self.controller.getLocation()
+				if location != nil {
+					let d: Int = calculateDistance(lat1: location.latitude, lon1: location.longitude, lat2: lat, lon2: lon)
+					NSLog(":LOCATION:LOG: Distance (m): \(d)")
 				
-				if d <= 1000 {
-					self.lbDistance.text = "A \(d) metros de ti."
+					if d <= 1000 {
+						self.lbDistance.text = "A \(d) metros de ti."
+					}
+					else{
+						self.lbDistance.text = "A \(Int(d/1000)) kilómetros de ti."
+					}
 				}
-				else{
-					self.lbDistance.text = "A \(Int(d/1000)) kilómetros de ti."
-				}
+			}
+			else{
+				self.map.isHidden = true
+				self.lbTitle.isHidden = true
+				self.lbDistance.isHidden = true
+				self.lbNo.isHidden = false
 			}
 		}
 		else{
