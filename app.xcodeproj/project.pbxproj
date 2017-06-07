@@ -19,6 +19,7 @@
 		9326C4F61EA5279D007DF2A4 /* RowLablancaDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9326C4F51EA5279D007DF2A4 /* RowLablancaDay.swift */; };
 		93294FF81E336FA000FDAF50 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93294FF71E336FA000FDAF50 /* Entry.swift */; };
 		93294FFA1E337D0D00FDAF50 /* RowHomePastActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93294FF91E337D0D00FDAF50 /* RowHomePastActivities.swift */; };
+		935746101EE20B99005DED61 /* FetchLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9357460F1EE20B99005DED61 /* FetchLocation.swift */; };
 		935892D01E493C2300E1CD5F /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935892CF1E493C2300E1CD5F /* UIImageView.swift */; };
 		935AE18A1EC6138D0055E71F /* SyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935AE1891EC6138D0055E71F /* SyncController.swift */; };
 		935AE18C1ECE162C0055E71F /* RowLablancaOffer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 935AE18B1ECE162B0055E71F /* RowLablancaOffer.xib */; };
@@ -100,6 +101,7 @@
 		9326C4F51EA5279D007DF2A4 /* RowLablancaDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowLablancaDay.swift; sourceTree = "<group>"; };
 		93294FF71E336FA000FDAF50 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		93294FF91E337D0D00FDAF50 /* RowHomePastActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowHomePastActivities.swift; sourceTree = "<group>"; };
+		9357460F1EE20B99005DED61 /* FetchLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLocation.swift; sourceTree = "<group>"; };
 		935892CF1E493C2300E1CD5F /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		935AE1891EC6138D0055E71F /* SyncController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncController.swift; sourceTree = "<group>"; };
 		935AE18B1ECE162B0055E71F /* RowLablancaOffer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowLablancaOffer.xib; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				93075C711E59D06900396389 /* RowBlog.xib */,
 				93075C6F1E59D04A00396389 /* RowBlog.swift */,
 				93D9EA751DE3ACBB00089002 /* Sync.swift */,
+				9357460F1EE20B99005DED61 /* FetchLocation.swift */,
 				931AA5881E1AFF8C003A2290 /* String.swift */,
 				93D9EA671DE342AC00089002 /* UIView.swift */,
 				935892CF1E493C2300E1CD5F /* UIImageView.swift */,
@@ -337,7 +340,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Margolariak;
 				TargetAttributes = {
 					93B84B951D9C31AB006C0F67 = {
@@ -445,6 +448,7 @@
 				93E0C5E41EB7E94300905811 /* ActivitiesView.swift in Sources */,
 				93B408031D9ED44C000FBC99 /* MenuCollectionViewCell.swift in Sources */,
 				93B9113F1ED7582B0061BA71 /* LocationView.swift in Sources */,
+				935746101EE20B99005DED61 /* FetchLocation.swift in Sources */,
 				93E0C5E61EBDEF2B00905811 /* RowFutureActivity.swift in Sources */,
 				935D6E2F1E86792000CED3A1 /* GalleryView.swift in Sources */,
 			);
@@ -490,6 +494,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -540,6 +545,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

@@ -26,9 +26,6 @@ Extension of UIView to be formatted as sections.
 */
 @IBDesignable class RowHomeGallery: UIView {
 	
-	//This view
-	var v: UIView!
-	
 	@IBOutlet weak var container: UIView!
 	@IBOutlet weak var photo0: UIImageView!
 	@IBOutlet weak var photo1: UIImageView!
@@ -37,6 +34,7 @@ Extension of UIView to be formatted as sections.
 	
 	var photos: [UIImageView] = []
 	
+	
 	/**
 	Default constructor
 	*/
@@ -44,11 +42,16 @@ Extension of UIView to be formatted as sections.
 		super.init(coder: aDecoder)
 	}
 	
+	
+	/**
+	Loads the view in the xib file with the same name.
+	*/
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
 		nib.instantiate(withOwner: self, options: nil).first as! UIView
 	}
+	
 	
 	/**
 	Default constructor.
@@ -58,23 +61,14 @@ Extension of UIView to be formatted as sections.
 	init(s: String, i: Int) {
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
-		v = self
-		//v.frame = bounds
-		//v.bounds = v.frame
-		//v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		//v.translatesAutoresizingMaskIntoConstraints = true
-		//container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		//container.translatesAutoresizingMaskIntoConstraints = true
+		self.addSubview(self.container)
 		
-		//container.frame = v.bounds
-		v.addSubview(container)
-		
-		photos = [photo0, photo1, photo2, photo3]
+		self.photos = [photo0, photo1, photo2, photo3]
 		
 
-		
 		//TODO Set click listeners
 	}
+	
 	
 	/**
 	Default constructor for the interface builder
@@ -83,6 +77,7 @@ Extension of UIView to be formatted as sections.
 		super.init(frame: frame)
 	}
 	
+	
 	/**
 	Changes the preview image.
 	If null or empty, the igage is hidden.
@@ -90,8 +85,8 @@ Extension of UIView to be formatted as sections.
 	*/
 	func setImage(idx: Int, filename: String){
 		if (filename == ""){
-			print("ROWHOMEGALLERY:LOG: No image.")
-			//TODO hide the imageview
+			// Hide the imageview
+			self.photos[idx].isHidden = true
 		}
 		else{
 			let path = "img/galeria/thumb/\(filename)"

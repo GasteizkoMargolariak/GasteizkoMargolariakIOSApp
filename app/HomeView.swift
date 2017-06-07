@@ -85,9 +85,10 @@ class HomeView: UIView {
 		/*//Always at the end: update scrollview
 		var h: Int = 0
 		for view in scrollView.subviews {
-		//contentRect = contentRect.union(view.frame);
-		h = h + Int(view.frame.height) + 30 //Why 30?
-		print("curh: \(h)")
+
+			//contentRect = contentRect.union(view.frame);
+			h = h + Int(view.frame.height) + 30 //Why 30?
+
 		}
 		// TODO: Calculate at the end
 		self.scrollView.contentSize.height = 1300// CGFloat(h);*/
@@ -107,6 +108,11 @@ class HomeView: UIView {
 
 	}
 	
+	/**
+	Gets the device language. The only recognized languages are Spanish, English and Basque.
+	If the device has another language, Spanish will be selected by default.
+	:return: Two-letter language code.
+	*/
 	func getLanguage() -> String{
 		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
 		if(pre == "es" || pre == "en" || pre == "eu"){
@@ -117,9 +123,14 @@ class HomeView: UIView {
 		}
 	}
 	
+	
+	/**
+	Sets up the future activities section.
+	:param: delegate App delegate.
+	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
+	:param: parent Stack view to load the rows in.
+	*/
 	func setUpFutureActivities(context : NSManagedObjectContext, delegate: AppDelegate, lang: String, parent : UIStackView){
-		
-		//context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Activity> = Activity.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
 		let sortDescriptors = [sortDescriptor]
@@ -128,34 +139,25 @@ class HomeView: UIView {
 		fetchRequest.fetchLimit = 2
 		
 		do {
-			//go get the results
 			let searchResults = try context.fetch(fetchRequest)
 			
-			//I like to check the size of the returned results!
-			print ("Activities: \(searchResults.count)")
-			
-			var row : RowHomePastActivities
+			var row : RowHomeFutureActivities
 			var count = 0
 			var id: Int
 			var title: String
 			var text: String
 			var image: String
 			
-			//You need to convert to NSManagedObject to use 'for' loops
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
-				//get the Key Value pairs (although there may be a better way to do that...
-				print("Perm: \(String(describing: r.value(forKey: "permalink")))")
-				
 				
 				//Create a new row
-				row = RowHomePastActivities.init(s: "rowHomeFutureActivities\(count)", i: count)
+				row = RowHomeFutureActivities.init(s: "rowHomeFutureActivities\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
-				print(title)
 				row.setTitle(text: title)
-				row.setText(text: text)
+				row.setText(text: text.decode())
 				
 				// Get main image
 				image = ""
@@ -169,26 +171,30 @@ class HomeView: UIView {
 					let imgSearchResults = try context.fetch(imgFetchRequest)
 					for imgR in imgSearchResults as [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
-						print ("IMAGE: \(image)")
 						row.setImage(filename: image)
 					}
-				} catch {
-					print("Error getting image for activity \(id): \(error)")
 				}
-				
-				print("Row height: \(row.frame.height)")
+				catch {
+					NSLog(":HOME:ERROR: Error getting image for activity \(id): \(error)")
+				}
 				
 				parent.addArrangedSubview(row)
 				
 			}
 		} catch {
-			print("Error with request: \(error)")
+			NSLog(":HOME:ERROR: Error loading future activities: \(error)")
 		}
 	}
 	
+	
+	/**
+	Sets up the blog section.
+	:param: delegate App delegate.
+	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
+	:param: parent Stack view to load the rows in.
+	*/
 	func setUpBlog(context : NSManagedObjectContext, delegate: AppDelegate, lang: String, parent : UIStackView){
 		
-		//context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "dtime", ascending: false)
 		let sortDescriptors = [sortDescriptor]
@@ -196,12 +202,7 @@ class HomeView: UIView {
 		fetchRequest.fetchLimit = 2
 		
 		do {
-			//go get the results
 			let searchResults = try context.fetch(fetchRequest)
-			
-			//I like to check the size of the returned results!
-			print ("Post: \(searchResults.count)")
-			
 			var row : RowHomeBlog
 			var count = 0
 			var id: Int
@@ -209,12 +210,8 @@ class HomeView: UIView {
 			var text: String
 			var image: String
 			
-			//You need to convert to NSManagedObject to use 'for' loops
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
-				//get the Key Value pairs (although there may be a better way to do that...
-				print("Perm: \(r.value(forKey: "permalink"))")
-				
 				
 				//Create a new row
 				row = RowHomeBlog.init(s: "rowHomeBlog\(count)", i: count)
@@ -238,14 +235,11 @@ class HomeView: UIView {
 					let imgSearchResults = try context.fetch(imgFetchRequest)
 					for imgR in imgSearchResults as [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
-						print ("IMAGE: \(image)")
 						row.setImage(filename: image)
 					}
 				} catch {
-					print("Error getting image for post \(id): \(error)")
+					NSLog(":HOME:ERROR: Error getting image for post \(id): \(error)")
 				}
-				
-				print("Row height: \(row.frame.height)")
 				
 				parent.addArrangedSubview(row)
 				
@@ -254,14 +248,21 @@ class HomeView: UIView {
 				row.addGestureRecognizer(tapRecognizer)
 				
 			}
-		} catch {
-			print("Error with request: \(error)")
+		}
+		catch {
+			NSLog(":HOME:ERROR: Error loading the blog section: \(error)")
 		}
 	}
 	
+	
+	/**
+	Sets up the past activities section.
+	:param: delegate App delegate.
+	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
+	:param: parent Stack view to load the rows in.
+	*/
 	func setUpPastActivities(context : NSManagedObjectContext, delegate: AppDelegate, lang: String, parent : UIStackView){
 		
-		//context.persistentStoreCoordinator = delegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Activity> = Activity.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
 		let sortDescriptors = [sortDescriptor]
@@ -270,11 +271,7 @@ class HomeView: UIView {
 		fetchRequest.fetchLimit = 2
 		
 		do {
-			//go get the results
 			let searchResults = try context.fetch(fetchRequest)
-			
-			//I like to check the size of the returned results!
-			print ("Activities: \(searchResults.count)")
 			
 			var row : RowHomePastActivities
 			var count = 0
@@ -283,19 +280,14 @@ class HomeView: UIView {
 			var text: String
 			var image: String
 			
-			//You need to convert to NSManagedObject to use 'for' loops
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
-				//get the Key Value pairs (although there may be a better way to do that...
-				print("Perm: \(r.value(forKey: "permalink"))")
-				
 				
 				//Create a new row
 				row = RowHomePastActivities.init(s: "rowHomePastActivities\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
-				
 				
 				row.setTitle(text: title)
 				row.setText(text: text)
@@ -312,31 +304,31 @@ class HomeView: UIView {
 					let imgSearchResults = try context.fetch(imgFetchRequest)
 					for imgR in imgSearchResults as [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
-						print ("IMAGE: \(image)")
 						row.setImage(filename: image)
 					}
-				} catch {
-					print("Error getting image for activity \(id): \(error)")
 				}
-				
-				print("Row height: \(row.frame.height)")
-				
+				catch {
+					NSLog(":HOME:ERROR: Error getting image for past activity \(id): \(error)")
+				}
 				parent.addArrangedSubview(row)
 				
 			}
 		} catch {
-			print("Error with request: \(error)")
+			NSLog(":HOME:ERROR: Error loading past activities: \(error)")
 		}
 	}
 	
+	/**
+	Sets up the future activities section.
+	:param: delegate App delegate.
+	:param: parent Stack view to load the rows in.
+	*/
 	func setUpGallery(context : NSManagedObjectContext, delegate: AppDelegate,parent: UIStackView){
-		print("HOME:LOG: Setting up gallery.")
 		
 		// Create the row
 		var row: RowHomeGallery
 		row = RowHomeGallery.init(s: "rowHomeGallery", i: 0)
 		parent.addArrangedSubview(row)
-		
 		
 		// Set images
 		let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
@@ -346,13 +338,10 @@ class HomeView: UIView {
 		fetchRequest.fetchLimit = 4
 		
 		do {
-			//go get the results
 			let searchResults = try context.fetch(fetchRequest)
 	
 			var id: Int
 			var image: String
-			
-			// Loop images
 			var i = 0
 			for r in searchResults as [NSManagedObject] {
 				
@@ -360,30 +349,33 @@ class HomeView: UIView {
 				row.setImage(idx: i, filename: image)
 				
 				//TODO Set click listener
-				
 				i = i + 1
 			}
-			
 		}
 		catch{
-			print("HOME:ERROR: Error setting gallery up: \(error)")
+			NSLog(":HOME:ERROR: Error setting gallery up: \(error)")
 		}
-		
 	}
 	
+	
+	/**
+	Sets up the social section.
+	:param: parent Stack view to load the rows in.
+	*/
 	func setUpSocial(parent : UIStackView){
-		print("SETING UP SOCIAL")
 		//Create a new row
 		var row : RowHomeSocial
 		row = RowHomeSocial.init(s: "rowHomeSocial", i: 0)
-		print("ROW CREATED")
 		parent.addArrangedSubview(row)
 	}
 	
+	
+	/**
+	Opens a post.
+	*/
 	func openPost(_ sender:UITapGestureRecognizer? = nil){
-		print("HOME:DEBUG: getting delegate and showing post.")
+		NSLog(":HOME:DEBUG: Getting delegate and showing post.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: (sender?.view as! RowHomeBlog).id)
-		print("HOME:DEBUG: Post should be shown.")
 	}
 }

@@ -41,8 +41,6 @@ class LablancaView: UIView {
 	// App delegate
 	var delegate: AppDelegate? = nil
 	
-	// Section row list
-	//var rows: Array<RowGallery> = []
 	
 	/**
 	Run when the view is started.
@@ -50,6 +48,7 @@ class LablancaView: UIView {
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}
+	
 	
 	/**
 	Run when the view is started.
@@ -62,15 +61,15 @@ class LablancaView: UIView {
 
 		Bundle.main.loadNibNamed("LablancaView", owner: self, options: nil)
 		self.addSubview(container)
-		container.frame = self.bounds
+		self.container.frame = self.bounds
 		
 		// Get viewController from StoryBoard
 		let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-		let controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
+		_ = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		
 		// Read settings and show the required sections
 		let defaults = UserDefaults.standard
-		let festivals: Int = 1 //TODO defaults.integer(forKey: "festivals")
+		let festivals: Int = defaults.integer(forKey: "festivals")
 		
 		if festivals == 1{
 			showFestivals()
@@ -88,7 +87,7 @@ class LablancaView: UIView {
 		self.nfWindow.isHidden = true
 		
 		// TODO: Get current year
-		let year = 2016
+		let year = 2017
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -108,7 +107,7 @@ class LablancaView: UIView {
 				let r = searchResults[0]
 			
 				// Set description
-				self.fText.text = r.value(forKey: "text_\(lang)") as! String?
+				self.fText.text = (r.value(forKey: "text_\(lang)") as! String?)?.decode().stripHtml()
 			}
 
 		}
@@ -184,7 +183,7 @@ class LablancaView: UIView {
 
 		// Get days
 		let dayFetchRequest: NSFetchRequest<Festival_day> = Festival_day.fetchRequest()
-		dayFetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", argumentArray: [sDate, eDate])
+		dayFetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", argumentArray: [sDate!, eDate!])
 		
 		do {
 			
@@ -198,7 +197,7 @@ class LablancaView: UIView {
 				
 				let date: NSDate = day.value(forKey: "date")! as! NSDate
 				let dateString: String = dateFormatter.string(from: date as Date)
-				let nDay: String = dateString.subStr(start: 8, end: 9)
+				let nDay: Int = Int(dateString.subStr(start: 8, end: 9))!
 				let month: String = dateString.subStr(start: 5, end: 6)
 				var nMonth: String = "Agosto" // TODO: Reference
 				if month == "07"{
@@ -209,10 +208,7 @@ class LablancaView: UIView {
 				
 				// Create the row and set data.
 				row = RowLablancaDay.init(s: "rowLablancaDay\(count)", i: count)
-				row.name.text = name
-				row.price.text = "\(price) €"
-				row.number.text = "\(Int(nDay)!)"
-				row.month.text = nMonth
+				row.setDay(number: nDay, month: nMonth, name: name, price: price)
 				
 				// Add the row
 				fDayList.addArrangedSubview(row)
@@ -227,7 +223,8 @@ class LablancaView: UIView {
 				count = count + 1
 			}
 			
-		} catch {
+		}
+		catch {
 			NSLog(":LABLANCA:ERROR: Error getting festival days info: \(error)")
 		}
 	}
@@ -244,9 +241,9 @@ class LablancaView: UIView {
 	
 
 	/**
-  Commands the view controller to show the city schedule view.
-  :param: sender The view that triggered the event.
-  */
+	Commands the view controller to show the city schedule view.
+	:param: sender The view that triggered the event.
+	*/
 	func openSchedule(_ sender:UITapGestureRecognizer? = nil){
 		NSLog(":LABLANCA:DEBUG: Getting delegate and showing schedule.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -260,11 +257,11 @@ class LablancaView: UIView {
 	:param: sender The view that triggered the event.
 	*/
 	func openGMSchedule(_ sender:UITapGestureRecognizer? = nil){
-    NSLog(":LABLANCA:DEBUG: Getting delegate and showing GM schedule.")
-    let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    delegate.controller?.showSchedule(margolari: true)
-    NSLog(":LABLANCA:DEBUG: GM schedule should be shown.")
-  }
+		NSLog(":LABLANCA:DEBUG: Getting delegate and showing GM schedule.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showSchedule(margolari: true)
+		NSLog(":LABLANCA:DEBUG: GM schedule should be shown.")
+	}
 
 	
 	/**
