@@ -190,8 +190,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		fetchLocation()
 		self.locationTimer = Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(fetchLocation), userInfo: nil, repeats: true)
 				
-		NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
-		Sync()
+		//NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
+		NSLog(":CONTROLLER:DEBUG: Skyp sync")
+		//Sync()
 
 		
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
