@@ -164,6 +164,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		}
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		NSLog(":CONTROLLER:DEBUG: Forcing a call to populate")
+		self.populate()
+		super.viewWillAppear(animated)
+	}
+	
 	/**
 	Run when the app loads.
 	*/
@@ -184,15 +190,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		fetchLocation()
 		self.locationTimer = Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(fetchLocation), userInfo: nil, repeats: true)
 				
-		NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
-		Sync()
+		//NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
+		NSLog(":CONTROLLER:DEBUG: Skyp sync")
+		//Sync()
 
 		
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.delegate?.controller = self
-		
-		NSLog(":CONTROLLER:DEBUG: NOT Forcing a call to populate")
-		//self.populate()
 		
 		super.viewDidLoad()
 		
@@ -208,7 +212,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	*/
 	func populate(){
 		if (self.containerViewHome != nil){
-			//(self.containerViewHome as HomeView).populate2()
+			//(self.containerViewHome as HomeView).populate()
 			//let ng = self.containerViewHome.dbgTxt
 			//NSLog("AAAAA \(ng)")
 		}
