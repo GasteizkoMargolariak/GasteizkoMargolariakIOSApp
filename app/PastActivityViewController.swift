@@ -84,7 +84,7 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 	*/
 	public func loadActivity(id: Int){
 		
-		NSLog(":POSTCONTROLLER:DEBUG: Loading post \(id)")
+		NSLog(":PASTACTIVITYCONTROLLER:DEBUG: Loading past activity \(id)")
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -99,18 +99,21 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 			var sTitle: String
 			var sText: String
 			var image: String
+			var date: NSDate
 			
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
 				sTitle = r.value(forKey: "title_\(lang)")! as! String
-				if (r.value(forKey: "after_\(lang)")! as! String).length == 0{
+				if (r.value(forKey: "after_\(lang)")! as! String).length != 0{
 					sText = r.value(forKey: "after_\(lang)")! as! String
 				}
 				else{
-					sText = r.value(forKey: "description_\(lang)")! as! String
+					sText = r.value(forKey: "text_\(lang)")! as! String
 				}
-				activityTitle.text = "  \(sTitle)"
-				activityText.text = sText.stripHtml()
+				date = r.value(forKey: "date")! as! NSDate
+				activityTitle.text = "  \(sTitle.decode().stripHtml())"
+				activityText.text = sText.decode().stripHtml()
+				activityDate.text = formatDate(date: date, lang: lang)
 				
 				// Get main image
 				image = ""
@@ -128,13 +131,64 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 						self.activityImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 					}
 				} catch {
-					NSLog(":POSTCONTROLLER:DEBUG: Error getting image for post \(id): \(error)")
+					NSLog(":PASTACTIVITYCONTROLLER:DEBUG: Error getting image for post \(id): \(error)")
 				}
 				
 			}
 		} catch {
-			NSLog(":POSTCONTROLLER:DEBUG: Error with request: \(error)")
+			NSLog(":PASTACTIVITYCONTROLLER:DEBUG: Error with request: \(error)")
 		}
+	}
+	
+	
+	/**
+	Formats a date to the desired language.
+	:param: text The date.
+	:param: lang Device language (only 'es', 'en', or 'eu').
+	*/
+	func formatDate(date: NSDate, lang: String) -> String{
+		
+		let months_es = ["0index", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+		let months_en = ["0index", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+		let months_eu = ["0index", "urtarrilaren", "otsailaren", "martxoaren", "abrilaren", "maiatzaren", "ekainaren", "ustailaren", "abustuaren", "irailaren", "urriaren", "azaroaren", "abenduaren"]
+		let days_es = ["0index", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+		let days_en = ["0index", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+		let days_eu = ["0index", "Astelehena", "Asteartea", "Asteazkena", "Osteguna", "Ostirala", "Larumbata", "Igandea"]
+		
+		let calendar = Calendar.current
+		let day = calendar.component(.day, from: date as Date)
+		let month = calendar.component(.month, from: date as Date)
+		let weekday = calendar.component(.weekday, from: date as Date)
+		var strDate = ""
+		
+		switch lang{
+		case "en":
+			
+			var dayNum = ""
+			switch day{
+			case 1:
+				dayNum = "1th"
+				break
+			case 2:
+				dayNum = "2nd"
+				break;
+			case 3:
+				dayNum = "3rd"
+				break;
+			default:
+				dayNum = "\(weekday)th"
+			}
+			
+			strDate = "\(days_en[weekday]), \(months_en[month]) \(dayNum)"
+			break
+		case "eu":
+			strDate = "\(days_eu[weekday]) \(months_eu[month]) \(day)an"
+			break
+		default:
+			strDate = "\(days_es[weekday]) \(day) de \(months_es[month])"
+		}
+		
+		return strDate
 	}
 	
 	/**

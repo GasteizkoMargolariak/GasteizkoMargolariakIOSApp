@@ -38,9 +38,6 @@ class ActivitiesView: UIView {
 	var pastList: UIStackView? = nil
 	var context: NSManagedObjectContext? = nil
 	
-	// Section row list
-	var pastRows: Array<RowPastActivity> = []
-	var futureRows: Array<RowFutureActivity> = []
 	
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -144,13 +141,6 @@ class ActivitiesView: UIView {
 					}
 				
 					self.futureList?.addArrangedSubview(row)
-					self.futureRows.append(row)
-					
-					// TODO: Do this on the row didLoad method
-					// Set tap recognizer
-					//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openActivity(_:)))
-					//row.isUserInteractionEnabled = true
-					//row.addGestureRecognizer(tapRecognizer)
 				}
 				self.futureList?.setNeedsLayout()
 				self.futureList?.layoutIfNeeded()
@@ -160,8 +150,6 @@ class ActivitiesView: UIView {
 		catch {
 			NSLog(":ACTIVITIES:ERROR: Error with request: \(error)")
 		}
-		setUpFutureRowsTapRecognizers()
-		
 		
 		
 		// Show past activities
@@ -214,13 +202,6 @@ class ActivitiesView: UIView {
 				
 				
 				self.pastList?.addArrangedSubview(row)
-				self.pastRows.append(row)
-				
-				// TODO: Do this on the row didLoad method
-				// Set tap recognizer
-				//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openActivity(_:)))
-				//row.isUserInteractionEnabled = true
-				//row.addGestureRecognizer(tapRecognizer)
 			}
 			self.pastList?.setNeedsLayout()
 			self.pastList?.layoutIfNeeded()
@@ -229,75 +210,8 @@ class ActivitiesView: UIView {
 			NSLog(":ACTIVITIES:ERROR: Error with request: \(error)")
 		}
 		
-		//setUpPastRowsTapRecognizers()
 		NSLog(":ACTIVITIES:DEBUG: Finished loading ActivitiesView")
 	}
-	
-	
-	/*func openActivity(){//(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ACTIVITIES:DEBUG: getting delegate and showing activity.")
-		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showActivity(id: 4)
-		NSLog(":ACTIVITIES:DEBUG: Activity should be shown.")
-	}
-	
-	
-	func openActivity(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ACTIVITIES:DEBUG: getting delegate and showing activity.")
-		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showActivity(id: 4)
-		NSLog(":ACTIVITIES:DEBUG: Activity should be shown.")
-	}*/
-	
-	
-	/**
-	Handles the click events to open past activities.
-	*/
-	func setUpPastRowsTapRecognizers(){
-		NSLog(":ACTIVITIES:DEBUG: Setting up past activitiesr tap recognizers")
-		for row in self.pastRows{
-			let tapRecognizer = UITapGestureRecognizer(target: row, action: #selector(openPastActivity(_:)))
-			row.isUserInteractionEnabled = true
-			row.addGestureRecognizer(tapRecognizer)
-		}
-	}
-	
-	
-	/**
-	Opens a past activity.
-	*/
-	func openPastActivity(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ACTIVITIES:DEBUG: opening pastActivity.")
-		let id = (sender?.view as! RowPastActivity).id
-		NSLog(":ACTIVITIES:DEBUG: getting delegate and showing pastActivity \(id).")
-		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showPastActivity(id: id)
-	}
-	
-	
-	/**
-	Handles the click events to open past activities.
-	*/
-	func setUpFutureRowsTapRecognizers(){
-		NSLog(":ACTIVITIES:DEBUG: Setting up future activities tap recognizers")
-		for row in self.futureRows{
-			let tapRecognizer = UITapGestureRecognizer(target: row, action: #selector(openFutureActivity(_:)))
-			row.isUserInteractionEnabled = true
-			//container.addGestureRecognizer(tapRecognizer)
-		}
-	}
-	
-	
-	/**
-	Opens a past activity.
-	*/
-	func openFutureActivity(_ sender:UITapGestureRecognizer? = nil){
-		let id = (sender?.view as! RowFutureActivity).id
-		NSLog(":ACTIVITIES:DEBUG: getting delegate and showing pastActivity \(id).")
-		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showFutureActivity(id: id)
-	}
-	
 	
 	/**
 	Gets the device language. The only recognized languages are Spanish, English and Basque.
