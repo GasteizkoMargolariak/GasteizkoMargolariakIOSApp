@@ -38,6 +38,10 @@ class ActivitiesView: UIView {
 	var pastList: UIStackView? = nil
 	var context: NSManagedObjectContext? = nil
 	
+	// Section row list
+	var pastRows: Array<RowPastActivity> = []
+	var futureRows: Array<RowFutureActivity> = []
+	
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}
@@ -119,6 +123,7 @@ class ActivitiesView: UIView {
 					row.setPrice(price: price)
 					row.setCity(text: city)
 					row.setDate(date: date, lang: lang!)
+					row.id = id
 				
 					// Get main image
 					image = ""
@@ -139,6 +144,7 @@ class ActivitiesView: UIView {
 					}
 				
 					self.futureList?.addArrangedSubview(row)
+					self.futureRows.append(row)
 					
 					// TODO: Do this on the row didLoad method
 					// Set tap recognizer
@@ -148,11 +154,13 @@ class ActivitiesView: UIView {
 				}
 				self.futureList?.setNeedsLayout()
 				self.futureList?.layoutIfNeeded()
+				
 			}
 		}
 		catch {
 			NSLog(":ACTIVITIES:ERROR: Error with request: \(error)")
 		}
+		setUpFutureRowsTapRecognizers()
 		
 		
 		
@@ -183,6 +191,7 @@ class ActivitiesView: UIView {
 				text = r.value(forKey: "text_\(lang!)")! as! String
 				row.setTitle(text: title)
 				row.setText(text: text)
+				row.id = id
 				
 				// Get main image
 				image = ""
@@ -205,6 +214,7 @@ class ActivitiesView: UIView {
 				
 				
 				self.pastList?.addArrangedSubview(row)
+				self.pastRows.append(row)
 				
 				// TODO: Do this on the row didLoad method
 				// Set tap recognizer
@@ -214,9 +224,12 @@ class ActivitiesView: UIView {
 			}
 			self.pastList?.setNeedsLayout()
 			self.pastList?.layoutIfNeeded()
+			
 		} catch {
 			NSLog(":ACTIVITIES:ERROR: Error with request: \(error)")
 		}
+		
+		//setUpPastRowsTapRecognizers()
 		NSLog(":ACTIVITIES:DEBUG: Finished loading ActivitiesView")
 	}
 	
@@ -235,6 +248,55 @@ class ActivitiesView: UIView {
 		delegate.controller?.showActivity(id: 4)
 		NSLog(":ACTIVITIES:DEBUG: Activity should be shown.")
 	}*/
+	
+	
+	/**
+	Handles the click events to open past activities.
+	*/
+	func setUpPastRowsTapRecognizers(){
+		NSLog(":ACTIVITIES:DEBUG: Setting up past activitiesr tap recognizers")
+		for row in self.pastRows{
+			let tapRecognizer = UITapGestureRecognizer(target: row, action: #selector(openPastActivity(_:)))
+			row.isUserInteractionEnabled = true
+			row.addGestureRecognizer(tapRecognizer)
+		}
+	}
+	
+	
+	/**
+	Opens a past activity.
+	*/
+	func openPastActivity(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":ACTIVITIES:DEBUG: opening pastActivity.")
+		let id = (sender?.view as! RowPastActivity).id
+		NSLog(":ACTIVITIES:DEBUG: getting delegate and showing pastActivity \(id).")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPastActivity(id: id)
+	}
+	
+	
+	/**
+	Handles the click events to open past activities.
+	*/
+	func setUpFutureRowsTapRecognizers(){
+		NSLog(":ACTIVITIES:DEBUG: Setting up future activities tap recognizers")
+		for row in self.futureRows{
+			let tapRecognizer = UITapGestureRecognizer(target: row, action: #selector(openFutureActivity(_:)))
+			row.isUserInteractionEnabled = true
+			//container.addGestureRecognizer(tapRecognizer)
+		}
+	}
+	
+	
+	/**
+	Opens a past activity.
+	*/
+	func openFutureActivity(_ sender:UITapGestureRecognizer? = nil){
+		let id = (sender?.view as! RowFutureActivity).id
+		NSLog(":ACTIVITIES:DEBUG: getting delegate and showing pastActivity \(id).")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showFutureActivity(id: id)
+	}
 	
 	
 	/**

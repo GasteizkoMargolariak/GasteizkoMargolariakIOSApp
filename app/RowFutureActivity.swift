@@ -35,6 +35,8 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var city: UILabel!
 	@IBOutlet weak var price: UILabel!
 	
+	// Activity ID
+	var id = -1
 	
 	/**
 	Default constructor
