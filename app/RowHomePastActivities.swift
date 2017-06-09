@@ -22,27 +22,20 @@ import Foundation
 import UIKit
 
 /**
-Extension of UIView to be formatted as sections.
+Extension of UIView to be formatted as past activity rows.
 */
 @IBDesignable class RowHomePastActivities: UIView {
 	
-	//This view
-	var v: UIView!
-	
-	//The container.
+	// Outlets.
 	@IBOutlet weak var container: UIView!
-	
-	//The entry
 	@IBOutlet weak var entry: UIView!
-	
-	//The activity title.
 	@IBOutlet weak var title: UILabel!
-	
-	//The activity description.
 	@IBOutlet weak var descrip: UILabel!
-	
-	//The activity image.
 	@IBOutlet weak var image: UIImageView!
+	
+	// Activity ID.
+	var id: Int = -1;
+	
 	
 	/**
 	Default constructor
@@ -51,11 +44,16 @@ Extension of UIView to be formatted as sections.
 		super.init(coder: aDecoder)
 	}
 	
+	
+	/**
+	Loads the view in the xib file with the same name.
+	*/
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first as! UIView
+		nib.instantiate(withOwner: self, options: nil).first
 	}
+	
 	
 	/**
 	Default constructor.
@@ -65,16 +63,21 @@ Extension of UIView to be formatted as sections.
 	init(s: String, i: Int) {
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
-		v = self
-		v.frame = bounds
-		v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		v.translatesAutoresizingMaskIntoConstraints = true
-		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		container.translatesAutoresizingMaskIntoConstraints = true
+		self.frame = self.bounds
+		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.translatesAutoresizingMaskIntoConstraints = true
+		self.container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.container.translatesAutoresizingMaskIntoConstraints = true
 
-		container.frame = v.bounds
-		v.addSubview(container)
+		self.container.frame = self.bounds
+		self.addSubview(container)
+		
+		// Set tap recognizer
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowHomePastActivities.openActivity (_:)))
+		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+		self.addGestureRecognizer(tapRecognizer)
 	}
+	
 	
 	/**
 	Default constructor for the interface builder
@@ -83,21 +86,24 @@ Extension of UIView to be formatted as sections.
 		super.init(frame: frame)
 	}
 	
+	
 	/**
 	Changes the title of the activity. Decodes HTML.
 	:param: text The new title.
 	*/
 	func setTitle(text: String){
-		title.text = text.stripHtml()
+		self.title.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Changes the description of the activity. Decodes HTML.
 	:param: text The new text.
 	*/
 	func setText(text: String){
-		descrip.text = text.stripHtml()
+		self.descrip.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Changes the image of the activity.
@@ -106,13 +112,22 @@ Extension of UIView to be formatted as sections.
 	*/
 	func setImage(filename: String){
 		if (filename == ""){
-			print("No image")
-			//TODO hide the imageview
+			// Hide the imageview
+			self.image.isHidden = true
 		}
 		else{
-			print("Set image \(filename)")
 			let path = "img/actividades/thumb/\(filename)"
-			image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+			self.image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
+	}
+	
+	
+	/**
+	Opens an activity.
+	*/
+	func openActivity(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":ROWPASTACTIVITY:DEBUG: Getting delegate and showing past activity \(self.id).")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPastActivity(id: self.id)
 	}
 }

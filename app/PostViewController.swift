@@ -26,32 +26,26 @@ The view controller of the app.
 */
 class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	
-
 	
 	@IBOutlet weak var barTitle: UILabel!
 	@IBOutlet weak var barButton: UIButton!
 	@IBOutlet weak var postText: UILabel!
 	@IBOutlet weak var postTitle: UILabel!
 	@IBOutlet weak var postImage: UIImageView!
+	
 	var id: Int = -1
+	var passId: Int = -1
 	var delegate: AppDelegate?
 	
-	//Each of the sections of the app.
-	
-	var passId: Int = -1
-	
 	func getContext () -> NSManagedObjectContext {
-		//let appDelegate = UIApplication.shared.delegate as! AppDelegate
-		//return appDelegate.persistentContainer.viewContext
 		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 	}
+	
 	
 	/**
 	Run when the app loads.
 	*/
 	override func viewDidLoad() {
-		
-		print("POSTCONTROLLER:LOG: viewDidLoad()")
 		
 		super.viewDidLoad()
 		self.loadPost(id: id)
@@ -78,8 +72,6 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	
 	public func loadPost(id: Int){
 		
-		print("POSTCONTROLLER:DEBUG: Loading post \(id)")
-		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let lang : String = getLanguage()
@@ -91,19 +83,17 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 			//go get the results
 			let searchResults = try context.fetch(fetchRequest)
 			
-			var count = 0
 			var sTitle: String
 			var sText: String
 			var image: String
 			
 			//You need to convert to NSManagedObject to use 'for' loops
 			for r in searchResults as [NSManagedObject] {
-				count = count + 1
 				
 				sTitle = r.value(forKey: "title_\(lang)")! as! String
 				sText = r.value(forKey: "text_\(lang)")! as! String
-				postTitle.text = "  \(sTitle)"
-				postText.text = sText.stripHtml()
+				postTitle.text = "  \(sTitle.decode().stripHtml())"
+				postText.text = sText.decode().stripHtml()
 				
 				// Get main image
 				image = ""
@@ -118,32 +108,30 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 					let imgSearchResults = try context.fetch(imgFetchRequest)
 					for imgR in imgSearchResults as [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
-						print ("POST:LOG: Image: \(image)")
-						//TODO set image
-						//row.setImage(filename: image)
+						if image == ""{
+							self.postImage.isHidden = true
+						}
+						else{
+							let path = "img/actividades/thumb/\(image)"
+							self.postImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+						}
 					}
 				} catch {
-					print("POST:ERROR: Error getting image for post \(id): \(error)")
+					NSLog(":POST:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
 			}
 		} catch {
-			print("POST:ERROR: Error with request: \(error)")
+			NSLog(":POST:ERROR: Error with request: \(error)")
 		}
-		
-		//Always at the end: update scrollview
-		// TODOs
-		//var h: Int = 0
-		//for view in scrollView.subviews {
-			//contentRect = contentRect.union(view.frame);
-		//	h = h + Int(view.frame.height) + 30 //Why 30?
-		//}
-		//print("POST:DEBUG: Height: \(h)")
-		// TODO: Calculate at the end
-		//self.scrollView.contentSize.height = 4500//CGFloat(h);
-
 	}
 	
+	
+	/**
+	Gets the device language. The only recognized languages are Spanish, English and Basque.
+	If the device has another language, Spanish will be selected by default.
+	:return: Two-letter language code.
+	*/
 	func getLanguage() -> String{
 		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
 		if(pre == "es" || pre == "en" || pre == "eu"){
