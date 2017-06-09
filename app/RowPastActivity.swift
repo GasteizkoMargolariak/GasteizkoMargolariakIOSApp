@@ -26,14 +26,14 @@ Extension of UIView to be formatted as sections.
 */
 @IBDesignable class RowPastActivity: UIView {
 	
-	//This view
-	var v: UIView!
-	
 	// Outlets
 	@IBOutlet weak var container: UIView!
 	@IBOutlet weak var title: UILabel!
 	@IBOutlet weak var image: UIImageView!
 	@IBOutlet weak var descript: UILabel!
+	
+	// Activity ID.
+	var id = -1
 	
 	/**
 	Default constructor
@@ -71,10 +71,9 @@ Extension of UIView to be formatted as sections.
 		self.addSubview(self.container)
 		
 		// Set tap recognizer
-		/*print("ROW_PAST_ACTIVITY:DEBUG: set tap recognizer")
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (self.openActivity (_:)))
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowPastActivity.openActivity (_:)))
 		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
-		addGestureRecognizer(tapRecognizer)*/
+		self.addGestureRecognizer(tapRecognizer)
 	}
 	
 	
@@ -119,13 +118,14 @@ Extension of UIView to be formatted as sections.
 			image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
 	}
-	
-	
+
+
 	/**
 	Opens an activity.
 	*/
 	func openActivity(_ sender:UITapGestureRecognizer? = nil){
-		// TODO: Implement openActivity.
-		NSLog(":ROW_PAST_ACTIVITY:DEBUG: open activity")
+		NSLog(":ROWPASTACTIVITY:DEBUG: Getting delegate and showing past activity \(self.id).")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPastActivity(id: self.id)
 	}
 }

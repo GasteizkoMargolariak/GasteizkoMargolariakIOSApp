@@ -86,6 +86,7 @@
 		93E0C5F41EBE306900905811 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E0C5F31EBE306900905811 /* ScheduleViewController.swift */; };
 		93EB2F0C1EBF5AEB00F64186 /* RowSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EB2F0B1EBF5AEB00F64186 /* RowSchedule.swift */; };
 		93EB2F0E1EBF5BF500F64186 /* RowSchedule.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EB2F0D1EBF5BF500F64186 /* RowSchedule.xib */; };
+		93EE9ECB1EE9B87100288F6E /* PastActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE9ECA1EE9B87100288F6E /* PastActivityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,6 +172,7 @@
 		93E0C5F31EBE306900905811 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		93EB2F0B1EBF5AEB00F64186 /* RowSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowSchedule.swift; sourceTree = "<group>"; };
 		93EB2F0D1EBF5BF500F64186 /* RowSchedule.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowSchedule.xib; sourceTree = "<group>"; };
+		93EE9ECA1EE9B87100288F6E /* PastActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastActivityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,8 +230,8 @@
 				93B84B991D9C31AB006C0F67 /* AppDelegate.swift */,
 				93B84B9D1D9C31AB006C0F67 /* Main.storyboard */,
 				93B84B9B1D9C31AB006C0F67 /* ViewController.swift */,
-				93B408021D9ED44C000FBC99 /* MenuCollectionViewCell.swift */,
 				93BEB6D11E7E878300C68DE5 /* PostViewController.swift */,
+				93B408021D9ED44C000FBC99 /* MenuCollectionViewCell.swift */,
 				93D9EA5F1DE271E700089002 /* Section.xib */,
 				93D9EA631DE273FD00089002 /* Section.swift */,
 				931AA5AD1E218D0D003A2290 /* Entry.xib */,
@@ -284,6 +286,7 @@
 				93B9113C1ED7567B0061BA71 /* LocationView.xib */,
 				93B9113E1ED7582B0061BA71 /* LocationView.swift */,
 				93B9115E1ED765510061BA71 /* app-Bridging-Header.h */,
+				93EE9ECA1EE9B87100288F6E /* PastActivityViewController.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				93B84BA21D9C31AB006C0F67 /* app.xcdatamodeld in Sources */,
 				935D6E331E867C7E00CED3A1 /* RowGallery.swift in Sources */,
 				93EB2F0C1EBF5AEB00F64186 /* RowSchedule.swift in Sources */,
+				93EE9ECB1EE9B87100288F6E /* PastActivityViewController.swift in Sources */,
 				936966ED1E98445200A11055 /* AlbumViewController.swift in Sources */,
 				93D9EA681DE342AC00089002 /* UIView.swift in Sources */,
 				938D211F1EA2306300C47EC3 /* LablancaView.swift in Sources */,

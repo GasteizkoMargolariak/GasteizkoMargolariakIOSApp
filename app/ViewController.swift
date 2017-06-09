@@ -92,6 +92,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	
 	/**
+	Shows a past activity.
+	:param: id The activity id.
+	*/
+	func showPastActivity(id: Int){
+		NSLog(":CONTROLLER:DEBUG: Showing past activity \(id)")
+		self.passId = id
+		performSegue(withIdentifier: "SeguePastActivity", sender: nil)
+	}
+	
+	
+	/**
+	Shows a future activity.
+	:param: id The activity id.
+	*/
+	func showFutureActivity(id: Int){
+		NSLog(":CONTROLLER:DEBUG: Showing future activity \(id)")
+		self.passId = id
+		// TODO
+		//performSegue(withIdentifier: "SegueFutureActivity", sender: nil)
+	}
+	
+	
+	/**
 	Shows an album.
 	:param: id The album id.
 	*/
@@ -161,6 +184,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		}
 		if segue.identifier == "SegueSync"{
 			self.syncSegue = segue
+		}
+		if segue.identifier == "SeguePastActivity"{
+			(segue.destination as! PastActivityViewController).id = passId
+		}
+		if segue.identifier == "SegueFutureActivity"{
+			// TODO
+			//(segue.destination as! FutureActivityViewController).id = passId
 		}
 	}
 	
