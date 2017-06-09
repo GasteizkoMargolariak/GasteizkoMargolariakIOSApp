@@ -21,11 +21,13 @@
 import Foundation
 import CoreData
 import UIKit
+
 /**
 Class to handle the home view.
 */
 class ActivitiesView: UIView {
 	
+	// Outlets.
 	@IBOutlet var container: ActivitiesView!
 	@IBOutlet weak var futureSection: Section!
 	@IBOutlet weak var pastSection: Section!
@@ -209,8 +211,6 @@ class ActivitiesView: UIView {
 		} catch {
 			NSLog(":ACTIVITIES:ERROR: Error with request: \(error)")
 		}
-		
-		NSLog(":ACTIVITIES:DEBUG: Finished loading ActivitiesView")
 	}
 	
 	/**

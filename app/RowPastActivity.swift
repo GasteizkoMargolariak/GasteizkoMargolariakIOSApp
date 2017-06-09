@@ -32,7 +32,7 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var image: UIImageView!
 	@IBOutlet weak var descript: UILabel!
 	
-	// Activity ID
+	// Activity ID.
 	var id = -1
 	
 	/**
@@ -74,12 +74,6 @@ Extension of UIView to be formatted as sections.
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowPastActivity.openActivity (_:)))
 		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
 		self.addGestureRecognizer(tapRecognizer)
-		
-		// Set tap recognizer
-		/*print("ROW_PAST_ACTIVITY:DEBUG: set tap recognizer")
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (self.openActivity (_:)))
-		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
-		addGestureRecognizer(tapRecognizer)*/
 	}
 	
 	
@@ -124,22 +118,14 @@ Extension of UIView to be formatted as sections.
 			image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
 	}
-	
+
+
 	/**
-	Opens an album.
+	Opens an activity.
 	*/
 	func openActivity(_ sender:UITapGestureRecognizer? = nil){
 		NSLog(":ROWPASTACTIVITY:DEBUG: Getting delegate and showing past activity \(self.id).")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPastActivity(id: self.id)
 	}
-	
-	
-	/**
-	Opens an activity.
-	*/
-	/*func openActivity(_ sender:UITapGestureRecognizer? = nil){
-		// TODO: Implement openActivity.
-		NSLog(":ROW_PAST_ACTIVITY:DEBUG: open activity")
-	}*/
 }

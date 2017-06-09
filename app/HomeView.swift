@@ -26,10 +26,8 @@ import UIKit
  */
 class HomeView: UIView {
 	
-	//The main scroll view.
+	// Outlets
 	@IBOutlet weak var scrollView: UIScrollView!
-	
-	//The container of the view.
 	@IBOutlet weak var container: UIView!
 	
 	//Each of the sections of the view.
@@ -157,7 +155,8 @@ class HomeView: UIView {
 				title = r.value(forKey: "title_\(lang)")! as! String
 				text = r.value(forKey: "text_\(lang)")! as! String
 				row.setTitle(text: title)
-				row.setText(text: text.decode())
+				row.setText(text: text)
+				row.id = id
 				
 				// Get main image
 				image = ""
@@ -291,6 +290,7 @@ class HomeView: UIView {
 				
 				row.setTitle(text: title)
 				row.setText(text: text)
+				row.id = id
 				
 				// Get main image
 				image = ""
