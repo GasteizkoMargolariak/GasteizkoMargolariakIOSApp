@@ -22,14 +22,11 @@ import Foundation
 import UIKit
 
 /**
-Extension of UIView to be formatted as sections.
+Extension of UIView to be formatted as future activity rows.
 */
 @IBDesignable class RowFutureActivity: UIView {
-	
-	//This view
-	var v: UIView!
 
-	// Outlets
+	// Outlets.
 	@IBOutlet weak var container: UIView!
 	@IBOutlet weak var title: UILabel!
 	@IBOutlet weak var image: UIImageView!
@@ -38,18 +35,28 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var city: UILabel!
 	@IBOutlet weak var price: UILabel!
 	
+	// Activity ID.
+	var id = -1
+	
+	
 	/**
 	Default constructor
+	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	
+	
+	/**
+	Loads the view from the xib with the same name as the class.
+	*/
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first as! UIView
+		nib.instantiate(withOwner: self, options: nil).first
 	}
+	
 	
 	/**
 	Default constructor.
@@ -59,22 +66,21 @@ Extension of UIView to be formatted as sections.
 	init(s: String, i: Int) {
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
-		v = self
 		self.frame = self.bounds
 		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		self.translatesAutoresizingMaskIntoConstraints = true
 		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		container.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.frame = self.bounds
-		self.addSubview(container)
+		self.container.frame = self.bounds
+		self.addSubview(self.container)
 		
 		// Set tap recognizer
-		/*print("ROW_FUTURE_ACTIVITY:DEBUG: set tap recognizer")
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (self.openActivity (_:)))
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowPastActivity.openActivity (_:)))
 		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
-		addGestureRecognizer(tapRecognizer)*/
+		self.addGestureRecognizer(tapRecognizer)
 	}
+	
 	
 	/**
 	Default constructor for the interface builder
@@ -84,22 +90,23 @@ Extension of UIView to be formatted as sections.
 	}
 	
 	
-	
 	/**
 	Changes the title of the activity. Decodes HTML.
 	:param: text The new title.
 	*/
 	func setTitle(text: String){
-		self.title.text = text.stripHtml()
+		self.title.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Sets the city of the activity.
 	:param: text The city.
 	*/
 	func setCity(text: String){
-		self.city.text = text
+		self.city.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Sets the price of the activity.
@@ -114,13 +121,15 @@ Extension of UIView to be formatted as sections.
 		}
 	}
 	
+	
 	/**
 	Changes the description of the activity. Decodes HTML.
 	:param: text The new text.
 	*/
 	func setText(text: String){
-		self.descript.text = text.stripHtml()
+		self.descript.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Sets the date of the activity in a human readable format.
@@ -128,9 +137,7 @@ Extension of UIView to be formatted as sections.
 	:param: lang Device language.
 	*/
 	func setDate(date: NSDate, lang: String){
-		
-		let dateformatter = DateFormatter()
-		
+				
 		let months_es = ["0index", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
 		let months_en = ["0index", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 		let months_eu = ["0index", "urtarrilaren", "otsailaren", "martxoaren", "abrilaren", "maiatzaren", "ekainaren", "ustailaren", "abustuaren", "irailaren", "urriaren", "azaroaren", "abenduaren"]
@@ -174,6 +181,7 @@ Extension of UIView to be formatted as sections.
 		self.date.text = strDate
 	}
 	
+	
 	/**
 	Changes the image of the activity.
 	If null or empty, the igage is hidden.
@@ -181,17 +189,22 @@ Extension of UIView to be formatted as sections.
 	*/
 	func setImage(filename: String){
 		if (filename == ""){
-			NSLog("ROW_FUTURE_ACTIVITY:DEBUG: No image")
-			//TODO hide the imageview
+			// Hide the imageview
+			self.image.isHidden = true
 		}
 		else{
-			NSLog(":ROW_FUTURE_ACTIVITY:DEBUG: Set image \(filename)")
 			let path = "img/actividades/thumb/\(filename)"
-			image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+			self.image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
 	}
 	
+	
+	/**
+	Opens an activity.
+	*/
 	func openActivity(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROW_FUTURE_ACTIVITY:DEBUG: open activity")
+		NSLog(":ROWFUTUREACTIVITY:DEBUG: Getting delegate and showing past activity \(self.id).")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPastActivity(id: self.id)
 	}
 }

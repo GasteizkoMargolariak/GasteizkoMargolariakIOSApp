@@ -35,8 +35,6 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var separator: UIView!
 	
 	
-	
-	
 	/**
 	Default constructor
 	*/
@@ -44,25 +42,27 @@ Extension of UIView to be formatted as sections.
 		super.init(coder: aDecoder)
 	}
 	
+	
 	/**
 	Loads the view from the xib with the same name as the class.
 	*/
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first as! UIView
+		nib.instantiate(withOwner: self, options: nil).first
 		
 		self.frame = self.bounds
 		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		self.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		container.translatesAutoresizingMaskIntoConstraints = true
+		self.container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.container.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.frame = self.bounds
-		self.addSubview(container)
+		self.container.frame = self.bounds
+		self.addSubview(self.container)
 		
 	}
+	
 	
 	/**
 	Default constructor.
@@ -70,7 +70,6 @@ Extension of UIView to be formatted as sections.
 	:param: i Custom identifier
 	*/
 	init(s: String, i: Int) {
-		NSLog(":ROWLABLANCADAY:DEBUG: Init \(s), \(i)")
 		
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
@@ -79,11 +78,27 @@ Extension of UIView to be formatted as sections.
 		self.translatesAutoresizingMaskIntoConstraints = true
 	}
 	
+	
 	/**
 	Default constructor for the interface builder
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
+	}
+	
+	
+	/**
+	Sets the info about the day.
+	:param: number Number of the day (1-31)
+	:param: month Name of the month.
+	:param: name Name of the day.
+	:param: price Price of the day, in euros.
+	*/
+	func setDay(number: Int, month: String, name: String, price: Int){
+		self.number.text = "\(Int(number))"
+		self.month.text = month.decode().stripHtml()
+		self.name.text = name.decode().stripHtml()
+		self.price.text = "\(price) €"
 	}
 	
 }

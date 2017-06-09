@@ -18,6 +18,9 @@
 // License along with the Gasteizko Margolariak IOS app.
 // If not, see <http://www.gnu.org/licenses/>.
 
+
+// TODO: Barely working. City schedule not working, GM is shown but events times are mixed.
+
 import UIKit
 import CoreData
 
@@ -48,6 +51,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	var days: [NSDate] = [NSDate]()
 	var selectedDay: Int = 0
 
+	
 	/**
 	Gets the application context.
 	:return: The application context.
@@ -56,12 +60,11 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 	}
 	
+	
 	/**
 	Run when the app loads.
 	*/
 	override func viewDidLoad() {
-		
-		NSLog(":SCHEDULECONTROLLER:LOG: Init schedule.")
 		
 		super.viewDidLoad()
 		self.loadSchedule(margolari: margolari)
@@ -80,11 +83,11 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		btToolbarButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
 	}
 	
+	
 	/**
 	Returns to the main view controller.
 	*/
 	func back() {
-		NSLog(":SCHEDULECONTROLLER:DEBUG: Back")
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -96,29 +99,20 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		super.didReceiveMemoryWarning()
 	}
 	
+	
 	/**
 	Loads the schedule.
 	*/
 	public func loadSchedule(margolari: Bool){
 		
-		NSLog(":SCHEDULECONTROLLER:DEBUG: Loading schedule: Margolariak \(margolari)")
-		
-		var rowcount = 0
-		var row: RowSchedule
-		var start: NSDate
-		var title: String
-		var text: String
-		var locationId: Int
-		var location: String
-		
 		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		self.delegate = UIApplication.shared.delegate as! AppDelegate
+		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.lang = getLanguage()
 		self.context?.persistentStoreCoordinator = self.delegate?.persistentStoreCoordinator
 
 		// Get days
 		// TODO: Get current year
-		let year = 2016
+		let year = 2017
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		dateFormatter.locale = Locale.init(identifier: "en_GB")
@@ -129,14 +123,13 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		let dayFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Festival_event")
 		dayFetchRequest.propertiesToFetch = ["day"]
 		if self.margolari == true{
-			dayFetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (start >= %@) AND (start <= %@)", argumentArray: [1, sDate, eDate])
+			dayFetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (start >= %@) AND (start <= %@)", argumentArray: [1, sDate!, eDate!])
 		}
 		else{
-			dayFetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (start >= %@) AND (start <= %@)", argumentArray: [0, sDate, eDate])
+			dayFetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (start >= %@) AND (start <= %@)", argumentArray: [0, sDate!, eDate!])
 		}
 
 		dayFetchRequest.returnsDistinctResults = true
-		//dayFetchRequest.resultType = NSFetchRequestResultType.dictionaryResultType
 
 		do {
 			let results = try self.context?.fetch(dayFetchRequest)
@@ -145,18 +138,9 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 				let day: NSDate = r.value(forKey: "day") as! NSDate
 				// Don't add duplicates
 				if self.days.contains(day) == false{
-					NSLog(":SCHEDULECONTROLLER:DEBUG: Day \(day)")
 					self.days.append(day)
 				}
 			}
-
-			/*let resultsDict = results as! [[String: String]]
-			for r in resultsDict {
-				//let dayStr: String = r.value(forKey: "day") as! String
-				NSLog(":SCHEDULECONTROLLER:DEBUG: Day \(r["day"])")
-				//self.days.append(r.value(forKey: "day") as! NSDate)
-			}*/
-
 		}
 		catch let err as NSError {
 			NSLog(":SCHEDULECONTROLLER:ERROR: Error getting day list: \(err)")
@@ -174,8 +158,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		self.btNext.isUserInteractionEnabled = true
 		self.btNext.addGestureRecognizer(tapRecognizerNextDay)
 
-	loadDay()
-
+		loadDay()
 	}
 
 
@@ -201,7 +184,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 			var name: String = ""
 			do {
 				let daySearchResults = try self.context?.fetch(dayFetchRequest)
-				for r in daySearchResults as! [NSManagedObject] {
+				for r in daySearchResults! {
 					name = r.value(forKey: "name_\(lang!)") as! String
 				}
 				self.lbDayName.text = name
@@ -213,7 +196,14 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		else{
 			self.lbDayName.text = ""
 		}
-		let dateString: String = dateFormatter.string(from: days[selectedDay] as Date)
+		
+		// Check for no days
+		if self.selectedDay >= days.count || selectedDay < 0 {
+			NSLog("SCHEDULECONTROLLER:ERROR: No schedule for day \(selectedDay)")
+			return
+		}
+		
+		let dateString: String = dateFormatter.string(from: self.days[self.selectedDay] as Date)
 		let nDay: String = dateString.subStr(start: 8, end: 9)
 		let month: String = dateString.subStr(start: 5, end: 6)
 		var nMonth: String = "Agosto" // TODO: Reference
@@ -240,9 +230,6 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 			self.btNext.alpha = 1
 			self.btNext.isUserInteractionEnabled = true
 		}
-
-		
-		
 		
 		var rowcount = 0
 		var row: RowSchedule
@@ -269,9 +256,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 			// Get the result
 			let searchResults = try self.context?.fetch(fetchRequest)
 			
-			NSLog(":SCHEDULECONTROLLER:DEBUG: Total events: \(searchResults?.count)")
-			
-			for r in searchResults as! [NSManagedObject] {
+			for r in searchResults! {
 				
 				title = r.value(forKey: "title_\(lang!)") as! String
 				if let tx = r.value(forKey: "description_\(lang!)"){
@@ -311,9 +296,8 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 			svScheduleList.layoutIfNeeded()
 
 		} catch {
-			NSLog(":SCHEDULECONTROLLER:ERROR: Error with request: \(error)")
+			NSLog(":SCHEDULECONTROLLER:ERROR: Error with event: \(error)")
 		}
-
 	}
 
 
@@ -331,8 +315,8 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	:param: sender Event trigger.
 	*/
 	func prevDay(_ sender:UITapGestureRecognizer? = nil){
-    changeDay(increment: -1)
-  }
+		changeDay(increment: -1)
+	}
 
 
 	/**
@@ -352,9 +336,11 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		loadDay()
 	}
 	
+	
 	/**
-	Gets the device language.
-	:return: Two letter language code of the device.
+	Gets the device language. The only recognized languages are Spanish, English and Basque.
+	If the device has another language, Spanish will be selected by default.
+	:return: Two-letter language code.
 	*/
 	func getLanguage() -> String{
 		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
