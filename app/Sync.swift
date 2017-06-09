@@ -28,6 +28,11 @@ Class to handle server sync.
 class Sync{
 	
 	var initial: Bool = false
+	var vBlog: Int = 0
+	var vActivities: Int = 0
+	var vGallery: Int = 0
+	var vBlanca: Int = 0
+	var vAll: Int = 0
 	
 	/**
 	Starts the sync process.
@@ -56,14 +61,34 @@ class Sync{
 	:returns: The URL.
 	*/
 	func buildUrl() -> URL{
-		let url = URL(string: "https://margolariak.com/API/v1/sync.php?client=com.margolariak.app")
-		//TODO add parameters
+		let defaults = UserDefaults.standard
+		var uId: String = "unknown"
+		if defaults.value(forKey: "versionAll") != nil{
+			self.vAll = defaults.value(forKey: "versionAll") as! Int
+		}
+		if defaults.value(forKey: "versionBlog") != nil{
+			self.vAll = defaults.value(forKey: "versionBlog") as! Int
+		}
+		if defaults.value(forKey: "versionActivities") != nil{
+			self.vActivities = defaults.value(forKey: "versionActivities") as! Int
+		}
+		if defaults.value(forKey: "versionGallery") != nil{
+			self.vGallery = defaults.value(forKey: "versionGallery") as! Int
+		}
+		if defaults.value(forKey: "versionBlanca") != nil{
+			self.vBlanca = defaults.value(forKey: "versionBlanca") as! Int
+		}
+		if defaults.value(forKey: "userId") != nil{
+			uId = defaults.value(forKey: "userId") as! String
+		}
+		let url = URL(string: "https://margolariak.com/API/v1/sync.php?client=com.margolariak.app&user=\(uId)&action=sync&version=\(self.vAll)")
+		
 		return url!
 	}
 	
 	/**
 	Performs an asynchronous sync.
-	It fethes the info from the server and stores as Core Data
+	It fetches the info from the server and stores as Core Data
 	:param: url The url to sync.
 	*/
 	func sync(url: URL){
@@ -82,66 +107,94 @@ class Sync{
 			}
 			
 			NSLog(":SYNC:LOG: Data received.")
+			let defaults = UserDefaults.standard
 			
 			var strData = String(data:data, encoding: String.Encoding.utf8)
+			
+			var strVersions = ""
+			if strData != nil{
+				strVersions = (strData?.subStr(start : (strData?.indexOf(target : "\"version\":")!)! + 11, end : (strData?.indexOf(target : "}]}")!)! + 1))!
+			}
+			var vrAll: Int = 0
+			var vrBlog: Int = 0
+			var vrActivities: Int = 0
+			var vrGallery: Int = 0
+			var vrBlanca: Int = 0
+			vrAll = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"all\":")! + 7, end : strVersions.indexOf(target : "}")!-2))!
+			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",\"")! + 1, end : strVersions.length - 1)
+			vrBlog = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"blog\":")! + 7, end : strVersions.indexOf(target : "}")!-2))!
+			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",\"")! + 1, end : strVersions.length - 1)
+			vrActivities = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"activities\":")! + 13, end : strVersions.indexOf(target : "}")!-2))!
+			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",\"")! + 1, end : strVersions.length - 1)
+			vrGallery = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"gallery\":")! + 10, end : strVersions.indexOf(target : "}")!-2))!
+			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",\"")! + 1, end : strVersions.length - 1)
+			vrBlanca = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"lablanca\":")! + 11, end : strVersions.indexOf(target : "}")!-2))!
 			
 			let dataIdx = strData?.indexOf(target: "{\"data\"")
 			strData = strData!.subStr(start: dataIdx!, end: strData!.length - 1)
 			
-			//TODO: do something with versions
-			
-			//Get tables
-			let dataActivity : [String] = self.getTable(data: strData!, table: "activity")
-			let dataActivityComment : [String] = self.getTable(data: strData!, table: "activity_comment")
-			let dataActivityImage : [String] = self.getTable(data: strData!, table: "activity_image")
-			let dataActivityTag : [String] = self.getTable(data: strData!, table: "activity_tag")
-			let dataActivityItinerary : [String] = self.getTable(data: strData!, table: "activity_itinerary")
-			let dataAlbum : [String] = self.getTable(data: strData!, table: "album")
-			let dataFestival : [String] = self.getTable(data: strData!, table: "festival")
-			let dataFestivalDay : [String] = self.getTable(data: strData!, table: "festival_day")
-			let dataFestivalEvent : [String] = self.getTable(data: strData!, table: "festival_event")
-			//let dataFestivalEventImage : [String] = self.getTable(data: strData!, table: "festival_event_image")
-			let dataFestivalOffer : [String] = self.getTable(data: strData!, table: "festival_offer")
-			let dataPeople : [String] = self.getTable(data: strData!, table: "people")
-			let dataPhoto : [String] = self.getTable(data: strData!, table: "photo")
-			let dataPhotoAlbum : [String] = self.getTable(data: strData!, table: "photo_album")
-			//let dataPhotoComment : [String] = self.getTable(data: strData!, table: "photo_comment")
-			let dataPlace : [String] = self.getTable(data: strData!, table: "place")
-			let dataPost : [String] = self.getTable(data: strData!, table: "post")
-			let dataPostComment : [String] = self.getTable(data: strData!, table: "post_comment")
-			let dataPostImage : [String] = self.getTable(data: strData!, table: "post_image")
-			let dataPostTag : [String] = self.getTable(data: strData!, table: "post_tag")
+			//Get tables and save them
+			if vrActivities > self.vActivities || vrBlanca > self.vBlanca{
+				let dataPlace : [String] = self.getTable(data: strData!, table: "place")
+				self.saveTablePlace(entries: dataPlace)
+			}
+			if vrActivities > self.vActivities {
+				let dataActivity : [String] = self.getTable(data: strData!, table: "activity")
+				self.saveTableActivity(entries : dataActivity)
+				let dataActivityComment : [String] = self.getTable(data: strData!, table: "activity_comment")
+				self.saveTableActivityComment(entries : dataActivityComment)
+				let dataActivityImage : [String] = self.getTable(data: strData!, table: "activity_image")
+				self.saveTableActivityImage(entries : dataActivityImage)
+				let dataActivityTag : [String] = self.getTable(data: strData!, table: "activity_tag")
+				self.saveTableActivityTag(entries : dataActivityTag)
+				let dataActivityItinerary : [String] = self.getTable(data: strData!, table: "activity_itinerary")
+				self.saveTableActivityItinerary(entries : dataActivityItinerary)
+				defaults.set(vrActivities, forKey: "versionActivities")
+			}
+			if vrBlanca > self.vBlanca {
+				let dataPeople : [String] = self.getTable(data: strData!, table: "people")
+				self.saveTablePeople(entries: dataPeople)
+				let dataFestival : [String] = self.getTable(data: strData!, table: "festival")
+				self.saveTableFestival(entries: dataFestival)
+				let dataFestivalDay : [String] = self.getTable(data: strData!, table: "festival_day")
+				self.saveTableFestivalDay(entries: dataFestivalDay)
+				let dataFestivalEvent : [String] = self.getTable(data: strData!, table: "festival_event")
+				self.saveTableFestivalEvent(entries: dataFestivalEvent)
+				//let dataFestivalEventImage : [String] = self.getTable(data: strData!, table: "festival_event_image")
+				//
+				let dataFestivalOffer : [String] = self.getTable(data: strData!, table: "festival_offer")
+				self.saveTableFestivalOffer(entries: dataFestivalOffer)
+				defaults.set(vrBlanca, forKey: "versionBlanca")
+			}
+			if vrGallery > self.vGallery {
+				let dataAlbum : [String] = self.getTable(data: strData!, table: "album")
+				self.saveTableAlbum(entries: dataAlbum)
+				let dataPhoto : [String] = self.getTable(data: strData!, table: "photo")
+				self.saveTablePhoto(entries: dataPhoto)
+				let dataPhotoAlbum : [String] = self.getTable(data: strData!, table: "photo_album")
+				self.saveTablePhotoAlbum(entries: dataPhotoAlbum)
+				//let dataPhotoComment : [String] = self.getTable(data: strData!, table: "photo_comment")
+				//
+				defaults.set(vrGallery, forKey: "versionGallery")
+			}
+			if vrBlog > self.vBlog {
+				let dataPost : [String] = self.getTable(data: strData!, table: "post")
+				self.saveTablePost(entries: dataPost)
+				let dataPostComment : [String] = self.getTable(data: strData!, table: "post_comment")
+				self.saveTablePostComment(entries: dataPostComment)
+				let dataPostImage : [String] = self.getTable(data: strData!, table: "post_image")
+				self.saveTablePostImage(entries: dataPostImage)
+				let dataPostTag : [String] = self.getTable(data: strData!, table: "post_tag")
+				self.saveTablePostTag(entries: dataPostTag)
+				defaults.set(vrBlog, forKey: "versionBlog")
+			}
 			let dataSponsor : [String] = self.getTable(data: strData!, table: "sponsor")
-			let dataSettings: [String] = self.getTable(data: strData!, table: "settings")
-			
-			//One by one, save the received data
-			self.saveTableActivity(entries : dataActivity)
-			self.saveTableActivityComment(entries : dataActivityComment)
-			self.saveTableActivityImage(entries : dataActivityImage)
-			self.saveTableActivityTag(entries : dataActivityTag)
-			self.saveTableActivityItinerary(entries : dataActivityItinerary)
-			
-			self.saveTablePost(entries: dataPost)
-			self.saveTablePostComment(entries: dataPostComment)
-			self.saveTablePostImage(entries: dataPostImage)
-			self.saveTablePostTag(entries: dataPostTag)
-			
-			self.saveTablePlace(entries: dataPlace)
-			self.saveTablePeople(entries: dataPeople)
-			
-			self.saveTableAlbum(entries: dataAlbum)
-			self.saveTablePhoto(entries: dataPhoto)
-			self.saveTablePhotoAlbum(entries: dataPhotoAlbum)
-			
-			self.saveTableFestival(entries: dataFestival)
-			self.saveTableFestivalDay(entries: dataFestivalDay)
-			self.saveTableFestivalOffer(entries: dataFestivalOffer)
-			self.saveTableFestivalEvent(entries: dataFestivalEvent)
-			
 			self.saveTableSponsor(entries: dataSponsor)
-			
+			let dataSettings: [String] = self.getTable(data: strData!, table: "settings")
 			self.saveSettings(entries: dataSettings)
-			
+			defaults.set(vrAll, forKey: "versionAll")
+				
+
 			// If it's the initial sync, hide the segue
 			if self.initial == true{
 				NSLog(":SYNC:LOG: Finishing synchronous sync.")
