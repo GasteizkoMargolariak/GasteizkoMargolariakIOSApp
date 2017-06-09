@@ -108,8 +108,11 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 				
 				var r = searchResults[i]
 				var photoId = r.value(forKey: "photo")! as! Int
+				var leftId: Int = -1
+				var rightId: Int = -1
 				
 				row = RowAlbum.init(s: "rowAlbum\(i)", i: i)
+				row.id = id
 				
 				// Get photo info from Photo entity
 				let imgFetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
@@ -122,17 +125,20 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 					var imgSearchResults = try context.fetch(imgFetchRequest)
 					var imgR = imgSearchResults[0]
 					image = imgR.value(forKey: "file")! as! String
+					leftId = imgR.value(forKey: "id")! as! Int
 					NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) left: \(image)")
 					row.setImage(idx: 0, filename: image)
 					if i + 1 < searchResults.count {
 						r = searchResults[i + 1]
 						photoId = r.value(forKey: "photo")! as! Int
+						
 						imgFetchRequest.predicate = NSPredicate(format: "id == %i", photoId)
 						imgSearchResults = try context.fetch(imgFetchRequest)
 						
 						
 						imgR = imgSearchResults[0]
 						image = imgR.value(forKey: "file")! as! String
+						rightId = imgR.value(forKey: "id")! as! Int
 						NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: \(image)")
 						row.setImage(idx: 1, filename: image)
 					}
@@ -145,7 +151,7 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 					NSLog(":GALLERYCONTROLLER:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
-				NSLog(":GALLERYCONTROLLER:DEBUG: Adding row: height: \(row.frame.height)")
+				row.setIds(left: leftId, right: rightId)
 				albumContainer.addArrangedSubview(row)
 				
 				rowcount = rowcount + 1

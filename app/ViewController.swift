@@ -45,6 +45,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	// Passed id to perform segues.
 	var passId: Int = -1
+	var passAlbum: Int = -1
 	
 	// Location-related variables.
 	var locationManager = CLLocationManager()
@@ -125,6 +126,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	
+	// TODO: This must go in it AlbumViewController
+	/**
+	Shows a photo.
+	:param: id The album id.
+	*/
+	func showPhoto(album: Int, photo: Int){
+		NSLog(":CONTROLLER:DEBUG: Showing photo \(photo) of album \(album)")
+		self.passAlbum = album
+		self.passId = photo
+		performSegue(withIdentifier: "SeguePhoto", sender: nil)
+		NSLog(":CONTROLLER:DEBUG: PHOTO should be shown")
+	}
+	
+	
 	/**
 	Shows a schedule.
 	:param: margolari True for the margolari schedule, false for the city one.
@@ -141,7 +156,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	
-	/**
+	/** m
 	Handles the initial sync process.
 	It can start it, showing the sync screen, or finish it, hidding the screen.
 	:param: showScreen True to start the sync, false to end it.
@@ -173,6 +188,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		}
 		if segue.identifier == "SegueAlbum"{
 			(segue.destination as! AlbumViewController).id = passId
+		}
+		if segue.identifier == "SeguePhoto"{
+			(segue.destination as! PhotoViewController).photoId = passId
+			(segue.destination as! PhotoViewController).albumId = passAlbum
 		}
 		if segue.identifier == "SegueSchedule"{
 			if passId == 1{

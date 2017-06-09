@@ -34,6 +34,9 @@ Extension of UIView to be formatted as sections.
 	// Album ID
 	var id = -1
 	
+	// Photo ids
+	var photoIds: [Int] = [-1, -1]
+	
 	// Array with the imageviews
 	var preview: [UIImageView] = []
 
@@ -95,29 +98,54 @@ Extension of UIView to be formatted as sections.
 		super.init(frame: frame)
 	}
 	
-	func openPhoto(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROWALBUM:DEBUG: Getting delegate and showing photo.")
-		// TODO
-		//let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		//delegate.controller?.showAlbum(id: self.id)
+	func openLeftPhoto(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":ROWALBUM:DEBUG: Getting delegate and showing left photo.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPhoto(album: self.id, photo: self.photoIds[0])
+	}
+	
+	func openRightPhoto(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":ROWALBUM:DEBUG: Getting delegate and showing right photo.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPhoto(album: self.id, photo: self.photoIds[1])
 	}
 	
 	
 	/**
 	Changes the preview image of the photos.
 	If null or empty, the igage is hidden.
+	It also sets the tap listener to show the photo.
 	:param: idx Id of the image in the row. 0 for left, 1 for right.
 	:param: filename Filename of the image.
 	*/
 	func setImage(idx: Int, filename: String){
 		if (filename == ""){
 			self.preview[idx].isHidden = true
-			//TODO hide the imageview
 		}
 		else{
 			let path = "img/galeria/thumb/\(filename)"
 			self.preview[idx].setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+			// Set tap listener
+			if idx == 0 {
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowAlbum.openLeftPhoto(_:)))
+				tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+				self.preview[idx].isUserInteractionEnabled = true
+				NSLog(":ROWALBUM:DEBUG: Setting tap recognizer for left photo.")
+				self.preview[idx].addGestureRecognizer(tapRecognizer)
+			}
+			else{
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowAlbum.openRightPhoto(_:)))
+				tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+				self.preview[idx].isUserInteractionEnabled = true
+				NSLog(":ROWALBUM:DEBUG: Setting tap recognizer for right photo.")
+				self.preview[idx].addGestureRecognizer(tapRecognizer)
+			}
 		}
+	}
+	
+	func setIds(left: Int, right: Int){
+		self.photoIds[0] = left
+		self.photoIds[1] = right
 	}
 	
 }

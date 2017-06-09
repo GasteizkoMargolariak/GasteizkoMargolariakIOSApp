@@ -61,6 +61,7 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	Run when the app loads.
 	*/
 	override func viewDidLoad() {
+		NSLog(":PHOTOCONTROLLER:DEBUG: viewDidLoad")
 		
 		super.viewDidLoad()
 		self.loadPhoto(id: photoId)
