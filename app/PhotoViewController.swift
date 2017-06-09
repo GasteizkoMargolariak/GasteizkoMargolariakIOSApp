@@ -24,19 +24,34 @@ import CoreData
 /**
 The view controller of the app.
 */
-class PostViewController: UIViewController, UIGestureRecognizerDelegate {
+class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	
 	
-	@IBOutlet weak var barTitle: UILabel!
+	//@IBOutlet weak var barTitle: UILabel!
+	//@IBOutlet weak var barButton: UIButton!
+	//@IBOutlet weak var postText: UILabel!
+	//@IBOutlet weak var postTitle: UILabel!
+	//@IBOutlet weak var postImage: UIImageView!
 	@IBOutlet weak var barButton: UIButton!
-	@IBOutlet weak var postText: UILabel!
-	@IBOutlet weak var postTitle: UILabel!
-	@IBOutlet weak var postImage: UIImageView!
+	@IBOutlet weak var barTitle: UILabel!
+	@IBOutlet weak var photoTitle: UILabel!
+	@IBOutlet weak var photoImage: UIImageView!
+	@IBOutlet weak var photoDate: UILabel!
+	@IBOutlet weak var btPrev: UIButton!
+	@IBOutlet weak var btNext: UIButton!
 	
-	var id: Int = -1
-	var passId: Int = -1
+	var albumId: Int = -1
+	var photoId: Int = -1
+	var photoIds: [Int] = []
+	var passPhotoId: Int = -1
+	var passAlbumId: Int = -1
 	var delegate: AppDelegate?
 	
+	
+	/**
+	Gets the application context.
+	:return: The application context.
+	*/
 	func getContext () -> NSManagedObjectContext {
 		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 	}
@@ -46,19 +61,23 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	Run when the app loads.
 	*/
 	override func viewDidLoad() {
+		NSLog(":PHOTOCONTROLLER:DEBUG: viewDidLoad")
 		
 		super.viewDidLoad()
-		self.loadPost(id: id)
+		self.loadPhoto(id: photoId)
+		
+		// TODO populate photo array
 		
 		// Set button action
-		barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
+		// TODO barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
 	}
 	
-	//TODO implement all the logic for post loading here, including iboutlts
 	
-	
+	/**
+	Dismisses the controller.
+	*/
 	func back() {
-		print("POSTCONTROLLER:DEBUG: Back")
+		NSLog(":PHOTOCONTROLLER:DEBUG: Back")
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -70,31 +89,36 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 		super.didReceiveMemoryWarning()
 	}
 	
-	public func loadPost(id: Int){
+	
+	/**
+	Loads a photo in the viewer.
+	:param: id
+	*/
+	public func loadPhoto(id: Int){
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
+		let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
 		fetchRequest.predicate = NSPredicate(format: "id = %i", id)
 		
 		do {
-			//go get the results
 			let searchResults = try context.fetch(fetchRequest)
 			
 			var sTitle: String
 			var sText: String
 			var image: String
 			
-			//You need to convert to NSManagedObject to use 'for' loops
 			for r in searchResults as [NSManagedObject] {
 				
 				sTitle = r.value(forKey: "title_\(lang)")! as! String
-				sText = r.value(forKey: "text_\(lang)")! as! String
-				postTitle.text = "  \(sTitle.decode().stripHtml())"
-				postText.text = sText.decode().stripHtml()
+				// TODO photoTitle.text = "  \(sTitle.decode().stripHtml())"
+				// TODO date
 				
+				// TODO set photo
+				
+				/*
 				// Get main image
 				image = ""
 				let imgFetchRequest: NSFetchRequest<Post_image> = Post_image.fetchRequest()
@@ -118,13 +142,16 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 					}
 				} catch {
 					NSLog(":POST:ERROR: Error getting image for post \(id): \(error)")
-				}
+				}*/
 				
 			}
 		} catch {
-			NSLog(":POST:ERROR: Error with request: \(error)")
+			NSLog(":PHOTO:ERROR: Error setting up photo \(id): \(error)")
 		}
 	}
+	
+	
+	// TODO Buttons
 	
 	
 	/**
@@ -141,6 +168,5 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 			return "es"
 		}
 	}
-	
 }
 

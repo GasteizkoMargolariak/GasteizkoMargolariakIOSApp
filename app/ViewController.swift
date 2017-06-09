@@ -45,10 +45,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	// Passed id to perform segues.
 	var passId: Int = -1
+	var passAlbum: Int = -1
 	
 	// Location-related variables.
 	var locationManager = CLLocationManager()
 	var didFindMyLocation = false
+	
+	
+	var locationTimer: Timer? = nil
 	
 	
 	/**
@@ -58,6 +62,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	required init?(coder aDecoder: NSCoder) {
 		NSLog(":CONTROLLER:DEBUG: Init!")
 		super.init(coder: aDecoder)
+		
+	}
+	
+	func getLocation() -> CLLocationCoordinate2D {
+		return (locationManager.location?.coordinate)!
 	}
 	
 	
@@ -84,6 +93,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	
 	/**
+	Shows a past activity.
+	:param: id The activity id.
+	*/
+	func showPastActivity(id: Int){
+		NSLog(":CONTROLLER:DEBUG: Showing past activity \(id)")
+		self.passId = id
+		performSegue(withIdentifier: "SeguePastActivity", sender: nil)
+	}
+	
+	
+	/**
+	Shows a future activity.
+	:param: id The activity id.
+	*/
+	func showFutureActivity(id: Int){
+		NSLog(":CONTROLLER:DEBUG: Showing future activity \(id)")
+		self.passId = id
+		// TODO
+		//performSegue(withIdentifier: "SegueFutureActivity", sender: nil)
+	}
+	
+	
+	/**
 	Shows an album.
 	:param: id The album id.
 	*/
@@ -91,6 +123,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		NSLog(":CONTROLLER:DEBUG: Showing album \(id)")
 		self.passId = id
 		performSegue(withIdentifier: "SegueAlbum", sender: nil)
+	}
+	
+	
+	// TODO: This must go in it AlbumViewController
+	/**
+	Shows a photo.
+	:param: id The album id.
+	*/
+	func showPhoto(album: Int, photo: Int){
+		NSLog(":CONTROLLER:DEBUG: Showing photo \(photo) of album \(album)")
+		self.passAlbum = album
+		self.passId = photo
+		performSegue(withIdentifier: "SeguePhoto", sender: nil)
+		NSLog(":CONTROLLER:DEBUG: PHOTO should be shown")
 	}
 	
 	
@@ -110,7 +156,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	
-	/**
+	/** m
 	Handles the initial sync process.
 	It can start it, showing the sync screen, or finish it, hidding the screen.
 	:param: showScreen True to start the sync, false to end it.
@@ -143,6 +189,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		if segue.identifier == "SegueAlbum"{
 			(segue.destination as! AlbumViewController).id = passId
 		}
+		if segue.identifier == "SeguePhoto"{
+			(segue.destination as! PhotoViewController).photoId = passId
+			(segue.destination as! PhotoViewController).albumId = passAlbum
+		}
 		if segue.identifier == "SegueSchedule"{
 			if passId == 1{
 				(segue.destination as! ScheduleViewController).margolari = true
@@ -154,6 +204,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		if segue.identifier == "SegueSync"{
 			self.syncSegue = segue
 		}
+		if segue.identifier == "SeguePastActivity"{
+			(segue.destination as! PastActivityViewController).id = passId
+		}
+		if segue.identifier == "SegueFutureActivity"{
+			// TODO
+			//(segue.destination as! FutureActivityViewController).id = passId
+		}
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		NSLog(":CONTROLLER:DEBUG: Forcing a call to populate")
+		self.populate()
+		super.viewWillAppear(animated)
 	}
 	
 	/**
@@ -171,19 +234,25 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.containerViewActivities.alpha = 0
 		self.containerViewBlog.alpha = 0
 		self.containerViewGallery.alpha = 0
+		
+		// Start the location schedule
+		fetchLocation()
+		self.locationTimer = Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(fetchLocation), userInfo: nil, repeats: true)
 				
-		NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
-		Sync()
+		//NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
+		NSLog(":CONTROLLER:DEBUG: Skyp sync")
+		//Sync()
 
 		
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.delegate?.controller = self
 		
-		NSLog(":CONTROLLER:DEBUG: NOT Forcing a call to populate")
-		//self.populate()
-		
 		super.viewDidLoad()
 		
+	}
+	
+	func fetchLocation(){
+		FetchLocation()
 	}
 
 	/**
@@ -192,7 +261,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	*/
 	func populate(){
 		if (self.containerViewHome != nil){
-			//(self.containerViewHome as HomeView).populate2()
+			//(self.containerViewHome as HomeView).populate()
 			//let ng = self.containerViewHome.dbgTxt
 			//NSLog("AAAAA \(ng)")
 		}

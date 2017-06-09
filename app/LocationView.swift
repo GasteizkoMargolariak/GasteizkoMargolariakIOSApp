@@ -29,10 +29,23 @@ class LocationView: UIView {
 	
 	@IBOutlet var container: UIView!
 	@IBOutlet weak var map: GMSMapView!
+	@IBOutlet weak var lbTitle: UILabel!
+	@IBOutlet weak var lbDistance: UILabel!
+	@IBOutlet weak var lbNo: UILabel!
+	
+	var controller: ViewController
+	var storyboard: UIStoryboard
 	
 	var didFindMyLocation = false
 	
+	var locationTimer: Timer? = nil
+	
 	override init(frame: CGRect){
+		
+		// Set controller
+		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+		self.controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
+		
 		super.init(frame: frame)
 	}
 	
@@ -41,6 +54,10 @@ class LocationView: UIView {
 	Run when the view is started.
 	*/
 	required init?(coder aDecoder: NSCoder) {
+		
+		// Set controller
+		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+		self.controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		
 		super.init(coder: aDecoder)
 		
@@ -54,6 +71,10 @@ class LocationView: UIView {
 		//map.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
 		let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 42.846399, longitude: -2.673365, zoom: 12.0)
 		map.camera = camera
+		
+		// Schedule location fetches
+		getNewLocation()
+		Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(getNewLocation), userInfo: nil, repeats: true)
 	}
 	
 	
@@ -64,6 +85,77 @@ class LocationView: UIView {
 		if status == CLAuthorizationStatus.authorizedWhenInUse {
 			map.isMyLocationEnabled = true
 		}
+	}
+	
+	
+	/**
+	Get new location
+	*/
+	func getNewLocation(){
+		NSLog(":LOCATION:DEBUG: Setting marker.")
+		let defaults = UserDefaults.standard
+		if (defaults.value(forKey: "GMLocLat") != nil && defaults.value(forKey: "GMLocLon") != nil){
+			let lat = defaults.value(forKey: "GMLocLat") as! Double
+			let lon = defaults.value(forKey: "GMLocLon") as! Double
+			let time = defaults.value(forKey: "GMLocTime") as! Date
+			let cTime = Date()
+			let minutes = Calendar.current.dateComponents([.minute], from: time, to: cTime).minute
+			if (minutes! < 30){
+				self.map.isHidden = false
+				self.lbTitle.isHidden = false
+				self.lbDistance.isHidden = false
+				self.lbNo.isHidden = true
+				let marker = GMSMarker()
+				marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+				marker.title = "Gasteizko Margolariak"
+				//marker.snippet = "Australia"
+				marker.map = self.map
+				NSLog(":LOCATION:DEBUG: Marker set.")
+			
+				let location = self.controller.getLocation()
+				if location != nil {
+					let d: Int = calculateDistance(lat1: location.latitude, lon1: location.longitude, lat2: lat, lon2: lon)
+					NSLog(":LOCATION:LOG: Distance (m): \(d)")
+				
+					if d <= 1000 {
+						self.lbDistance.text = "A \(d) metros de ti."
+					}
+					else{
+						self.lbDistance.text = "A \(Int(d/1000)) kilómetros de ti."
+					}
+				}
+			}
+			else{
+				self.map.isHidden = true
+				self.lbTitle.isHidden = true
+				self.lbDistance.isHidden = true
+				self.lbNo.isHidden = false
+			}
+		}
+		else{
+			NSLog(":LOCATION:DEBUG: No location saved yet.")
+		}
+	}
+
+
+	func degreesToRadians(degrees: Double) -> Double {
+		return degrees * Double.pi / 180;
+	}
+
+
+	func calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double) -> Int {
+		let eRadius: Double = 6371
+
+		let dLat: Double = degreesToRadians(degrees: lat2-lat1)
+		let dLon: Double = degreesToRadians(degrees: lon2-lon1)
+
+		let l1: Double = degreesToRadians(degrees: lat1)
+		let l2: Double = degreesToRadians(degrees: lat2)
+
+		let a: Double = sin(dLat/2) * sin(dLat/2) + sin(dLon/2) * sin(dLon/2) * cos(l1) * cos(l2)
+		let c: Double = 2 * atan2(sqrt(a), sqrt(1-a))
+		let m: Double = eRadius * c * 1000
+		return Int(m)
 	}
 	
 	/*func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutableRawPointer) {

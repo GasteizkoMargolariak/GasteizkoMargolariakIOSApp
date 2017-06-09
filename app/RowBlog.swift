@@ -22,24 +22,19 @@ import Foundation
 import UIKit
 
 /**
-Extension of UIView to be formatted as sections.
+Extension of UIView to be formatted as post rows.
 */
 @IBDesignable class RowBlog: UIView {
 	
-	//The container.
+	// Outlets.
 	@IBOutlet weak var container: UIView!
-	
-	//The entry
 	@IBOutlet weak var entry: UIView!
-
-	//The post title.
 	@IBOutlet weak var title: UILabel!
-	
-	//The post description.
 	@IBOutlet weak var descrip: UILabel!
-
-	//The post image.
 	@IBOutlet weak var image: UIImageView!
+	
+	// Post ID.
+	var id = -1
 	
 	
 	/**
@@ -51,13 +46,14 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Loads the view in the xib file with the same name.
+	Loads the view from the xib with the same name as the class.
 	*/
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first
+		nib.instantiate(withOwner: self, options: nil).first as! UIView
 	}
+	
 	
 	/**
 	Default constructor.
@@ -77,10 +73,9 @@ Extension of UIView to be formatted as sections.
 		self.addSubview(self.container)
 		
 		// Set tap recognizer
-		/*print("ROW_BLOG:DEBUG: set tap recognizer")
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (self.openPost (_:)))
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowBlog.openPost (_:)))
 		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
-		addGestureRecognizer(tapRecognizer)*/
+		self.addGestureRecognizer(tapRecognizer)
 	}
 	
 	
@@ -97,7 +92,7 @@ Extension of UIView to be formatted as sections.
 	:param: text The new title.
 	*/
 	func setTitle(text: String){
-		self.title.text = text.decode().stripHtml()
+		title.text = text.decode().stripHtml()
 	}
 	
 	
@@ -106,8 +101,9 @@ Extension of UIView to be formatted as sections.
 	:param: text The new text.
 	*/
 	func setText(text: String){
-		self.descrip.text = text.decode()
+		descrip.text = text.decode().stripHtml()
 	}
+	
 	
 	
 	/**
@@ -128,10 +124,11 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Opens a post.
+	Opens an activity.
 	*/
 	func openPost(_ sender:UITapGestureRecognizer? = nil){
-		// TODO implement openPost.
-		NSLog(":ROW_BLOG:DEBUG: openpost")
+		NSLog(":ROWBLOG:DEBUG: Getting delegate and showing post \(self.id).")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPost(id: self.id)
 	}
 }

@@ -31,7 +31,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gOz-rr-CeQ">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="780"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="930"/>
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ljm-NP-c4e" customClass="Section" customModule="app">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -46,10 +46,10 @@
                                     <rect key="frame" x="0.0" y="180" width="320" height="50"/>
                                 </view>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v6A-Ya-esA" customClass="Section" customModule="app" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="240" width="320" height="50"/>
+                                    <rect key="frame" x="0.0" y="240" width="320" height="200"/>
                                 </view>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fZk-r1-Tca" customClass="Section" customModule="app">
-                                    <rect key="frame" x="0.0" y="300" width="320" height="350"/>
+                                    <rect key="frame" x="0.0" y="450" width="320" height="350"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                             <real key="value" value="0.0"/>
@@ -57,7 +57,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dgk-s8-xje" customClass="Section" customModule="app">
-                                    <rect key="frame" x="0.0" y="660" width="320" height="120"/>
+                                    <rect key="frame" x="0.0" y="810" width="320" height="120"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="0.42787000868055558" alpha="1" colorSpace="calibratedRGB"/>
@@ -73,6 +73,7 @@
                                 <constraint firstItem="FQo-nm-4Mo" firstAttribute="centerX" secondItem="gOz-rr-CeQ" secondAttribute="centerX" id="aWZ-5w-1ke"/>
                                 <constraint firstItem="FQo-nm-4Mo" firstAttribute="width" secondItem="gOz-rr-CeQ" secondAttribute="width" id="azo-MK-F5R"/>
                                 <constraint firstItem="uHa-Mu-U68" firstAttribute="centerX" secondItem="gOz-rr-CeQ" secondAttribute="centerX" id="i5O-1b-eCi"/>
+                                <constraint firstAttribute="bottom" secondItem="dgk-s8-xje" secondAttribute="bottom" id="lUo-Rq-bAi"/>
                                 <constraint firstItem="uHa-Mu-U68" firstAttribute="width" secondItem="gOz-rr-CeQ" secondAttribute="width" id="ljo-DJ-9M1"/>
                                 <constraint firstItem="Ljm-NP-c4e" firstAttribute="width" secondItem="gOz-rr-CeQ" secondAttribute="width" id="s8R-dV-4ju"/>
                                 <constraint firstItem="9nu-j1-wGI" firstAttribute="width" secondItem="gOz-rr-CeQ" secondAttribute="width" id="v1C-hQ-R98"/>
@@ -80,6 +81,8 @@
                         </stackView>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="gOz-rr-CeQ" secondAttribute="bottom" id="1aX-69-rIr"/>
+                        <constraint firstAttribute="trailing" secondItem="gOz-rr-CeQ" secondAttribute="trailing" id="53K-6k-eT3"/>
                         <constraint firstItem="gOz-rr-CeQ" firstAttribute="width" secondItem="Poy-ba-9jX" secondAttribute="width" id="Gw0-jw-ldE"/>
                         <constraint firstItem="gOz-rr-CeQ" firstAttribute="top" secondItem="Poy-ba-9jX" secondAttribute="top" id="Hmx-ri-LqQ"/>
                         <constraint firstItem="gOz-rr-CeQ" firstAttribute="leading" secondItem="Poy-ba-9jX" secondAttribute="leading" id="k5u-hr-4th"/>
@@ -89,7 +92,10 @@
             <color key="backgroundColor" red="0.70980392160000005" green="0.82745098039999998" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Poy-ba-9jX" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="9SN-Tf-raC"/>
-                <constraint firstItem="Poy-ba-9jX" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="TFG-sf-YY4"/>
+                <constraint firstItem="Poy-ba-9jX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Gar-uI-abW"/>
+                <constraint firstItem="Poy-ba-9jX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gDS-mJ-c25"/>
+                <constraint firstItem="Poy-ba-9jX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="k8Z-RL-IVb"/>
+                <constraint firstItem="Poy-ba-9jX" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="xvC-vv-ebb"/>
             </constraints>
             <point key="canvasLocation" x="26" y="52"/>
         </view>

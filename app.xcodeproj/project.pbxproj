@@ -19,6 +19,7 @@
 		9326C4F61EA5279D007DF2A4 /* RowLablancaDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9326C4F51EA5279D007DF2A4 /* RowLablancaDay.swift */; };
 		93294FF81E336FA000FDAF50 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93294FF71E336FA000FDAF50 /* Entry.swift */; };
 		93294FFA1E337D0D00FDAF50 /* RowHomePastActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93294FF91E337D0D00FDAF50 /* RowHomePastActivities.swift */; };
+		935746101EE20B99005DED61 /* FetchLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9357460F1EE20B99005DED61 /* FetchLocation.swift */; };
 		935892D01E493C2300E1CD5F /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935892CF1E493C2300E1CD5F /* UIImageView.swift */; };
 		935AE18A1EC6138D0055E71F /* SyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935AE1891EC6138D0055E71F /* SyncController.swift */; };
 		935AE18C1ECE162C0055E71F /* RowLablancaOffer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 935AE18B1ECE162B0055E71F /* RowLablancaOffer.xib */; };
@@ -83,8 +84,10 @@
 		93E0C5EE1EBE25BD00905811 /* RowLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E0C5ED1EBE25BC00905811 /* RowLabel.swift */; };
 		93E0C5F21EBE264F00905811 /* RowLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E0C5F11EBE264F00905811 /* RowLabel.xib */; };
 		93E0C5F41EBE306900905811 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E0C5F31EBE306900905811 /* ScheduleViewController.swift */; };
+		93E5058F1EEB0DCC00560B4A /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5058E1EEB0DCC00560B4A /* PhotoViewController.swift */; };
 		93EB2F0C1EBF5AEB00F64186 /* RowSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EB2F0B1EBF5AEB00F64186 /* RowSchedule.swift */; };
 		93EB2F0E1EBF5BF500F64186 /* RowSchedule.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EB2F0D1EBF5BF500F64186 /* RowSchedule.xib */; };
+		93EE9ECB1EE9B87100288F6E /* PastActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE9ECA1EE9B87100288F6E /* PastActivityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +103,7 @@
 		9326C4F51EA5279D007DF2A4 /* RowLablancaDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowLablancaDay.swift; sourceTree = "<group>"; };
 		93294FF71E336FA000FDAF50 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		93294FF91E337D0D00FDAF50 /* RowHomePastActivities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowHomePastActivities.swift; sourceTree = "<group>"; };
+		9357460F1EE20B99005DED61 /* FetchLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLocation.swift; sourceTree = "<group>"; };
 		935892CF1E493C2300E1CD5F /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		935AE1891EC6138D0055E71F /* SyncController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncController.swift; sourceTree = "<group>"; };
 		935AE18B1ECE162B0055E71F /* RowLablancaOffer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowLablancaOffer.xib; sourceTree = "<group>"; };
@@ -167,8 +171,10 @@
 		93E0C5ED1EBE25BC00905811 /* RowLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowLabel.swift; sourceTree = "<group>"; };
 		93E0C5F11EBE264F00905811 /* RowLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowLabel.xib; sourceTree = "<group>"; };
 		93E0C5F31EBE306900905811 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		93E5058E1EEB0DCC00560B4A /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		93EB2F0B1EBF5AEB00F64186 /* RowSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowSchedule.swift; sourceTree = "<group>"; };
 		93EB2F0D1EBF5BF500F64186 /* RowSchedule.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowSchedule.xib; sourceTree = "<group>"; };
+		93EE9ECA1EE9B87100288F6E /* PastActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastActivityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,8 +232,8 @@
 				93B84B991D9C31AB006C0F67 /* AppDelegate.swift */,
 				93B84B9D1D9C31AB006C0F67 /* Main.storyboard */,
 				93B84B9B1D9C31AB006C0F67 /* ViewController.swift */,
-				93B408021D9ED44C000FBC99 /* MenuCollectionViewCell.swift */,
 				93BEB6D11E7E878300C68DE5 /* PostViewController.swift */,
+				93B408021D9ED44C000FBC99 /* MenuCollectionViewCell.swift */,
 				93D9EA5F1DE271E700089002 /* Section.xib */,
 				93D9EA631DE273FD00089002 /* Section.swift */,
 				931AA5AD1E218D0D003A2290 /* Entry.xib */,
@@ -247,6 +253,7 @@
 				93075C711E59D06900396389 /* RowBlog.xib */,
 				93075C6F1E59D04A00396389 /* RowBlog.swift */,
 				93D9EA751DE3ACBB00089002 /* Sync.swift */,
+				9357460F1EE20B99005DED61 /* FetchLocation.swift */,
 				931AA5881E1AFF8C003A2290 /* String.swift */,
 				93D9EA671DE342AC00089002 /* UIView.swift */,
 				935892CF1E493C2300E1CD5F /* UIImageView.swift */,
@@ -281,6 +288,8 @@
 				93B9113C1ED7567B0061BA71 /* LocationView.xib */,
 				93B9113E1ED7582B0061BA71 /* LocationView.swift */,
 				93B9115E1ED765510061BA71 /* app-Bridging-Header.h */,
+				93EE9ECA1EE9B87100288F6E /* PastActivityViewController.swift */,
+				93E5058E1EEB0DCC00560B4A /* PhotoViewController.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -345,6 +354,11 @@
 						DevelopmentTeam = 9F9ER4X7TG;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -424,6 +438,7 @@
 				93D9EA761DE3ACBB00089002 /* Sync.swift in Sources */,
 				93E0C5EA1EBDFFB400905811 /* RowPastActivity.swift in Sources */,
 				93BAD2F41E585EE6009DF853 /* RowHomeFutureActivities.swift in Sources */,
+				93E5058F1EEB0DCC00560B4A /* PhotoViewController.swift in Sources */,
 				931AA5891E1AFF8C003A2290 /* String.swift in Sources */,
 				935AE18A1EC6138D0055E71F /* SyncController.swift in Sources */,
 				93B84B9C1D9C31AB006C0F67 /* ViewController.swift in Sources */,
@@ -432,6 +447,7 @@
 				93B84BA21D9C31AB006C0F67 /* app.xcdatamodeld in Sources */,
 				935D6E331E867C7E00CED3A1 /* RowGallery.swift in Sources */,
 				93EB2F0C1EBF5AEB00F64186 /* RowSchedule.swift in Sources */,
+				93EE9ECB1EE9B87100288F6E /* PastActivityViewController.swift in Sources */,
 				936966ED1E98445200A11055 /* AlbumViewController.swift in Sources */,
 				93D9EA681DE342AC00089002 /* UIView.swift in Sources */,
 				938D211F1EA2306300C47EC3 /* LablancaView.swift in Sources */,
@@ -440,6 +456,7 @@
 				93E0C5E41EB7E94300905811 /* ActivitiesView.swift in Sources */,
 				93B408031D9ED44C000FBC99 /* MenuCollectionViewCell.swift in Sources */,
 				93B9113F1ED7582B0061BA71 /* LocationView.swift in Sources */,
+				935746101EE20B99005DED61 /* FetchLocation.swift in Sources */,
 				93E0C5E61EBDEF2B00905811 /* RowFutureActivity.swift in Sources */,
 				935D6E2F1E86792000CED3A1 /* GalleryView.swift in Sources */,
 			);

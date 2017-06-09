@@ -26,10 +26,8 @@ import UIKit
  */
 class HomeView: UIView {
 	
-	//The main scroll view.
+	// Outlets
 	@IBOutlet weak var scrollView: UIScrollView!
-	
-	//The container of the view.
 	@IBOutlet weak var container: UIView!
 	
 	//Each of the sections of the view.
@@ -41,9 +39,21 @@ class HomeView: UIView {
 	@IBOutlet weak var pastActivitiesSection: Section!
 	@IBOutlet weak var socialSection: Section!
 	
+	var moc: NSManagedObjectContext? = nil
+	var delegate: AppDelegate? = nil
+	var lang: String? = nil
+	var locationTimer: Timer? = nil
+	
+	
+	/**
+	Default constructor for the storyboard.
+	:param: frame View frame.
+	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
+		
 	}
+	
 	
 	/**
 	 Run when the view is started.
@@ -57,44 +67,48 @@ class HomeView: UIView {
 		self.addSubview(container)
 		container.frame = self.bounds
 		
-
-		
 		//Set titles for each section
-		locationSection.setTitle(text: "Encuentranos")
+		locationSection.setTitle(text: "Encuéntranos")
 		lablancaSection.setTitle(text: "La Blanca")
-		futureActivitiesSection.setTitle(text: "Proximas actividades")
-		blogSection.setTitle(text: "Ultimos posts")
-		gallerySection.setTitle(text: "Ultimas fotos")
-		pastActivitiesSection.setTitle(text: "Ultimas actividades")
-		socialSection.setTitle(text: "Siguenos")
+		futureActivitiesSection.setTitle(text: "Próximas actividades")
+		blogSection.setTitle(text: "Últimos posts")
+		gallerySection.setTitle(text: "Últimas fotos")
+		pastActivitiesSection.setTitle(text: "Últimas actividades")
+		socialSection.setTitle(text: "Síguenos")
 		
 		//Get info to populate sections
-		let moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		self.moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		
-		let appDelegate = UIApplication.shared.delegate as! AppDelegate
-		moc.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-		let lang : String = getLanguage()
-		
-		//Populate sections
-		setUpPastActivities(context: moc, delegate: appDelegate, lang: lang, parent: pastActivitiesSection.getContentStack())
-		setUpBlog(context: moc, delegate: appDelegate, lang: lang, parent: blogSection.getContentStack())
-		setUpFutureActivities(context: moc, delegate: appDelegate, lang: lang, parent: futureActivitiesSection.getContentStack())
-		setUpSocial(parent: socialSection.getContentStack())
-		setUpGallery(context: moc, delegate: appDelegate, parent: gallerySection.getContentStack())
+		self.delegate = UIApplication.shared.delegate as! AppDelegate
+		self.moc?.persistentStoreCoordinator = self.delegate?.persistentStoreCoordinator
+		self.lang = getLanguage()
 		
 		
-		pastActivitiesSection.expandSection()
+		// Populate section.
+		populate()
 		
 		
-		//Always at the end: update scrollview
-		var h: Int = 0
-		for view in scrollView.subviews {
-			//contentRect = contentRect.union(view.frame);
-			h = h + Int(view.frame.height) + 30 //Why 30?
-		}
-		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 1300// CGFloat(h);
+		// Special case: Location
+		// Set up once and start and periodically witha  timer.
+		setUpLocation()
+		Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(setUpLocation), userInfo: nil, repeats: true)
 	}
+	
+	
+	/**
+	Sets all the sections up
+	*/
+	func populate(){
+	
+		//Populate sections
+		setUpPastActivities(context: self.moc!, delegate: self.delegate!, lang: self.lang!, parent: self.pastActivitiesSection.getContentStack())
+		setUpBlog(context: self.moc!, delegate: self.delegate!, lang: self.lang!, parent: self.blogSection.getContentStack())
+		setUpFutureActivities(context: self.moc!, delegate: self.delegate!, lang: self.lang!, parent: self.futureActivitiesSection.getContentStack())
+		setUpSocial(parent: self.socialSection.getContentStack())
+		setUpGallery(context: self.moc!, delegate: self.delegate!, parent: self.gallerySection.getContentStack())
+		setUpLablanca(context: self.moc!, delegate: self.delegate!, self.lang!)
+	}
+	
 	
 	/**
 	Gets the device language. The only recognized languages are Spanish, English and Basque.
@@ -113,7 +127,53 @@ class HomeView: UIView {
 	
 	
 	/**
+	Sets up the location section.
+	If no location is reported, it hiddes the section.
+	*/
+	func setUpLocation(){
+		let defaults = UserDefaults.standard
+		if (defaults.value(forKey: "GMLocLat") != nil && defaults.value(forKey: "GMLocLon") != nil){
+			let time = defaults.value(forKey: "GMLocTime") as! Date
+			let cTime = Date()
+			let minutes = Calendar.current.dateComponents([.minute], from: time, to: cTime).minute
+			if (minutes! < 30){
+				self.locationSection.isHidden = false
+			}
+			else{
+				self.locationSection.isHidden = true
+			}
+		}
+		else{
+			self.locationSection.isHidden = true
+		}
+	}
+	
+	
+	/**
+	Sets up the La Blanca secction.
+	Hiddes it if no current festivals.
+	:param: context App context.
+	:param: delegate App delegate.
+	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
+	*/
+	func setUpLablanca(context : NSManagedObjectContext, delegate: AppDelegate, lang: String){
+		let defaults = UserDefaults.standard
+		if (defaults.value(forKey: "festivals") != nil){
+			let festivals = defaults.value(forKey: "festivals") as! Int
+			if festivals == 1{
+				// TODO Actualy show something
+			}
+			else{
+				self.lablancaSection.isHidden = true
+			}
+		}
+	}
+	
+	
+	/**
 	Sets up the future activities section.
+	If none, it hiddes the section.
+	:param: context App context.
 	:param: delegate App delegate.
 	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
 	:param: parent Stack view to load the rows in.
@@ -136,40 +196,46 @@ class HomeView: UIView {
 			var text: String
 			var image: String
 			
-			for r in searchResults as [NSManagedObject] {
-				count = count + 1
-				
-				//Create a new row
-				row = RowHomeFutureActivities.init(s: "rowHomeFutureActivities\(count)", i: count)
-				id = r.value(forKey: "id")! as! Int
-				title = r.value(forKey: "title_\(lang)")! as! String
-				text = r.value(forKey: "text_\(lang)")! as! String
-				row.setTitle(text: title)
-				row.setText(text: text.decode())
-				
-				// Get main image
-				image = ""
-				let imgFetchRequest: NSFetchRequest<Activity_image> = Activity_image.fetchRequest()
-				let imgSortDescriptor = NSSortDescriptor(key: "idx", ascending: true)
-				let imgSortDescriptors = [imgSortDescriptor]
-				imgFetchRequest.sortDescriptors = imgSortDescriptors
-				imgFetchRequest.predicate = NSPredicate(format: "activity == %i", id)
-				imgFetchRequest.fetchLimit = 1
-				do{
-					let imgSearchResults = try context.fetch(imgFetchRequest)
-					for imgR in imgSearchResults as [NSManagedObject]{
-						image = imgR.value(forKey: "image")! as! String
-						row.setImage(filename: image)
-					}
-				}
-				catch {
-					NSLog(":HOME:ERROR: Error getting image for activity \(id): \(error)")
-				}
-				
-				parent.addArrangedSubview(row)
-				
+			if searchResults.count == 0{
+				self.futureActivitiesSection.isHidden = true
 			}
-		} catch {
+			else{
+				for r in searchResults as [NSManagedObject] {
+					count = count + 1
+				
+					//Create a new row
+					row = RowHomeFutureActivities.init(s: "rowHomeFutureActivities\(count)", i: count)
+					id = r.value(forKey: "id")! as! Int
+					title = r.value(forKey: "title_\(lang)")! as! String
+					text = r.value(forKey: "text_\(lang)")! as! String
+					row.setTitle(text: title)
+					row.setText(text: text)
+					row.id = id
+				
+					// Get main image
+					image = ""
+					let imgFetchRequest: NSFetchRequest<Activity_image> = Activity_image.fetchRequest()
+					let imgSortDescriptor = NSSortDescriptor(key: "idx", ascending: true)
+					let imgSortDescriptors = [imgSortDescriptor]
+					imgFetchRequest.sortDescriptors = imgSortDescriptors
+					imgFetchRequest.predicate = NSPredicate(format: "activity == %i", id)
+					imgFetchRequest.fetchLimit = 1
+					do{
+						let imgSearchResults = try context.fetch(imgFetchRequest)
+						for imgR in imgSearchResults as [NSManagedObject]{
+							image = imgR.value(forKey: "image")! as! String
+							row.setImage(filename: image)
+						}
+					}
+					catch {
+						NSLog(":HOME:ERROR: Error getting image for activity \(id): \(error)")
+					}
+				
+					parent.addArrangedSubview(row)
+				}
+			}
+		}
+		catch {
 			NSLog(":HOME:ERROR: Error loading future activities: \(error)")
 		}
 	}
@@ -177,6 +243,7 @@ class HomeView: UIView {
 	
 	/**
 	Sets up the blog section.
+	:param: context App context.
 	:param: delegate App delegate.
 	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
 	:param: parent Stack view to load the rows in.
@@ -245,6 +312,7 @@ class HomeView: UIView {
 	
 	/**
 	Sets up the past activities section.
+	:param: context App context.
 	:param: delegate App delegate.
 	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
 	:param: parent Stack view to load the rows in.
@@ -279,6 +347,7 @@ class HomeView: UIView {
 				
 				row.setTitle(text: title)
 				row.setText(text: text)
+				row.id = id
 				
 				// Get main image
 				image = ""
@@ -306,8 +375,10 @@ class HomeView: UIView {
 		}
 	}
 	
+	
 	/**
 	Sets up the future activities section.
+	:param: context App context.
 	:param: delegate App delegate.
 	:param: parent Stack view to load the rows in.
 	*/
@@ -335,6 +406,7 @@ class HomeView: UIView {
 				
 				image = r.value(forKey: "file")! as! String
 				row.setImage(idx: i, filename: image)
+				NSLog(":HOME:DEBUG: Photo \(i)")
 				
 				//TODO Set click listener
 				i = i + 1
