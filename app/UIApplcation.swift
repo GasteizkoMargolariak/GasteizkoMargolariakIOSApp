@@ -25,6 +25,11 @@ import UIKit
 Extension of UIApplication to get the root view controller.
 */
 extension UIApplication {
+	
+	/**
+	Gets the top level controller.
+	:return: Top level view controller.
+	*/
 	class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
 		if let navigationController = controller as? UINavigationController {
 			return topViewController(controller: navigationController.visibleViewController)

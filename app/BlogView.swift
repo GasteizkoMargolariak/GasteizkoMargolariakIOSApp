@@ -43,13 +43,13 @@ class BlogView: UIView {
 		super.init(frame: frame)
 	}
 	
+	
 	/**
 	Run when the view is started.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		
 		super.init(coder: aDecoder)
-		NSLog(":BLOG:DEBUG: init (coder).")
 		
 		// Load the contents of the HomeView.xib file.
 		Bundle.main.loadNibNamed("BlogView", owner: self, options: nil)
@@ -60,18 +60,19 @@ class BlogView: UIView {
 		
 		// Get viewController from StoryBoard
 		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
-		self.controller = storyboard?.instantiateViewController(withIdentifier: "GMViewController") as? ViewController
+		self.controller = storyboard?.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		self.delegate = UIApplication.shared.delegate as? AppDelegate
+		self.delegate = UIApplication.shared.delegate as! AppDelegate
 		self.lang = getLanguage()
 		self.context?.persistentStoreCoordinator = delegate?.persistentStoreCoordinator
 		
 		populate()
-		
-		NSLog(":BLOG:DEBUG: Finished loading BlogView")
-		
 	}
 	
+	
+	/**
+	Actually populates the section.
+	*/
 	func populate(){
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "dtime", ascending: false)
@@ -85,19 +86,16 @@ class BlogView: UIView {
 			}
 			
 			// Get the results
-			let searchResults = try self.context?.fetch(fetchRequest)			
-			NSLog(":BLOG:DEBUG: Total posts: \(String(describing: searchResults?.count))")
+			let searchResults = try self.context?.fetch(fetchRequest)
 			
+			var count: Int = 0
 			var row : RowBlog
-			var count = 0
 			var id: Int
 			var title: String
 			var text: String
 			var image: String
 			
-			for r in searchResults! {
-				count = count + 1
-				NSLog(":BLOG:DEBUG: Post perm: \(String(describing: r.value(forKey: "permalink")))")
+			for r in searchResults as! [NSManagedObject] {
 								
 				//Create a new row
 				row = RowBlog.init(s: "rowBlog\(count)", i: count)
@@ -106,6 +104,7 @@ class BlogView: UIView {
 				text = r.value(forKey: "text_\(lang!)")! as! String
 				row.setTitle(text: title)
 				row.setText(text: text)
+				row.id = id
 				
 				// Get main image
 				image = ""
@@ -117,9 +116,8 @@ class BlogView: UIView {
 				imgFetchRequest.fetchLimit = 1
 				do{
 					let imgSearchResults = try context?.fetch(imgFetchRequest)
-					for imgR in imgSearchResults!{
+					for imgR in imgSearchResults as! [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
-						NSLog(":BLOG:DEBUG: Image: \(image)")
 						row.setImage(filename: image)
 					}
 				} catch {
@@ -128,17 +126,7 @@ class BlogView: UIView {
 				
 				
 				self.postList?.addArrangedSubview(row)
-				//row.setNeedsLayout()
-				//row.layoutIfNeeded()
-				
-				// TODO: Do this on the row didLoad method
-				// Set tap recognizer
-				//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPost(_:)))
-				//row.isUserInteractionEnabled = true
-				//row.addGestureRecognizer(tapRecognizer)
-				
-				
-				
+				count = count + 1
 			}
 
 			// Trigger a layout update
@@ -148,23 +136,14 @@ class BlogView: UIView {
 		} catch {
 			NSLog(":BLOG:ERROR: Error with request: \(error)")
 		}
-		NSLog(":BLOG:DEBUG: Finished populating BlogView")
 	}
+
 	
-	/*func openPost(){//(_ sender:UITapGestureRecognizer? = nil){
-		print("BLOG:DEBUG: getting delegate and showing post.")
-		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showPost(id: 4)
-		print("BLOG:DEBUG: Post should be shown.")
-	}
-	
-	func openPost(_ sender:UITapGestureRecognizer? = nil){
-		print("BLOG:DEBUG: getting delegate and showing post.")
-		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showPost(id: 4)
-		print("BLOG:DEBUG: Post should be shown.")
-	}*/
-	
+	/**
+	Gets the device language. The only recognized languages are Spanish, English and Basque.
+	If the device has another language, Spanish will be selected by default.
+	:return: Two-letter language code.
+	*/
 	func getLanguage() -> String{
 		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
 		if(pre == "es" || pre == "en" || pre == "eu"){

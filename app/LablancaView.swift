@@ -38,12 +38,9 @@ class LablancaView: UIView {
 	@IBOutlet weak var fDayList: UIStackView!	// Stack view to hold the single days price list.
 	
 	
-	
 	// App delegate
 	var delegate: AppDelegate? = nil
 	
-	// Section row list
-	//var rows: Array<RowGallery> = []
 	
 	/**
 	Run when the view is started.
@@ -51,6 +48,7 @@ class LablancaView: UIView {
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}
+	
 	
 	/**
 	Run when the view is started.
@@ -63,15 +61,15 @@ class LablancaView: UIView {
 
 		Bundle.main.loadNibNamed("LablancaView", owner: self, options: nil)
 		self.addSubview(container)
-		container.frame = self.bounds
+		self.container.frame = self.bounds
 		
 		// Get viewController from StoryBoard
 		let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-		let controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
+		_ = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		
 		// Read settings and show the required sections
 		let defaults = UserDefaults.standard
-		let festivals: Int = 1 //TODO defaults.integer(forKey: "festivals")
+		let festivals: Int = defaults.integer(forKey: "festivals")
 		
 		if festivals == 1{
 			showFestivals()
@@ -80,13 +78,16 @@ class LablancaView: UIView {
 			showNoFestivals()
 		}
 	}
-	
+
+	/**
+	Displays the section to be shown while (and near) the La Blanca festivals.
+	*/	
 	func showFestivals(){
 		NSLog(":LABLANCA:LOG: Showing festivals section.")
 		self.nfWindow.isHidden = true
 		
 		// TODO: Get current year
-		let year = 2016
+		let year = 2017
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -106,20 +107,24 @@ class LablancaView: UIView {
 				let r = searchResults[0]
 			
 				// Set description
-				self.fText.text = r.value(forKey: "text_\(lang)") as! String?
+				self.fText.text = (r.value(forKey: "text_\(lang)") as! String?)?.decode().stripHtml()
 			}
 
-		} catch {
+		}
+		catch {
 			NSLog(":LABLANCA:ERROR: Error getting festivals info: \(error)")
 		}
 		
 		// Set up schedule buttons
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openSchedule(_:)))
+		let tapRecognizerSchedule = UITapGestureRecognizer(target: self, action: #selector(openSchedule(_:)))
 		fBtSchedule.isUserInteractionEnabled = true
-		fBtSchedule.addGestureRecognizer(tapRecognizer)
+		fBtSchedule.addGestureRecognizer(tapRecognizerSchedule)
+		let tapRecognizerGMSchedule = UITapGestureRecognizer(target: self, action: #selector(openGMSchedule(_:)))
+		fBtGMSchedule.isUserInteractionEnabled = true
+		fBtGMSchedule.addGestureRecognizer(tapRecognizerGMSchedule)
+
 		
-		
-		// Get info about the day prices.
+		// Get info about the days and offers.
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		dateFormatter.locale = Locale.init(identifier: "en_GB")
@@ -131,10 +136,54 @@ class LablancaView: UIView {
 		// Last date of year
 		dateString = "\(year)-12-31"
 		let eDate = dateFormatter.date(from: dateString)
-		
+
+		// Get offers
+		let offerFetchRequest: NSFetchRequest<Festival_offer> = Festival_offer.fetchRequest()
+		offerFetchRequest.predicate = NSPredicate(format: "year = %i", year)
+
+		do {
+
+			// Get info from festivals
+			let offerSearchResults = try context.fetch(offerFetchRequest)
+			
+			NSLog(":LABLANCA:DEBUG: \(offerSearchResults.count) offes found.")
+
+			var row: RowLablancaOffer
+			var count: Int = 0
+
+			for offer in offerSearchResults as [NSManagedObject]{
+
+				let name: String = offer.value(forKey: "name_\(lang)")! as! String
+				let price: Int = offer.value(forKey: "price")! as! Int
+				let description: String = offer.value(forKey: "description_\(lang)")! as! String
+
+				// Create the row and set data.
+				row = RowLablancaOffer.init(s: "rowLablancaOffer\(count)", i: count)
+				row.setName(name: name)
+				row.setPrice(price: price)
+				row.setDescription(description: description)
+
+				// Add the row
+				fOfferList.addArrangedSubview(row)
+				row.setNeedsLayout()
+				row.layoutIfNeeded()
+
+				// Hide the separator of the last row
+				if count == offerSearchResults.count - 1 {
+					row.hidSeparator()
+				}
+
+				count = count + 1
+			}
+
+		}
+		catch {
+			NSLog(":LABLANCA:ERROR: Error getting festival offers: \(error)")
+		}
+
 		// Get days
 		let dayFetchRequest: NSFetchRequest<Festival_day> = Festival_day.fetchRequest()
-		dayFetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", argumentArray: [sDate, eDate])
+		dayFetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", argumentArray: [sDate!, eDate!])
 		
 		do {
 			
@@ -148,7 +197,7 @@ class LablancaView: UIView {
 				
 				let date: NSDate = day.value(forKey: "date")! as! NSDate
 				let dateString: String = dateFormatter.string(from: date as Date)
-				let nDay: String = dateString.subStr(start: 8, end: 9)
+				let nDay: Int = Int(dateString.subStr(start: 8, end: 9))!
 				let month: String = dateString.subStr(start: 5, end: 6)
 				var nMonth: String = "Agosto" // TODO: Reference
 				if month == "07"{
@@ -159,10 +208,7 @@ class LablancaView: UIView {
 				
 				// Create the row and set data.
 				row = RowLablancaDay.init(s: "rowLablancaDay\(count)", i: count)
-				row.name.text = name
-				row.price.text = "\(price) €"
-				row.number.text = "\(Int(nDay)!)"
-				row.month.text = nMonth
+				row.setDay(number: nDay, month: nMonth, name: name, price: price)
 				
 				// Add the row
 				fDayList.addArrangedSubview(row)
@@ -177,27 +223,52 @@ class LablancaView: UIView {
 				count = count + 1
 			}
 			
-		} catch {
+		}
+		catch {
 			NSLog(":LABLANCA:ERROR: Error getting festival days info: \(error)")
 		}
-		
-		
-		
 	}
 	
+
+	/**
+	Hides the view to be shown during (and near) the festivals.
+	*/
 	func showNoFestivals(){
 		NSLog(":LABLANCA:LOG: Showing no festivals section.")
 		self.fWindow.isHidden = true
 		// Nothing else to be done.
 	}
 	
+
+	/**
+	Commands the view controller to show the city schedule view.
+	:param: sender The view that triggered the event.
+	*/
 	func openSchedule(_ sender:UITapGestureRecognizer? = nil){
 		NSLog(":LABLANCA:DEBUG: Getting delegate and showing schedule.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showSchedule(margolari: false)
 		NSLog(":LABLANCA:DEBUG: Schedule should be shown.")
 	}
+
+
+	/**
+	Commands the view controller to show the Gasteizko Margolariak schedule view.
+	:param: sender The view that triggered the event.
+	*/
+	func openGMSchedule(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":LABLANCA:DEBUG: Getting delegate and showing GM schedule.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showSchedule(margolari: true)
+		NSLog(":LABLANCA:DEBUG: GM schedule should be shown.")
+	}
+
 	
+	/**
+	Gets the device language. The only recognized languages are Spanish, English and Basque.
+	If the device has another language, Spanish will be selected by default.
+	:return: Two-letter language code.
+	*/
 	func getLanguage() -> String{
 		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
 		if(pre == "es" || pre == "en" || pre == "eu"){

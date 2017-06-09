@@ -25,10 +25,7 @@ import UIKit
 Extension of UIView to be formatted as sections.
 */
 @IBDesignable class RowHomeSocial: UIView {
-	
-	//This view
-	var v: UIView!
-	
+
 	//The container.
 	@IBOutlet weak var container: UIView!
 	
@@ -45,6 +42,7 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var btnYoutube: UIImageView!
 	@IBOutlet weak var btnInstagram: UIImageView!
 	
+	
 	/**
 	Default constructor
 	*/
@@ -52,14 +50,13 @@ Extension of UIView to be formatted as sections.
 		super.init(coder: aDecoder)
 	}
 	
+	/**
+	Loads the view in the xib file with the same name.
+	*/
 	private func loadViewFromNib() {
-		print("LOADING NIB...")
 		let bundle = Bundle(for: type(of: self))
-		print("GOT BUNDLE...")
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		print("NIB CREATED")
-		nib.instantiate(withOwner: self, options: nil).first as! UIView
-		print("NIB INSTANTIATED")
+		nib.instantiate(withOwner: self, options: nil).first
 	}
 	
 	/**
@@ -70,15 +67,14 @@ Extension of UIView to be formatted as sections.
 	init(s: String, i: Int) {
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
-		v = self
-		v.frame = bounds
-		v.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		v.translatesAutoresizingMaskIntoConstraints = true
-		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		container.translatesAutoresizingMaskIntoConstraints = true
+		self.frame = self.bounds
+		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.translatesAutoresizingMaskIntoConstraints = true
+		self.container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.container.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.frame = v.bounds
-		v.addSubview(container)
+		self.container.frame = self.bounds
+		self.addSubview(container)
 		
 		// Set buttons up
 		let phoneTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapPhone))
@@ -109,42 +105,75 @@ Extension of UIView to be formatted as sections.
 	
 	/**
 	Default constructor for the interface builder
+	:param: frame View frame.
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}
 	
+	
+	/**
+	Called when the phone button is tapped.
+	*/
 	func didTapPhone() {
-		UIApplication.shared.openURL(NSURL(string: "tel://+34637140371") as! URL)
+		UIApplication.shared.openURL(NSURL(string: "tel://+34637140371")! as URL)
 	}
 	
+	
+	/**
+	Called when the mail button is tapped.
+	*/
 	func didTapMail() {
-		UIApplication.shared.openURL(NSURL(string: "mailto:gasteizkomargolariak@gmail.com") as! URL)
+		UIApplication.shared.openURL(NSURL(string: "mailto:gasteizkomargolariak@gmail.com")! as URL)
 	}
 	
+	
+	/**
+	Called when the Whatsapp button is tapped.
+	*/
 	func didTapWhatsapp() {
 		//As of today, imposible
 		//UIApplication.shared.openURL(NSURL(string: "+34637140371") as! URL)
 	}
 	
+	
+	/**
+	Called when the Facebook button is tapped.
+	*/
 	func didTapFacebook() {
-		UIApplication.shared.openURL(NSURL(string: "http://facebook.com/gmargolariak") as! URL)
+		UIApplication.shared.openURL(NSURL(string: "http://facebook.com/gmargolariak")! as URL)
 	}
 	
+	
+	/**
+	Called when the Twitter button is tapped.
+	*/
 	func didTapTwitter() {
-		UIApplication.shared.openURL(NSURL(string: "http://twitter.com/gmargolariak") as! URL)
+		UIApplication.shared.openURL(NSURL(string: "http://twitter.com/gmargolariak")! as URL)
 	}
 	
+	
+	/**
+	Called when the G+ button is tapped.
+	*/
 	func didTapGoogle() {
-		UIApplication.shared.openURL(NSURL(string: "https://plus.google.com/106661466029005469492") as! URL)
+		UIApplication.shared.openURL(NSURL(string: "https://plus.google.com/106661466029005469492")! as URL)
 	}
 	
+	
+	/**
+	Called when the Youtube button is tapped.
+	*/
 	func didTapYoutube() {
-		UIApplication.shared.openURL(NSURL(string: "https://www.youtube.com/user/GasteizkoMargolariak") as! URL)
+		UIApplication.shared.openURL(NSURL(string: "https://www.youtube.com/user/GasteizkoMargolariak")! as URL)
 	}
 	
+	
+	/**
+	Called when the Instagram button is tapped.
+	*/
 	func didTapInstagram() {
-		UIApplication.shared.openURL(NSURL(string: "https://instagram.com/gmargolariak/") as! URL)
+		UIApplication.shared.openURL(NSURL(string: "https://instagram.com/gmargolariak/")! as URL)
 	}
 	
 	

@@ -20,11 +20,12 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 /**
   The view controller of the app.
  */
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, CLLocationManagerDelegate {
 	
 	var delegate: AppDelegate?
 	
@@ -39,21 +40,39 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet var containerViewBlog: BlogView!
 	@IBOutlet var containerViewActivities: ActivitiesView!
 	@IBOutlet var containerViewLablanca: LablancaView!
-	@IBOutlet var containerViewLocation: UIView!
+	@IBOutlet var containerViewLocation: LocationView!
 	@IBOutlet var containerViewHome: HomeView!
 	
+	// Passed id to perform segues.
 	var passId: Int = -1
+	var passAlbum: Int = -1
+	
+	// Location-related variables.
+	var locationManager = CLLocationManager()
+	var didFindMyLocation = false
+	
+	
+	var locationTimer: Timer? = nil
+	
 	
 	/**
-	 Controller initializer.
+	Controller initializer.
+	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
+		NSLog(":CONTROLLER:DEBUG: Init!")
 		super.init(coder: aDecoder)
+		
 	}
 	
+	func getLocation() -> CLLocationCoordinate2D {
+		return (locationManager.location?.coordinate)!
+	}
+	
+	
 	/**
-	 Retrieves the application context.
-	 :return: The application context.
+	Retrieves the application context.
+	:return: The application context.
 	*/
 	func getContext () -> NSManagedObjectContext {
 		//let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -61,9 +80,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 	}
 	
+	
 	/**
-	 Shows a post by loading the controller.
-	 :param: id The post id.
+	Shows a post.
+	:param: id The post id.
 	*/
 	func showPost(id: Int){
 		NSLog(":CONTROLLER:DEBUG: Showing Post \(id)")
@@ -71,9 +91,33 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		performSegue(withIdentifier: "SeguePost", sender: nil)
 	}
 	
+	
 	/**
-	 Shows a post by loading the controller.
-	 :param: id The album id.
+	Shows a past activity.
+	:param: id The activity id.
+	*/
+	func showPastActivity(id: Int){
+		NSLog(":CONTROLLER:DEBUG: Showing past activity \(id)")
+		self.passId = id
+		performSegue(withIdentifier: "SeguePastActivity", sender: nil)
+	}
+	
+	
+	/**
+	Shows a future activity.
+	:param: id The activity id.
+	*/
+	func showFutureActivity(id: Int){
+		NSLog(":CONTROLLER:DEBUG: Showing future activity \(id)")
+		self.passId = id
+		// TODO
+		//performSegue(withIdentifier: "SegueFutureActivity", sender: nil)
+	}
+	
+	
+	/**
+	Shows an album.
+	:param: id The album id.
 	*/
 	func showAlbum(id: Int){
 		NSLog(":CONTROLLER:DEBUG: Showing album \(id)")
@@ -81,6 +125,25 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		performSegue(withIdentifier: "SegueAlbum", sender: nil)
 	}
 	
+	
+	// TODO: This must go in it AlbumViewController
+	/**
+	Shows a photo.
+	:param: id The album id.
+	*/
+	func showPhoto(album: Int, photo: Int){
+		NSLog(":CONTROLLER:DEBUG: Showing photo \(photo) of album \(album)")
+		self.passAlbum = album
+		self.passId = photo
+		performSegue(withIdentifier: "SeguePhoto", sender: nil)
+		NSLog(":CONTROLLER:DEBUG: PHOTO should be shown")
+	}
+	
+	
+	/**
+	Shows a schedule.
+	:param: margolari True for the margolari schedule, false for the city one.
+	*/
 	func showSchedule(margolari: Bool){
 		NSLog(":CONTROLLER:DEBUG: Showing schedule. Margolari: \(margolari)")
 		if margolari == true{
@@ -89,14 +152,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		else{
 			self.passId = 0
 		}
-		// TODO: Uncomment when ready
 		performSegue(withIdentifier: "SegueSchedule", sender: nil)
 	}
 	
-	/**
-	 Handles the initial sync process.
-	 It can start it, showing the sync screen, or finish it, hidding the screen.
-	 :param: showScreen True to start the sync, false to end it.
+	
+	/** m
+	Handles the initial sync process.
+	It can start it, showing the sync screen, or finish it, hidding the screen.
+	:param: showScreen True to start the sync, false to end it.
 	*/
 	func initialSync(showScreen: Bool){
 		if showScreen == true{
@@ -107,24 +170,28 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		else{
 			NSLog(":CONTROLLER:DEBUG: Re-populating views and hidding initial sync screen.")
 			NSLog(":CONTROLLER:DEBUG: Re-populating disabled: Throws error.")
-			//populate()
+			//self.populate()
 			syncSegue?.destination.dismiss(animated: true, completion: nil)
 		}
 	}
 	
 	/**
-	 Run before performing a segue.
-	 Assigns id if neccessary.
-	 :param: segue The segue to perform.
-	 :sender: The calling view.
+	Run before performing a segue.
+	Assigns id if neccessary.
+	:param: segue The segue to perform.
+	:sender: The calling view.
 	*/
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		NSLog(":CONTROLLER:DEBUG: preparing for segue '\(segue.identifier)' with id \(self.passId)")
+		NSLog(":CONTROLLER:DEBUG: preparing for segue '\(String(describing: segue.identifier))' with id \(self.passId)")
 		if segue.identifier == "SeguePost"{
 			(segue.destination as! PostViewController).id = passId
 		}
 		if segue.identifier == "SegueAlbum"{
 			(segue.destination as! AlbumViewController).id = passId
+		}
+		if segue.identifier == "SeguePhoto"{
+			(segue.destination as! PhotoViewController).photoId = passId
+			(segue.destination as! PhotoViewController).albumId = passAlbum
 		}
 		if segue.identifier == "SegueSchedule"{
 			if passId == 1{
@@ -137,47 +204,82 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		if segue.identifier == "SegueSync"{
 			self.syncSegue = segue
 		}
+		if segue.identifier == "SeguePastActivity"{
+			(segue.destination as! PastActivityViewController).id = passId
+		}
+		if segue.identifier == "SegueFutureActivity"{
+			// TODO
+			//(segue.destination as! FutureActivityViewController).id = passId
+		}
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		NSLog(":CONTROLLER:DEBUG: Forcing a call to populate")
+		self.populate()
+		super.viewWillAppear(animated)
 	}
 	
 	/**
-	 Run when the app loads.
+	Run when the app loads.
 	*/
 	override func viewDidLoad() {
-				
+		
+		// Ask for location permissions.
+		locationManager.delegate = self
+		locationManager.requestWhenInUseAuthorization()
+		
 		//Hide all sections, except for the first one
 		self.containerViewLocation.alpha = 0
 		self.containerViewLablanca.alpha = 0
 		self.containerViewActivities.alpha = 0
 		self.containerViewBlog.alpha = 0
 		self.containerViewGallery.alpha = 0
+		
+		// Start the location schedule
+		fetchLocation()
+		self.locationTimer = Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(fetchLocation), userInfo: nil, repeats: true)
 				
-		NSLog(":CONTROLLER:LOG: viewDidLoad()")
+		//NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
 		NSLog(":CONTROLLER:DEBUG: Skyp sync")
 		//Sync()
+
+		
+		self.delegate = UIApplication.shared.delegate as? AppDelegate
+		self.delegate?.controller = self
 		
 		super.viewDidLoad()
-
-		//self.containerViewBlog.setController(controller: self as ViewController)
-		
-		delegate = UIApplication.shared.delegate as! AppDelegate
-		delegate?.controller = self
 		
 	}
+	
+	func fetchLocation(){
+		FetchLocation()
+	}
 
+	/**
+	Actually populates all sections.
+	As of now, not working.
+	*/
 	func populate(){
-		//self.containerViewHome.populate()
+		if (self.containerViewHome != nil){
+			//(self.containerViewHome as HomeView).populate()
+			//let ng = self.containerViewHome.dbgTxt
+			//NSLog("AAAAA \(ng)")
+		}
+		else{
+			NSLog("CONTROLLER:ERROR: containerViewHome couldn't be populated: It is nil.")
+		}
 		//self.containerLocation.populate()
 		//self.containerLablanca.populate()
-		self.containerViewActivities.populate()
-		self.containerViewBlog.populate()
+		//self.containerViewActivities.populate()
+		//self.containerViewBlog.populate()
 		//self.containerGallery.populate()
 	}
 	
 	/**
-	 Executed when the view is actually shown.
-	 Performs the initial sync in the first run.
-	 It also generates a user id if none exists.
-	 :param: animated Wether the controller appearance must be animated or not.
+	Executed when the view is actually shown.
+	Performs the initial sync in the first run.
+	It also generates a user id if none exists.
+	:param: animated Wether the controller appearance must be animated or not.
 	*/
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -191,9 +293,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	/**
-	 Generates a random string to be used as a user identifier.
-	 :param: length The length of the generated string.
-	 :return: A random alphanumeric string with the indicated length.
+	Generates a random string to be used as a user identifier.
+	:param: length The length of the generated string.
+	:return: A random alphanumeric string with the indicated length.
 	*/
 	func randomString(length: Int) -> String {
 		
@@ -212,7 +314,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 
 	/**
-	 Dispose of any resources that can be recreated.
+	Dispose of any resources that can be recreated.
 	*/
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
@@ -226,7 +328,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	// MARK: - UICollectionViewDataSource protocol
 	
-	//Tell the collection view how many cells to make
+	/**
+	Sets a collection of menu items.
+	:param: numberOfItemsInSection The number of entries of the menu.
+	:return: The number of entries of the menu.
+	*/
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return self.items.count
 	}
@@ -262,6 +368,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		showComponent(selected: indexPath.item)
 	}
 	
+	/**
+	Caled when an item of the menu bar is selected.
+	:param: selected Index of the selected item.
+	*/
 	@IBAction func showComponent(selected: Int) {
 		//Activate label
 		var i = 0
