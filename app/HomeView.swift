@@ -29,9 +29,10 @@ class HomeView: UIView {
 	// Outlets
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var container: UIView!
+	@IBOutlet weak var locationMessage: UILabel!
 	
 	//Each of the sections of the view.
-	@IBOutlet weak var locationSection: Section!
+	@IBOutlet weak var locationSection: UIView!
 	@IBOutlet weak var lablancaSection: Section!
 	@IBOutlet weak var futureActivitiesSection: Section!
 	@IBOutlet weak var blogSection: Section!
@@ -43,6 +44,8 @@ class HomeView: UIView {
 	var delegate: AppDelegate? = nil
 	var lang: String? = nil
 	var locationTimer: Timer? = nil
+	var controller: ViewController
+	var storyboard: UIStoryboard
 	
 	
 	/**
@@ -50,6 +53,8 @@ class HomeView: UIView {
 	:param: frame View frame.
 	*/
 	override init(frame: CGRect){
+		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+		self.controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		super.init(frame: frame)
 		
 	}
@@ -60,6 +65,8 @@ class HomeView: UIView {
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		
+		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+		self.controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		super.init(coder: aDecoder)
 		
 		//Load the contents of the HomeView.xib file.
@@ -68,7 +75,6 @@ class HomeView: UIView {
 		container.frame = self.bounds
 		
 		//Set titles for each section
-		locationSection.setTitle(text: "Encuéntranos")
 		lablancaSection.setTitle(text: "La Blanca")
 		futureActivitiesSection.setTitle(text: "Próximas actividades")
 		blogSection.setTitle(text: "Últimos posts")
@@ -131,13 +137,30 @@ class HomeView: UIView {
 	If no location is reported, it hiddes the section.
 	*/
 	func setUpLocation(){
+		// TODO: Also set up tap recognizer.
 		let defaults = UserDefaults.standard
 		if (defaults.value(forKey: "GMLocLat") != nil && defaults.value(forKey: "GMLocLon") != nil){
+			let lat = defaults.value(forKey: "GMLocLat") as! Double
+			let lon = defaults.value(forKey: "GMLocLon") as! Double
 			let time = defaults.value(forKey: "GMLocTime") as! Date
 			let cTime = Date()
 			let minutes = Calendar.current.dateComponents([.minute], from: time, to: cTime).minute
-			if (minutes! < 30){
+			if (minutes! < 3000000){
 				self.locationSection.isHidden = false
+				let location = self.controller.getLocation()
+				if location != nil {
+					let d: Int = calculateDistance(lat1: location.latitude, lon1: location.longitude, lat2: lat, lon2: lon)
+					
+					if d <= 1000 {
+						self.locationMessage.text = "¡Gasteizko Margolariak está por ahí! A \(d) metros de ti."
+					}
+					else{
+						self.locationMessage.text = "¡Gasteizko Margolariak está por ahí! A \(Int(d/1000)) kilómetros de ti."
+					}
+				}
+				else{
+					self.locationMessage.text = "¡Gasteizko Margolariak está por ahí!"
+				}
 			}
 			else{
 				self.locationSection.isHidden = true
@@ -427,6 +450,40 @@ class HomeView: UIView {
 		var row : RowHomeSocial
 		row = RowHomeSocial.init(s: "rowHomeSocial", i: 0)
 		parent.addArrangedSubview(row)
+	}
+	
+	
+	/**
+	Converts degrees to radians.
+	:params: degrees Angle in degrees.
+	:return: Angle in radians.
+	*/
+	func degreesToRadians(degrees: Double) -> Double {
+		return degrees * Double.pi / 180;
+	}
+	
+	
+	/**
+	Calculates the distance between two coordinates.
+	:param: lat1 Latitude of the first coordinate.
+	:param: lon1 Longitude of the first coordinate.
+	:param: lat2 Latitude of the second coordinate.
+	:param: lon2 Longitude of the second coordinate.
+	:return: Distance between the points, in meters.
+	*/
+	func calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double) -> Int {
+		let eRadius: Double = 6371
+		
+		let dLat: Double = degreesToRadians(degrees: lat2-lat1)
+		let dLon: Double = degreesToRadians(degrees: lon2-lon1)
+		
+		let l1: Double = degreesToRadians(degrees: lat1)
+		let l2: Double = degreesToRadians(degrees: lat2)
+		
+		let a: Double = sin(dLat/2) * sin(dLat/2) + sin(dLon/2) * sin(dLon/2) * cos(l1) * cos(l2)
+		let c: Double = 2 * atan2(sqrt(a), sqrt(1-a))
+		let m: Double = eRadius * c * 1000
+		return Int(m)
 	}
 	
 	
