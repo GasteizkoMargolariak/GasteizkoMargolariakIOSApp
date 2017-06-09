@@ -53,8 +53,15 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqh-sw-MbH" userLabel="Entry">
                                                     <rect key="frame" x="10" y="37" width="280" height="90"/>
                                                     <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PinpointGM" translatesAutoresizingMaskIntoConstraints="NO" id="HgA-hw-nFb">
+                                                            <rect key="frame" x="10" y="19.5" width="40" height="50"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="LL7-qW-58P"/>
+                                                                <constraint firstAttribute="height" constant="50" id="Ye3-b8-p9O"/>
+                                                            </constraints>
+                                                        </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¡Gasteizko Margolariak está por ahí!" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXP-eW-H8r" userLabel="Text">
-                                                            <rect key="frame" x="10" y="10" width="260" height="70"/>
+                                                            <rect key="frame" x="65" y="10" width="205" height="70"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="70" id="EF3-nL-xJE"/>
                                                             </constraints>
@@ -65,9 +72,11 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="JXP-eW-H8r" firstAttribute="centerX" secondItem="qqh-sw-MbH" secondAttribute="centerX" id="8kG-zL-Z8b"/>
+                                                        <constraint firstItem="HgA-hw-nFb" firstAttribute="leading" secondItem="qqh-sw-MbH" secondAttribute="leading" constant="10" id="K2O-i3-xXX"/>
+                                                        <constraint firstItem="HgA-hw-nFb" firstAttribute="centerY" secondItem="qqh-sw-MbH" secondAttribute="centerY" id="KM1-Yd-1CZ"/>
                                                         <constraint firstItem="JXP-eW-H8r" firstAttribute="height" secondItem="qqh-sw-MbH" secondAttribute="height" constant="-20" id="KPu-k0-bCe"/>
-                                                        <constraint firstItem="JXP-eW-H8r" firstAttribute="width" secondItem="qqh-sw-MbH" secondAttribute="width" constant="-20" id="sqg-U0-NXE"/>
+                                                        <constraint firstItem="JXP-eW-H8r" firstAttribute="leading" secondItem="HgA-hw-nFb" secondAttribute="trailing" constant="15" id="aTU-Xn-urr"/>
+                                                        <constraint firstAttribute="trailing" secondItem="JXP-eW-H8r" secondAttribute="trailing" constant="10" id="gOz-7L-IQ6"/>
                                                         <constraint firstItem="JXP-eW-H8r" firstAttribute="centerY" secondItem="qqh-sw-MbH" secondAttribute="centerY" id="yEV-Vl-cMY"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -185,4 +194,7 @@
             <point key="canvasLocation" x="26" y="52"/>
         </view>
     </objects>
+    <resources>
+        <image name="PinpointGM" width="15" height="20"/>
+    </resources>
 </document>

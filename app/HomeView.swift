@@ -145,7 +145,7 @@ class HomeView: UIView {
 			let time = defaults.value(forKey: "GMLocTime") as! Date
 			let cTime = Date()
 			let minutes = Calendar.current.dateComponents([.minute], from: time, to: cTime).minute
-			if (minutes! < 3000000){
+			if (minutes! < 30){
 				self.locationSection.isHidden = false
 				let location = self.controller.getLocation()
 				if location != nil {
