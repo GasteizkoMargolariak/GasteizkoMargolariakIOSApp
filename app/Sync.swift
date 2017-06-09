@@ -142,39 +142,17 @@ class Sync{
 			
 			self.saveSettings(entries: dataSettings)
 			
-			
-			//DEBUG: Tester, Debug only
-			// Test if a entity has entries
-			/*let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-			let appDelegate = UIApplication.shared.delegate as! AppDelegate
-			context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-			let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()  //Entity to debug
-			
-			do {
-				//go get the results
-				let searchResults = try context.fetch(fetchRequest)
-				
-				NSLog(":SYNC:DEBUG: Num of results = \(searchResults.count).")
-				for r in searchResults as [NSManagedObject] {
-					NSLog(":SYNC:DEBUG: id: \(r.value(forKey: "id")).")
-				}
-			} catch {
-				NSLog(":SYNC:DEBUG: Error with request: \(error).")
-			}*/
-			//End tester
-			
 			// If it's the initial sync, hide the segue
 			if self.initial == true{
 				NSLog(":SYNC:LOG: Finishing synchronous sync.")
 				let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 				delegate.controller?.initialSync(showScreen: false)
-				
 			}
 		}
 		
 		task.resume()
-		
 	}
+	
 	
 	/**
 	Extracts table rows from the raw data received.
@@ -206,6 +184,7 @@ class Sync{
 		//Return the array
 		return entries
 	}
+	
 	
 	/**
 	Saves the data in the table.
@@ -300,6 +279,7 @@ class Sync{
 		}
 	}
 	
+	
 	/**
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
@@ -368,6 +348,7 @@ class Sync{
 			}
 		}
 	}
+	
 	
 	/**
 	Saves the data in the table.
@@ -473,6 +454,7 @@ class Sync{
 		}
 	}
 	
+	
 	/**
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
@@ -551,6 +533,7 @@ class Sync{
 		}
 	}
 	
+	
 	/**
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
@@ -614,6 +597,7 @@ class Sync{
 		}
 	}
 	
+	
 	/**
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
@@ -666,6 +650,7 @@ class Sync{
 			}
 		}
 	}
+	
 	
 	/**
 	Saves the data in the table.
@@ -824,6 +809,7 @@ class Sync{
 		}
 	}
 	
+	
 	/**
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
@@ -902,6 +888,7 @@ class Sync{
 		}
 	}
 	
+	
 	/**
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
@@ -965,6 +952,7 @@ class Sync{
 		}
 	}
 	
+	
 	/**
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
@@ -1017,6 +1005,7 @@ class Sync{
 			}
 		}
 	}
+	
 	
 	/**
 	Saves the data in the table.
@@ -1130,6 +1119,7 @@ class Sync{
 		}
 	}
 	
+	
 	/**
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
@@ -1224,6 +1214,7 @@ class Sync{
 			}
 		}
 	}
+	
 	
 	/**
 	Saves the data in the table.
@@ -1335,6 +1326,7 @@ class Sync{
 		}
 	}
 	
+	
 	/**
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
@@ -1391,6 +1383,7 @@ class Sync{
 			}
 		}
 	}
+	
 	
 	/**
 	Saves the data in the table.
@@ -1481,6 +1474,7 @@ class Sync{
 		}
 	}
 	
+	
 	/**
 	Saves the data in the table.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
@@ -1558,6 +1552,7 @@ class Sync{
 			}
 		}
 	}
+	
 	
 	/**
 	Saves the data in the table.
@@ -1658,6 +1653,7 @@ class Sync{
 			}
 		}
 	}
+	
 	
 	/**
 	Saves the data in the table.
@@ -1763,10 +1759,10 @@ class Sync{
 			// Get day
 			// Special item, not in the sync content
 			dateFormatter.dateFormat = "yyyy-MM-dd"
-			var day = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
+			var day = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 11))!
 			// If on the first hours of the next day...
 			let calendar = Calendar.current
-			let hours = calendar.component(.hour, from: day as! Date)
+			let hours = calendar.component(.hour, from: day )
 			// ... the event belongs to the previous day.
 			if hours < 6{
 				day = Calendar.current.date(byAdding: .day, value: -1, to: day)!	
@@ -1793,6 +1789,7 @@ class Sync{
 			}
 		}
 	}
+	
 	
 	/**
 	Saves the data in the table.
@@ -1924,6 +1921,7 @@ class Sync{
 		}
 	}
 	
+	
 	/**
 	Saves the received settings.
 	:param: entries Array of strings containing the rows of the table, in JSON format.
@@ -1949,7 +1947,6 @@ class Sync{
 				NSLog(":SYNC:LOG: Setting \(name) \(value)")
 				defaults.set(value, forKey: name)
 			}
-
 		}
 	}
 }

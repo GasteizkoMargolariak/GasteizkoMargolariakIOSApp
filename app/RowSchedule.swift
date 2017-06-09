@@ -34,6 +34,7 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var lbText: UILabel!
 	@IBOutlet weak var lbLocation: UILabel!
 	
+	
 	/**
 	Default constructor
 	*/
@@ -41,11 +42,16 @@ Extension of UIView to be formatted as sections.
 		super.init(coder: aDecoder)
 	}
 	
+	
+	/**
+	Loads the view from the xib with the same name as the class.
+	*/
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first as! UIView
+		nib.instantiate(withOwner: self, options: nil).first
 	}
+	
 	
 	/**
 	Default constructor.
@@ -72,12 +78,14 @@ Extension of UIView to be formatted as sections.
 		addGestureRecognizer(tapRecognizer)*/
 	}
 	
+	
 	/**
 	Default constructor for the interface builder
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}
+	
 	
 	/**
 	Sets the time of the event.
@@ -87,55 +95,75 @@ Extension of UIView to be formatted as sections.
 		self.lbTime.text = str
 	}
 	
+	
 	/**
 	Sets the time of the event.
 	:param: hours Hour of the event start.
 	:param: minutes Minutes of the event start.
 	*/
 	func setTime(hours: Int, minutes: Int){
-		self.lbTime.text = "\(hours):\(minutes)"
+		var strMinutes: String = ""
+		if "\(minutes)".length == 1{
+			strMinutes = "0\(minutes)"
+		}
+		else{
+			strMinutes = "\(minutes)"
+		}
+		self.lbTime.text = "\(hours):\(strMinutes)"
 	}
+	
 	
 	/**
 	Sets the time of the event.
 	:param: dtime Datetime of the event start.
 	*/
 	func setTime(dtime: NSDate){
-		let dateformatter = DateFormatter()
 		let calendar = Calendar.current
 		let hours = calendar.component(.hour, from: dtime as Date)
 		let minutes = calendar.component(.minute, from: dtime as Date)
-		self.lbTime.text = "\(hours):\(minutes)"
+		var strMinutes: String = ""
+		if "\(minutes)".length == 1{
+			strMinutes = "0\(minutes)"
+		}
+		else{
+			strMinutes = "\(minutes)"
+		}
+		self.lbTime.text = "\(hours):\(strMinutes)"
 	}
+	
 	
 	/**
 	Sets the title of the event.
 	:param: text The title of the event.
 	*/
 	func setTitle(text: String){
-		self.lbTitle.text = text
+		self.lbTitle.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Sets the location of the event.
 	:param: text The location of the event.
 	*/
 	func setLocation(text: String){
-		self.lbLocation.text = text
+		self.lbLocation.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Sets the description of the event. Decodes HTML.
 	:param: text The new text.
 	*/
 	func setText(text: String){
-		self.lbText.text = text.stripHtml()
+		self.lbText.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Opens an event dialog.
 	*/
 	func openEvent(_ sender:UITapGestureRecognizer? = nil){
-		print("ROW_BLOG:DEBUG: openpost")
+		// TODO implement openEvent.
+		print("ROW_BLOG:DEBUG: Open Event")
 	}
 }

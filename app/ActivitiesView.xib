@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ActivitiesView" customModule="app">
+            <connections>
+                <outlet property="container" destination="iN0-l3-epB" id="7AX-8i-BPU"/>
+                <outlet property="futureSection" destination="Jdf-74-tJS" id="WNV-uv-XXg"/>
+                <outlet property="pastSection" destination="0Su-Ex-4hq" id="3vd-uB-fTu"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xyM-cc-W1r">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="666"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gvi-ij-s5Q">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="306"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jdf-74-tJS" customClass="Section" customModule="app">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                </view>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Su-Ex-4hq" customClass="Section" customModule="app">
+                                    <rect key="frame" x="0.0" y="50" width="375" height="256"/>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="0Su-Ex-4hq" firstAttribute="top" secondItem="Jdf-74-tJS" secondAttribute="bottom" constant="10" id="Vwq-bc-l9J"/>
+                                <constraint firstAttribute="bottom" secondItem="0Su-Ex-4hq" secondAttribute="bottom" id="YXW-7I-LlA"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="gvi-ij-s5Q" secondAttribute="bottom" id="dLo-VU-AFT"/>
+                        <constraint firstAttribute="trailing" secondItem="gvi-ij-s5Q" secondAttribute="trailing" id="iKv-jf-8lN"/>
+                        <constraint firstItem="gvi-ij-s5Q" firstAttribute="top" secondItem="xyM-cc-W1r" secondAttribute="top" id="nBi-D9-aFk"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="gvi-ij-s5Q" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="4bi-AV-eh4"/>
+                <constraint firstItem="xyM-cc-W1r" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="6Qm-1G-beA"/>
+                <constraint firstItem="xyM-cc-W1r" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="92C-lK-w4Q"/>
+                <constraint firstItem="gvi-ij-s5Q" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Iab-hX-fdC"/>
+                <constraint firstItem="xyM-cc-W1r" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="iKU-OG-Vpz"/>
+                <constraint firstItem="xyM-cc-W1r" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="q5m-cP-yKY"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

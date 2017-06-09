@@ -26,8 +26,6 @@ The view controller of the app.
 */
 class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	
-
-	
 	@IBOutlet weak var barTitle: UILabel!
 	@IBOutlet weak var barButton: UIButton!
 	@IBOutlet weak var postText: UILabel!
@@ -36,33 +34,31 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	var id: Int = -1
 	var delegate: AppDelegate?
 	
-	//Each of the sections of the app.
-	
 	var passId: Int = -1
 	
+	/**
+	Get the app context.
+	:return: The app context.
+	*/
 	func getContext () -> NSManagedObjectContext {
-		//let appDelegate = UIApplication.shared.delegate as! AppDelegate
-		//return appDelegate.persistentContainer.viewContext
 		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 	}
+	
 	
 	/**
 	Run when the app loads.
 	*/
 	override func viewDidLoad() {
-		
-		print("POSTCONTROLLER:LOG: viewDidLoad()")
-		
 		super.viewDidLoad()
 		self.loadPost(id: id)
-		
 		// Set button action
 		barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
 	}
 	
-	//TODO implement all the logic for post loading here, including iboutlts
 	
-	
+	/**
+	Dismisses the controller.
+	*/
 	func back() {
 		print("POSTCONTROLLER:DEBUG: Back")
 		self.dismiss(animated: true, completion: nil)
@@ -76,9 +72,14 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 		super.didReceiveMemoryWarning()
 	}
 	
+	
+	/**
+	Loads the selected post.
+	:param: id Post id.
+	*/
 	public func loadPost(id: Int){
 		
-		print("POSTCONTROLLER:DEBUG: Loading post \(id)")
+		NSLog(":POSTCONTROLLER:DEBUG: Loading post \(id)")
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -88,18 +89,14 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 		fetchRequest.predicate = NSPredicate(format: "id = %i", id)
 		
 		do {
-			//go get the results
 			let searchResults = try context.fetch(fetchRequest)
-			
 			var count = 0
 			var sTitle: String
 			var sText: String
 			var image: String
 			
-			//You need to convert to NSManagedObject to use 'for' loops
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
-				
 				sTitle = r.value(forKey: "title_\(lang)")! as! String
 				sText = r.value(forKey: "text_\(lang)")! as! String
 				postTitle.text = "  \(sTitle)"
@@ -113,37 +110,28 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 				imgFetchRequest.sortDescriptors = imgSortDescriptors
 				imgFetchRequest.predicate = NSPredicate(format: "post == %i", id)
 				imgFetchRequest.fetchLimit = 1
-				//TODO get more images
 				do{
 					let imgSearchResults = try context.fetch(imgFetchRequest)
 					for imgR in imgSearchResults as [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
-						print ("POST:LOG: Image: \(image)")
-						//TODO set image
-						//row.setImage(filename: image)
+						let path = "img/blog/preview/\(image)"
+						self.postImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 					}
 				} catch {
-					print("POST:ERROR: Error getting image for post \(id): \(error)")
+					NSLog(":POST:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
 			}
 		} catch {
-			print("POST:ERROR: Error with request: \(error)")
+			NSLog(":POST:ERROR: Error with request: \(error)")
 		}
-		
-		//Always at the end: update scrollview
-		// TODOs
-		//var h: Int = 0
-		//for view in scrollView.subviews {
-			//contentRect = contentRect.union(view.frame);
-		//	h = h + Int(view.frame.height) + 30 //Why 30?
-		//}
-		//print("POST:DEBUG: Height: \(h)")
-		// TODO: Calculate at the end
-		//self.scrollView.contentSize.height = 4500//CGFloat(h);
-
 	}
 	
+	/**
+	Gets the device language. The only recognized languages are Spanish, English and Basque.
+	If the device has another language, Spanish will be selected by default.
+	:return: Two-letter language code.
+	*/
 	func getLanguage() -> String{
 		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
 		if(pre == "es" || pre == "en" || pre == "eu"){

@@ -43,13 +43,13 @@ class BlogView: UIView {
 		super.init(frame: frame)
 	}
 	
+	
 	/**
 	Run when the view is started.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		
 		super.init(coder: aDecoder)
-		NSLog(":BLOG:DEBUG: init (coder).")
 		
 		// Load the contents of the HomeView.xib file.
 		Bundle.main.loadNibNamed("BlogView", owner: self, options: nil)
@@ -60,18 +60,20 @@ class BlogView: UIView {
 		
 		// Get viewController from StoryBoard
 		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
-		self.controller = storyboard?.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
+		self.controller = storyboard?.instantiateViewController(withIdentifier: "GMViewController") as? ViewController
 		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		self.delegate = UIApplication.shared.delegate as! AppDelegate
+		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.lang = getLanguage()
 		self.context?.persistentStoreCoordinator = delegate?.persistentStoreCoordinator
 		
 		populate()
 		
-		NSLog(":BLOG:DEBUG: Finished loading BlogView")
-		
 	}
 	
+	
+	/**
+	Populates the section.
+	*/
 	func populate(){
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
 		let sortDescriptor = NSSortDescriptor(key: "dtime", ascending: false)
@@ -80,13 +82,12 @@ class BlogView: UIView {
 		
 		do {
 			// Clear the list
-			for v in self.postList?.subviews{
+			for v in (self.postList?.subviews)!{
 				v.removeFromSuperview()
 			}
 			
 			// Get the results
 			let searchResults = try self.context?.fetch(fetchRequest)			
-			NSLog(":BLOG:DEBUG: Total posts: \(searchResults?.count)")
 			
 			var row : RowBlog
 			var count = 0
@@ -95,10 +96,9 @@ class BlogView: UIView {
 			var text: String
 			var image: String
 			
-			for r in searchResults as! [NSManagedObject] {
+			for r in searchResults! {
 				count = count + 1
-				NSLog(":BLOG:DEBUG: Post perm: \(r.value(forKey: "permalink"))")
-								
+				
 				//Create a new row
 				row = RowBlog.init(s: "rowBlog\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
@@ -117,9 +117,8 @@ class BlogView: UIView {
 				imgFetchRequest.fetchLimit = 1
 				do{
 					let imgSearchResults = try context?.fetch(imgFetchRequest)
-					for imgR in imgSearchResults as! [NSManagedObject]{
+					for imgR in imgSearchResults!{
 						image = imgR.value(forKey: "image")! as! String
-						NSLog(":BLOG:DEBUG: Image: \(image)")
 						row.setImage(filename: image)
 					}
 				} catch {
@@ -128,16 +127,12 @@ class BlogView: UIView {
 				
 				
 				self.postList?.addArrangedSubview(row)
-				//row.setNeedsLayout()
-				//row.layoutIfNeeded()
 				
 				// TODO: Do this on the row didLoad method
 				// Set tap recognizer
 				//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPost(_:)))
 				//row.isUserInteractionEnabled = true
 				//row.addGestureRecognizer(tapRecognizer)
-				
-				
 				
 			}
 
@@ -148,41 +143,16 @@ class BlogView: UIView {
 		} catch {
 			NSLog(":BLOG:ERROR: Error with request: \(error)")
 		}
-		
-		//Always at the end: update scrollview
-		//var h: Int = 0
-		//for view in scrollView.subviews {
-		//	//contentRect = contentRect.union(view.frame);
-		//	h = h + Int(view.frame.height) + 30 //Why 30?
-		//	NSLog(":BLOG:DEBUG: curh: \(h)")
-		//}
-		// TODO: Calculate at the end
-		//self.scrollView.contentSize.height = 2500//CGFloat(h);
-		
-		// The view controller
-		//var viewController: ViewController  = self.window?.rootViewController as! ViewController
-		
-		
-		//let viewController = UIApplication.topViewController() as! ViewController
-		
-		//viewController.showPost(id: 4)
-		
-		//print("BLOG:DEBUG: Show post on load.")
-		//self.delegate?.controller?.showPost(id: 4)
-		
-		//controller.showPost(id: 4)
-		
-		
-		
-		
 		NSLog(":BLOG:DEBUG: Finished populating BlogView")
 	}
+	
 	
 	/*func openPost(){//(_ sender:UITapGestureRecognizer? = nil){
 		print("BLOG:DEBUG: getting delegate and showing post.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: 4)
-		print("BLOG:DEBUG: Post should be shown.")
+		
+	print("BLOG:DEBUG: Post should be shown.")
 	}
 	
 	func openPost(_ sender:UITapGestureRecognizer? = nil){
@@ -192,6 +162,12 @@ class BlogView: UIView {
 		print("BLOG:DEBUG: Post should be shown.")
 	}*/
 	
+	
+	/**
+	Gets the device language. The only recognized languages are Spanish, English and Basque.
+	If the device has another language, Spanish will be selected by default.
+	:return: Two-letter language code.
+	*/
 	func getLanguage() -> String{
 		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
 		if(pre == "es" || pre == "en" || pre == "eu"){
