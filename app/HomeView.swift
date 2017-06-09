@@ -347,6 +347,7 @@ class HomeView: UIView {
 				
 				image = r.value(forKey: "file")! as! String
 				row.setImage(idx: i, filename: image)
+				NSLog(":HOME:DEBUG: Photo \(i)")
 				
 				//TODO Set click listener
 				i = i + 1

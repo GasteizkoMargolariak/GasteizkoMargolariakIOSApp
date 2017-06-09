@@ -84,6 +84,7 @@
 		93E0C5EE1EBE25BD00905811 /* RowLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E0C5ED1EBE25BC00905811 /* RowLabel.swift */; };
 		93E0C5F21EBE264F00905811 /* RowLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E0C5F11EBE264F00905811 /* RowLabel.xib */; };
 		93E0C5F41EBE306900905811 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E0C5F31EBE306900905811 /* ScheduleViewController.swift */; };
+		93E5058F1EEB0DCC00560B4A /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E5058E1EEB0DCC00560B4A /* PhotoViewController.swift */; };
 		93EB2F0C1EBF5AEB00F64186 /* RowSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EB2F0B1EBF5AEB00F64186 /* RowSchedule.swift */; };
 		93EB2F0E1EBF5BF500F64186 /* RowSchedule.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93EB2F0D1EBF5BF500F64186 /* RowSchedule.xib */; };
 		93EE9ECB1EE9B87100288F6E /* PastActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EE9ECA1EE9B87100288F6E /* PastActivityViewController.swift */; };
@@ -170,6 +171,7 @@
 		93E0C5ED1EBE25BC00905811 /* RowLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowLabel.swift; sourceTree = "<group>"; };
 		93E0C5F11EBE264F00905811 /* RowLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowLabel.xib; sourceTree = "<group>"; };
 		93E0C5F31EBE306900905811 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		93E5058E1EEB0DCC00560B4A /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		93EB2F0B1EBF5AEB00F64186 /* RowSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowSchedule.swift; sourceTree = "<group>"; };
 		93EB2F0D1EBF5BF500F64186 /* RowSchedule.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowSchedule.xib; sourceTree = "<group>"; };
 		93EE9ECA1EE9B87100288F6E /* PastActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastActivityViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				93B9113E1ED7582B0061BA71 /* LocationView.swift */,
 				93B9115E1ED765510061BA71 /* app-Bridging-Header.h */,
 				93EE9ECA1EE9B87100288F6E /* PastActivityViewController.swift */,
+				93E5058E1EEB0DCC00560B4A /* PhotoViewController.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				93D9EA761DE3ACBB00089002 /* Sync.swift in Sources */,
 				93E0C5EA1EBDFFB400905811 /* RowPastActivity.swift in Sources */,
 				93BAD2F41E585EE6009DF853 /* RowHomeFutureActivities.swift in Sources */,
+				93E5058F1EEB0DCC00560B4A /* PhotoViewController.swift in Sources */,
 				931AA5891E1AFF8C003A2290 /* String.swift in Sources */,
 				935AE18A1EC6138D0055E71F /* SyncController.swift in Sources */,
 				93B84B9C1D9C31AB006C0F67 /* ViewController.swift in Sources */,
