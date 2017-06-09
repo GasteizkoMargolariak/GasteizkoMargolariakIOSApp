@@ -1,6 +1,5 @@
 ---
-[Informacion en castellano](README.es-ES.md) 
-[Information in english](README.md)
+[Informacion en castellano](README.es-ES.md) - [Information in english](README.md)
 ---
 
 
@@ -13,8 +12,9 @@ Una aplicacion para iOS para miembros de [Gasteizko Margolariak](https://margola
 Hay funciones diseñadas especificamente para las Fiestas de La Blanca, y solo estarán disponibles en esas fechas.
 
 * [NO IMPLEMENTADO] Consulta en tu teléfono el Programa de Fiestas, encuentra actos alrededor tuyo ydescubre como llegar hasta ellos.
-* [NO IMPLEMENTADO] Consulta el Programa de Fiestas de Gasteizko Margolariak, detallado y con la ubicación de cada actividad...
-* [NO IMPLEMENTADO] ... pero, como no somos famosos por nuestra puntualidad, comprueba nuestra ubicación en tiempo real.
+* Consulta el Programa de Fiestas de Gasteizko Margolariak, detallado y con la ubicación de cada actividad...
+* ... pero, como no somos famosos por nuestra puntualidad, comprueba nuestra ubicación en tiempo real.
+* Descubre eventos a tu alrededor.
 
 
 ### Durante el resto del año ###

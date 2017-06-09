@@ -1,6 +1,5 @@
 ---
-[Información en castellano](README.es-ES.md) 
-[Informazioa euskaraz](README.es-EU.md)
+[Información en castellano](README.es-ES.md) - [Informazioa euskaraz](README.es-EU.md)
 ---
 
 
@@ -13,8 +12,8 @@ An iOS app intended for members of [Gasteizko Margolariak](https://margolariak.c
 This features will be only available during the city festivals.
 
 * [TODO] Check out the festival schedule, discover events all around the city, and get their location.
-* [TODO] Check out the schedule for the members of Gasteizko Margolariak, indicating the location of every event and activity...
-* [TODO] ... but, since we are not known for our puntuality, check out the location of Gasteizko Margolariak in real time.
+* Check out the schedule for the members of Gasteizko Margolariak, indicating the location of every event and activity...
+* ... but, since we are not known for our puntuality, check out the location of Gasteizko Margolariak in real time.
 * [TODO] Approximate distance to important event around the city.
 
 
