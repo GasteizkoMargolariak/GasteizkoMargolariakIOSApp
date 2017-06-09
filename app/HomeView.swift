@@ -106,7 +106,7 @@ class HomeView: UIView {
 		setUpFutureActivities(context: self.moc!, delegate: self.delegate!, lang: self.lang!, parent: self.futureActivitiesSection.getContentStack())
 		setUpSocial(parent: self.socialSection.getContentStack())
 		setUpGallery(context: self.moc!, delegate: self.delegate!, parent: self.gallerySection.getContentStack())
-		setUpLablanca(context: self.moc!, delegate: self.delegate!, self.lang!)
+		setUpLablanca(context: self.moc!, delegate: self.delegate!, lang: self.lang!)
 	}
 	
 	
