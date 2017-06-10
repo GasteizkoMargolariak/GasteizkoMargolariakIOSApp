@@ -247,6 +247,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.delegate?.controller = self
 		
+		//self.sectionCollection.visibleCells[0].isSelected = true
+		
 		super.viewDidLoad()
 		
 	}
@@ -339,26 +341,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	//Make a cell for each section
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-				
+		
+		var first = true
+		
 		//Get a reference to our storyboard cell
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MenuCollectionViewCell
 		
 		//Set text
 		cell.label.text = self.items[indexPath.item]
 		
-		//Mark the first cell as selected...
-		/*if indexPath.item == selected{
-			cell.bar.backgroundColor = UIColor(red: 148/255, green: 209/255, blue: 255/255, alpha: 1)
-			cell.label.font = UIFont.boldSystemFont(ofSize: cell.label.font.pointSize)
-			cell.label.textColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+		// Mark the first one as selected.
+		if indexPath.item == 0{
+			cell.isSelected = true
+			first = false
 		}
-			
-		//... and the others as unselected
-		else{
-			cell.bar.backgroundColor = UIColor(red: 90/255, green: 180/255, blue: 255/255, alpha: 1)
-			cell.label.font = UIFont.systemFont(ofSize: cell.label.font.pointSize)
-			cell.label.textColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
-		}*/
 		
 		return cell
 	}
