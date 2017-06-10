@@ -697,6 +697,7 @@
                         <outlet property="albumView" destination="YEF-04-q7Y" id="7tR-Lr-9nh"/>
                         <outlet property="barButton" destination="Thj-0t-rxK" id="6bX-xo-abt"/>
                         <outlet property="barTitle" destination="LLe-aQ-Sbj" id="bFR-jT-Xmq"/>
+                        <segue destination="hRA-2q-Tv9" kind="show" identifier="SeguePhotoAlbum" id="ftR-BO-YPe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLj-OZ-Cqc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1460,4 +1461,7 @@
         <image name="Logo" width="83" height="83"/>
         <image name="PhotoPlaceholder" width="170" height="108"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ftR-BO-YPe"/>
+    </inferredMetricsTieBreakers>
 </document>

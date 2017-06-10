@@ -61,6 +61,10 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 		
 		// Set button action
 		barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
+		
+		// Set this controller in the delegate
+		self.delegate = UIApplication.shared.delegate as? AppDelegate
+		self.delegate?.albumController = self
 	}
 	
 	
@@ -175,6 +179,20 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 		else{
 			return "es"
 		}
+	}
+	
+	
+	/**
+	Shows a photo.
+	:param: id The album id.
+	*/
+	func showPhoto(album: Int, photo: Int){
+		NSLog(":ALBUMCONTROLLER:DEBUG: Showing photo \(photo) of album \(album)")
+		// TODO: Set thoese variables and the prepare method
+		//self.passAlbum = album
+		//self.passId = photo
+		performSegue(withIdentifier: "SeguePhotoAlbum", sender: nil)
+		NSLog(":ALBUMCONTROLLER:DEBUG: PHOTO should be shown")
 	}
 	
 }

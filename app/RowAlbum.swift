@@ -101,13 +101,13 @@ Extension of UIView to be formatted as sections.
 	func openLeftPhoto(_ sender:UITapGestureRecognizer? = nil){
 		NSLog(":ROWALBUM:DEBUG: Getting delegate and showing left photo.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showPhoto(album: self.id, photo: self.photoIds[0])
+		delegate.albumController?.showPhoto(album: self.id, photo: self.photoIds[0])
 	}
 	
 	func openRightPhoto(_ sender:UITapGestureRecognizer? = nil){
 		NSLog(":ROWALBUM:DEBUG: Getting delegate and showing right photo.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showPhoto(album: self.id, photo: self.photoIds[1])
+		delegate.albumController?.showPhoto(album: self.id, photo: self.photoIds[1])
 	}
 	
 	
