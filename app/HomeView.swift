@@ -30,6 +30,8 @@ class HomeView: UIView {
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var container: UIView!
 	@IBOutlet weak var locationMessage: UILabel!
+	@IBOutlet weak var lablancaImage: UIImageView!
+	@IBOutlet weak var lablancaText: UILabel!
 	
 	//Each of the sections of the view.
 	@IBOutlet weak var locationSection: UIView!
@@ -75,7 +77,6 @@ class HomeView: UIView {
 		container.frame = self.bounds
 		
 		//Set titles for each section
-		lablancaSection.setTitle(text: "La Blanca")
 		futureActivitiesSection.setTitle(text: "Próximas actividades")
 		blogSection.setTitle(text: "Últimos posts")
 		gallerySection.setTitle(text: "Últimas fotos")
@@ -180,11 +181,44 @@ class HomeView: UIView {
 	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
 	*/
 	func setUpLablanca(context : NSManagedObjectContext, delegate: AppDelegate, lang: String){
+		
+		// TODO set listener.
 		let defaults = UserDefaults.standard
 		if (defaults.value(forKey: "festivals") != nil){
 			let festivals = defaults.value(forKey: "festivals") as! Int
 			if festivals == 1{
-				// TODO Actualy show something
+				// TODO: Get current year
+				let year = 2017
+				
+				// Get info about festivals
+				let fetchRequest: NSFetchRequest<Festival> = Festival.fetchRequest()
+				fetchRequest.predicate = NSPredicate(format: "year = %i", year)
+				
+				do {
+					
+					// Get info from festivals
+					let searchResults = try context.fetch(fetchRequest)
+					
+					if searchResults.count > 0 {
+						let r = searchResults[0]
+						
+						// Set image and text
+						self.lablancaText.text = (r.value(forKey: "text_\(lang)") as! String?)?.decode().stripHtml()
+						let filename: String = r.value(forKey: "img") as! String
+						if (filename == ""){
+							// Hide the imageview
+							self.lablancaImage.isHidden = true;
+						}
+						else{
+							let path = "img/blog/thumb/\(filename)"
+							self.lablancaImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+						}
+					}
+					
+				}
+				catch {
+					NSLog(":LABLANCA:ERROR: Error getting festivals info: \(error)")
+				}
 			}
 			else{
 				self.lablancaSection.isHidden = true
