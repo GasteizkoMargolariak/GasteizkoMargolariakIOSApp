@@ -347,16 +347,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		cell.label.text = self.items[indexPath.item]
 		
 		//Mark the first cell as selected...
-		if indexPath.item == selected{
-			cell.bar.backgroundColor = UIColor(red: 90/255, green: 180/255, blue: 255/255, alpha: 1)
+		/*if indexPath.item == selected{
+			cell.bar.backgroundColor = UIColor(red: 148/255, green: 209/255, blue: 255/255, alpha: 1)
 			cell.label.font = UIFont.boldSystemFont(ofSize: cell.label.font.pointSize)
+			cell.label.textColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
 		}
 			
 		//... and the others as unselected
 		else{
-			cell.bar.backgroundColor = UIColor(red: 148/255, green: 209/255, blue: 255/255, alpha: 1)
+			cell.bar.backgroundColor = UIColor(red: 90/255, green: 180/255, blue: 255/255, alpha: 1)
 			cell.label.font = UIFont.systemFont(ofSize: cell.label.font.pointSize)
-		}
+			cell.label.textColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
+		}*/
 		
 		return cell
 	}
@@ -373,9 +375,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	:param: selected Index of the selected item.
 	*/
 	@IBAction func showComponent(selected: Int) {
+		NSLog(":CONTROLLER:DEBUG: Selected: \(selected)")
 		//Activate label
 		var i = 0
-		for cell in sectionCollection.visibleCells as! [MenuCollectionViewCell]{ //TODO: Not only visibles!
+
+		
+		/*for cell in sectionCollection.visibleCells as! [MenuCollectionViewCell]{ //TODO: Not only visibles!
 			if i == selected + 1{
 				cell.bar.backgroundColor = UIColor(red: 90/255, green: 180/255, blue: 255/255, alpha: 1)
 				cell.label.font = UIFont.boldSystemFont(ofSize: cell.label.font.pointSize)
@@ -386,7 +391,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				
 			}
 			i = i + 1
-		}
+		}*/
 		
 		//Show the view
 		if selected == 0 {

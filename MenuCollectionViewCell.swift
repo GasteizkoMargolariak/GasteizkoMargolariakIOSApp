@@ -20,6 +20,8 @@
 
 import UIKit
 
+private let highlightedColor = UIColor(rgb: 0xD8D8D8)
+
 /**
  Extension of UICollectionViewCell for the main menu.
  */
@@ -28,4 +30,40 @@ class MenuCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var label: UILabel!
  
 	@IBOutlet weak var bar: UIView!
+	
+	var shouldTintBackgroundWhenSelected = true // You can change default value
+	var specialHighlightedArea: UIView?
+	
+	override var isHighlighted: Bool { // make lightgray background show immediately
+		willSet {
+			onSelected(newValue)
+		}
+	}
+	override var isSelected: Bool { // keep lightGray background until unselected
+		willSet {
+			onSelected(newValue)
+		}
+	}
+	func onSelected(_ newValue: Bool) {
+		//self.bar.backgroundColor = UIColor(red: 90/255, green: 180/255, blue: 255/255, alpha: 1)
+		//self.label.font = UIFont.boldSystemFont(ofSize: self.label.font.pointSize)
+		guard selectedBackgroundView == nil else { return }
+		if newValue == true {
+			//contentView.backgroundColor = newValue ? highlightedColor : UIColor.clear
+			self.bar.backgroundColor = UIColor(red: 148/255, green: 209/255, blue: 255/255, alpha: 1)
+			self.label.font = UIFont.boldSystemFont(ofSize: self.label.font.pointSize)
+			self.label.textColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+		}
+		else{
+			self.bar.backgroundColor = UIColor(red: 90/255, green: 180/255, blue: 255/255, alpha: 1)
+			self.label.font = UIFont.systemFont(ofSize: self.label.font.pointSize)
+			self.label.textColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
+		}
+	}
+}
+
+extension UIColor {
+	convenience init(rgb: Int, alpha: CGFloat = 1.0) {
+		self.init(red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgb & 0xFF00) >> 8) / 255.0, blue: CGFloat(rgb & 0xFF) / 255.0, alpha: alpha)
+	}
 }
