@@ -148,6 +148,12 @@ class HomeView: UIView {
 			let minutes = Calendar.current.dateComponents([.minute], from: time, to: cTime).minute
 			if (minutes! < 30){
 				self.locationSection.isHidden = false
+				
+				// Set tap recognizer.
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (HomeView.openLocation (_:)))
+				tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+				self.locationSection.addGestureRecognizer(tapRecognizer)
+				
 				let location = self.controller.getLocation()
 				if location != nil {
 					let d: Int = calculateDistance(lat1: location.latitude, lon1: location.longitude, lat2: lat, lon2: lon)
@@ -182,11 +188,16 @@ class HomeView: UIView {
 	*/
 	func setUpLablanca(context : NSManagedObjectContext, delegate: AppDelegate, lang: String){
 		
-		// TODO set listener.
 		let defaults = UserDefaults.standard
 		if (defaults.value(forKey: "festivals") != nil){
 			let festivals = defaults.value(forKey: "festivals") as! Int
 			if festivals == 1{
+				
+				// Set tap recognizer
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (HomeView.openLablanca (_:)))
+				tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+				self.lablancaSection.addGestureRecognizer(tapRecognizer)
+				
 				// TODO: Get current year
 				let year = 2017
 				
@@ -528,5 +539,25 @@ class HomeView: UIView {
 		NSLog(":HOME:DEBUG: Getting delegate and showing post.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: (sender?.view as! RowHomeBlog).id)
+	}
+	
+	
+	/**
+	Opens the La Blanca section when tapping the section.
+	*/
+	func openLablanca(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":HOME:DEBUG: Getting delegate opening the La Blanca section.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showComponent(selected: 2)
+	}
+	
+	
+	/**
+	Opens the Location section when tapping the section.
+	*/
+	func openLocation(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":HOME:DEBUG: Getting delegate opening the location section.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showComponent(selected: 1)
 	}
 }
