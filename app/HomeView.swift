@@ -29,9 +29,12 @@ class HomeView: UIView {
 	// Outlets
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var container: UIView!
+	@IBOutlet weak var locationMessage: UILabel!
+	@IBOutlet weak var lablancaImage: UIImageView!
+	@IBOutlet weak var lablancaText: UILabel!
 	
 	//Each of the sections of the view.
-	@IBOutlet weak var locationSection: Section!
+	@IBOutlet weak var locationSection: UIView!
 	@IBOutlet weak var lablancaSection: Section!
 	@IBOutlet weak var futureActivitiesSection: Section!
 	@IBOutlet weak var blogSection: Section!
@@ -43,6 +46,8 @@ class HomeView: UIView {
 	var delegate: AppDelegate? = nil
 	var lang: String? = nil
 	var locationTimer: Timer? = nil
+	var controller: ViewController
+	var storyboard: UIStoryboard
 	
 	
 	/**
@@ -50,6 +55,8 @@ class HomeView: UIView {
 	:param: frame View frame.
 	*/
 	override init(frame: CGRect){
+		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+		self.controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		super.init(frame: frame)
 		
 	}
@@ -60,6 +67,8 @@ class HomeView: UIView {
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		
+		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+		self.controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		super.init(coder: aDecoder)
 		
 		//Load the contents of the HomeView.xib file.
@@ -68,8 +77,6 @@ class HomeView: UIView {
 		container.frame = self.bounds
 		
 		//Set titles for each section
-		locationSection.setTitle(text: "Encuéntranos")
-		lablancaSection.setTitle(text: "La Blanca")
 		futureActivitiesSection.setTitle(text: "Próximas actividades")
 		blogSection.setTitle(text: "Últimos posts")
 		gallerySection.setTitle(text: "Últimas fotos")
@@ -131,13 +138,30 @@ class HomeView: UIView {
 	If no location is reported, it hiddes the section.
 	*/
 	func setUpLocation(){
+		// TODO: Also set up tap recognizer.
 		let defaults = UserDefaults.standard
 		if (defaults.value(forKey: "GMLocLat") != nil && defaults.value(forKey: "GMLocLon") != nil){
+			let lat = defaults.value(forKey: "GMLocLat") as! Double
+			let lon = defaults.value(forKey: "GMLocLon") as! Double
 			let time = defaults.value(forKey: "GMLocTime") as! Date
 			let cTime = Date()
 			let minutes = Calendar.current.dateComponents([.minute], from: time, to: cTime).minute
 			if (minutes! < 30){
 				self.locationSection.isHidden = false
+				let location = self.controller.getLocation()
+				if location != nil {
+					let d: Int = calculateDistance(lat1: location.latitude, lon1: location.longitude, lat2: lat, lon2: lon)
+					
+					if d <= 1000 {
+						self.locationMessage.text = "¡Gasteizko Margolariak está por ahí! A \(d) metros de ti."
+					}
+					else{
+						self.locationMessage.text = "¡Gasteizko Margolariak está por ahí! A \(Int(d/1000)) kilómetros de ti."
+					}
+				}
+				else{
+					self.locationMessage.text = "¡Gasteizko Margolariak está por ahí!"
+				}
 			}
 			else{
 				self.locationSection.isHidden = true
@@ -157,11 +181,44 @@ class HomeView: UIView {
 	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
 	*/
 	func setUpLablanca(context : NSManagedObjectContext, delegate: AppDelegate, lang: String){
+		
+		// TODO set listener.
 		let defaults = UserDefaults.standard
 		if (defaults.value(forKey: "festivals") != nil){
 			let festivals = defaults.value(forKey: "festivals") as! Int
 			if festivals == 1{
-				// TODO Actualy show something
+				// TODO: Get current year
+				let year = 2017
+				
+				// Get info about festivals
+				let fetchRequest: NSFetchRequest<Festival> = Festival.fetchRequest()
+				fetchRequest.predicate = NSPredicate(format: "year = %i", year)
+				
+				do {
+					
+					// Get info from festivals
+					let searchResults = try context.fetch(fetchRequest)
+					
+					if searchResults.count > 0 {
+						let r = searchResults[0]
+						
+						// Set image and text
+						self.lablancaText.text = (r.value(forKey: "text_\(lang)") as! String?)?.decode().stripHtml()
+						let filename: String = r.value(forKey: "img") as! String
+						if (filename == ""){
+							// Hide the imageview
+							self.lablancaImage.isHidden = true;
+						}
+						else{
+							let path = "img/blog/thumb/\(filename)"
+							self.lablancaImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+						}
+					}
+					
+				}
+				catch {
+					NSLog(":LABLANCA:ERROR: Error getting festivals info: \(error)")
+				}
 			}
 			else{
 				self.lablancaSection.isHidden = true
@@ -427,6 +484,40 @@ class HomeView: UIView {
 		var row : RowHomeSocial
 		row = RowHomeSocial.init(s: "rowHomeSocial", i: 0)
 		parent.addArrangedSubview(row)
+	}
+	
+	
+	/**
+	Converts degrees to radians.
+	:params: degrees Angle in degrees.
+	:return: Angle in radians.
+	*/
+	func degreesToRadians(degrees: Double) -> Double {
+		return degrees * Double.pi / 180;
+	}
+	
+	
+	/**
+	Calculates the distance between two coordinates.
+	:param: lat1 Latitude of the first coordinate.
+	:param: lon1 Longitude of the first coordinate.
+	:param: lat2 Latitude of the second coordinate.
+	:param: lon2 Longitude of the second coordinate.
+	:return: Distance between the points, in meters.
+	*/
+	func calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double) -> Int {
+		let eRadius: Double = 6371
+		
+		let dLat: Double = degreesToRadians(degrees: lat2-lat1)
+		let dLon: Double = degreesToRadians(degrees: lon2-lon1)
+		
+		let l1: Double = degreesToRadians(degrees: lat1)
+		let l2: Double = degreesToRadians(degrees: lat2)
+		
+		let a: Double = sin(dLat/2) * sin(dLat/2) + sin(dLon/2) * sin(dLon/2) * cos(l1) * cos(l2)
+		let c: Double = 2 * atan2(sqrt(a), sqrt(1-a))
+		let m: Double = eRadius * c * 1000
+		return Int(m)
 	}
 	
 	
