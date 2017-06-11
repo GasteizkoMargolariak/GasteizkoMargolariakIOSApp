@@ -73,7 +73,7 @@ class GalleryView: UIView {
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Album> = Album.fetchRequest()
-		let sortDescriptor = NSSortDescriptor(key: "time", ascending: false)
+		let sortDescriptor = NSSortDescriptor(key: "id", ascending: false)
 		let sortDescriptors = [sortDescriptor]
 		fetchRequest.sortDescriptors = sortDescriptors
 		
