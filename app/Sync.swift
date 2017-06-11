@@ -1323,17 +1323,23 @@ class Sync{
 			//Get title_es
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_es : String = str.subStr(start : str.indexOf(target : "\"title_es\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			row.setValue(title_es, forKey: "title_es")
+			if (title_es != "ul"){ //From "null"
+				row.setValue(title_es, forKey: "title_es")
+			}
 			
 			//Get title_en
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_en : String = str.subStr(start : str.indexOf(target : "\"title_en\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			row.setValue(title_en, forKey: "title_en")
+			if (title_en != "ul"){ //From "null"
+				row.setValue(title_en, forKey: "title_en")
+			}
 			
 			//Get title_eu
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_eu : String = str.subStr(start : str.indexOf(target : "\"title_eu\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			row.setValue(title_eu, forKey: "title_eu")
+			if (title_eu != "ul"){ //From "null"
+				row.setValue(title_eu, forKey: "title_eu")
+			}
 			
 			//Get description_es
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)

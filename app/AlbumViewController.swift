@@ -40,6 +40,7 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	
 	// Id received from segue.
 	var passId: Int = -1
+	var passAlbum: Int = -1
 	
 	
 	/**
@@ -65,6 +66,23 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 		// Set this controller in the delegate
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.delegate?.albumController = self
+		
+		// Get album title
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let lang : String = getLanguage()
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		let fetchRequest: NSFetchRequest<Album> = Album.fetchRequest()
+		fetchRequest.predicate = NSPredicate(format: "id = %i", id)
+		do {
+			let results = try context.fetch(fetchRequest)
+			let r = results[0]
+			let title: String = r.value(forKey: "title_\(lang)")! as! String
+			self.albumTitle.text = " \(title.decode().stripHtml())"
+		}
+		catch {
+			NSLog(":GALLERYCONTROLLER:ERROR: Error getting album info: \(error)")
+		}
 	}
 	
 	
@@ -105,8 +123,6 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 			// Get the photo list
 			let searchResults = try context.fetch(fetchRequest)
 			var image: String
-			
-			NSLog(":GALLERYCONTROLLER:DEBUG: Total photos: \(searchResults.count)")
 			
 			for i in (0..<searchResults.count) where i % 2 == 0 {
 				
@@ -160,7 +176,8 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 				
 				rowcount = rowcount + 1
 			}
-		} catch {
+		}
+		catch {
 			NSLog(":GALLERYCONTROLLER:ERROR: Error with request: \(error)")
 		}
 	}
@@ -183,14 +200,29 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	
 	
 	/**
+	Run before performing a segue.
+	Assigns id if neccessary.
+	:param: segue The segue to perform.
+	:sender: The calling view.
+	*/
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		NSLog(":GALLERYCONTROLLER:DEBUG: Preparing for segue '\(String(describing: segue.identifier))' with id \(self.passId)")
+		if segue.identifier == "SeguePhotoAlbum"{
+			(segue.destination as! PhotoViewController).albumId = passAlbum
+			(segue.destination as! PhotoViewController).photoId = passId
+		}
+	}
+	
+	
+	/**
 	Shows a photo.
 	:param: id The album id.
 	*/
 	func showPhoto(album: Int, photo: Int){
 		NSLog(":ALBUMCONTROLLER:DEBUG: Showing photo \(photo) of album \(album)")
 		// TODO: Set thoese variables and the prepare method
-		//self.passAlbum = album
-		//self.passId = photo
+		self.passAlbum = album
+		self.passId = photo
 		performSegue(withIdentifier: "SeguePhotoAlbum", sender: nil)
 		NSLog(":ALBUMCONTROLLER:DEBUG: PHOTO should be shown")
 	}
