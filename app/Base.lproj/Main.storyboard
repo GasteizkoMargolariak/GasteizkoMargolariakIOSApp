@@ -16,7 +16,7 @@
         <scene sceneID="e3W-6Z-Jyk">
             <objects>
                 <navigationController title="Gasteizko Margolariak" id="cgF-cq-ysf" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lgI-h9-O0s">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lgI-h9-O0s">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.4079896717" green="1" blue="0.34807942549999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -382,13 +382,13 @@
                                                                 <rect key="frame" x="8" y="8" width="339" height="949"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="u3M-mi-Tyn" userLabel="Image">
-                                                                        <rect key="frame" x="0.0" y="10" width="339" height="71"/>
+                                                                        <rect key="frame" x="10" y="10" width="319" height="180"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="71" id="fQp-wR-eLU"/>
+                                                                            <constraint firstAttribute="height" constant="180" id="fQp-wR-eLU"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2i2-HF-HyI" userLabel="Text">
-                                                                        <rect key="frame" x="17" y="91" width="305.5" height="826"/>
+                                                                        <rect key="frame" x="17" y="200" width="305.5" height="717"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -412,7 +412,7 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="u3M-mi-Tyn" firstAttribute="width" secondItem="7t9-eQ-KC7" secondAttribute="width" id="4ZF-fF-btB"/>
+                                                                    <constraint firstItem="u3M-mi-Tyn" firstAttribute="width" secondItem="7t9-eQ-KC7" secondAttribute="width" constant="-20" id="4ZF-fF-btB"/>
                                                                     <constraint firstItem="tAc-xa-mg2" firstAttribute="centerX" secondItem="7t9-eQ-KC7" secondAttribute="centerX" id="Bf4-vV-UnB"/>
                                                                     <constraint firstItem="pX4-mq-dj0" firstAttribute="width" secondItem="7t9-eQ-KC7" secondAttribute="width" multiplier="0.9" id="Dqr-hS-PV9"/>
                                                                     <constraint firstItem="2i2-HF-HyI" firstAttribute="centerX" secondItem="7t9-eQ-KC7" secondAttribute="centerX" id="Hoe-4Q-YTi"/>
@@ -1102,13 +1102,13 @@
                                                                 <rect key="frame" x="8" y="8" width="339" height="949"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="8Jn-h7-TSJ" userLabel="Image">
-                                                                        <rect key="frame" x="0.0" y="10" width="339" height="71"/>
+                                                                        <rect key="frame" x="10" y="10" width="319" height="180"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="71" id="lZg-2O-4LP"/>
+                                                                            <constraint firstAttribute="height" constant="180" id="lZg-2O-4LP"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usd-Rm-Tq2" userLabel="Text">
-                                                                        <rect key="frame" x="17" y="91" width="305.5" height="826"/>
+                                                                        <rect key="frame" x="17" y="200" width="305.5" height="717"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -1141,7 +1141,7 @@
                                                                     <constraint firstItem="Usd-Rm-Tq2" firstAttribute="centerX" secondItem="Omg-cP-uvF" secondAttribute="centerX" id="SHM-nk-s9u"/>
                                                                     <constraint firstItem="dvg-B2-xmI" firstAttribute="centerX" secondItem="Omg-cP-uvF" secondAttribute="centerX" id="XBR-sR-Yqg"/>
                                                                     <constraint firstItem="LmH-0o-Hku" firstAttribute="centerX" secondItem="Omg-cP-uvF" secondAttribute="centerX" id="a8v-br-EaA"/>
-                                                                    <constraint firstItem="8Jn-h7-TSJ" firstAttribute="width" secondItem="Omg-cP-uvF" secondAttribute="width" id="gm5-CU-FKw"/>
+                                                                    <constraint firstItem="8Jn-h7-TSJ" firstAttribute="width" secondItem="Omg-cP-uvF" secondAttribute="width" constant="-20" id="gm5-CU-FKw"/>
                                                                     <constraint firstItem="8Jn-h7-TSJ" firstAttribute="top" secondItem="Omg-cP-uvF" secondAttribute="top" constant="10" id="js6-Fg-pg1"/>
                                                                     <constraint firstAttribute="bottom" secondItem="dvg-B2-xmI" secondAttribute="bottom" id="lta-H9-CYI"/>
                                                                     <constraint firstItem="LmH-0o-Hku" firstAttribute="width" secondItem="Omg-cP-uvF" secondAttribute="width" multiplier="0.9" id="xmH-tU-ZFp"/>

@@ -112,7 +112,7 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 							self.postImage.isHidden = true
 						}
 						else{
-							let path = "img/actividades/thumb/\(image)"
+							let path = "img/blog/thumb/\(image)"
 							self.postImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 						}
 					}
