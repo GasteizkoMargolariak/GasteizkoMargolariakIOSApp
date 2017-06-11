@@ -53,12 +53,9 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 		// Set button action
 		barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
 	}
-	
-	//TODO implement all the logic for post loading here, including iboutlts
-	
+		
 	
 	func back() {
-		print("POSTCONTROLLER:DEBUG: Back")
 		self.dismiss(animated: true, completion: nil)
 	}
 	

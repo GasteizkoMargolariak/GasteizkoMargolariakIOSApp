@@ -126,7 +126,6 @@ Extension of UIView to be formatted as sections.
 	Opens a post.
 	*/
 	func openPost(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROWHOMEBLOG:DEBUG: Getting delegate and showing post \(self.id).")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: self.id)
 	}

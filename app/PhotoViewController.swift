@@ -57,7 +57,6 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	Run when the app loads.
 	*/
 	override func viewDidLoad() {
-		NSLog(":PHOTO:DEBUG: viewDidLoad")
 		
 		// Populate photo array.
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -118,7 +117,6 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	Dismisses the controller.
 	*/
 	func back() {
-		NSLog(":PHOTOCONTROLLER:DEBUG: Back")
 		self.dismiss(animated: true, completion: nil)
 	}
 	

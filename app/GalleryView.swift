@@ -164,7 +164,6 @@ class GalleryView: UIView {
 	*/
 	func openAlbum(_ sender:UITapGestureRecognizer? = nil){
 		let id = (sender?.view as! RowGallery).id
-		NSLog(":GALLERY:DEBUG: getting delegate and showing album \(id).")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showAlbum(id: id)
 	}
@@ -190,7 +189,6 @@ class GalleryView: UIView {
 	Handles the click events to open albums.
 	*/
 	func setUpRowsTapRecognizers(){
-		NSLog(":GALLERY:DEBUG: Setting up tap recognizers")
 		for row in self.rows{
 			let tapRecognizer = UITapGestureRecognizer(target: row, action: #selector(openAlbum(_:)))
 			row.isUserInteractionEnabled = true

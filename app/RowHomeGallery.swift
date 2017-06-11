@@ -84,7 +84,6 @@ Extension of UIView to be formatted as sections.
 	Open the first photo in the photo viewer.
 	*/
 	func openFirstPhoto(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROWHOMEGALLERY:DEBUG: Getting delegate and showing first photo.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPhoto(album: self.albumIds[0], photo: self.photoIds[0])
 	}
@@ -94,7 +93,6 @@ Extension of UIView to be formatted as sections.
 	Open the second photo in the photo viewer.
 	*/
 	func openSecondPhoto(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROWHOMEGALLERY:DEBUG: Getting delegate and showing second photo.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPhoto(album: self.albumIds[1], photo: self.photoIds[1])
 	}
@@ -104,7 +102,6 @@ Extension of UIView to be formatted as sections.
 	Open the third photo in the photo viewer.
 	*/
 	func openThirdPhoto(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROWHOMEGALLERY:DEBUG: Getting delegate and showing third photo.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPhoto(album: self.albumIds[2], photo: self.photoIds[2])
 	}
@@ -114,7 +111,6 @@ Extension of UIView to be formatted as sections.
 	Open the fourth photo in the photo viewer.
 	*/
 	func openFourthPhoto(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROWHOMEGALLERY:DEBUG: Getting delegate and showing fourth photo.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPhoto(album: self.albumIds[3], photo: self.photoIds[3])
 	}
@@ -143,7 +139,6 @@ Extension of UIView to be formatted as sections.
 			photos[idx].setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 			
 			// Set tap recognizer
-			NSLog(":ROWHOMEGALLERY:DEBUG: Setting tap recognizer for index \(idx)")
 			switch idx{
 				case 0:
 					let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowHomeGallery.openFirstPhoto(_:)))

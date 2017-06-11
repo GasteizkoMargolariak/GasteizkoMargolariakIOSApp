@@ -68,7 +68,6 @@ Extension of UIView to be formatted as sections.
 	:param: i Custom identifier
 	*/
 	init(s: String, i: Int) {
-		NSLog(":ROWLABLANCAOFFER:DEBUG: Init \(s), \(i)")
 		
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()

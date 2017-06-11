@@ -206,7 +206,6 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	:sender: The calling view.
 	*/
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		NSLog(":GALLERYCONTROLLER:DEBUG: Preparing for segue '\(String(describing: segue.identifier))' with id \(self.passId)")
 		if segue.identifier == "SeguePhotoAlbum"{
 			(segue.destination as! PhotoViewController).albumId = passAlbum
 			(segue.destination as! PhotoViewController).photoId = passId
@@ -219,12 +218,9 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	:param: id The album id.
 	*/
 	func showPhoto(album: Int, photo: Int){
-		NSLog(":ALBUMCONTROLLER:DEBUG: Showing photo \(photo) of album \(album)")
-		// TODO: Set thoese variables and the prepare method
 		self.passAlbum = album
 		self.passId = photo
 		performSegue(withIdentifier: "SeguePhotoAlbum", sender: nil)
-		NSLog(":ALBUMCONTROLLER:DEBUG: PHOTO should be shown")
 	}
 	
 }

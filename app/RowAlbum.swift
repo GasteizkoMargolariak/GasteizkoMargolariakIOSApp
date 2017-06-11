@@ -73,7 +73,6 @@ Extension of UIView to be formatted as sections.
 	:param: i Custom identifier
 	*/
 	init(s: String, i: Int) {
-		NSLog(":ROWALBUM:DEBUG: Init \(s), \(i)")
 		
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()
@@ -99,13 +98,11 @@ Extension of UIView to be formatted as sections.
 	}
 	
 	func openLeftPhoto(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROWALBUM:DEBUG: Getting delegate and showing left photo.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.albumController?.showPhoto(album: self.id, photo: self.photoIds[0])
 	}
 	
 	func openRightPhoto(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROWALBUM:DEBUG: Getting delegate and showing right photo.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.albumController?.showPhoto(album: self.id, photo: self.photoIds[1])
 	}
@@ -130,14 +127,12 @@ Extension of UIView to be formatted as sections.
 				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowAlbum.openLeftPhoto(_:)))
 				tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
 				self.preview[idx].isUserInteractionEnabled = true
-				NSLog(":ROWALBUM:DEBUG: Setting tap recognizer for left photo.")
 				self.preview[idx].addGestureRecognizer(tapRecognizer)
 			}
 			else{
 				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowAlbum.openRightPhoto(_:)))
 				tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
 				self.preview[idx].isUserInteractionEnabled = true
-				NSLog(":ROWALBUM:DEBUG: Setting tap recognizer for right photo.")
 				self.preview[idx].addGestureRecognizer(tapRecognizer)
 			}
 		}

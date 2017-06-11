@@ -490,13 +490,9 @@ class HomeView: UIView {
 					NSLog(":GALLERYCONTROLLER:ERROR: Error getting album info: \(error)")
 				}
 				
-				
-				
 				row.setImage(idx: i, filename: image)
 				row.photoIds[i] = id
-				NSLog(":HOME:DEBUG: Photo \(i)")
 				
-				//TODO Set click listener
 				i = i + 1
 			}
 		}
@@ -556,7 +552,6 @@ class HomeView: UIView {
 	Opens a post.
 	*/
 	func openPost(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":HOME:DEBUG: Getting delegate and showing post.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: (sender?.view as! RowHomeBlog).id)
 	}
@@ -566,7 +561,6 @@ class HomeView: UIView {
 	Opens the La Blanca section when tapping the section.
 	*/
 	func openLablanca(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":HOME:DEBUG: Getting delegate opening the La Blanca section.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showComponent(selected: 2)
 	}
@@ -576,7 +570,6 @@ class HomeView: UIView {
 	Opens the Location section when tapping the section.
 	*/
 	func openLocation(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":HOME:DEBUG: Getting delegate opening the location section.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showComponent(selected: 1)
 	}
