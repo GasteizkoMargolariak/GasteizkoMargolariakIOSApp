@@ -469,11 +469,31 @@ class HomeView: UIView {
 	
 			var id: Int
 			var image: String
+			var albumId: Int
 			var i = 0
 			for r in searchResults as [NSManagedObject] {
 				
 				image = r.value(forKey: "file")! as! String
+				id = r.value(forKey: "id")! as! Int
+				
+				// TODO Get album id
+				// Get album title
+				let albumFetchRequest: NSFetchRequest<Photo_album> = Photo_album.fetchRequest()
+				albumFetchRequest.predicate = NSPredicate(format: "photo = %i", id)
+				do {
+					let results = try context.fetch(albumFetchRequest)
+					let r = results[0]
+					albumId = r.value(forKey: "album")! as! Int
+					row.albumIds[i] = albumId
+				}
+				catch {
+					NSLog(":GALLERYCONTROLLER:ERROR: Error getting album info: \(error)")
+				}
+				
+				
+				
 				row.setImage(idx: i, filename: image)
+				row.photoIds[i] = id
 				NSLog(":HOME:DEBUG: Photo \(i)")
 				
 				//TODO Set click listener
