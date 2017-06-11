@@ -65,7 +65,6 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 	Dismisses the controller.
 	*/
 	func back() {
-		NSLog(":FUTUREACTIVITYCONTROLLER:CONTROLLER:DEBUG: Back")
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -83,8 +82,6 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 	:param: id Post id.
 	*/
 	public func loadActivity(id: Int){
-		
-		NSLog(":PASTACTIVITYCONTROLLER:DEBUG: Loading past activity \(id)")
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -131,12 +128,12 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 						self.activityImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 					}
 				} catch {
-					NSLog(":PASTACTIVITYCONTROLLER:DEBUG: Error getting image for post \(id): \(error)")
+					NSLog(":PASTACTIVITYCONTROLLER:ERROR: Error getting image for past activity \(id): \(error)")
 				}
 				
 			}
 		} catch {
-			NSLog(":PASTACTIVITYCONTROLLER:DEBUG: Error with request: \(error)")
+			NSLog(":PASTACTIVITYCONTROLLER:ERROR: Error loading past activity: \(error)")
 		}
 	}
 	

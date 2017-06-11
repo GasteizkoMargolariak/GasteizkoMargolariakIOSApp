@@ -146,8 +146,6 @@ class LablancaView: UIView {
 			// Get info from festivals
 			let offerSearchResults = try context.fetch(offerFetchRequest)
 			
-			NSLog(":LABLANCA:DEBUG: \(offerSearchResults.count) offes found.")
-
 			var row: RowLablancaOffer
 			var count: Int = 0
 
@@ -245,10 +243,8 @@ class LablancaView: UIView {
 	:param: sender The view that triggered the event.
 	*/
 	func openSchedule(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":LABLANCA:DEBUG: Getting delegate and showing schedule.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showSchedule(margolari: false)
-		NSLog(":LABLANCA:DEBUG: Schedule should be shown.")
 	}
 
 
@@ -257,10 +253,8 @@ class LablancaView: UIView {
 	:param: sender The view that triggered the event.
 	*/
 	func openGMSchedule(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":LABLANCA:DEBUG: Getting delegate and showing GM schedule.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showSchedule(margolari: true)
-		NSLog(":LABLANCA:DEBUG: GM schedule should be shown.")
 	}
 
 	

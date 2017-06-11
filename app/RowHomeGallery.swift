@@ -34,6 +34,9 @@ Extension of UIView to be formatted as sections.
 	
 	var photos: [UIImageView] = []
 	
+	var photoIds: [Int] = [-1, -1, -1, -1]
+	var albumIds: [Int] = [-1, -1, -1, -1]
+	
 	
 	/**
 	Default constructor
@@ -78,6 +81,42 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
+	Open the first photo in the photo viewer.
+	*/
+	func openFirstPhoto(_ sender:UITapGestureRecognizer? = nil){
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPhoto(album: self.albumIds[0], photo: self.photoIds[0])
+	}
+	
+	
+	/**
+	Open the second photo in the photo viewer.
+	*/
+	func openSecondPhoto(_ sender:UITapGestureRecognizer? = nil){
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPhoto(album: self.albumIds[1], photo: self.photoIds[1])
+	}
+	
+	
+	/**
+	Open the third photo in the photo viewer.
+	*/
+	func openThirdPhoto(_ sender:UITapGestureRecognizer? = nil){
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPhoto(album: self.albumIds[2], photo: self.photoIds[2])
+	}
+	
+	
+	/**
+	Open the fourth photo in the photo viewer.
+	*/
+	func openFourthPhoto(_ sender:UITapGestureRecognizer? = nil){
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPhoto(album: self.albumIds[3], photo: self.photoIds[3])
+	}
+	
+	
+	/**
 	Default constructor for the interface builder
 	*/
 	override init(frame: CGRect){
@@ -98,6 +137,36 @@ Extension of UIView to be formatted as sections.
 		else{
 			let path = "img/galeria/thumb/\(filename)"
 			photos[idx].setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+			
+			// Set tap recognizer
+			switch idx{
+				case 0:
+					let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowHomeGallery.openFirstPhoto(_:)))
+					tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+					self.photos[idx].isUserInteractionEnabled = true
+					self.photos[idx].addGestureRecognizer(tapRecognizer)
+					break;
+				case 1:
+					let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowHomeGallery.openSecondPhoto(_:)))
+					tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+					self.photos[idx].isUserInteractionEnabled = true
+					self.photos[idx].addGestureRecognizer(tapRecognizer)
+					break;
+				case 2:
+					let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowHomeGallery.openThirdPhoto(_:)))
+					tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+					self.photos[idx].isUserInteractionEnabled = true
+					self.photos[idx].addGestureRecognizer(tapRecognizer)
+					break;
+				case 3:
+					let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowHomeGallery.openFourthPhoto(_:)))
+					tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+					self.photos[idx].isUserInteractionEnabled = true
+					self.photos[idx].addGestureRecognizer(tapRecognizer)
+					break;
+				default:
+					NSLog(":ROWHOMEGALLERY:ERROR: Trying to set tap recognizer for invalid photo index \(idx).")
+			}
 		}
 	}
 	

@@ -92,7 +92,7 @@ class LocationView: UIView {
 	Get new location
 	*/
 	func getNewLocation(){
-		NSLog(":LOCATION:DEBUG: Setting marker.")
+		NSLog(":LOCATION:LOG: Recalculating location.")
 		let defaults = UserDefaults.standard
 		if (defaults.value(forKey: "GMLocLat") != nil && defaults.value(forKey: "GMLocLon") != nil){
 			let lat = defaults.value(forKey: "GMLocLat") as! Double
@@ -110,12 +110,10 @@ class LocationView: UIView {
 				marker.title = "Gasteizko Margolariak"
 				//marker.snippet = "Australia"
 				marker.map = self.map
-				NSLog(":LOCATION:DEBUG: Marker set.")
 			
 				let location = self.controller.getLocation()
 				if location != nil {
 					let d: Int = calculateDistance(lat1: location.latitude, lon1: location.longitude, lat2: lat, lon2: lon)
-					NSLog(":LOCATION:LOG: Distance (m): \(d)")
 				
 					if d <= 1000 {
 						self.lbDistance.text = "A \(d) metros de ti."
@@ -131,9 +129,6 @@ class LocationView: UIView {
 				self.lbDistance.isHidden = true
 				self.lbNo.isHidden = false
 			}
-		}
-		else{
-			NSLog(":LOCATION:DEBUG: No location saved yet.")
 		}
 	}
 

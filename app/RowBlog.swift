@@ -127,7 +127,6 @@ Extension of UIView to be formatted as post rows.
 	Opens an activity.
 	*/
 	func openPost(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROWBLOG:DEBUG: Getting delegate and showing post \(self.id).")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: self.id)
 	}
