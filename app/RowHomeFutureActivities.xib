@@ -1,111 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-<device id="retina4_7" orientation="portrait">
-<adaptation id="fullscreen"/>
-</device>
-<dependencies>
-<deployment identifier="iOS"/>
-<plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-<capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
-<capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-</dependencies>
-<objects>
-<placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RowHomeFutureActivities" customModule="app">
-<connections>
-<outlet property="container" destination="2hI-rc-KPm" id="rWX-Vl-kOp"/>
-<outlet property="descrip" destination="f4E-5p-Bid" id="IF5-ck-qUL"/>
-<outlet property="entry" destination="wLM-VU-VYk" id="Gkq-yE-fdN"/>
-<outlet property="image" destination="WSe-uz-Uhz" id="iU4-jm-UzQ"/>
-<outlet property="title" destination="Bkz-DV-HVr" id="1ok-yI-Npt"/>
-</connections>
-</placeholder>
-<placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-<view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="RowHomePastActivities" customClass="RowHomePastActivities" customModule="app">
-<rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-<autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-<subviews>
-<view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hI-rc-KPm" userLabel="Container">
-<rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-<subviews>
-<view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLM-VU-VYk" userLabel="Entry">
-<rect key="frame" x="10" y="10" width="355" height="667"/>
-<subviews>
-<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bkz-DV-HVr" userLabel="Title">
-<rect key="frame" x="10" y="10" width="335" height="21.5"/>
-<fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-<color key="textColor" red="0.15294117647058825" green="0.33333333333333331" blue="0.45098039215686275" alpha="1" colorSpace="calibratedRGB"/>
-<nil key="highlightedColor"/>
-</label>
-<imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WSe-uz-Uhz" userLabel="Image">
-<rect key="frame" x="10" y="40" width="89" height="64"/>
-<constraints>
-<constraint firstAttribute="height" constant="64" id="EJ3-uo-Xp3"/>
-</constraints>
-</imageView>
-<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-5p-Bid" userLabel="Text">
-<rect key="frame" x="98" y="40" width="214" height="64"/>
-<fontDescription key="fontDescription" type="system" pointSize="17"/>
-<nil key="textColor"/>
-<nil key="highlightedColor"/>
-</label>
-</subviews>
-<color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-<constraints>
-<constraint firstItem="WSe-uz-Uhz" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.2" id="9Lz-WQ-1aS"/>
-<constraint firstItem="f4E-5p-Bid" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="40" id="Emi-Ob-27Q"/>
-<constraint firstItem="Bkz-DV-HVr" firstAttribute="leading" secondItem="wLM-VU-VYk" secondAttribute="leading" constant="10" id="LSz-FM-x2V"/>
-<constraint firstItem="f4E-5p-Bid" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.7" id="MdM-ps-4b8"/>
-<constraint firstAttribute="trailing" secondItem="Bkz-DV-HVr" secondAttribute="trailing" constant="10" id="MdM-yF-pmK"/>
-<constraint firstItem="WSe-uz-Uhz" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="40" id="Pyf-oT-PQl"/>
-<constraint firstItem="WSe-uz-Uhz" firstAttribute="leading" secondItem="wLM-VU-VYk" secondAttribute="leading" constant="10" id="YG6-eX-oTj"/>
-<constraint firstItem="Bkz-DV-HVr" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="10" id="mwG-d2-HQL"/>
-<constraint firstAttribute="trailing" secondItem="f4E-5p-Bid" secondAttribute="trailing" constant="10" id="svU-xx-LsR"/>
-</constraints>
-<edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-<userDefinedRuntimeAttributes>
-<userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-<color key="value" red="0.42745098039215684" green="0.41176470588235292" blue="0.56470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-</userDefinedRuntimeAttribute>
-<userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-<real key="value" value="1"/>
-</userDefinedRuntimeAttribute>
-<userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-<real key="value" value="3"/>
-</userDefinedRuntimeAttribute>
-</userDefinedRuntimeAttributes>
-</view>
-</subviews>
-<constraints>
-<constraint firstItem="wLM-VU-VYk" firstAttribute="bottom" secondItem="2hI-rc-KPm" secondAttribute="bottom" constant="10" id="39K-W7-EIE"/>
-<constraint firstAttribute="trailing" secondItem="wLM-VU-VYk" secondAttribute="trailing" constant="10" id="HSF-55-R5c"/>
-<constraint firstAttribute="height" constant="120" id="PdT-5v-I0r"/>
-<constraint firstItem="wLM-VU-VYk" firstAttribute="top" secondItem="2hI-rc-KPm" secondAttribute="top" constant="10" id="fWN-oO-QzS"/>
-<constraint firstItem="wLM-VU-VYk" firstAttribute="leading" secondItem="2hI-rc-KPm" secondAttribute="leading" constant="10" id="teN-oh-Db9"/>
-</constraints>
-<edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-<userDefinedRuntimeAttributes>
-<userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-<real key="value" value="0.0"/>
-</userDefinedRuntimeAttribute>
-</userDefinedRuntimeAttributes>
-</view>
-</subviews>
-<constraints>
-<constraint firstItem="2hI-rc-KPm" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="Kwy-25-YES"/>
-<constraint firstItem="2hI-rc-KPm" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="clR-QU-zlD"/>
-<constraint firstItem="2hI-rc-KPm" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="htS-q0-otF"/>
-<constraint firstItem="2hI-rc-KPm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="rig-k7-6bz"/>
-</constraints>
-<nil key="simulatedStatusBarMetrics"/>
-<userDefinedRuntimeAttributes>
-<userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-<real key="value" value="0.0"/>
-</userDefinedRuntimeAttribute>
-</userDefinedRuntimeAttributes>
-<point key="canvasLocation" x="45.5" y="-43.5"/>
-</view>
-</objects>
-<resources>
-<image name="PhotoPlaceholder" width="170" height="108"/>
-</resources>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RowHomeFutureActivities" customModule="app">
+            <connections>
+                <outlet property="container" destination="2hI-rc-KPm" id="rWX-Vl-kOp"/>
+                <outlet property="descrip" destination="f4E-5p-Bid" id="IF5-ck-qUL"/>
+                <outlet property="entry" destination="wLM-VU-VYk" id="Gkq-yE-fdN"/>
+                <outlet property="image" destination="WSe-uz-Uhz" id="iU4-jm-UzQ"/>
+                <outlet property="title" destination="Bkz-DV-HVr" id="1ok-yI-Npt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="RowHomePastActivities" customClass="RowHomePastActivities" customModule="app">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hI-rc-KPm" userLabel="Container">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLM-VU-VYk" userLabel="Entry">
+                            <rect key="frame" x="10" y="10" width="355" height="667"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bkz-DV-HVr" userLabel="Title">
+                                    <rect key="frame" x="10" y="10" width="335" height="21.5"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                    <color key="textColor" red="0.15294117647058825" green="0.33333333333333331" blue="0.45098039215686275" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WSe-uz-Uhz" userLabel="Image">
+                                    <rect key="frame" x="10" y="40" width="71" height="64"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="64" id="EJ3-uo-Xp3"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-5p-Bid" userLabel="Text">
+                                    <rect key="frame" x="96.5" y="40" width="248.5" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="WSe-uz-Uhz" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.2" id="9Lz-WQ-1aS"/>
+                                <constraint firstItem="f4E-5p-Bid" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="40" id="Emi-Ob-27Q"/>
+                                <constraint firstItem="Bkz-DV-HVr" firstAttribute="leading" secondItem="wLM-VU-VYk" secondAttribute="leading" constant="10" id="LSz-FM-x2V"/>
+                                <constraint firstItem="f4E-5p-Bid" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.7" id="MdM-ps-4b8"/>
+                                <constraint firstAttribute="trailing" secondItem="Bkz-DV-HVr" secondAttribute="trailing" constant="10" id="MdM-yF-pmK"/>
+                                <constraint firstItem="WSe-uz-Uhz" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="40" id="Pyf-oT-PQl"/>
+                                <constraint firstItem="WSe-uz-Uhz" firstAttribute="leading" secondItem="wLM-VU-VYk" secondAttribute="leading" constant="10" id="YG6-eX-oTj"/>
+                                <constraint firstItem="Bkz-DV-HVr" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="10" id="mwG-d2-HQL"/>
+                                <constraint firstAttribute="trailing" secondItem="f4E-5p-Bid" secondAttribute="trailing" constant="10" id="svU-xx-LsR"/>
+                            </constraints>
+                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" red="0.42745098039215684" green="0.41176470588235292" blue="0.56470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="wLM-VU-VYk" firstAttribute="bottom" secondItem="2hI-rc-KPm" secondAttribute="bottom" constant="10" id="39K-W7-EIE"/>
+                        <constraint firstAttribute="trailing" secondItem="wLM-VU-VYk" secondAttribute="trailing" constant="10" id="HSF-55-R5c"/>
+                        <constraint firstAttribute="height" constant="120" id="PdT-5v-I0r"/>
+                        <constraint firstItem="wLM-VU-VYk" firstAttribute="top" secondItem="2hI-rc-KPm" secondAttribute="top" constant="10" id="fWN-oO-QzS"/>
+                        <constraint firstItem="wLM-VU-VYk" firstAttribute="leading" secondItem="2hI-rc-KPm" secondAttribute="leading" constant="10" id="teN-oh-Db9"/>
+                    </constraints>
+                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="2hI-rc-KPm" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="Kwy-25-YES"/>
+                <constraint firstItem="2hI-rc-KPm" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="clR-QU-zlD"/>
+                <constraint firstItem="2hI-rc-KPm" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="htS-q0-otF"/>
+                <constraint firstItem="2hI-rc-KPm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="rig-k7-6bz"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="45.5" y="-43.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="PhotoPlaceholder" width="170" height="108"/>
+    </resources>
 </document>

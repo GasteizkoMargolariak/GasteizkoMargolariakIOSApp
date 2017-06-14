@@ -28,4 +28,30 @@ class MenuCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var label: UILabel!
  
 	@IBOutlet weak var bar: UIView!
+	
+	
+	override var isHighlighted: Bool {
+		willSet {
+			onSelected(newValue)
+		}
+	}
+	override var isSelected: Bool {
+		willSet {
+			onSelected(newValue)
+		}
+	}
+	func onSelected(_ newValue: Bool) {
+
+		guard selectedBackgroundView == nil else { return }
+		if newValue == true {
+			self.bar.backgroundColor = UIColor(red: 148/255, green: 209/255, blue: 255/255, alpha: 1)
+			self.label.font = UIFont.boldSystemFont(ofSize: self.label.font.pointSize)
+			self.label.textColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+		}
+		else{
+			self.bar.backgroundColor = UIColor(red: 90/255, green: 180/255, blue: 255/255, alpha: 1)
+			self.label.font = UIFont.systemFont(ofSize: self.label.font.pointSize)
+			self.label.textColor = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
+		}
+	}
 }

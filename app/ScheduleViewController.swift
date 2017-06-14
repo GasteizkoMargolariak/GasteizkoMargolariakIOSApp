@@ -325,7 +325,6 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	:param: increment Days to advance the schedule. Negative values to back it up.
 	*/
 	func changeDay(increment: Int){
-		NSLog(":SCHEDULECONTROLLER:DEBUG: Change day increment: \(increment)")
 		self.selectedDay = self.selectedDay + increment
 		if self.selectedDay <= -1{
 			self.selectedDay = 0

@@ -46,6 +46,7 @@
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="xIf-kY-gPW" userLabel="Image">
                                     <rect key="frame" x="10" y="69" width="71" height="64"/>
+                                    <rect key="frame" x="10" y="53" width="71" height="64"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="64" id="GGt-lC-syI"/>
                                     </constraints>
