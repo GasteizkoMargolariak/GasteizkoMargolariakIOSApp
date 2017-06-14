@@ -106,9 +106,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	*/
 	func showFutureActivity(id: Int){
 		self.passId = id
-		// TODO set future segue
-		//performSegue(withIdentifier: "SegueFutureActivity", sender: nil)
-		performSegue(withIdentifier: "SeguePastActivity", sender: nil)
+		performSegue(withIdentifier: "SegueFutureActivity", sender: nil)
 	}
 	
 	
@@ -197,8 +195,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			(segue.destination as! PastActivityViewController).id = passId
 		}
 		if segue.identifier == "SegueFutureActivity"{
-			// TODO
-			//(segue.destination as! FutureActivityViewController).id = passId
+			(segue.destination as! FutureActivityViewController).id = passId
 		}
 	}
 	
