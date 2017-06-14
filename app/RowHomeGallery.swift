@@ -52,7 +52,7 @@ Extension of UIView to be formatted as sections.
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first as! UIView
+		nib.instantiate(withOwner: self, options: nil)
 	}
 	
 	

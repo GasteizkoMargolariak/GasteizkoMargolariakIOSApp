@@ -50,7 +50,7 @@ Extension of UIView to be formatted an activity itinerary.
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first
+		nib.instantiate(withOwner: self, options: nil)
 	}
 	
 	
