@@ -229,6 +229,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				
 		NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
 		//NSLog(":CONTROLLER:DEBUG: Skyp sync")
+		Notifications()
 		Sync()
 
 		
