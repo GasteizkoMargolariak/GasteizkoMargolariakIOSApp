@@ -68,6 +68,7 @@
 		93BAD2F61E586310009DF853 /* RowHomeSocial.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93BAD2F51E586310009DF853 /* RowHomeSocial.xib */; };
 		93BAD2F81E586741009DF853 /* RowHomeSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAD2F71E586741009DF853 /* RowHomeSocial.swift */; };
 		93BEB6D21E7E878300C68DE5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BEB6D11E7E878300C68DE5 /* PostViewController.swift */; };
+		93D8B0941EF1A64C008BD946 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D8B0931EF1A64C008BD946 /* Notifications.swift */; };
 		93D9EA601DE271E700089002 /* Section.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EA5F1DE271E700089002 /* Section.xib */; };
 		93D9EA641DE273FD00089002 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA631DE273FD00089002 /* Section.swift */; };
 		93D9EA681DE342AC00089002 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EA671DE342AC00089002 /* UIView.swift */; };
@@ -155,6 +156,7 @@
 		93BAD2F51E586310009DF853 /* RowHomeSocial.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowHomeSocial.xib; sourceTree = "<group>"; };
 		93BAD2F71E586741009DF853 /* RowHomeSocial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowHomeSocial.swift; sourceTree = "<group>"; };
 		93BEB6D11E7E878300C68DE5 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		93D8B0931EF1A64C008BD946 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		93D9EA5F1DE271E700089002 /* Section.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Section.xib; path = ../Section.xib; sourceTree = "<group>"; };
 		93D9EA631DE273FD00089002 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		93D9EA671DE342AC00089002 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 		93B84B981D9C31AB006C0F67 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				93D8B0931EF1A64C008BD946 /* Notifications.swift */,
 				93B84BA81D9C31AB006C0F67 /* Info.plist */,
 				93B84BA31D9C31AB006C0F67 /* Assets.xcassets */,
 				93B84BA01D9C31AB006C0F67 /* app.xcdatamodeld */,
@@ -439,6 +442,7 @@
 				93E0C5EA1EBDFFB400905811 /* RowPastActivity.swift in Sources */,
 				93BAD2F41E585EE6009DF853 /* RowHomeFutureActivities.swift in Sources */,
 				93E5058F1EEB0DCC00560B4A /* PhotoViewController.swift in Sources */,
+				93D8B0941EF1A64C008BD946 /* Notifications.swift in Sources */,
 				931AA5891E1AFF8C003A2290 /* String.swift in Sources */,
 				935AE18A1EC6138D0055E71F /* SyncController.swift in Sources */,
 				93B84B9C1D9C31AB006C0F67 /* ViewController.swift in Sources */,
