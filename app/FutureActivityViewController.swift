@@ -22,9 +22,9 @@ import UIKit
 import CoreData
 
 /**
-Controller to show a past activity.
+Controller to show a future activity.
 */
-class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate {
+class FutureActivityViewController: UIViewController, UIGestureRecognizerDelegate {
 	
 	@IBOutlet weak var barButton: UIButton!
 	@IBOutlet weak var barTitle: UILabel!
@@ -32,7 +32,9 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 	@IBOutlet weak var activityImage: UIImageView!
 	@IBOutlet weak var activityText: UILabel!
 	@IBOutlet weak var activityDate: UILabel!
-
+	@IBOutlet weak var itineraryContainer: UIView!
+	@IBOutlet weak var itineraryList: UIStackView!
+	@IBOutlet weak var activityPrice: UILabel!
 	
 	// Activity id
 	var id: Int = -1
@@ -40,6 +42,7 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 	var delegate: AppDelegate?
 	
 	var passId: Int = -1
+	
 	
 	/**
 	Get the app context.
@@ -97,20 +100,18 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 			var sText: String
 			var image: String
 			var date: NSDate
+			var price: Int
 			
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
 				sTitle = r.value(forKey: "title_\(lang)")! as! String
-				if (r.value(forKey: "after_\(lang)")! as! String).length != 0{
-					sText = r.value(forKey: "after_\(lang)")! as! String
-				}
-				else{
-					sText = r.value(forKey: "text_\(lang)")! as! String
-				}
+				sText = r.value(forKey: "text_\(lang)")! as! String
 				date = r.value(forKey: "date")! as! NSDate
+				price = r.value(forKey: "price")! as! Int
 				activityTitle.text = "  \(sTitle.decode().stripHtml())"
 				activityText.text = sText.decode().stripHtml()
 				activityDate.text = formatDate(date: date, lang: lang)
+				activityPrice.text = "Precio: \(price) €"
 				
 				// Get main image
 				image = ""
@@ -127,13 +128,65 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 						let path = "img/actividades/preview/\(image)"
 						self.activityImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 					}
-				} catch {
-					NSLog(":PASTACTIVITYCONTROLLER:ERROR: Error getting image for past activity \(id): \(error)")
+				}
+				catch {
+					NSLog(":FUTUREACTIVITYCONTROLLER:ERROR: Error getting image for past activity \(id): \(error)")
 				}
 				
+				// Get itinerary
+				let itiFetchRequest: NSFetchRequest<Activity_itinerary> = Activity_itinerary.fetchRequest()
+				let itiSortDescriptor = NSSortDescriptor(key: "start", ascending: true)
+				let itiSortDescriptors = [itiSortDescriptor]
+				itiFetchRequest.sortDescriptors = itiSortDescriptors
+				itiFetchRequest.predicate = NSPredicate(format: "activity == %i", id)
+				do {
+					let itiSearchResults = try context.fetch(itiFetchRequest)
+					if itiSearchResults.count == 0{
+						NSLog(":FUTUREACTIVITY:DEBUG: No itinerary for activity \(id)")
+						self.itineraryContainer.isHidden = true
+					}
+					else{
+					
+						var row: RowItinerary
+						var count = 0
+						var itiId: Int
+						var itiTitle: String
+						var itiText: String
+						var itiPlace: Int
+						var itiStart: NSDate
+						var place: [String]
+					
+						for r in itiSearchResults {
+							count = count + 1
+						
+							// Create a new row
+							row = RowItinerary.init(s: "rowItinerary\(count)", i: count)
+							itiId = r.value(forKey: "id")! as! Int
+							itiTitle = r.value(forKey: "name_\(lang)")! as! String
+							itiText = r.value(forKey: "description_\(lang)")! as! String
+							itiStart = r.value(forKey: "start")! as! NSDate
+							itiPlace = r.value(forKey: "place")! as! Int
+							place = getPlace(place: itiPlace, lang: lang, context: context)
+														
+							row.setTitle(text: itiTitle)
+							row.setText(text: itiText)
+							row.setStart(str: formatTime(date: itiStart))
+							row.setPlace(place: place[0], address: place[1])
+							row.id = id
+						
+							self.itineraryList?.addArrangedSubview(row)
+						}
+						self.itineraryList?.setNeedsLayout()
+						self.itineraryList?.layoutIfNeeded()
+						
+					}
+				}
+				catch {
+					NSLog(":FUTUREACTIVITY:ERROR: Error getting itinerary: \(error)")
+				}
 			}
 		} catch {
-			NSLog(":PASTACTIVITYCONTROLLER:ERROR: Error loading past activity: \(error)")
+			NSLog(":FUTUREACTIVITYCONTROLLER:ERROR: Error loading past activity: \(error)")
 		}
 	}
 	
@@ -187,6 +240,55 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 		
 		return strDate
 	}
+	
+	
+	/**
+	Extracts the time from a date to a string.
+	:param: text The date.
+	:return: Time, in string format.
+	*/
+	func formatTime(date: NSDate) -> String{
+
+		let calendar = Calendar.current
+		let hour: Int = calendar.component(.hour, from: date as Date)
+		let minute: Int = calendar.component(.minute, from: date as Date)
+		
+		var strTime = ""
+		if minute <= 9{
+			strTime = "\(hour):0\(minute)"
+		}
+		else{
+			strTime = "\(hour):\(minute)"
+		}
+		
+		return strTime
+	}
+	
+	
+	/**
+	Gets info about a place in the device language.
+	:param: place Place id.
+	:param: lang Device language (only 'es', 'en', or 'eu').
+	:param: context Application context.
+	:return: String array. 0-index item contains the place name. The 1-index one contains the address.
+	*/
+	func getPlace(place: Int, lang: String, context: NSManagedObjectContext) -> [String]{
+		var placeName = ""
+		var placeAddress = ""
+		let fetchRequest: NSFetchRequest<Place> = Place.fetchRequest()
+		fetchRequest.predicate = NSPredicate(format: "id = %i", place)
+		do {
+			let searchResults = try context.fetch(fetchRequest)
+			let r: NSManagedObject = searchResults[0]
+			placeName = r.value(forKey: "name_\(lang)")! as! String
+			placeAddress = r.value(forKey: "address_\(lang)")! as! String
+		}
+		catch{
+			NSLog(":FUTUREACTIVITY:ERROR: Error getting infor about place \(place): \(error)")
+		}
+		return [placeName, placeAddress]
+	}
+	
 	
 	/**
 	Gets the device language. The only recognized languages are Spanish, English and Basque.

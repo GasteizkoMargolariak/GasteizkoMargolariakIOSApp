@@ -205,6 +205,6 @@ Extension of UIView to be formatted as future activity rows.
 	func openActivity(_ sender:UITapGestureRecognizer? = nil){
 		NSLog(":ROWFUTUREACTIVITY:DEBUG: Getting delegate and showing past activity \(self.id).")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showPastActivity(id: self.id)
+		delegate.controller?.showFutureActivity(id: self.id)
 	}
 }
