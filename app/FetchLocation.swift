@@ -50,7 +50,6 @@ class FetchLocation{
 			if status == 200{
 			
 				guard let data = data else {
-					NSLog(":LOCATION:DEBUG: No data received.")
 					return
 				}
 

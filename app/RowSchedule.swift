@@ -70,12 +70,6 @@ Extension of UIView to be formatted as sections.
 		
 		container.frame = self.bounds
 		self.addSubview(container)
-		
-		// Set tap recognizer
-		/*print("ROW_BLOG:DEBUG: set tap recognizer")
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (self.openPost (_:)))
-		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
-		addGestureRecognizer(tapRecognizer)*/
 	}
 	
 	
@@ -164,6 +158,6 @@ Extension of UIView to be formatted as sections.
 	*/
 	func openEvent(_ sender:UITapGestureRecognizer? = nil){
 		// TODO implement openEvent.
-		print("ROW_BLOG:DEBUG: Open Event")
+		NSLog(":ROWSCHEDULE:DEBUG: Open Event")
 	}
 }

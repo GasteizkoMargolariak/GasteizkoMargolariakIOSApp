@@ -26,20 +26,15 @@ Extension of UIView to be formatted as sections.
 */
 @IBDesignable class RowHomeFutureActivities: UIView {
 	
-	//The container.
+	// Outlets.
 	@IBOutlet weak var container: UIView!
-	
-	//The entry
 	@IBOutlet weak var entry: UIView!
-	
-	//The activity title.
 	@IBOutlet weak var title: UILabel!
-	
-	//The activity description.
 	@IBOutlet weak var descrip: UILabel!
-	
-	//The activity image.
 	@IBOutlet weak var image: UIImageView!
+	
+	// Activity ID.
+	var id: Int = -1;
 	
 	
 	/**
@@ -76,6 +71,11 @@ Extension of UIView to be formatted as sections.
 		
 		self.container.frame = self.bounds
 		self.addSubview(container)
+		
+		// Set tap recognizer
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowHomeFutureActivities.openActivity (_:)))
+		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+		self.addGestureRecognizer(tapRecognizer)
 	}
 	
 	
@@ -119,5 +119,14 @@ Extension of UIView to be formatted as sections.
 			let path = "img/actividades/thumb/\(filename)"
 			self.image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
+	}
+	
+	
+	/**
+	Opens an activity.
+	*/
+	func openActivity(_ sender:UITapGestureRecognizer? = nil){
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showFutureActivity(id: self.id)
 	}
 }

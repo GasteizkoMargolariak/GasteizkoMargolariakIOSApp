@@ -45,6 +45,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	// Passed id to perform segues.
 	var passId: Int = -1
+	var passAlbum: Int = -1
 	
 	// Location-related variables.
 	var locationManager = CLLocationManager()
@@ -59,7 +60,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
-		NSLog(":CONTROLLER:DEBUG: Init!")
 		super.init(coder: aDecoder)
 		
 	}
@@ -85,9 +85,30 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	:param: id The post id.
 	*/
 	func showPost(id: Int){
-		NSLog(":CONTROLLER:DEBUG: Showing Post \(id)")
 		self.passId = id
 		performSegue(withIdentifier: "SeguePost", sender: nil)
+	}
+	
+	
+	/**
+	Shows a past activity.
+	:param: id The activity id.
+	*/
+	func showPastActivity(id: Int){
+		self.passId = id
+		performSegue(withIdentifier: "SeguePastActivity", sender: nil)
+	}
+	
+	
+	/**
+	Shows a future activity.
+	:param: id The activity id.
+	*/
+	func showFutureActivity(id: Int){
+		self.passId = id
+		// TODO set future segue
+		//performSegue(withIdentifier: "SegueFutureActivity", sender: nil)
+		performSegue(withIdentifier: "SeguePastActivity", sender: nil)
 	}
 	
 	
@@ -96,9 +117,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	:param: id The album id.
 	*/
 	func showAlbum(id: Int){
-		NSLog(":CONTROLLER:DEBUG: Showing album \(id)")
 		self.passId = id
 		performSegue(withIdentifier: "SegueAlbum", sender: nil)
+	}
+	
+	
+	/**
+	Shows a photo.
+	:param: id The album id.
+	*/
+	func showPhoto(album: Int, photo: Int){
+		self.passAlbum = album
+		self.passId = photo
+		performSegue(withIdentifier: "SeguePhoto", sender: nil)
 	}
 	
 	
@@ -107,7 +138,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	:param: margolari True for the margolari schedule, false for the city one.
 	*/
 	func showSchedule(margolari: Bool){
-		NSLog(":CONTROLLER:DEBUG: Showing schedule. Margolari: \(margolari)")
 		if margolari == true{
 			self.passId = 1
 		}
@@ -118,19 +148,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	
-	/**
+	/** m
 	Handles the initial sync process.
 	It can start it, showing the sync screen, or finish it, hidding the screen.
 	:param: showScreen True to start the sync, false to end it.
 	*/
 	func initialSync(showScreen: Bool){
 		if showScreen == true{
-			NSLog(":CONTROLLER:DEBUG: Showing initial sync screen.")
 			performSegue(withIdentifier: "SegueSync", sender: nil)
 			Sync(synchronous: true)
 		}
 		else{
-			NSLog(":CONTROLLER:DEBUG: Re-populating views and hidding initial sync screen.")
 			NSLog(":CONTROLLER:DEBUG: Re-populating disabled: Throws error.")
 			//self.populate()
 			syncSegue?.destination.dismiss(animated: true, completion: nil)
@@ -144,12 +172,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	:sender: The calling view.
 	*/
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		NSLog(":CONTROLLER:DEBUG: preparing for segue '\(String(describing: segue.identifier))' with id \(self.passId)")
 		if segue.identifier == "SeguePost"{
 			(segue.destination as! PostViewController).id = passId
 		}
 		if segue.identifier == "SegueAlbum"{
 			(segue.destination as! AlbumViewController).id = passId
+		}
+		if segue.identifier == "SeguePhoto"{
+			(segue.destination as! PhotoViewController).photoId = passId
+			(segue.destination as! PhotoViewController).albumId = passAlbum
 		}
 		if segue.identifier == "SegueSchedule"{
 			if passId == 1{
@@ -162,10 +193,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		if segue.identifier == "SegueSync"{
 			self.syncSegue = segue
 		}
+		if segue.identifier == "SeguePastActivity"{
+			(segue.destination as! PastActivityViewController).id = passId
+		}
+		if segue.identifier == "SegueFutureActivity"{
+			// TODO
+			//(segue.destination as! FutureActivityViewController).id = passId
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		NSLog(":CONTROLLER:DEBUG: Forcing a call to populate")
 		self.populate()
 		super.viewWillAppear(animated)
 	}
@@ -190,13 +227,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		fetchLocation()
 		self.locationTimer = Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(fetchLocation), userInfo: nil, repeats: true)
 				
-		//NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
-		NSLog(":CONTROLLER:DEBUG: Skyp sync")
-		//Sync()
+		NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
+		//NSLog(":CONTROLLER:DEBUG: Skyp sync")
+		Sync()
 
 		
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.delegate?.controller = self
+		
+		//self.sectionCollection.visibleCells[0].isSelected = true
 		
 		super.viewDidLoad()
 		
@@ -211,6 +250,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	As of now, not working.
 	*/
 	func populate(){
+		// TODO Set this up.
 		if (self.containerViewHome != nil){
 			//(self.containerViewHome as HomeView).populate()
 			//let ng = self.containerViewHome.dbgTxt
@@ -290,23 +330,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	//Make a cell for each section
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-				
+		
+		var first = true
+		
 		//Get a reference to our storyboard cell
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MenuCollectionViewCell
 		
 		//Set text
 		cell.label.text = self.items[indexPath.item]
 		
-		//Mark the first cell as selected...
-		if indexPath.item == selected{
-			cell.bar.backgroundColor = UIColor(red: 90/255, green: 180/255, blue: 255/255, alpha: 1)
-			cell.label.font = UIFont.boldSystemFont(ofSize: cell.label.font.pointSize)
-		}
-			
-		//... and the others as unselected
-		else{
-			cell.bar.backgroundColor = UIColor(red: 148/255, green: 209/255, blue: 255/255, alpha: 1)
-			cell.label.font = UIFont.systemFont(ofSize: cell.label.font.pointSize)
+		// Mark the first one as selected.
+		if indexPath.item == 0{
+			cell.isSelected = true
+			first = false
 		}
 		
 		return cell
@@ -326,18 +362,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBAction func showComponent(selected: Int) {
 		//Activate label
 		var i = 0
-		for cell in sectionCollection.visibleCells as! [MenuCollectionViewCell]{ //TODO: Not only visibles!
-			if i == selected + 1{
-				cell.bar.backgroundColor = UIColor(red: 90/255, green: 180/255, blue: 255/255, alpha: 1)
-				cell.label.font = UIFont.boldSystemFont(ofSize: cell.label.font.pointSize)
-			}
-			else{
-				cell.bar.backgroundColor = UIColor(red: 148/255, green: 209/255, blue: 255/255, alpha: 1)
-				cell.label.font = UIFont.systemFont(ofSize: cell.label.font.pointSize)
-				
-			}
-			i = i + 1
-		}
 		
 		//Show the view
 		if selected == 0 {
@@ -400,9 +424,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				self.containerViewGallery.alpha = 1
 			})
 		}
-		
 	}
-
-
 }
 

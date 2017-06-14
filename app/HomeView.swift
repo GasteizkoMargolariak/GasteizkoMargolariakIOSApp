@@ -26,14 +26,15 @@ import UIKit
  */
 class HomeView: UIView {
 	
-	//The main scroll view.
+	// Outlets
 	@IBOutlet weak var scrollView: UIScrollView!
-	
-	//The container of the view.
 	@IBOutlet weak var container: UIView!
+	@IBOutlet weak var locationMessage: UILabel!
+	@IBOutlet weak var lablancaImage: UIImageView!
+	@IBOutlet weak var lablancaText: UILabel!
 	
 	//Each of the sections of the view.
-	@IBOutlet weak var locationSection: Section!
+	@IBOutlet weak var locationSection: UIView!
 	@IBOutlet weak var lablancaSection: Section!
 	@IBOutlet weak var futureActivitiesSection: Section!
 	@IBOutlet weak var blogSection: Section!
@@ -44,17 +45,30 @@ class HomeView: UIView {
 	var moc: NSManagedObjectContext? = nil
 	var delegate: AppDelegate? = nil
 	var lang: String? = nil
+	var locationTimer: Timer? = nil
+	var controller: ViewController
+	var storyboard: UIStoryboard
 	
+	
+	/**
+	Default constructor for the storyboard.
+	:param: frame View frame.
+	*/
 	override init(frame: CGRect){
+		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+		self.controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		super.init(frame: frame)
 		
 	}
+	
 	
 	/**
 	 Run when the view is started.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		
+		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+		self.controller = storyboard.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		super.init(coder: aDecoder)
 		
 		//Load the contents of the HomeView.xib file.
@@ -62,16 +76,12 @@ class HomeView: UIView {
 		self.addSubview(container)
 		container.frame = self.bounds
 		
-
-		
 		//Set titles for each section
-		locationSection.setTitle(text: "Encuentranos")
-		lablancaSection.setTitle(text: "La Blanca")
-		futureActivitiesSection.setTitle(text: "Proximas actividades")
-		blogSection.setTitle(text: "Ultimos posts")
-		gallerySection.setTitle(text: "Ultimas fotos")
-		pastActivitiesSection.setTitle(text: "Ultimas actividades")
-		socialSection.setTitle(text: "Siguenos")
+		futureActivitiesSection.setTitle(text: "Próximas actividades")
+		blogSection.setTitle(text: "Últimos posts")
+		gallerySection.setTitle(text: "Últimas fotos")
+		pastActivitiesSection.setTitle(text: "Últimas actividades")
+		socialSection.setTitle(text: "Síguenos")
 		
 		//Get info to populate sections
 		self.moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -80,20 +90,21 @@ class HomeView: UIView {
 		self.moc?.persistentStoreCoordinator = self.delegate?.persistentStoreCoordinator
 		self.lang = getLanguage()
 		
+		
+		// Populate section.
 		populate()
 		
-		/*//Always at the end: update scrollview
-		var h: Int = 0
-		for view in scrollView.subviews {
-
-			//contentRect = contentRect.union(view.frame);
-			h = h + Int(view.frame.height) + 30 //Why 30?
-
-		}
-		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 1300// CGFloat(h);*/
+		
+		// Special case: Location
+		// Set up once and start and periodically witha  timer.
+		setUpLocation()
+		Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(setUpLocation), userInfo: nil, repeats: true)
 	}
 	
+	
+	/**
+	Sets all the sections up
+	*/
 	func populate(){
 	
 		//Populate sections
@@ -102,11 +113,9 @@ class HomeView: UIView {
 		setUpFutureActivities(context: self.moc!, delegate: self.delegate!, lang: self.lang!, parent: self.futureActivitiesSection.getContentStack())
 		setUpSocial(parent: self.socialSection.getContentStack())
 		setUpGallery(context: self.moc!, delegate: self.delegate!, parent: self.gallerySection.getContentStack())
-		
-		
-		//pastActivitiesSection.expandSection()
-
+		setUpLablanca(context: self.moc!, delegate: self.delegate!, lang: self.lang!)
 	}
+	
 	
 	/**
 	Gets the device language. The only recognized languages are Spanish, English and Basque.
@@ -125,7 +134,114 @@ class HomeView: UIView {
 	
 	
 	/**
+	Sets up the location section.
+	If no location is reported, it hiddes the section.
+	*/
+	func setUpLocation(){
+		// TODO: Also set up tap recognizer.
+		let defaults = UserDefaults.standard
+		if (defaults.value(forKey: "GMLocLat") != nil && defaults.value(forKey: "GMLocLon") != nil){
+			let lat = defaults.value(forKey: "GMLocLat") as! Double
+			let lon = defaults.value(forKey: "GMLocLon") as! Double
+			let time = defaults.value(forKey: "GMLocTime") as! Date
+			let cTime = Date()
+			let minutes = Calendar.current.dateComponents([.minute], from: time, to: cTime).minute
+			if (minutes! < 30){
+				self.locationSection.isHidden = false
+				
+				// Set tap recognizer.
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (HomeView.openLocation (_:)))
+				tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+				self.locationSection.addGestureRecognizer(tapRecognizer)
+				
+				let location = self.controller.getLocation()
+				if location != nil {
+					let d: Int = calculateDistance(lat1: location.latitude, lon1: location.longitude, lat2: lat, lon2: lon)
+					
+					if d <= 1000 {
+						self.locationMessage.text = "¡Gasteizko Margolariak está por ahí! A \(d) metros de ti."
+					}
+					else{
+						self.locationMessage.text = "¡Gasteizko Margolariak está por ahí! A \(Int(d/1000)) kilómetros de ti."
+					}
+				}
+				else{
+					self.locationMessage.text = "¡Gasteizko Margolariak está por ahí!"
+				}
+			}
+			else{
+				self.locationSection.isHidden = true
+			}
+		}
+		else{
+			self.locationSection.isHidden = true
+		}
+	}
+	
+	
+	/**
+	Sets up the La Blanca secction.
+	Hiddes it if no current festivals.
+	:param: context App context.
+	:param: delegate App delegate.
+	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
+	*/
+	func setUpLablanca(context : NSManagedObjectContext, delegate: AppDelegate, lang: String){
+		
+		let defaults = UserDefaults.standard
+		if (defaults.value(forKey: "festivals") != nil){
+			let festivals = defaults.value(forKey: "festivals") as! Int
+			if festivals == 1{
+				
+				// Set tap recognizer
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (HomeView.openLablanca (_:)))
+				tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+				self.lablancaSection.addGestureRecognizer(tapRecognizer)
+				
+				// TODO: Get current year
+				let year = 2017
+				
+				// Get info about festivals
+				let fetchRequest: NSFetchRequest<Festival> = Festival.fetchRequest()
+				fetchRequest.predicate = NSPredicate(format: "year = %i", year)
+				
+				do {
+					
+					// Get info from festivals
+					let searchResults = try context.fetch(fetchRequest)
+					
+					if searchResults.count > 0 {
+						let r = searchResults[0]
+						
+						// Set image and text
+						self.lablancaText.text = (r.value(forKey: "text_\(lang)") as! String?)?.decode().stripHtml()
+						let filename: String = r.value(forKey: "img") as! String
+						if (filename == ""){
+							// Hide the imageview
+							self.lablancaImage.isHidden = true;
+						}
+						else{
+							let path = "img/blog/thumb/\(filename)"
+							self.lablancaImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+						}
+					}
+					
+				}
+				catch {
+					NSLog(":LABLANCA:ERROR: Error getting festivals info: \(error)")
+				}
+			}
+			else{
+				self.lablancaSection.isHidden = true
+			}
+		}
+	}
+	
+	
+	/**
 	Sets up the future activities section.
+	If none, it hiddes the section.
+	:param: context App context.
 	:param: delegate App delegate.
 	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
 	:param: parent Stack view to load the rows in.
@@ -148,40 +264,46 @@ class HomeView: UIView {
 			var text: String
 			var image: String
 			
-			for r in searchResults as [NSManagedObject] {
-				count = count + 1
-				
-				//Create a new row
-				row = RowHomeFutureActivities.init(s: "rowHomeFutureActivities\(count)", i: count)
-				id = r.value(forKey: "id")! as! Int
-				title = r.value(forKey: "title_\(lang)")! as! String
-				text = r.value(forKey: "text_\(lang)")! as! String
-				row.setTitle(text: title)
-				row.setText(text: text.decode())
-				
-				// Get main image
-				image = ""
-				let imgFetchRequest: NSFetchRequest<Activity_image> = Activity_image.fetchRequest()
-				let imgSortDescriptor = NSSortDescriptor(key: "idx", ascending: true)
-				let imgSortDescriptors = [imgSortDescriptor]
-				imgFetchRequest.sortDescriptors = imgSortDescriptors
-				imgFetchRequest.predicate = NSPredicate(format: "activity == %i", id)
-				imgFetchRequest.fetchLimit = 1
-				do{
-					let imgSearchResults = try context.fetch(imgFetchRequest)
-					for imgR in imgSearchResults as [NSManagedObject]{
-						image = imgR.value(forKey: "image")! as! String
-						row.setImage(filename: image)
-					}
-				}
-				catch {
-					NSLog(":HOME:ERROR: Error getting image for activity \(id): \(error)")
-				}
-				
-				parent.addArrangedSubview(row)
-				
+			if searchResults.count == 0{
+				self.futureActivitiesSection.isHidden = true
 			}
-		} catch {
+			else{
+				for r in searchResults as [NSManagedObject] {
+					count = count + 1
+				
+					//Create a new row
+					row = RowHomeFutureActivities.init(s: "rowHomeFutureActivities\(count)", i: count)
+					id = r.value(forKey: "id")! as! Int
+					title = r.value(forKey: "title_\(lang)")! as! String
+					text = r.value(forKey: "text_\(lang)")! as! String
+					row.setTitle(text: title)
+					row.setText(text: text)
+					row.id = id
+				
+					// Get main image
+					image = ""
+					let imgFetchRequest: NSFetchRequest<Activity_image> = Activity_image.fetchRequest()
+					let imgSortDescriptor = NSSortDescriptor(key: "idx", ascending: true)
+					let imgSortDescriptors = [imgSortDescriptor]
+					imgFetchRequest.sortDescriptors = imgSortDescriptors
+					imgFetchRequest.predicate = NSPredicate(format: "activity == %i", id)
+					imgFetchRequest.fetchLimit = 1
+					do{
+						let imgSearchResults = try context.fetch(imgFetchRequest)
+						for imgR in imgSearchResults as [NSManagedObject]{
+							image = imgR.value(forKey: "image")! as! String
+							row.setImage(filename: image)
+						}
+					}
+					catch {
+						NSLog(":HOME:ERROR: Error getting image for activity \(id): \(error)")
+					}
+				
+					parent.addArrangedSubview(row)
+				}
+			}
+		}
+		catch {
 			NSLog(":HOME:ERROR: Error loading future activities: \(error)")
 		}
 	}
@@ -189,6 +311,7 @@ class HomeView: UIView {
 	
 	/**
 	Sets up the blog section.
+	:param: context App context.
 	:param: delegate App delegate.
 	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
 	:param: parent Stack view to load the rows in.
@@ -257,6 +380,7 @@ class HomeView: UIView {
 	
 	/**
 	Sets up the past activities section.
+	:param: context App context.
 	:param: delegate App delegate.
 	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
 	:param: parent Stack view to load the rows in.
@@ -291,6 +415,7 @@ class HomeView: UIView {
 				
 				row.setTitle(text: title)
 				row.setText(text: text)
+				row.id = id
 				
 				// Get main image
 				image = ""
@@ -318,8 +443,10 @@ class HomeView: UIView {
 		}
 	}
 	
+	
 	/**
 	Sets up the future activities section.
+	:param: context App context.
 	:param: delegate App delegate.
 	:param: parent Stack view to load the rows in.
 	*/
@@ -342,13 +469,30 @@ class HomeView: UIView {
 	
 			var id: Int
 			var image: String
+			var albumId: Int
 			var i = 0
 			for r in searchResults as [NSManagedObject] {
 				
 				image = r.value(forKey: "file")! as! String
-				row.setImage(idx: i, filename: image)
+				id = r.value(forKey: "id")! as! Int
 				
-				//TODO Set click listener
+				// TODO Get album id
+				// Get album title
+				let albumFetchRequest: NSFetchRequest<Photo_album> = Photo_album.fetchRequest()
+				albumFetchRequest.predicate = NSPredicate(format: "photo = %i", id)
+				do {
+					let results = try context.fetch(albumFetchRequest)
+					let r = results[0]
+					albumId = r.value(forKey: "album")! as! Int
+					row.albumIds[i] = albumId
+				}
+				catch {
+					NSLog(":GALLERYCONTROLLER:ERROR: Error getting album info: \(error)")
+				}
+				
+				row.setImage(idx: i, filename: image)
+				row.photoIds[i] = id
+				
 				i = i + 1
 			}
 		}
@@ -371,11 +515,62 @@ class HomeView: UIView {
 	
 	
 	/**
+	Converts degrees to radians.
+	:params: degrees Angle in degrees.
+	:return: Angle in radians.
+	*/
+	func degreesToRadians(degrees: Double) -> Double {
+		return degrees * Double.pi / 180;
+	}
+	
+	
+	/**
+	Calculates the distance between two coordinates.
+	:param: lat1 Latitude of the first coordinate.
+	:param: lon1 Longitude of the first coordinate.
+	:param: lat2 Latitude of the second coordinate.
+	:param: lon2 Longitude of the second coordinate.
+	:return: Distance between the points, in meters.
+	*/
+	func calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double) -> Int {
+		let eRadius: Double = 6371
+		
+		let dLat: Double = degreesToRadians(degrees: lat2-lat1)
+		let dLon: Double = degreesToRadians(degrees: lon2-lon1)
+		
+		let l1: Double = degreesToRadians(degrees: lat1)
+		let l2: Double = degreesToRadians(degrees: lat2)
+		
+		let a: Double = sin(dLat/2) * sin(dLat/2) + sin(dLon/2) * sin(dLon/2) * cos(l1) * cos(l2)
+		let c: Double = 2 * atan2(sqrt(a), sqrt(1-a))
+		let m: Double = eRadius * c * 1000
+		return Int(m)
+	}
+	
+	
+	/**
 	Opens a post.
 	*/
 	func openPost(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":HOME:DEBUG: Getting delegate and showing post.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: (sender?.view as! RowHomeBlog).id)
+	}
+	
+	
+	/**
+	Opens the La Blanca section when tapping the section.
+	*/
+	func openLablanca(_ sender:UITapGestureRecognizer? = nil){
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showComponent(selected: 2)
+	}
+	
+	
+	/**
+	Opens the Location section when tapping the section.
+	*/
+	func openLocation(_ sender:UITapGestureRecognizer? = nil){
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showComponent(selected: 1)
 	}
 }

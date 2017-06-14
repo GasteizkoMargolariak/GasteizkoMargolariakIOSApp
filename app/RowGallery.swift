@@ -100,7 +100,6 @@ Extension of UIView to be formatted as sections.
 	Opens an album.
 	*/
 	func openAlbum(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROW_GALLERY:DEBUG: Getting delegate and showing album \(self.id).")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showAlbum(id: self.id)
 	}
@@ -122,7 +121,6 @@ Extension of UIView to be formatted as sections.
 	*/
 	func setImage(idx: Int, filename: String){
 		if (filename == ""){
-			NSLog(":ROWGALLERY:DEBUG: No image for album \(self.id) at index \(idx).")
 			self.preview[idx].isHidden = true
 		}
 		else{

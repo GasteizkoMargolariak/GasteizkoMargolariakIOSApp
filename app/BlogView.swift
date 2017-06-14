@@ -60,19 +60,18 @@ class BlogView: UIView {
 		
 		// Get viewController from StoryBoard
 		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
-		self.controller = storyboard?.instantiateViewController(withIdentifier: "GMViewController") as? ViewController
+		self.controller = storyboard?.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		self.delegate = UIApplication.shared.delegate as? AppDelegate
+		self.delegate = UIApplication.shared.delegate as! AppDelegate
 		self.lang = getLanguage()
 		self.context?.persistentStoreCoordinator = delegate?.persistentStoreCoordinator
 		
 		populate()
-		
 	}
 	
 	
 	/**
-	Populates the section.
+	Actually populates the section.
 	*/
 	func populate(){
 		let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
@@ -87,18 +86,17 @@ class BlogView: UIView {
 			}
 			
 			// Get the results
-			let searchResults = try self.context?.fetch(fetchRequest)			
+			let searchResults = try self.context?.fetch(fetchRequest)
 			
+			var count: Int = 0
 			var row : RowBlog
-			var count = 0
 			var id: Int
 			var title: String
 			var text: String
 			var image: String
 			
-			for r in searchResults! {
-				count = count + 1
-				
+			for r in searchResults as! [NSManagedObject] {
+								
 				//Create a new row
 				row = RowBlog.init(s: "rowBlog\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
@@ -106,6 +104,7 @@ class BlogView: UIView {
 				text = r.value(forKey: "text_\(lang!)")! as! String
 				row.setTitle(text: title)
 				row.setText(text: text)
+				row.id = id
 				
 				// Get main image
 				image = ""
@@ -117,7 +116,7 @@ class BlogView: UIView {
 				imgFetchRequest.fetchLimit = 1
 				do{
 					let imgSearchResults = try context?.fetch(imgFetchRequest)
-					for imgR in imgSearchResults!{
+					for imgR in imgSearchResults as! [NSManagedObject]{
 						image = imgR.value(forKey: "image")! as! String
 						row.setImage(filename: image)
 					}
@@ -127,13 +126,7 @@ class BlogView: UIView {
 				
 				
 				self.postList?.addArrangedSubview(row)
-				
-				// TODO: Do this on the row didLoad method
-				// Set tap recognizer
-				//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openPost(_:)))
-				//row.isUserInteractionEnabled = true
-				//row.addGestureRecognizer(tapRecognizer)
-				
+				count = count + 1
 			}
 
 			// Trigger a layout update
@@ -143,25 +136,8 @@ class BlogView: UIView {
 		} catch {
 			NSLog(":BLOG:ERROR: Error with request: \(error)")
 		}
-		NSLog(":BLOG:DEBUG: Finished populating BlogView")
 	}
-	
-	
-	/*func openPost(){//(_ sender:UITapGestureRecognizer? = nil){
-		print("BLOG:DEBUG: getting delegate and showing post.")
-		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showPost(id: 4)
-		
-	print("BLOG:DEBUG: Post should be shown.")
-	}
-	
-	func openPost(_ sender:UITapGestureRecognizer? = nil){
-		print("BLOG:DEBUG: getting delegate and showing post.")
-		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showPost(id: 4)
-		print("BLOG:DEBUG: Post should be shown.")
-	}*/
-	
+
 	
 	/**
 	Gets the device language. The only recognized languages are Spanish, English and Basque.

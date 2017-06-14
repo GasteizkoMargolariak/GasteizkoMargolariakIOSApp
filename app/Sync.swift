@@ -121,14 +121,14 @@ class Sync{
 			var vrGallery: Int = 0
 			var vrBlanca: Int = 0
 			vrAll = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"all\":")! + 7, end : strVersions.indexOf(target : "}")!-2))!
-			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",\"")! + 1, end : strVersions.length - 1)
-			vrBlog = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"blog\":")! + 7, end : strVersions.indexOf(target : "}")!-2))!
-			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",\"")! + 1, end : strVersions.length - 1)
-			vrActivities = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"activities\":")! + 13, end : strVersions.indexOf(target : "}")!-2))!
-			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",\"")! + 1, end : strVersions.length - 1)
-			vrGallery = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"gallery\":")! + 10, end : strVersions.indexOf(target : "}")!-2))!
-			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",\"")! + 1, end : strVersions.length - 1)
-			vrBlanca = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"lablanca\":")! + 11, end : strVersions.indexOf(target : "}")!-2))!
+			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",")! + 1, end : strVersions.length - 1)
+			vrBlog = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"blog\":")! + 8, end : strVersions.indexOf(target : "}")!-2))!
+			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",")! + 1, end : strVersions.length - 1)
+			vrActivities = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"activities\":")! + 14, end : strVersions.indexOf(target : "}")!-2))!
+			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",")! + 1, end : strVersions.length - 1)
+			vrGallery = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"gallery\":")! + 11, end : strVersions.indexOf(target : "}")!-2))!
+			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",")! + 1, end : strVersions.length - 1)
+			vrBlanca = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"lablanca\":")! + 12, end : strVersions.indexOf(target : "}")!-2))!
 			
 			let dataIdx = strData?.indexOf(target: "{\"data\"")
 			strData = strData!.subStr(start: dataIdx!, end: strData!.length - 1)
@@ -546,9 +546,9 @@ class Sync{
 			var str = entry
 			let id : Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
 			
-			//Get activity
+			//Get post
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let post : String = str.subStr(start : str.indexOf(target : "\"post\":")! + 8, end : str.indexOf(target : ",\"")! - 2)
+			let post : Int = Int(str.subStr(start : str.indexOf(target : "\"post\":")! + 8, end : str.indexOf(target : ",\"")! - 2))!
 			
 			//Get text
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
@@ -556,7 +556,7 @@ class Sync{
 			
 			//Get dtime
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			dateFormatter.dateFormat = "yyyy-MM-dd"
+			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 			let dtime = dateFormatter.date(from : str.subStr(start : str.indexOf(target : "\"dtime\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
 			
 			//Get username
@@ -1323,17 +1323,23 @@ class Sync{
 			//Get title_es
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_es : String = str.subStr(start : str.indexOf(target : "\"title_es\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			row.setValue(title_es, forKey: "title_es")
+			if (title_es != "ul"){ //From "null"
+				row.setValue(title_es, forKey: "title_es")
+			}
 			
 			//Get title_en
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_en : String = str.subStr(start : str.indexOf(target : "\"title_en\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			row.setValue(title_en, forKey: "title_en")
+			if (title_en != "ul"){ //From "null"
+				row.setValue(title_en, forKey: "title_en")
+			}
 			
 			//Get title_eu
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_eu : String = str.subStr(start : str.indexOf(target : "\"title_eu\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			row.setValue(title_eu, forKey: "title_eu")
+			if (title_eu != "ul"){ //From "null"
+				row.setValue(title_eu, forKey: "title_eu")
+			}
 			
 			//Get description_es
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
@@ -1811,11 +1817,17 @@ class Sync{
 
 			// Get day
 			// Special item, not in the sync content
-			dateFormatter.dateFormat = "yyyy-MM-dd"
-			var day = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 11))!
+			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+			dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601)! as Calendar
+			dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+			//dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone!
+			dateFormatter.timeZone = NSTimeZone.local
+			var dayString = "\(str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 11)) 00:00:00"
+			var day = dateFormatter.date(from: dayString)!
 			// If on the first hours of the next day...
 			let calendar = Calendar.current
-			let hours = calendar.component(.hour, from: day )
+			let hours = calendar.component(.hour, from: start )
+			
 			// ... the event belongs to the previous day.
 			if hours < 6{
 				day = Calendar.current.date(byAdding: .day, value: -1, to: day)!	

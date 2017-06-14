@@ -21,11 +21,13 @@
 import Foundation
 import CoreData
 import UIKit
+
 /**
 Class to handle the home view.
 */
 class ActivitiesView: UIView {
 	
+	// Outlets.
 	@IBOutlet var container: ActivitiesView!
 	@IBOutlet weak var futureSection: Section!
 	@IBOutlet weak var pastSection: Section!
@@ -37,6 +39,7 @@ class ActivitiesView: UIView {
 	var futureList: UIStackView? = nil
 	var pastList: UIStackView? = nil
 	var context: NSManagedObjectContext? = nil
+	
 	
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -86,7 +89,6 @@ class ActivitiesView: UIView {
 		do {
 			let searchResults = try self.context?.fetch(fetchRequest)
 			if searchResults?.count == 0{
-				NSLog(":ACTIVITIES:DEBUG: No future activities: \(String(describing: searchResults?.count))")
 				let row: RowLabel = RowLabel.init(s: "rowFutureActivity0", i: 0)
 				row.setText(text: "No hay actividades planeadas proximamente. Pronto organizaremos algo!")
 				self.futureList?.addArrangedSubview(row)
@@ -119,6 +121,7 @@ class ActivitiesView: UIView {
 					row.setPrice(price: price)
 					row.setCity(text: city)
 					row.setDate(date: date, lang: lang!)
+					row.id = id
 				
 					// Get main image
 					image = ""
@@ -139,21 +142,15 @@ class ActivitiesView: UIView {
 					}
 				
 					self.futureList?.addArrangedSubview(row)
-					
-					// TODO: Do this on the row didLoad method
-					// Set tap recognizer
-					//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openActivity(_:)))
-					//row.isUserInteractionEnabled = true
-					//row.addGestureRecognizer(tapRecognizer)
 				}
 				self.futureList?.setNeedsLayout()
 				self.futureList?.layoutIfNeeded()
+				
 			}
 		}
 		catch {
 			NSLog(":ACTIVITIES:ERROR: Error with request: \(error)")
 		}
-		
 		
 		
 		// Show past activities
@@ -183,6 +180,7 @@ class ActivitiesView: UIView {
 				text = r.value(forKey: "text_\(lang!)")! as! String
 				row.setTitle(text: title)
 				row.setText(text: text)
+				row.id = id
 				
 				// Get main image
 				image = ""
@@ -205,37 +203,14 @@ class ActivitiesView: UIView {
 				
 				
 				self.pastList?.addArrangedSubview(row)
-				
-				// TODO: Do this on the row didLoad method
-				// Set tap recognizer
-				//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(openActivity(_:)))
-				//row.isUserInteractionEnabled = true
-				//row.addGestureRecognizer(tapRecognizer)
 			}
 			self.pastList?.setNeedsLayout()
 			self.pastList?.layoutIfNeeded()
+			
 		} catch {
 			NSLog(":ACTIVITIES:ERROR: Error with request: \(error)")
 		}
-		NSLog(":ACTIVITIES:DEBUG: Finished loading ActivitiesView")
 	}
-	
-	
-	/*func openActivity(){//(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ACTIVITIES:DEBUG: getting delegate and showing activity.")
-		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showActivity(id: 4)
-		NSLog(":ACTIVITIES:DEBUG: Activity should be shown.")
-	}
-	
-	
-	func openActivity(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ACTIVITIES:DEBUG: getting delegate and showing activity.")
-		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-		delegate.controller?.showActivity(id: 4)
-		NSLog(":ACTIVITIES:DEBUG: Activity should be shown.")
-	}*/
-	
 	
 	/**
 	Gets the device language. The only recognized languages are Spanish, English and Basque.

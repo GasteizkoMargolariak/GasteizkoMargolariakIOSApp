@@ -36,7 +36,7 @@
                                     <color key="textColor" red="0.1529411765" green="0.33333333329999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="6hA-MD-OsD" userLabel="Image">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="6hA-MD-OsD" userLabel="Image">
                                     <rect key="frame" x="10" y="40" width="71" height="64"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="64" id="68z-jj-fIa"/>
