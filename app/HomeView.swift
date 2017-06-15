@@ -30,6 +30,8 @@ class HomeView: UIView {
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var container: UIView!
 	@IBOutlet weak var locationMessage: UILabel!
+	@IBOutlet weak var lablancaImage: UIImageView!
+	@IBOutlet weak var lablancaText: UILabel!
 	
 	//Each of the sections of the view.
 	@IBOutlet weak var locationSection: UIView!
@@ -75,7 +77,6 @@ class HomeView: UIView {
 		container.frame = self.bounds
 		
 		//Set titles for each section
-		lablancaSection.setTitle(text: "La Blanca")
 		futureActivitiesSection.setTitle(text: "Próximas actividades")
 		blogSection.setTitle(text: "Últimos posts")
 		gallerySection.setTitle(text: "Últimas fotos")
@@ -147,6 +148,12 @@ class HomeView: UIView {
 			let minutes = Calendar.current.dateComponents([.minute], from: time, to: cTime).minute
 			if (minutes! < 30){
 				self.locationSection.isHidden = false
+				
+				// Set tap recognizer.
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (HomeView.openLocation (_:)))
+				tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+				self.locationSection.addGestureRecognizer(tapRecognizer)
+				
 				let location = self.controller.getLocation()
 				if location != nil {
 					let d: Int = calculateDistance(lat1: location.latitude, lon1: location.longitude, lat2: lat, lon2: lon)
@@ -180,11 +187,49 @@ class HomeView: UIView {
 	:param: lang Language code (two letter code, lowercase. Only 'es', 'en' and 'eu' supported).
 	*/
 	func setUpLablanca(context : NSManagedObjectContext, delegate: AppDelegate, lang: String){
+		
 		let defaults = UserDefaults.standard
 		if (defaults.value(forKey: "festivals") != nil){
 			let festivals = defaults.value(forKey: "festivals") as! Int
 			if festivals == 1{
-				// TODO Actualy show something
+				
+				// Set tap recognizer
+				let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (HomeView.openLablanca (_:)))
+				tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+				self.lablancaSection.addGestureRecognizer(tapRecognizer)
+				
+				// TODO: Get current year
+				let year = 2017
+				
+				// Get info about festivals
+				let fetchRequest: NSFetchRequest<Festival> = Festival.fetchRequest()
+				fetchRequest.predicate = NSPredicate(format: "year = %i", year)
+				
+				do {
+					
+					// Get info from festivals
+					let searchResults = try context.fetch(fetchRequest)
+					
+					if searchResults.count > 0 {
+						let r = searchResults[0]
+						
+						// Set image and text
+						self.lablancaText.text = (r.value(forKey: "text_\(lang)") as! String?)?.decode().stripHtml()
+						let filename: String = r.value(forKey: "img") as! String
+						if (filename == ""){
+							// Hide the imageview
+							self.lablancaImage.isHidden = true;
+						}
+						else{
+							let path = "img/blog/thumb/\(filename)"
+							self.lablancaImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+						}
+					}
+					
+				}
+				catch {
+					NSLog(":LABLANCA:ERROR: Error getting festivals info: \(error)")
+				}
 			}
 			else{
 				self.lablancaSection.isHidden = true
@@ -494,5 +539,25 @@ class HomeView: UIView {
 		NSLog(":HOME:DEBUG: Getting delegate and showing post.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: (sender?.view as! RowHomeBlog).id)
+	}
+	
+	
+	/**
+	Opens the La Blanca section when tapping the section.
+	*/
+	func openLablanca(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":HOME:DEBUG: Getting delegate opening the La Blanca section.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showComponent(selected: 2)
+	}
+	
+	
+	/**
+	Opens the Location section when tapping the section.
+	*/
+	func openLocation(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":HOME:DEBUG: Getting delegate opening the location section.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showComponent(selected: 1)
 	}
 }
