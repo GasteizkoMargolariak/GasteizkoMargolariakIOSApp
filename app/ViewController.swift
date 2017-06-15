@@ -106,9 +106,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	*/
 	func showFutureActivity(id: Int){
 		self.passId = id
-		// TODO set future segue
-		//performSegue(withIdentifier: "SegueFutureActivity", sender: nil)
-		performSegue(withIdentifier: "SeguePastActivity", sender: nil)
+		performSegue(withIdentifier: "SegueFutureActivity", sender: nil)
 	}
 	
 	
@@ -159,6 +157,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			Sync(synchronous: true)
 		}
 		else{
+			// TODO CHECK this
 			NSLog(":CONTROLLER:DEBUG: Re-populating disabled: Throws error.")
 			//self.populate()
 			syncSegue?.destination.dismiss(animated: true, completion: nil)
@@ -197,8 +196,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			(segue.destination as! PastActivityViewController).id = passId
 		}
 		if segue.identifier == "SegueFutureActivity"{
-			// TODO
-			//(segue.destination as! FutureActivityViewController).id = passId
+			(segue.destination as! FutureActivityViewController).id = passId
 		}
 	}
 	
@@ -332,8 +330,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	//Make a cell for each section
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
-		var first = true
-		
 		//Get a reference to our storyboard cell
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MenuCollectionViewCell
 		
@@ -343,7 +339,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		// Mark the first one as selected.
 		if indexPath.item == 0{
 			cell.isSelected = true
-			first = false
 		}
 		
 		return cell
@@ -361,9 +356,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	:param: selected Index of the selected item.
 	*/
 	@IBAction func showComponent(selected: Int) {
-		//Activate label
-		var i = 0
-		
+				
 		//Show the view
 		if selected == 0 {
 			UIView.animate(withDuration: 0.5, animations: {

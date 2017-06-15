@@ -1820,9 +1820,8 @@ class Sync{
 			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 			dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601)! as Calendar
 			dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
-			//dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone!
 			dateFormatter.timeZone = NSTimeZone.local
-			var dayString = "\(str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 11)) 00:00:00"
+			let dayString = "\(str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 11)) 00:00:00"
 			var day = dateFormatter.date(from: dayString)!
 			// If on the first hours of the next day...
 			let calendar = Calendar.current

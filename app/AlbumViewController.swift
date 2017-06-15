@@ -146,7 +146,6 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 					var imgR = imgSearchResults[0]
 					image = imgR.value(forKey: "file")! as! String
 					leftId = imgR.value(forKey: "id")! as! Int
-					NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) left: \(image)")
 					row.setImage(idx: 0, filename: image)
 					if i + 1 < searchResults.count {
 						r = searchResults[i + 1]
@@ -159,15 +158,10 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 						imgR = imgSearchResults[0]
 						image = imgR.value(forKey: "file")! as! String
 						rightId = imgR.value(forKey: "id")! as! Int
-						NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: \(image)")
 						row.setImage(idx: 1, filename: image)
 					}
-					else{
-						NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: none")
-					}
-					//TODO create row, add images (L+R), add row to container.
-					//row.setImage(filename: image)
-				} catch {
+				}
+				catch {
 					NSLog(":GALLERYCONTROLLER:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
@@ -184,6 +178,20 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	
 	
 	/**
+	Run before performing a segue.
+	Assigns id if neccessary.
+	:param: segue The segue to perform.
+	:sender: The calling view.
+	*/
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "SeguePhotoAlbum"{
+			(segue.destination as! PhotoViewController).albumId = passAlbum
+			(segue.destination as! PhotoViewController).photoId = passId
+		}
+	}
+	
+	
+	/**
 	Gets the device language. The only recognized languages are Spanish, English and Basque.
 	If the device has another language, Spanish will be selected by default.
 	:return: Two-letter language code.
@@ -195,20 +203,6 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 		}
 		else{
 			return "es"
-		}
-	}
-	
-	
-	/**
-	Run before performing a segue.
-	Assigns id if neccessary.
-	:param: segue The segue to perform.
-	:sender: The calling view.
-	*/
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "SeguePhotoAlbum"{
-			(segue.destination as! PhotoViewController).albumId = passAlbum
-			(segue.destination as! PhotoViewController).photoId = passId
 		}
 	}
 	

@@ -164,7 +164,6 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 			let searchResults = try context.fetch(fetchRequest)
 			
 			var sTitle: String
-			var sText: String
 			var image: String
 			var date: NSDate
 			
