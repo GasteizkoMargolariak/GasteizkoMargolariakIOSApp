@@ -30,7 +30,6 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	@IBOutlet weak var barTitle: UILabel!
 	@IBOutlet weak var photoTitle: UILabel!
 	@IBOutlet weak var photoImage: UIImageView!
-	@IBOutlet weak var photoDate: UILabel!
 	@IBOutlet weak var btPrev: UIButton!
 	@IBOutlet weak var btNext: UIButton!
 	
@@ -153,6 +152,8 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	public func loadPhoto(id: Int){
 		
+		NSLog(":PHOTO:DEBUG: Load photo \(id)")
+		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let lang : String = getLanguage()
@@ -162,14 +163,18 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 		
 		do {
 			let searchResults = try context.fetch(fetchRequest)
+	
+			NSLog(":PHOTO:DEBUG: Result count \(searchResults.count)")
 			
-			var sTitle: String
+			var sTitle: String = ""
 			var image: String
 			var date: NSDate
 			
-			for r in searchResults as [NSManagedObject] {
+			//for r in searchResults as [NSManagedObject] {
+			
+			let r: NSManagedObject = searchResults[0]
 				
-				sTitle = r.value(forKey: "title_\(lang)")! as! String
+				//sTitle = r.value(forKey: "title_\(lang)")! as! String
 				if sTitle == "" || sTitle == "ul" {
 					sTitle = self.albumTitle
 				}
@@ -205,13 +210,13 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 					let path = "img/galeria/preview/\(image)"
 					// TODO: Every time, set placeholder image
 					self.photoImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
-					self.photoDate.text = formatDate(date: date, lang: lang)
+					//self.photoDate.text = formatDate(date: date, lang: lang)
 				}
 				catch {
 					NSLog(":PHOTO:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
-			}
+			//}
 		} catch {
 			NSLog(":PHOTO:ERROR: Error setting up photo \(id): \(error)")
 		}
