@@ -40,6 +40,7 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	
 	// Id received from segue.
 	var passId: Int = -1
+	var passAlbum: Int = -1
 	
 	
 	/**
@@ -61,6 +62,27 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 		
 		// Set button action
 		barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
+		
+		// Set this controller in the delegate
+		self.delegate = UIApplication.shared.delegate as? AppDelegate
+		self.delegate?.albumController = self
+		
+		// Get album title
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let lang : String = getLanguage()
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		let fetchRequest: NSFetchRequest<Album> = Album.fetchRequest()
+		fetchRequest.predicate = NSPredicate(format: "id = %i", id)
+		do {
+			let results = try context.fetch(fetchRequest)
+			let r = results[0]
+			let title: String = r.value(forKey: "title_\(lang)")! as! String
+			self.albumTitle.text = " \(title.decode().stripHtml())"
+		}
+		catch {
+			NSLog(":GALLERYCONTROLLER:ERROR: Error getting album info: \(error)")
+		}
 	}
 	
 	
@@ -102,14 +124,15 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 			let searchResults = try context.fetch(fetchRequest)
 			var image: String
 			
-			NSLog(":GALLERYCONTROLLER:DEBUG: Total photos: \(searchResults.count)")
-			
 			for i in (0..<searchResults.count) where i % 2 == 0 {
 				
 				var r = searchResults[i]
 				var photoId = r.value(forKey: "photo")! as! Int
+				var leftId: Int = -1
+				var rightId: Int = -1
 				
 				row = RowAlbum.init(s: "rowAlbum\(i)", i: i)
+				row.id = id
 				
 				// Get photo info from Photo entity
 				let imgFetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
@@ -122,36 +145,48 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 					var imgSearchResults = try context.fetch(imgFetchRequest)
 					var imgR = imgSearchResults[0]
 					image = imgR.value(forKey: "file")! as! String
-					NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) left: \(image)")
+					leftId = imgR.value(forKey: "id")! as! Int
 					row.setImage(idx: 0, filename: image)
 					if i + 1 < searchResults.count {
 						r = searchResults[i + 1]
 						photoId = r.value(forKey: "photo")! as! Int
+						
 						imgFetchRequest.predicate = NSPredicate(format: "id == %i", photoId)
 						imgSearchResults = try context.fetch(imgFetchRequest)
 						
 						
 						imgR = imgSearchResults[0]
 						image = imgR.value(forKey: "file")! as! String
-						NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: \(image)")
+						rightId = imgR.value(forKey: "id")! as! Int
 						row.setImage(idx: 1, filename: image)
 					}
-					else{
-						NSLog(":GALLERYCONTROLLER:LOG: Image Row \(i) right: none")
-					}
-					//TODO create row, add images (L+R), add row to container.
-					//row.setImage(filename: image)
-				} catch {
+				}
+				catch {
 					NSLog(":GALLERYCONTROLLER:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
-				NSLog(":GALLERYCONTROLLER:DEBUG: Adding row: height: \(row.frame.height)")
+				row.setIds(left: leftId, right: rightId)
 				albumContainer.addArrangedSubview(row)
 				
 				rowcount = rowcount + 1
 			}
-		} catch {
+		}
+		catch {
 			NSLog(":GALLERYCONTROLLER:ERROR: Error with request: \(error)")
+		}
+	}
+	
+	
+	/**
+	Run before performing a segue.
+	Assigns id if neccessary.
+	:param: segue The segue to perform.
+	:sender: The calling view.
+	*/
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "SeguePhotoAlbum"{
+			(segue.destination as! PhotoViewController).albumId = passAlbum
+			(segue.destination as! PhotoViewController).photoId = passId
 		}
 	}
 	
@@ -169,6 +204,17 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 		else{
 			return "es"
 		}
+	}
+	
+	
+	/**
+	Shows a photo.
+	:param: id The album id.
+	*/
+	func showPhoto(album: Int, photo: Int){
+		self.passAlbum = album
+		self.passId = photo
+		performSegue(withIdentifier: "SeguePhotoAlbum", sender: nil)
 	}
 	
 }

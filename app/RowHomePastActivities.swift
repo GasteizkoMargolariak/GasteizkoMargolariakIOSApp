@@ -22,24 +22,19 @@ import Foundation
 import UIKit
 
 /**
-Extension of UIView to be formatted as sections.
+Extension of UIView to be formatted as past activity rows.
 */
 @IBDesignable class RowHomePastActivities: UIView {
 	
-	//The container.
+	// Outlets.
 	@IBOutlet weak var container: UIView!
-	
-	//The entry
 	@IBOutlet weak var entry: UIView!
-	
-	//The activity title.
 	@IBOutlet weak var title: UILabel!
-	
-	//The activity description.
 	@IBOutlet weak var descrip: UILabel!
-	
-	//The activity image.
 	@IBOutlet weak var image: UIImageView!
+	
+	// Activity ID.
+	var id: Int = -1;
 	
 	
 	/**
@@ -56,7 +51,7 @@ Extension of UIView to be formatted as sections.
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first
+		nib.instantiate(withOwner: self, options: nil)
 	}
 	
 	
@@ -76,6 +71,11 @@ Extension of UIView to be formatted as sections.
 
 		self.container.frame = self.bounds
 		self.addSubview(container)
+		
+		// Set tap recognizer
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowHomePastActivities.openActivity (_:)))
+		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+		self.addGestureRecognizer(tapRecognizer)
 	}
 	
 	
@@ -119,5 +119,14 @@ Extension of UIView to be formatted as sections.
 			let path = "img/actividades/thumb/\(filename)"
 			self.image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
+	}
+	
+	
+	/**
+	Opens an activity.
+	*/
+	func openActivity(_ sender:UITapGestureRecognizer? = nil){
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPastActivity(id: self.id)
 	}
 }

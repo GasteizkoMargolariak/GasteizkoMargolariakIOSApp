@@ -28,7 +28,12 @@ Class to handle server sync.
 class Sync{
 	
 	var initial: Bool = false
-	
+	var vBlog: Int = 0
+	var vActivities: Int = 0
+	var vGallery: Int = 0
+	var vBlanca: Int = 0
+	var vAll: Int = 0
+		
 	/**
 	Starts the sync process.
 	Always asynchronously.
@@ -46,6 +51,7 @@ class Sync{
 		if synchronous == true{
 			NSLog(":SYNC:LOG: Synchronous sync started.")
 			self.initial = true
+			
 		}
 		let url = buildUrl();
 		sync(url: url)
@@ -56,19 +62,41 @@ class Sync{
 	:returns: The URL.
 	*/
 	func buildUrl() -> URL{
-		let url = URL(string: "https://margolariak.com/API/v1/sync.php?client=com.margolariak.app")
-		//TODO add parameters
+		let defaults = UserDefaults.standard
+		var uId: String = "unknown"
+		if defaults.value(forKey: "versionAll") != nil{
+			self.vAll = defaults.value(forKey: "versionAll") as! Int
+		}
+		if defaults.value(forKey: "versionBlog") != nil{
+			self.vAll = defaults.value(forKey: "versionBlog") as! Int
+		}
+		if defaults.value(forKey: "versionActivities") != nil{
+			self.vActivities = defaults.value(forKey: "versionActivities") as! Int
+		}
+		if defaults.value(forKey: "versionGallery") != nil{
+			self.vGallery = defaults.value(forKey: "versionGallery") as! Int
+		}
+		if defaults.value(forKey: "versionBlanca") != nil{
+			self.vBlanca = defaults.value(forKey: "versionBlanca") as! Int
+		}
+		if defaults.value(forKey: "userId") != nil{
+			uId = defaults.value(forKey: "userId") as! String
+		}
+		let url = URL(string: "https://margolariak.com/API/v1/sync.php?client=com.margolariak.app&user=\(uId)&action=sync&version=\(self.vAll)")
+		
 		return url!
 	}
 	
 	/**
 	Performs an asynchronous sync.
-	It fethes the info from the server and stores as Core Data
+	It fetches the info from the server and stores as Core Data
 	:param: url The url to sync.
 	*/
 	func sync(url: URL){
 		
 		NSLog(":SYNC:LOG: Sync started.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.syncController?.nowSyncing = true
 		
 		//Synchronously get data
 		let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -82,71 +110,101 @@ class Sync{
 			}
 			
 			NSLog(":SYNC:LOG: Data received.")
+			let defaults = UserDefaults.standard
 			
 			var strData = String(data:data, encoding: String.Encoding.utf8)
+			
+			var strVersions = ""
+			if strData != nil{
+				strVersions = (strData?.subStr(start : (strData?.indexOf(target : "\"version\":")!)! + 11, end : (strData?.indexOf(target : "}]}")!)! + 1))!
+			}
+			var vrAll: Int = 0
+			var vrBlog: Int = 0
+			var vrActivities: Int = 0
+			var vrGallery: Int = 0
+			var vrBlanca: Int = 0
+			vrAll = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"all\":")! + 7, end : strVersions.indexOf(target : "}")!-2))!
+			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",")! + 1, end : strVersions.length - 1)
+			vrBlog = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"blog\":")! + 8, end : strVersions.indexOf(target : "}")!-2))!
+			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",")! + 1, end : strVersions.length - 1)
+			vrActivities = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"activities\":")! + 14, end : strVersions.indexOf(target : "}")!-2))!
+			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",")! + 1, end : strVersions.length - 1)
+			vrGallery = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"gallery\":")! + 11, end : strVersions.indexOf(target : "}")!-2))!
+			strVersions = strVersions.subStr(start : strVersions.indexOf(target : ",")! + 1, end : strVersions.length - 1)
+			vrBlanca = Int(strVersions.subStr(start : strVersions.indexOf(target : "\"lablanca\":")! + 12, end : strVersions.indexOf(target : "}")!-2))!
 			
 			let dataIdx = strData?.indexOf(target: "{\"data\"")
 			strData = strData!.subStr(start: dataIdx!, end: strData!.length - 1)
 			
-			//TODO: do something with versions
-			
-			//Get tables
-			let dataActivity : [String] = self.getTable(data: strData!, table: "activity")
-			let dataActivityComment : [String] = self.getTable(data: strData!, table: "activity_comment")
-			let dataActivityImage : [String] = self.getTable(data: strData!, table: "activity_image")
-			let dataActivityTag : [String] = self.getTable(data: strData!, table: "activity_tag")
-			let dataActivityItinerary : [String] = self.getTable(data: strData!, table: "activity_itinerary")
-			let dataAlbum : [String] = self.getTable(data: strData!, table: "album")
-			let dataFestival : [String] = self.getTable(data: strData!, table: "festival")
-			let dataFestivalDay : [String] = self.getTable(data: strData!, table: "festival_day")
-			let dataFestivalEvent : [String] = self.getTable(data: strData!, table: "festival_event")
-			//let dataFestivalEventImage : [String] = self.getTable(data: strData!, table: "festival_event_image")
-			let dataFestivalOffer : [String] = self.getTable(data: strData!, table: "festival_offer")
-			let dataPeople : [String] = self.getTable(data: strData!, table: "people")
-			let dataPhoto : [String] = self.getTable(data: strData!, table: "photo")
-			let dataPhotoAlbum : [String] = self.getTable(data: strData!, table: "photo_album")
-			//let dataPhotoComment : [String] = self.getTable(data: strData!, table: "photo_comment")
-			let dataPlace : [String] = self.getTable(data: strData!, table: "place")
-			let dataPost : [String] = self.getTable(data: strData!, table: "post")
-			let dataPostComment : [String] = self.getTable(data: strData!, table: "post_comment")
-			let dataPostImage : [String] = self.getTable(data: strData!, table: "post_image")
-			let dataPostTag : [String] = self.getTable(data: strData!, table: "post_tag")
+			//Get tables and save them
+			if vrActivities > self.vActivities || vrBlanca > self.vBlanca{
+				let dataPlace : [String] = self.getTable(data: strData!, table: "place")
+				self.saveTablePlace(entries: dataPlace)
+			}
+			if vrActivities > self.vActivities {
+				let dataActivity : [String] = self.getTable(data: strData!, table: "activity")
+				self.saveTableActivity(entries : dataActivity)
+				let dataActivityComment : [String] = self.getTable(data: strData!, table: "activity_comment")
+				self.saveTableActivityComment(entries : dataActivityComment)
+				let dataActivityImage : [String] = self.getTable(data: strData!, table: "activity_image")
+				self.saveTableActivityImage(entries : dataActivityImage)
+				let dataActivityTag : [String] = self.getTable(data: strData!, table: "activity_tag")
+				self.saveTableActivityTag(entries : dataActivityTag)
+				let dataActivityItinerary : [String] = self.getTable(data: strData!, table: "activity_itinerary")
+				self.saveTableActivityItinerary(entries : dataActivityItinerary)
+				defaults.set(vrActivities, forKey: "versionActivities")
+			}
+			if vrBlanca > self.vBlanca {
+				let dataPeople : [String] = self.getTable(data: strData!, table: "people")
+				self.saveTablePeople(entries: dataPeople)
+				let dataFestival : [String] = self.getTable(data: strData!, table: "festival")
+				self.saveTableFestival(entries: dataFestival)
+				let dataFestivalDay : [String] = self.getTable(data: strData!, table: "festival_day")
+				self.saveTableFestivalDay(entries: dataFestivalDay)
+				let dataFestivalEvent : [String] = self.getTable(data: strData!, table: "festival_event")
+				self.saveTableFestivalEvent(entries: dataFestivalEvent)
+				//let dataFestivalEventImage : [String] = self.getTable(data: strData!, table: "festival_event_image")
+				//
+				let dataFestivalOffer : [String] = self.getTable(data: strData!, table: "festival_offer")
+				self.saveTableFestivalOffer(entries: dataFestivalOffer)
+				defaults.set(vrBlanca, forKey: "versionBlanca")
+			}
+			if vrGallery > self.vGallery {
+				let dataAlbum : [String] = self.getTable(data: strData!, table: "album")
+				self.saveTableAlbum(entries: dataAlbum)
+				let dataPhoto : [String] = self.getTable(data: strData!, table: "photo")
+				self.saveTablePhoto(entries: dataPhoto)
+				let dataPhotoAlbum : [String] = self.getTable(data: strData!, table: "photo_album")
+				self.saveTablePhotoAlbum(entries: dataPhotoAlbum)
+				//let dataPhotoComment : [String] = self.getTable(data: strData!, table: "photo_comment")
+				//
+				defaults.set(vrGallery, forKey: "versionGallery")
+			}
+			if vrBlog > self.vBlog {
+				let dataPost : [String] = self.getTable(data: strData!, table: "post")
+				self.saveTablePost(entries: dataPost)
+				let dataPostComment : [String] = self.getTable(data: strData!, table: "post_comment")
+				self.saveTablePostComment(entries: dataPostComment)
+				let dataPostImage : [String] = self.getTable(data: strData!, table: "post_image")
+				self.saveTablePostImage(entries: dataPostImage)
+				let dataPostTag : [String] = self.getTable(data: strData!, table: "post_tag")
+				self.saveTablePostTag(entries: dataPostTag)
+				defaults.set(vrBlog, forKey: "versionBlog")
+			}
 			let dataSponsor : [String] = self.getTable(data: strData!, table: "sponsor")
-			let dataSettings: [String] = self.getTable(data: strData!, table: "settings")
-			
-			//One by one, save the received data
-			self.saveTableActivity(entries : dataActivity)
-			self.saveTableActivityComment(entries : dataActivityComment)
-			self.saveTableActivityImage(entries : dataActivityImage)
-			self.saveTableActivityTag(entries : dataActivityTag)
-			self.saveTableActivityItinerary(entries : dataActivityItinerary)
-			
-			self.saveTablePost(entries: dataPost)
-			self.saveTablePostComment(entries: dataPostComment)
-			self.saveTablePostImage(entries: dataPostImage)
-			self.saveTablePostTag(entries: dataPostTag)
-			
-			self.saveTablePlace(entries: dataPlace)
-			self.saveTablePeople(entries: dataPeople)
-			
-			self.saveTableAlbum(entries: dataAlbum)
-			self.saveTablePhoto(entries: dataPhoto)
-			self.saveTablePhotoAlbum(entries: dataPhotoAlbum)
-			
-			self.saveTableFestival(entries: dataFestival)
-			self.saveTableFestivalDay(entries: dataFestivalDay)
-			self.saveTableFestivalOffer(entries: dataFestivalOffer)
-			self.saveTableFestivalEvent(entries: dataFestivalEvent)
-			
 			self.saveTableSponsor(entries: dataSponsor)
-			
+			let dataSettings: [String] = self.getTable(data: strData!, table: "settings")
 			self.saveSettings(entries: dataSettings)
-			
+			defaults.set(vrAll, forKey: "versionAll")
+				
+
 			// If it's the initial sync, hide the segue
 			if self.initial == true{
 				NSLog(":SYNC:LOG: Finishing synchronous sync.")
+				//let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+				//delegate.syncController?.startApp()
 				let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-				delegate.controller?.initialSync(showScreen: false)
+				delegate.syncController?.nowSyncing = false
 			}
 		}
 		
@@ -493,9 +551,9 @@ class Sync{
 			var str = entry
 			let id : Int = Int(str.subStr(start : str.indexOf(target : "\"id\":")! + 6, end : str.indexOf(target : ",\"")! - 2))!
 			
-			//Get activity
+			//Get post
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			let post : String = str.subStr(start : str.indexOf(target : "\"post\":")! + 8, end : str.indexOf(target : ",\"")! - 2)
+			let post : Int = Int(str.subStr(start : str.indexOf(target : "\"post\":")! + 8, end : str.indexOf(target : ",\"")! - 2))!
 			
 			//Get text
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
@@ -503,7 +561,7 @@ class Sync{
 			
 			//Get dtime
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
-			dateFormatter.dateFormat = "yyyy-MM-dd"
+			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 			let dtime = dateFormatter.date(from : str.subStr(start : str.indexOf(target : "\"dtime\":")! + 9, end : str.indexOf(target : ",\"")! - 2))!
 			
 			//Get username
@@ -1270,17 +1328,23 @@ class Sync{
 			//Get title_es
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_es : String = str.subStr(start : str.indexOf(target : "\"title_es\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			row.setValue(title_es, forKey: "title_es")
+			if (title_es != "ul"){ //From "null"
+				row.setValue(title_es, forKey: "title_es")
+			}
 			
 			//Get title_en
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_en : String = str.subStr(start : str.indexOf(target : "\"title_en\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			row.setValue(title_en, forKey: "title_en")
+			if (title_en != "ul"){ //From "null"
+				row.setValue(title_en, forKey: "title_en")
+			}
 			
 			//Get title_eu
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_eu : String = str.subStr(start : str.indexOf(target : "\"title_eu\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			row.setValue(title_eu, forKey: "title_eu")
+			if (title_eu != "ul"){ //From "null"
+				row.setValue(title_eu, forKey: "title_eu")
+			}
 			
 			//Get description_es
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
@@ -1758,11 +1822,16 @@ class Sync{
 
 			// Get day
 			// Special item, not in the sync content
-			dateFormatter.dateFormat = "yyyy-MM-dd"
-			var day = dateFormatter.date(from: str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 11))!
+			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+			dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601)! as Calendar
+			dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+			dateFormatter.timeZone = NSTimeZone.local
+			let dayString = "\(str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 11)) 00:00:00"
+			var day = dateFormatter.date(from: dayString)!
 			// If on the first hours of the next day...
 			let calendar = Calendar.current
-			let hours = calendar.component(.hour, from: day )
+			let hours = calendar.component(.hour, from: start )
+			
 			// ... the event belongs to the previous day.
 			if hours < 6{
 				day = Calendar.current.date(byAdding: .day, value: -1, to: day)!	

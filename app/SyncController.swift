@@ -26,6 +26,11 @@ The view controller of the app.
 */
 class SyncController: UIViewController{
 	
+	var delegate: AppDelegate?
+	
+	var nowSyncing: Bool = false
+	var syncTimer: Timer? = nil
+	
 	@IBOutlet weak var pb: UIProgressView!
 	@IBOutlet weak var lb: UILabel!
 	
@@ -39,16 +44,78 @@ class SyncController: UIViewController{
 	*/
 	override func viewDidLoad() {
 		
-		NSLog(":SYNC:LOG: SyncController shown.")
+		NSLog(":SYNCCONTROLLER:LOG: SyncController shown.")
+		self.delegate = UIApplication.shared.delegate as? AppDelegate
+		self.delegate?.syncController = self
 		
 		super.viewDidLoad()
 		
-		// Initial setup
-		pb.progress = 0
 		
-		// Start the timer
-		Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(progress), userInfo: nil, repeats: true)
 		
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		if UserDefaults.standard.object(forKey: "userId") == nil{
+			NSLog(":SYNCCONTROLLER:LOG: First run. Generating user ID and syncing...")
+			let newUid = randomString(length: 16)
+			let defaults = UserDefaults.standard
+			defaults.set(newUid, forKey: "userId")
+			// Initial setup
+			pb.progress = 0
+			
+			// Start the timer
+			Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(progress), userInfo: nil, repeats: true)
+			
+			syncTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(endSync), userInfo: nil, repeats: true)
+			
+			initialSync()
+		}
+		else{
+			startApp()
+		}
+	}
+	
+	func endSync(){
+		if self.nowSyncing == false{
+			syncTimer?.invalidate()
+			startApp()
+		}
+	}
+	
+	func startApp(){
+		performSegue(withIdentifier: "SegueInit", sender: nil)
+	}
+	
+	/**
+	Handles the initial sync process.
+	It can start it, showing the sync screen, or finish it, hidding the screen.
+	:param: showScreen True to start the sync, false to end it.
+	*/
+	func initialSync(){
+		//performSegue(withIdentifier: "SegueSync", sender: nil)
+		Sync(synchronous: true)
+	}
+	
+	
+	/**
+	Generates a random string to be used as a user identifier.
+	:param: length The length of the generated string.
+	:return: A random alphanumeric string with the indicated length.
+	*/
+	func randomString(length: Int) -> String {
+		
+		let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+		let len = UInt32(letters.length)
+		
+		var randomString = ""
+		
+		for _ in 0 ..< length {
+			let rand = arc4random_uniform(len)
+			var nextChar = letters.character(at: Int(rand))
+			randomString += NSString(characters: &nextChar, length: 1) as String
+		}
+		
+		return randomString
 	}
 	
 	

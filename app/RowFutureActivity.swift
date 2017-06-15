@@ -22,11 +22,11 @@ import Foundation
 import UIKit
 
 /**
-Extension of UIView to be formatted as sections.
+Extension of UIView to be formatted as future activity rows.
 */
 @IBDesignable class RowFutureActivity: UIView {
 
-	// Outlets
+	// Outlets.
 	@IBOutlet weak var container: UIView!
 	@IBOutlet weak var title: UILabel!
 	@IBOutlet weak var image: UIImageView!
@@ -34,6 +34,9 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var date: UILabel!
 	@IBOutlet weak var city: UILabel!
 	@IBOutlet weak var price: UILabel!
+	
+	// Activity ID.
+	var id = -1
 	
 	
 	/**
@@ -45,12 +48,15 @@ Extension of UIView to be formatted as sections.
 	}
 	
 	
-	
+	/**
+	Loads the view from the xib with the same name as the class.
+	*/
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first
+		nib.instantiate(withOwner: self, options: nil)
 	}
+	
 	
 	/**
 	Default constructor.
@@ -66,15 +72,15 @@ Extension of UIView to be formatted as sections.
 		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		container.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.frame = self.bounds
-		self.addSubview(container)
+		self.container.frame = self.bounds
+		self.addSubview(self.container)
 		
 		// Set tap recognizer
-		/*print("ROW_FUTURE_ACTIVITY:DEBUG: set tap recognizer")
-		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (self.openActivity (_:)))
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowPastActivity.openActivity (_:)))
 		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
-		addGestureRecognizer(tapRecognizer)*/
+		self.addGestureRecognizer(tapRecognizer)
 	}
+	
 	
 	/**
 	Default constructor for the interface builder
@@ -82,7 +88,6 @@ Extension of UIView to be formatted as sections.
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}
-	
 	
 	
 	/**
@@ -93,6 +98,7 @@ Extension of UIView to be formatted as sections.
 		self.title.text = text.decode().stripHtml()
 	}
 	
+	
 	/**
 	Sets the city of the activity.
 	:param: text The city.
@@ -100,6 +106,7 @@ Extension of UIView to be formatted as sections.
 	func setCity(text: String){
 		self.city.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Sets the price of the activity.
@@ -114,6 +121,7 @@ Extension of UIView to be formatted as sections.
 		}
 	}
 	
+	
 	/**
 	Changes the description of the activity. Decodes HTML.
 	:param: text The new text.
@@ -121,6 +129,7 @@ Extension of UIView to be formatted as sections.
 	func setText(text: String){
 		self.descript.text = text.decode().stripHtml()
 	}
+	
 	
 	/**
 	Sets the date of the activity in a human readable format.
@@ -172,6 +181,7 @@ Extension of UIView to be formatted as sections.
 		self.date.text = strDate
 	}
 	
+	
 	/**
 	Changes the image of the activity.
 	If null or empty, the igage is hidden.
@@ -179,17 +189,21 @@ Extension of UIView to be formatted as sections.
 	*/
 	func setImage(filename: String){
 		if (filename == ""){
-			NSLog("ROW_FUTURE_ACTIVITY:DEBUG: No image")
-			//TODO hide the imageview
+			// Hide the imageview
+			self.image.isHidden = true
 		}
 		else{
-			NSLog(":ROW_FUTURE_ACTIVITY:DEBUG: Set image \(filename)")
 			let path = "img/actividades/thumb/\(filename)"
-			image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+			self.image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
 	}
 	
+	
+	/**
+	Opens an activity.
+	*/
 	func openActivity(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROW_FUTURE_ACTIVITY:DEBUG: open activity")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showFutureActivity(id: self.id)
 	}
 }

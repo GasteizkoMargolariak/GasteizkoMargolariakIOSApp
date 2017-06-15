@@ -26,22 +26,15 @@ Extension of UIView to be formatted as sections.
 */
 @IBDesignable class RowHomeBlog: UIView {
 
-	var id: Int!
-	
-	//The container.
+	// Outlets.
 	@IBOutlet weak var container: UIView!
-	
-	//The entry
 	@IBOutlet weak var entry: UIView!
-	
-	//The post title.
 	@IBOutlet weak var title: UILabel!
-	
-	//The post text.
 	@IBOutlet weak var descrip: UILabel!
-	
-	//The image.
 	@IBOutlet weak var image: UIImageView!
+	
+	// Post ID.
+	var id: Int!
 	
 	
 	/**
@@ -58,7 +51,7 @@ Extension of UIView to be formatted as sections.
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first
+		nib.instantiate(withOwner: self, options: nil).first as! UIView
 	}
 	
 	
@@ -73,11 +66,16 @@ Extension of UIView to be formatted as sections.
 		self.frame = self.bounds
 		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		self.translatesAutoresizingMaskIntoConstraints = true
-		container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		container.translatesAutoresizingMaskIntoConstraints = true
+		self.container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		self.container.translatesAutoresizingMaskIntoConstraints = true
 		
-		container.frame = self.bounds
-		self.addSubview(container)
+		self.container.frame = self.bounds
+		self.addSubview(self.container)
+		
+		// Set tap recognizer
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowHomeBlog.openPost (_:)))
+		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+		self.addGestureRecognizer(tapRecognizer)
 	}
 	
 	
@@ -115,11 +113,20 @@ Extension of UIView to be formatted as sections.
 	func setImage(filename: String){
 		if (filename == ""){
 			// Hide the imageview
-			self.image.isHidden = true
+			self.image.isHidden = true;
 		}
 		else{
 			let path = "img/blog/thumb/\(filename)"
 			self.image.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 		}
+	}
+	
+	
+	/**
+	Opens a post.
+	*/
+	func openPost(_ sender:UITapGestureRecognizer? = nil){
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showPost(id: self.id)
 	}
 }
