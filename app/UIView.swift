@@ -63,7 +63,6 @@ import UIKit
 	
 	var parentViewController: ViewController? {
 		var parentResponder: UIResponder? = self
-		var i = 0
 		while parentResponder != nil {
 			parentResponder = parentResponder!.next
 			if let viewController = parentResponder as? ViewController {

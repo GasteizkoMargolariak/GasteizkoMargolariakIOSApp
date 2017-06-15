@@ -62,7 +62,7 @@ class BlogView: UIView {
 		self.storyboard = UIStoryboard(name: "Main", bundle: nil)
 		self.controller = storyboard?.instantiateViewController(withIdentifier: "GMViewController") as! ViewController
 		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		self.delegate = UIApplication.shared.delegate as! AppDelegate
+		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.lang = getLanguage()
 		self.context?.persistentStoreCoordinator = delegate?.persistentStoreCoordinator
 		
@@ -95,7 +95,7 @@ class BlogView: UIView {
 			var text: String
 			var image: String
 			
-			for r in searchResults as! [NSManagedObject] {
+			for r in searchResults! {
 								
 				//Create a new row
 				row = RowBlog.init(s: "rowBlog\(count)", i: count)
@@ -116,7 +116,7 @@ class BlogView: UIView {
 				imgFetchRequest.fetchLimit = 1
 				do{
 					let imgSearchResults = try context?.fetch(imgFetchRequest)
-					for imgR in imgSearchResults as! [NSManagedObject]{
+					for imgR in imgSearchResults!{
 						image = imgR.value(forKey: "image")! as! String
 						row.setImage(filename: image)
 					}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3o1-ab-AT4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -85,12 +85,12 @@
                                                         <constraint firstAttribute="width" constant="100" id="eKL-ga-53F"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZNu-9N-o6K">
                                                     <rect key="frame" x="4" y="38" width="92" height="4"/>
-                                                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.3529411764705882" green="0.70588235294117641" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="4" id="Si5-HX-bjR"/>
                                                     </constraints>
@@ -198,7 +198,6 @@
                         <segue destination="UkS-wI-Yhx" kind="show" identifier="SeguePost" id="gs2-jd-cPW"/>
                         <segue destination="k0M-Sk-DZM" kind="show" identifier="SegueAlbum" id="Puc-tv-vaD"/>
                         <segue destination="zJF-Mh-CNb" kind="show" identifier="SegueSchedule" id="A70-jo-yAP"/>
-                        <segue destination="3o1-ab-AT4" kind="show" identifier="SegueSync" id="E96-mK-gE9"/>
                         <segue destination="jfx-Q2-RtY" kind="show" identifier="SeguePastActivity" id="MmG-k2-wHn"/>
                         <segue destination="DDO-dI-c0J" kind="show" identifier="SegueFutureActivity" id="ec7-aO-4Ac"/>
                     </connections>
@@ -989,7 +988,7 @@
                                     <constraint firstAttribute="width" secondItem="dxh-Z0-luU" secondAttribute="height" multiplier="1:1" id="Bdr-NA-IH6"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sincronizando..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="up0-1V-tTd">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sincronizando..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="up0-1V-tTd">
                                 <rect key="frame" x="0.0" y="475" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="mIj-oN-tq7"/>
@@ -998,13 +997,16 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VkR-DT-y3S">
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VkR-DT-y3S">
                                 <rect key="frame" x="56.5" y="515" width="262.5" height="2"/>
                                 <color key="progressTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="trackTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </progressView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgU-dx-MvQ">
-                                <rect key="frame" x="56.5" y="525" width="262.5" height="18"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgU-dx-MvQ">
+                                <rect key="frame" x="56.5" y="525" width="262.5" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="QWb-tU-jUd"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -1028,7 +1030,9 @@
                     </view>
                     <connections>
                         <outlet property="lb" destination="pgU-dx-MvQ" id="ATL-SS-rxd"/>
+                        <outlet property="lbTitle" destination="up0-1V-tTd" id="l37-DZ-jpR"/>
                         <outlet property="pb" destination="VkR-DT-y3S" id="NMd-7R-Rlc"/>
+                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="SegueInit" action="showViewController:sender:" id="kSh-cP-och"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRm-1Y-Xmm" userLabel="First Responder" sceneMemberID="firstResponder"/>

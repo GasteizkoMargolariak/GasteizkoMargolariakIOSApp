@@ -33,7 +33,7 @@ class Sync{
 	var vGallery: Int = 0
 	var vBlanca: Int = 0
 	var vAll: Int = 0
-	
+		
 	/**
 	Starts the sync process.
 	Always asynchronously.
@@ -51,6 +51,7 @@ class Sync{
 		if synchronous == true{
 			NSLog(":SYNC:LOG: Synchronous sync started.")
 			self.initial = true
+			
 		}
 		let url = buildUrl();
 		sync(url: url)
@@ -94,6 +95,8 @@ class Sync{
 	func sync(url: URL){
 		
 		NSLog(":SYNC:LOG: Sync started.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.syncController?.nowSyncing = true
 		
 		//Synchronously get data
 		let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -198,8 +201,10 @@ class Sync{
 			// If it's the initial sync, hide the segue
 			if self.initial == true{
 				NSLog(":SYNC:LOG: Finishing synchronous sync.")
+				//let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+				//delegate.syncController?.startApp()
 				let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-				delegate.controller?.initialSync(showScreen: false)
+				delegate.syncController?.nowSyncing = false
 			}
 		}
 		
@@ -216,7 +221,6 @@ class Sync{
 	func getTable(data: String, table: String) -> [String]{
 		//Does the table exists?
 		if data.indexOf(target: "\"\(table)\":[") == nil{
-			NSLog(":SYNC:LOG: Empty table: \(table).")
 			return [String]()
 		}
 		let iS : Int? = data.indexOf(target: "\"\(table)\":[")
@@ -232,8 +236,6 @@ class Sync{
 		entries[0] = entries[0].subStr(start: 1, end: entries[0].length - 1)
 		entries[entries.count - 1] = entries[entries.count - 1].subStr(start: 0, end: entries[entries.count - 1].length - 2)
 		
-		NSLog(":SYNC:LOG: Table \(table) has \(entries.count) rows.")
-		
 		//Return the array
 		return entries
 	}
@@ -244,8 +246,6 @@ class Sync{
 	:param: entries Array of strings containing the rows of the table, in JSON format.
 	*/
 	func saveTablePlace(entries : [String]){
-		
-		NSLog(":SYNC:LOG: Saving table Place.")
 		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -339,8 +339,6 @@ class Sync{
 	*/
 	func saveTablePeople(entries : [String]){
 		
-		NSLog(":SYNC:LOG: Saving table People.")
-		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -408,8 +406,6 @@ class Sync{
 	:param: entries Array of strings containing the rows of the table, in JSON format.
 	*/
 	func saveTablePost(entries : [String]){
-		
-		NSLog(":SYNC:LOG: Saving table Post.")
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
@@ -514,8 +510,6 @@ class Sync{
 	*/
 	func saveTablePostComment(entries : [String]){
 		
-		NSLog(":SYNC:LOG: Saving table Post_comment.")
-		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
 		
@@ -593,8 +587,6 @@ class Sync{
 	*/
 	func saveTablePostImage(entries : [String]){
 		
-		NSLog(":SYNC:LOG: Saving table Post_image.")
-		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -657,8 +649,6 @@ class Sync{
 	*/
 	func saveTablePostTag(entries : [String]){
 		
-		NSLog(":SYNC:LOG: Saving table Post_tag.")
-		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -710,8 +700,6 @@ class Sync{
 	:param: entries Array of strings containing the rows of the table, in JSON format.
 	*/
 	func saveTableActivity(entries : [String]){
-		
-		NSLog(":SYNC:LOG: Saving table Activity.")
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
@@ -869,8 +857,6 @@ class Sync{
 	*/
 	func saveTableActivityComment(entries : [String]){
 		
-		NSLog(":SYNC:LOG: Saving table Activity_comment.")
-		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
 		
@@ -948,8 +934,6 @@ class Sync{
 	*/
 	func saveTableActivityImage(entries : [String]){
 		
-		NSLog(":SYNC:LOG: Saving table Activity_image.")
-		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -1012,8 +996,6 @@ class Sync{
 	*/
 	func saveTableActivityTag(entries : [String]){
 		
-		NSLog(":SYNC:LOG: Saving table Activity_tag.")
-		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -1066,8 +1048,6 @@ class Sync{
 	*/
 	//CHECK: New (and probably better format than the others.)
 	func saveTableActivityItinerary(entries : [String]){
-		
-		NSLog(":SYNC:LOG: Saving table Activity_itinerary.")
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
@@ -1179,8 +1159,6 @@ class Sync{
 	*/
 	func saveTableAlbum(entries : [String]){
 		
-		NSLog(":SYNC:LOG: Saving table Album.")
-		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -1274,8 +1252,6 @@ class Sync{
 	:param: entries Array of strings containing the rows of the table, in JSON format.
 	*/
 	func saveTablePhoto(entries : [String]){
-		
-		NSLog(":SYNC:LOG: Saving table Photo.")
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
@@ -1392,8 +1368,6 @@ class Sync{
 	*/
 	func saveTablePhotoAlbum(entries : [String]){
 		
-		NSLog(":SYNC:LOG: Saving table Photo_album.")
-		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
 		
@@ -1449,8 +1423,6 @@ class Sync{
 	:param: entries Array of strings containing the rows of the table, in JSON format.
 	*/
 	func saveTableFestival(entries : [String]){
-		
-		NSLog(":SYNC:LOG: Saving table Festival.")
 		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -1540,8 +1512,6 @@ class Sync{
 	*/
 	func saveTableFestivalDay(entries : [String]){
 		
-		NSLog(":SYNC:LOG: Saving table FestivalDay.")
-		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
 		
@@ -1618,8 +1588,6 @@ class Sync{
 	:param: entries Array of strings containing the rows of the table, in JSON format.
 	*/
 	func saveTableFestivalOffer(entries : [String]){
-		
-		NSLog(":SYNC:LOG: Saving table FestivalOffer.")
 		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -1720,8 +1688,6 @@ class Sync{
 	*/
 	func saveTableFestivalEvent(entries : [String]){
 		
-		NSLog(":SYNC:LOG: Saving table FestivalEvent.")
-		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
 		
@@ -1820,9 +1786,8 @@ class Sync{
 			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 			dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601)! as Calendar
 			dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
-			//dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone!
 			dateFormatter.timeZone = NSTimeZone.local
-			var dayString = "\(str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 11)) 00:00:00"
+			let dayString = "\(str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 11)) 00:00:00"
 			var day = dateFormatter.date(from: dayString)!
 			// If on the first hours of the next day...
 			let calendar = Calendar.current
@@ -1861,8 +1826,6 @@ class Sync{
 	:param: entries Array of strings containing the rows of the table, in JSON format.
 	*/
 	func saveTableSponsor(entries : [String]){
-		
-		NSLog(":SYNC:LOG: Saving table Sponsor.")
 		
 		//Set up context
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -1993,7 +1956,6 @@ class Sync{
 	*/
 	func saveSettings(entries : [String]){
 		
-		NSLog(":SYNC:LOG: Saving settings.")
 		let defaults = UserDefaults.standard
 		
 		// Loop new entries

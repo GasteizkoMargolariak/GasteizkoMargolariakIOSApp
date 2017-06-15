@@ -60,6 +60,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
+		NSLog(":CONTROLLER:DEBUG: Init.")
 		super.init(coder: aDecoder)
 		
 	}
@@ -146,19 +147,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	
-	/** m
+	/** 
 	Handles the initial sync process.
 	It can start it, showing the sync screen, or finish it, hidding the screen.
 	:param: showScreen True to start the sync, false to end it.
 	*/
 	func initialSync(showScreen: Bool){
 		if showScreen == true{
-			performSegue(withIdentifier: "SegueSync", sender: nil)
 			Sync(synchronous: true)
 		}
 		else{
-			NSLog(":CONTROLLER:DEBUG: Re-populating disabled: Throws error.")
-			//self.populate()
 			syncSegue?.destination.dismiss(animated: true, completion: nil)
 		}
 	}
@@ -200,7 +198,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		self.populate()
 		super.viewWillAppear(animated)
 	}
 	
@@ -226,8 +223,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				
 		NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
 		//NSLog(":CONTROLLER:DEBUG: Skyp sync")
-		Notifications()
-		Sync()
+		//Notifications()
+		//Sync()
 
 		
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
@@ -242,27 +239,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	func fetchLocation(){
 		FetchLocation()
 	}
-
-	/**
-	Actually populates all sections.
-	As of now, not working.
-	*/
-	func populate(){
-		// TODO Set this up.
-		if (self.containerViewHome != nil){
-			//(self.containerViewHome as HomeView).populate()
-			//let ng = self.containerViewHome.dbgTxt
-			//NSLog("AAAAA \(ng)")
-		}
-		else{
-			NSLog("CONTROLLER:ERROR: containerViewHome couldn't be populated: It is nil.")
-		}
-		//self.containerLocation.populate()
-		//self.containerLablanca.populate()
-		//self.containerViewActivities.populate()
-		//self.containerViewBlog.populate()
-		//self.containerGallery.populate()
-	}
+	
 	
 	/**
 	Executed when the view is actually shown.
@@ -272,12 +249,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	*/
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		if UserDefaults.standard.object(forKey: "userId") == nil{
+		/*if UserDefaults.standard.object(forKey: "userId") == nil{
 			let newUid = randomString(length: 16)
 			let defaults = UserDefaults.standard
 			defaults.set(newUid, forKey: "userId")
 			initialSync(showScreen: true)
-		}
+		}*/
 		
 	}
 	
@@ -329,8 +306,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	//Make a cell for each section
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
-		var first = true
-		
 		//Get a reference to our storyboard cell
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MenuCollectionViewCell
 		
@@ -340,7 +315,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		// Mark the first one as selected.
 		if indexPath.item == 0{
 			cell.isSelected = true
-			first = false
 		}
 		
 		return cell
@@ -358,9 +332,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	:param: selected Index of the selected item.
 	*/
 	@IBAction func showComponent(selected: Int) {
-		//Activate label
-		var i = 0
-		
+				
 		//Show the view
 		if selected == 0 {
 			UIView.animate(withDuration: 0.5, animations: {

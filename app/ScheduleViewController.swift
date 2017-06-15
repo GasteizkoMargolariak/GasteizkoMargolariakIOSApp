@@ -259,7 +259,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 			for r in searchResults! {
 				
 				title = r.value(forKey: "title_\(lang!)") as! String
-				if let tx = r.value(forKey: "description_\(lang!)"){
+				if r.value(forKey: "description_\(lang!)") != nil{
 					text = r.value(forKey: "description_\(lang!)") as! String
 				}
 				else{
@@ -279,7 +279,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 				locationFetchRequest.fetchLimit = 1
 				do{
 					var locationSearchResults = try self.context?.fetch(locationFetchRequest)
-					var locationR = locationSearchResults?[0]
+					let locationR = locationSearchResults?[0]
 					location = locationR?.value(forKey: "name_\(lang!)")! as! String
 					
 					row.setLocation(text: location)

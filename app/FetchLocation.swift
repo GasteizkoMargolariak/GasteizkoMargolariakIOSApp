@@ -46,7 +46,6 @@ class FetchLocation{
 			}
 			let status = (response as! HTTPURLResponse).statusCode
 			
-			NSLog(":LOCATION:LOG: Response code \(status)")
 			if status == 200{
 			
 				guard let data = data else {

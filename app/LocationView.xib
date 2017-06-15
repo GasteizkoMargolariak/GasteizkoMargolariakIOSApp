@@ -36,7 +36,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3aZ-8G-e8X" userLabel="Entry">
                             <rect key="frame" x="10" y="43" width="335" height="594"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="La cuadrilla está por ahí!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwp-Sd-GF5" userLabel="Title">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="La cuadrilla está por ahí!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwp-Sd-GF5" userLabel="Title">
                                     <rect key="frame" x="10" y="10" width="315" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="JQk-vd-DLN"/>
@@ -45,7 +45,7 @@
                                     <color key="textColor" red="0.1529411765" green="0.33333333329999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lB5-i1-GOe" userLabel="Message">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lB5-i1-GOe" userLabel="Message">
                                     <rect key="frame" x="11.5" y="42" width="311" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="ann-h3-NzS"/>
@@ -60,7 +60,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guk-vu-ykd" customClass="GMSMapView">
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guk-vu-ykd" customClass="GMSMapView">
                                     <rect key="frame" x="10" y="73" width="315" height="492"/>
                                     <color key="backgroundColor" red="1" green="0.20334201390000001" blue="0.32001410590000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <userDefinedRuntimeAttributes>
