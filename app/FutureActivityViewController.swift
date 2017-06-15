@@ -142,7 +142,6 @@ class FutureActivityViewController: UIViewController, UIGestureRecognizerDelegat
 				do {
 					let itiSearchResults = try context.fetch(itiFetchRequest)
 					if itiSearchResults.count == 0{
-						NSLog(":FUTUREACTIVITY:DEBUG: No itinerary for activity \(id)")
 						self.itineraryContainer.isHidden = true
 					}
 					else{

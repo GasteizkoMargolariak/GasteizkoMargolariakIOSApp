@@ -53,8 +53,6 @@ class GalleryView: UIView {
 		
 		super.init(coder: aDecoder)
 		
-		NSLog(":GALLERY:LOG: Init gallery section.")
-		
 		//Load the contents of the HomeView.xib file.
 		Bundle.main.loadNibNamed("GalleryView", owner: self, options: nil)
 		self.addSubview(container)
@@ -155,7 +153,6 @@ class GalleryView: UIView {
 		self.scrollView.contentSize.height = 2500 //CGFloat(h);
 		
 		self.setUpRowsTapRecognizers()
-		NSLog(":GALLERY:LOG: Finished loading gallery section.")
 	}
 	
 	
