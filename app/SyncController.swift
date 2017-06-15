@@ -33,10 +33,11 @@ class SyncController: UIViewController{
 	
 	@IBOutlet weak var pb: UIProgressView!
 	@IBOutlet weak var lb: UILabel!
+	@IBOutlet weak var lbTitle: UILabel!
 	
 	var completion: Float = 0.0
 	let messages: [String] = ["Contactando con Don Margolo...", "Arrancando la furgo...", "Preparando kalimotxos...",
-	"Tú eres el piloto", "Afinando la tuba...", "Margolari camina pa'lante, margolari camina pa'trás.", "Ari ari ari!", "Llegando tarde", "¿Cabe más gente en el Foro Margolari?"]
+	"Tú eres el piloto", "Afinando la tuba...", "Margolari camina pa'lante, margolari camina pa'trás.", "Ari ari ari!", "Llegando tarde...", "¿Cabe más gente en el Foro Margolari?", "Arreglando el tirador de cerveza...", "Descorchando botellas...", "Repartiendo pulseras...", "Pintando las fiestas...", "Desplegando pancarta..."]
 	
 	
 	/**
@@ -61,6 +62,9 @@ class SyncController: UIViewController{
 			let defaults = UserDefaults.standard
 			defaults.set(newUid, forKey: "userId")
 			// Initial setup
+			pb.isHidden = false
+			lbTitle.isHidden = false
+			lb.isHidden = false
 			pb.progress = 0
 			
 			// Start the timer
