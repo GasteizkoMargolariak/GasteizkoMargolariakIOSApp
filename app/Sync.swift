@@ -33,7 +33,7 @@ class Sync{
 	var vGallery: Int = 0
 	var vBlanca: Int = 0
 	var vAll: Int = 0
-	
+		
 	/**
 	Starts the sync process.
 	Always asynchronously.
@@ -51,6 +51,7 @@ class Sync{
 		if synchronous == true{
 			NSLog(":SYNC:LOG: Synchronous sync started.")
 			self.initial = true
+			
 		}
 		let url = buildUrl();
 		sync(url: url)
@@ -94,6 +95,8 @@ class Sync{
 	func sync(url: URL){
 		
 		NSLog(":SYNC:LOG: Sync started.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.syncController?.nowSyncing = true
 		
 		//Synchronously get data
 		let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -198,8 +201,10 @@ class Sync{
 			// If it's the initial sync, hide the segue
 			if self.initial == true{
 				NSLog(":SYNC:LOG: Finishing synchronous sync.")
+				//let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+				//delegate.syncController?.startApp()
 				let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-				delegate.controller?.initialSync(showScreen: false)
+				delegate.syncController?.nowSyncing = false
 			}
 		}
 		
