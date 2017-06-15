@@ -71,8 +71,8 @@ class Notifications{
 			}
 			
 			let strData: String = String(data:data, encoding: String.Encoding.utf8)!
-			NSLog(":NOTIFICATION:LOG: Data received: \(strData)")
 			if strData.length > 0{
+				NSLog(":NOTIFICATION:LOG: Notifications received.")
 				let dataNotification: [String] = self.getData(data: strData)
 				self.saveNotifications(entries: dataNotification)
 			}

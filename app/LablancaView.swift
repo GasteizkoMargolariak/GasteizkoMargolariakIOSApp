@@ -57,8 +57,6 @@ class LablancaView: UIView {
 		
 		super.init(coder: aDecoder)
 		
-		NSLog(":LABLANCA:LOG: Init lablanca section.")
-
 		Bundle.main.loadNibNamed("LablancaView", owner: self, options: nil)
 		self.addSubview(container)
 		self.container.frame = self.bounds
