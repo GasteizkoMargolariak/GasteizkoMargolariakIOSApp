@@ -48,7 +48,7 @@ Extension of UIView to be formatted as sections.
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first
+		nib.instantiate(withOwner: self, options: nil)
 		
 		self.frame = self.bounds
 		self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -68,7 +68,6 @@ Extension of UIView to be formatted as sections.
 	:param: i Custom identifier
 	*/
 	init(s: String, i: Int) {
-		NSLog(":ROWLABLANCAOFFER:DEBUG: Init \(s), \(i)")
 		
 		super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 		loadViewFromNib()

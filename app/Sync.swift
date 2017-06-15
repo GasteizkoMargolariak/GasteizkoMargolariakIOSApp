@@ -33,7 +33,7 @@ class Sync{
 	var vGallery: Int = 0
 	var vBlanca: Int = 0
 	var vAll: Int = 0
-	
+		
 	/**
 	Starts the sync process.
 	Always asynchronously.
@@ -51,6 +51,7 @@ class Sync{
 		if synchronous == true{
 			NSLog(":SYNC:LOG: Synchronous sync started.")
 			self.initial = true
+			
 		}
 		let url = buildUrl();
 		sync(url: url)
@@ -94,6 +95,8 @@ class Sync{
 	func sync(url: URL){
 		
 		NSLog(":SYNC:LOG: Sync started.")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.syncController?.nowSyncing = true
 		
 		//Synchronously get data
 		let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -198,8 +201,10 @@ class Sync{
 			// If it's the initial sync, hide the segue
 			if self.initial == true{
 				NSLog(":SYNC:LOG: Finishing synchronous sync.")
+				//let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+				//delegate.syncController?.startApp()
 				let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-				delegate.controller?.initialSync(showScreen: false)
+				delegate.syncController?.nowSyncing = false
 			}
 		}
 		
@@ -1323,17 +1328,23 @@ class Sync{
 			//Get title_es
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_es : String = str.subStr(start : str.indexOf(target : "\"title_es\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			row.setValue(title_es, forKey: "title_es")
+			if (title_es != "ul"){ //From "null"
+				row.setValue(title_es, forKey: "title_es")
+			}
 			
 			//Get title_en
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_en : String = str.subStr(start : str.indexOf(target : "\"title_en\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			row.setValue(title_en, forKey: "title_en")
+			if (title_en != "ul"){ //From "null"
+				row.setValue(title_en, forKey: "title_en")
+			}
 			
 			//Get title_eu
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
 			let title_eu : String = str.subStr(start : str.indexOf(target : "\"title_eu\":")! + 12, end : str.indexOf(target : ",\"")! - 2)
-			row.setValue(title_eu, forKey: "title_eu")
+			if (title_eu != "ul"){ //From "null"
+				row.setValue(title_eu, forKey: "title_eu")
+			}
 			
 			//Get description_es
 			str = str.subStr(start : str.indexOf(target : ",\"")! + 1, end : str.length - 1)
@@ -1814,9 +1825,8 @@ class Sync{
 			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 			dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601)! as Calendar
 			dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
-			//dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone!
 			dateFormatter.timeZone = NSTimeZone.local
-			var dayString = "\(str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 11)) 00:00:00"
+			let dayString = "\(str.subStr(start : str.indexOf(target : "\"start\":")! + 9, end : str.indexOf(target : ",\"")! - 11)) 00:00:00"
 			var day = dateFormatter.date(from: dayString)!
 			// If on the first hours of the next day...
 			let calendar = Calendar.current

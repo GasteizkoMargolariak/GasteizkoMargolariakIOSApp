@@ -469,14 +469,30 @@ class HomeView: UIView {
 	
 			var id: Int
 			var image: String
+			var albumId: Int
 			var i = 0
 			for r in searchResults as [NSManagedObject] {
 				
 				image = r.value(forKey: "file")! as! String
-				row.setImage(idx: i, filename: image)
-				NSLog(":HOME:DEBUG: Photo \(i)")
+				id = r.value(forKey: "id")! as! Int
 				
-				//TODO Set click listener
+				// TODO Get album id
+				// Get album title
+				let albumFetchRequest: NSFetchRequest<Photo_album> = Photo_album.fetchRequest()
+				albumFetchRequest.predicate = NSPredicate(format: "photo = %i", id)
+				do {
+					let results = try context.fetch(albumFetchRequest)
+					let r = results[0]
+					albumId = r.value(forKey: "album")! as! Int
+					row.albumIds[i] = albumId
+				}
+				catch {
+					NSLog(":GALLERYCONTROLLER:ERROR: Error getting album info: \(error)")
+				}
+				
+				row.setImage(idx: i, filename: image)
+				row.photoIds[i] = id
+				
 				i = i + 1
 			}
 		}
@@ -536,7 +552,6 @@ class HomeView: UIView {
 	Opens a post.
 	*/
 	func openPost(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":HOME:DEBUG: Getting delegate and showing post.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: (sender?.view as! RowHomeBlog).id)
 	}
@@ -546,7 +561,6 @@ class HomeView: UIView {
 	Opens the La Blanca section when tapping the section.
 	*/
 	func openLablanca(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":HOME:DEBUG: Getting delegate opening the La Blanca section.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showComponent(selected: 2)
 	}
@@ -556,7 +570,6 @@ class HomeView: UIView {
 	Opens the Location section when tapping the section.
 	*/
 	func openLocation(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":HOME:DEBUG: Getting delegate opening the location section.")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showComponent(selected: 1)
 	}

@@ -89,7 +89,6 @@ class ActivitiesView: UIView {
 		do {
 			let searchResults = try self.context?.fetch(fetchRequest)
 			if searchResults?.count == 0{
-				NSLog(":ACTIVITIES:DEBUG: No future activities: \(String(describing: searchResults?.count))")
 				let row: RowLabel = RowLabel.init(s: "rowFutureActivity0", i: 0)
 				row.setText(text: "No hay actividades planeadas proximamente. Pronto organizaremos algo!")
 				self.futureList?.addArrangedSubview(row)

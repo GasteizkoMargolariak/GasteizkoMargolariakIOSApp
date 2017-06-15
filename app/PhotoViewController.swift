@@ -25,13 +25,7 @@ import CoreData
 The view controller of the app.
 */
 class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
-	
-	
-	//@IBOutlet weak var barTitle: UILabel!
-	//@IBOutlet weak var barButton: UIButton!
-	//@IBOutlet weak var postText: UILabel!
-	//@IBOutlet weak var postTitle: UILabel!
-	//@IBOutlet weak var postImage: UIImageView!
+
 	@IBOutlet weak var barButton: UIButton!
 	@IBOutlet weak var barTitle: UILabel!
 	@IBOutlet weak var photoTitle: UILabel!
@@ -43,8 +37,10 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	var albumId: Int = -1
 	var photoId: Int = -1
 	var photoIds: [Int] = []
+	var photoIdx: Int = 0
 	var passPhotoId: Int = -1
 	var passAlbumId: Int = -1
+	var albumTitle: String = ""
 	var delegate: AppDelegate?
 	
 	
@@ -61,15 +57,59 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	Run when the app loads.
 	*/
 	override func viewDidLoad() {
-		NSLog(":PHOTOCONTROLLER:DEBUG: viewDidLoad")
+		
+		// Populate photo array.
+		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		let lang : String = getLanguage()
+		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+		let fetchRequest: NSFetchRequest<Photo_album> = Photo_album.fetchRequest()
+		fetchRequest.predicate = NSPredicate(format: "album = %i", albumId)
+		do {
+			let searchResults = try context.fetch(fetchRequest)
+			
+			var id: Int
+			var i = 0
+			
+			for r in searchResults as [NSManagedObject] {
+				
+				id = r.value(forKey: "photo")! as! Int
+				photoIds.append(id)
+				if id == photoId{
+					photoIdx = i
+				}
+				i = i + 1
+			}
+			
+			// Get album title
+			let albumFetchRequest: NSFetchRequest<Album> = Album.fetchRequest()
+			albumFetchRequest.predicate = NSPredicate(format: "id = %i", albumId)
+			do {
+				let results = try context.fetch(albumFetchRequest)
+				let r = results[0]
+				self.albumTitle = r.value(forKey: "title_\(lang)")! as! String
+			}
+			catch {
+				NSLog(":GALLERYCONTROLLER:ERROR: Error getting album info: \(error)")
+			}
+			
+		} catch {
+			NSLog(":PHOTO:ERROR: Error getting infor from album \(albumId): \(error)")
+		}
+		
+		// Set up buttons
+		let tapRecognizerNext = UITapGestureRecognizer(target: self, action: #selector(nextPhoto(_:)))
+		btNext.isUserInteractionEnabled = true
+		btNext.addGestureRecognizer(tapRecognizerNext)
+		let tapRecognizerPrev = UITapGestureRecognizer(target: self, action: #selector(prevPhoto(_:)))
+		btPrev.isUserInteractionEnabled = true
+		btPrev.addGestureRecognizer(tapRecognizerPrev)
 		
 		super.viewDidLoad()
 		self.loadPhoto(id: photoId)
 		
-		// TODO populate photo array
-		
 		// Set button action
-		// TODO barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
+		self.barButton.addTarget(self, action: #selector(self.back), for: .touchUpInside)
 	}
 	
 	
@@ -77,7 +117,6 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	Dismisses the controller.
 	*/
 	func back() {
-		NSLog(":PHOTOCONTROLLER:DEBUG: Back")
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -87,6 +126,24 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
+	}
+	
+	
+	/**
+	Opens the next photo.
+	*/
+	func nextPhoto(_ sender:UITapGestureRecognizer? = nil){
+		photoIdx = photoIdx + 1
+		loadPhoto(id: photoIds[photoIdx])
+	}
+	
+	
+	/**
+	Opens the previous photo.
+	*/
+	func prevPhoto(_ sender:UITapGestureRecognizer? = nil){
+		photoIdx = photoIdx - 1
+		loadPhoto(id: photoIds[photoIdx])
 	}
 	
 	
@@ -107,42 +164,52 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 			let searchResults = try context.fetch(fetchRequest)
 			
 			var sTitle: String
-			var sText: String
 			var image: String
+			var date: NSDate
 			
 			for r in searchResults as [NSManagedObject] {
 				
 				sTitle = r.value(forKey: "title_\(lang)")! as! String
-				// TODO photoTitle.text = "  \(sTitle.decode().stripHtml())"
-				// TODO date
+				if sTitle == "" || sTitle == "ul" {
+					sTitle = self.albumTitle
+				}
+				self.photoTitle.text = "  \(sTitle.decode().stripHtml())"
 				
-				// TODO set photo
+				// Enable or disable buttons
+				if photoIdx == 0{
+					self.btPrev.isEnabled = false
+					self.btPrev.alpha = 0.5
+				}
+				else{
+					self.btPrev.isEnabled = true
+					self.btPrev.alpha = 1
+				}
+				if photoIdx == photoIds.count - 1{
+					self.btNext.isEnabled = false
+					self.btNext.alpha = 0.5
+				}
+				else{
+					self.btNext.isEnabled = true
+					self.btNext.alpha = 1
+				}
 				
-				/*
-				// Get main image
+				// Get image
 				image = ""
-				let imgFetchRequest: NSFetchRequest<Post_image> = Post_image.fetchRequest()
-				let imgSortDescriptor = NSSortDescriptor(key: "idx", ascending: true)
-				let imgSortDescriptors = [imgSortDescriptor]
-				imgFetchRequest.sortDescriptors = imgSortDescriptors
-				imgFetchRequest.predicate = NSPredicate(format: "post == %i", id)
-				imgFetchRequest.fetchLimit = 1
-				//TODO get more images
+				let imgFetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+				imgFetchRequest.predicate = NSPredicate(format: "id == %i", id)
 				do{
 					let imgSearchResults = try context.fetch(imgFetchRequest)
-					for imgR in imgSearchResults as [NSManagedObject]{
-						image = imgR.value(forKey: "image")! as! String
-						if image == ""{
-							self.postImage.isHidden = true
-						}
-						else{
-							let path = "img/actividades/thumb/\(image)"
-							self.postImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
-						}
-					}
-				} catch {
-					NSLog(":POST:ERROR: Error getting image for post \(id): \(error)")
-				}*/
+					let r: NSManagedObject = imgSearchResults[0]
+					image = r.value(forKey: "file")! as! String
+					date = r.value(forKey: "uploaded")! as! NSDate
+					let path = "img/galeria/preview/\(image)"
+					// TODO: Every time, set placeholder image
+					self.photoImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+					self.photoDate.text = formatDate(date: date, lang: lang)
+				}
+				catch {
+					NSLog(":PHOTO:ERROR: Error getting image for post \(id): \(error)")
+				}
 				
 			}
 		} catch {
@@ -150,8 +217,58 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 		}
 	}
 	
+
 	
-	// TODO Buttons
+	/**
+	Formats a date to the desired language.
+	:param: text The date.
+	:param: lang Device language (only 'es', 'en', or 'eu').
+	*/
+	func formatDate(date: NSDate, lang: String) -> String{
+		
+		let months_es = ["0index", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+		let months_en = ["0index", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+		let months_eu = ["0index", "urtarrilaren", "otsailaren", "martxoaren", "abrilaren", "maiatzaren", "ekainaren", "ustailaren", "abustuaren", "irailaren", "urriaren", "azaroaren", "abenduaren"]
+		let days_es = ["0index", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+		let days_en = ["0index", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+		let days_eu = ["0index", "Astelehena", "Asteartea", "Asteazkena", "Osteguna", "Ostirala", "Larumbata", "Igandea"]
+		
+		let calendar = Calendar.current
+		let year = calendar.component(.year, from: date as Date)
+		let day = calendar.component(.day, from: date as Date)
+		let month = calendar.component(.month, from: date as Date)
+		let weekday = calendar.component(.weekday, from: date as Date)
+		var strDate = ""
+		
+		switch lang{
+		case "en":
+			
+			var dayNum = ""
+			switch day{
+			case 1:
+				dayNum = "1th"
+				break
+			case 2:
+				dayNum = "2nd"
+				break;
+			case 3:
+				dayNum = "3rd"
+				break;
+			default:
+				dayNum = "\(weekday)th"
+			}
+			
+			strDate = "\(days_en[weekday]), \(months_en[month]) \(dayNum), \(year)"
+			break
+		case "eu":
+			strDate = "\(year)ko \(days_eu[weekday]) \(months_eu[month]) \(day)an"
+			break
+		default:
+			strDate = "\(days_es[weekday]) \(day) de \(months_es[month]) de \(year)"
+		}
+		
+		return strDate
+	}
 	
 	
 	/**

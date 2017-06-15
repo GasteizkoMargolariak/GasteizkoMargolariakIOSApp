@@ -51,7 +51,7 @@ Extension of UIView to be formatted as past activity rows.
 	private func loadViewFromNib() {
 		let bundle = Bundle(for: type(of: self))
 		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-		nib.instantiate(withOwner: self, options: nil).first
+		nib.instantiate(withOwner: self, options: nil)
 	}
 	
 	
@@ -126,7 +126,6 @@ Extension of UIView to be formatted as past activity rows.
 	Opens an activity.
 	*/
 	func openActivity(_ sender:UITapGestureRecognizer? = nil){
-		NSLog(":ROWPASTACTIVITY:DEBUG: Getting delegate and showing past activity \(self.id).")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPastActivity(id: self.id)
 	}

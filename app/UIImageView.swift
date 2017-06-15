@@ -79,14 +79,10 @@ extension UIImageView {
 			let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
 				if let tempLocalUrl = tempLocalUrl, error == nil {
 					
-					// Success
-					if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-						// TODO something.
-					}
-					
 					do {
 						try FileManager.default.copyItem(at: tempLocalUrl, to: destinationFileUrl)
-					} catch (let writeError) {
+					}
+					catch (let writeError) {
 						NSLog(":IMAGE:ERROR: Error creating a file \(destinationFileUrl) : \(writeError)")
 					}
 					

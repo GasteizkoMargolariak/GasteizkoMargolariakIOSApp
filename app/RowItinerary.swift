@@ -22,9 +22,9 @@ import Foundation
 import UIKit
 
 /**
-Extension of UIView to be formatted as sections.
+Extension of UIView to be formatted an activity itinerary.
 */
-@IBDesignable class RowSchedule: UIView {
+@IBDesignable class RowItinerary: UIView {
 
 	
 	// Outlets
@@ -34,6 +34,7 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var lbText: UILabel!
 	@IBOutlet weak var lbLocation: UILabel!
 	
+	var id: Int = -1
 	
 	/**
 	Default constructor
@@ -85,7 +86,7 @@ Extension of UIView to be formatted as sections.
 	Sets the time of the event.
 	:param: str String with the time to set.
 	*/
-	func setTime(str: String){
+	func setStart(str: String){
 		self.lbTime.text = str
 	}
 	
@@ -95,7 +96,7 @@ Extension of UIView to be formatted as sections.
 	:param: hours Hour of the event start.
 	:param: minutes Minutes of the event start.
 	*/
-	func setTime(hours: Int, minutes: Int){
+	func setStart(hours: Int, minutes: Int){
 		var strMinutes: String = ""
 		if "\(minutes)".length == 1{
 			strMinutes = "0\(minutes)"
@@ -111,10 +112,10 @@ Extension of UIView to be formatted as sections.
 	Sets the time of the event.
 	:param: dtime Datetime of the event start.
 	*/
-	func setTime(dtime: NSDate){
+	func setStart(time: NSDate){
 		let calendar = Calendar.current
-		let hours = calendar.component(.hour, from: dtime as Date)
-		let minutes = calendar.component(.minute, from: dtime as Date)
+		let hours = calendar.component(.hour, from: time as Date)
+		let minutes = calendar.component(.minute, from: time as Date)
 		var strMinutes: String = ""
 		if "\(minutes)".length == 1{
 			strMinutes = "0\(minutes)"
@@ -152,12 +153,16 @@ Extension of UIView to be formatted as sections.
 		self.lbText.text = text.decode().stripHtml()
 	}
 	
+	func setPlace(place: String, address: String){
+		self.lbLocation.text = place.decode().stripHtml()
+	}
+	
 	
 	/**
 	Opens an event dialog.
 	*/
-	func openEvent(_ sender:UITapGestureRecognizer? = nil){
-		// TODO implement openEvent.
-		NSLog(":ROWSCHEDULE:DEBUG: Open Event")
+	func openItinerary(_ sender:UITapGestureRecognizer? = nil){
+		// TODO implement openItinerary.
+		NSLog(":ROWITINERARY:DEBUG: Open Itinerary")
 	}
 }

@@ -21,12 +21,15 @@
 import UIKit
 import CoreData
 import GoogleMaps
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	var controller: ViewController?
+	var albumController: AlbumViewController?
+	var syncController: SyncController?
 
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -38,12 +41,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Background mode.
 		UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 		
+		if #available(iOS 10.0, *) {
+			let center = UNUserNotificationCenter.current()
+			center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+				// Enable or disable features based on authorization.
+			}
+		} else {
+			// Fallback on earlier versions
+		}
+		
+		
 		return true
 	}
 	
 
 	func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 		NSLog(":BACKGROUND:LOG: Start bg sync...")
+		Notifications()
 		Sync()
 		
 		let when = DispatchTime.now() + 120 // 2 minutes to perform the sync.
