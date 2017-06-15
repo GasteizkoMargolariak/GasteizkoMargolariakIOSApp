@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 	var controller: ViewController?
 	var albumController: AlbumViewController?
+	var syncController: SyncController?
 
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

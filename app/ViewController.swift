@@ -60,6 +60,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
+		NSLog(":CONTROLLER:DEBUG: Init.")
 		super.init(coder: aDecoder)
 		
 	}
@@ -146,14 +147,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	
-	/** m
+	/** 
 	Handles the initial sync process.
 	It can start it, showing the sync screen, or finish it, hidding the screen.
 	:param: showScreen True to start the sync, false to end it.
 	*/
 	func initialSync(showScreen: Bool){
 		if showScreen == true{
-			performSegue(withIdentifier: "SegueSync", sender: nil)
+			//performSegue(withIdentifier: "SegueSync", sender: nil)
 			Sync(synchronous: true)
 		}
 		else{
@@ -227,8 +228,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				
 		NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
 		//NSLog(":CONTROLLER:DEBUG: Skyp sync")
-		Notifications()
-		Sync()
+		//Notifications()
+		//Sync()
 
 		
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
@@ -273,12 +274,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	*/
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		if UserDefaults.standard.object(forKey: "userId") == nil{
+		/*if UserDefaults.standard.object(forKey: "userId") == nil{
 			let newUid = randomString(length: 16)
 			let defaults = UserDefaults.standard
 			defaults.set(newUid, forKey: "userId")
 			initialSync(showScreen: true)
-		}
+		}*/
 		
 	}
 	
