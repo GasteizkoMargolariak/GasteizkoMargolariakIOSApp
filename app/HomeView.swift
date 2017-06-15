@@ -221,7 +221,7 @@ class HomeView: UIView {
 							self.lablancaImage.isHidden = true;
 						}
 						else{
-							let path = "img/blog/thumb/\(filename)"
+							let path = "img/fiestas/thumb/\(filename)"
 							self.lablancaImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 						}
 					}

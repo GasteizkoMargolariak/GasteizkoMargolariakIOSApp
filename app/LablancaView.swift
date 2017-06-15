@@ -108,6 +108,17 @@ class LablancaView: UIView {
 			
 				// Set description
 				self.fText.text = (r.value(forKey: "text_\(lang)") as! String?)?.decode().stripHtml()
+				
+				// Set image
+				let filename: String = r.value(forKey: "img") as! String
+				if (filename == ""){
+					// Hide the imageview
+					self.fImage.isHidden = true;
+				}
+				else{
+					let path = "img/fiestas/thumb/\(filename)"
+					self.fImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
+				}
 			}
 
 		}
