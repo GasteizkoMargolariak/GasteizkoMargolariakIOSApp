@@ -92,7 +92,6 @@ class LocationView: UIView {
 	Get new location
 	*/
 	func getNewLocation(){
-		NSLog(":LOCATION:LOG: Recalculating location.")
 		let defaults = UserDefaults.standard
 		if (defaults.value(forKey: "GMLocLat") != nil && defaults.value(forKey: "GMLocLon") != nil){
 			let lat = defaults.value(forKey: "GMLocLat") as! Double

@@ -154,13 +154,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	*/
 	func initialSync(showScreen: Bool){
 		if showScreen == true{
-			//performSegue(withIdentifier: "SegueSync", sender: nil)
 			Sync(synchronous: true)
 		}
 		else{
-			// TODO CHECK this
-			NSLog(":CONTROLLER:DEBUG: Re-populating disabled: Throws error.")
-			//self.populate()
 			syncSegue?.destination.dismiss(animated: true, completion: nil)
 		}
 	}
@@ -202,7 +198,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		self.populate()
 		super.viewWillAppear(animated)
 	}
 	
@@ -244,27 +239,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	func fetchLocation(){
 		FetchLocation()
 	}
-
-	/**
-	Actually populates all sections.
-	As of now, not working.
-	*/
-	func populate(){
-		// TODO Set this up.
-		if (self.containerViewHome != nil){
-			//(self.containerViewHome as HomeView).populate()
-			//let ng = self.containerViewHome.dbgTxt
-			//NSLog("AAAAA \(ng)")
-		}
-		else{
-			NSLog("CONTROLLER:ERROR: containerViewHome couldn't be populated: It is nil.")
-		}
-		//self.containerLocation.populate()
-		//self.containerLablanca.populate()
-		//self.containerViewActivities.populate()
-		//self.containerViewBlog.populate()
-		//self.containerGallery.populate()
-	}
+	
 	
 	/**
 	Executed when the view is actually shown.
