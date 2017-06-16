@@ -21,8 +21,10 @@
 import Foundation
 import CoreData
 import UIKit
+
+
 /**
-Class to handle the home view.
+Class to handle the gallery view.
 */
 class GalleryView: UIView {
 	
@@ -39,7 +41,7 @@ class GalleryView: UIView {
 	
 	
 	/**
-	Run when the view is started.
+	Default constructor for the interface builder.
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -139,19 +141,11 @@ class GalleryView: UIView {
 				// Add to the rows array
 				self.rows.append(row)
 			}
-		} catch {
+		}
+		catch {
 			NSLog(":GALLERY:ERROR: Error with request: \(error)")
 		}
-		
-		//Always at the end: update scrollview
-		var h: Int = 0
-		for view in scrollView.subviews {
-			//contentRect = contentRect.union(view.frame);
-			h = h + Int(view.frame.height) + 30 // TODO Why 30?
-		}
-		// TODO: Calculate at the end
-		self.scrollView.contentSize.height = 2500 //CGFloat(h);
-		
+				
 		self.setUpRowsTapRecognizers()
 	}
 	

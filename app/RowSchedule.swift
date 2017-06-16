@@ -34,6 +34,8 @@ Extension of UIView to be formatted as sections.
 	@IBOutlet weak var lbText: UILabel!
 	@IBOutlet weak var lbLocation: UILabel!
 	
+	var id: Int = -1
+	
 	
 	/**
 	Default constructor
@@ -70,6 +72,12 @@ Extension of UIView to be formatted as sections.
 		
 		container.frame = self.bounds
 		self.addSubview(container)
+		
+		// Set tap recognizer
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowSchedule.openSchedule(_:)))
+		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+		self.addGestureRecognizer(tapRecognizer)
+
 	}
 	
 	
@@ -154,10 +162,11 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Opens an event dialog.
+	Opens an schedule dialog.
 	*/
-	func openEvent(_ sender:UITapGestureRecognizer? = nil){
-		// TODO implement openEvent.
-		NSLog(":ROWSCHEDULE:DEBUG: Open Event")
+	func openSchedule(_ sender:UITapGestureRecognizer? = nil){
+		NSLog(":ROWSCHEDULE:DEBUG: Open schedule")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.scheduleController?.showEvent(id: self.id)
 	}
 }

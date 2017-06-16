@@ -28,13 +28,16 @@ class FetchLocation{
 	
 	
 	/**
-	Default constructor
+	Default constructor.
 	*/
 	init(){
 		fetch()
 	}
 	
 	
+	/**
+	Fetches location reports form the server in the background.
+	*/
 	func fetch(){
 		NSLog(":LOCATION:LOG: Fetching location...")
 		

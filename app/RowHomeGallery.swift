@@ -21,8 +21,9 @@
 import Foundation
 import UIKit
 
+
 /**
-Extension of UIView to be formatted as sections.
+Extension of UIView to be formatted as a the gallery section in the home view.
 */
 @IBDesignable class RowHomeGallery: UIView {
 	
@@ -39,7 +40,8 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Default constructor
+	Default constructor.
+	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
@@ -74,9 +76,6 @@ Extension of UIView to be formatted as sections.
 		self.addSubview(container)
 		
 		self.photos = [photo0, photo1, photo2, photo3]
-		
-
-		//TODO Set click listeners
 	}
 	
 	
@@ -117,7 +116,8 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Default constructor for the interface builder
+	Default constructor for the interface builder.
+	:param: frame View frame.
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -127,7 +127,8 @@ Extension of UIView to be formatted as sections.
 	/**
 	Changes the preview image.
 	If null or empty, the igage is hidden.
-	:param: path The new text.
+	:param: path idx Index of the image (0-3).
+	:filename: path to the image.
 	*/
 	func setImage(idx: Int, filename: String){
 		if (filename == ""){

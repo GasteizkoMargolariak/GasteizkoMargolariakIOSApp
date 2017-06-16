@@ -21,8 +21,9 @@
 import Foundation
 import UIKit
 
+
 /**
-Extension of UIView to be formatted as sections.
+Extension of UIView to be formatted as a row on the blog section of the home view.
 */
 @IBDesignable class RowHomeBlog: UIView {
 
@@ -38,7 +39,8 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Default constructor
+	Default constructor.
+	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
@@ -80,7 +82,8 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Default constructor for the interface builder
+	Default constructor for the interface builder.
+	:param: frame View frame.
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -97,7 +100,7 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Changes the text of the text. Decodes HTML.
+	Changes the text of the post. Decodes HTML.
 	:param: text The new text.
 	*/
 	func setText(text: String){
@@ -106,7 +109,7 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Changes the image of the activity.
+	Changes the image of the post.
 	If null or empty, the igage is hidden.
 	:param: path The new text.
 	*/
@@ -123,7 +126,7 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Opens a post.
+	Opens a post in a controller.
 	*/
 	func openPost(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

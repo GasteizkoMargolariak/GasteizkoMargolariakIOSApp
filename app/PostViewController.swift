@@ -21,8 +21,9 @@
 import UIKit
 import CoreData
 
+
 /**
-The view controller of the app.
+View controller to show a post.
 */
 class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	
@@ -37,6 +38,11 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	var passId: Int = -1
 	var delegate: AppDelegate?
 	
+
+	/**
+	Gets the application context.
+	:return: Application context.
+	*/
 	func getContext () -> NSManagedObjectContext {
 		return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 	}
@@ -55,6 +61,9 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	}
 		
 	
+	/**
+	Dismisses the controller, efectively going to the previous section.
+	*/
 	func back() {
 		self.dismiss(animated: true, completion: nil)
 	}
@@ -67,6 +76,11 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 		super.didReceiveMemoryWarning()
 	}
 	
+
+	/**
+	Actually loads the post.
+	:param: id Post id.
+	*/
 	public func loadPost(id: Int){
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -77,14 +91,12 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 		fetchRequest.predicate = NSPredicate(format: "id = %i", id)
 		
 		do {
-			//go get the results
 			let searchResults = try context.fetch(fetchRequest)
 			
 			var sTitle: String
 			var sText: String
 			var image: String
 			
-			//You need to convert to NSManagedObject to use 'for' loops
 			for r in searchResults as [NSManagedObject] {
 				
 				sTitle = r.value(forKey: "title_\(lang)")! as! String
@@ -100,7 +112,6 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 				imgFetchRequest.sortDescriptors = imgSortDescriptors
 				imgFetchRequest.predicate = NSPredicate(format: "post == %i", id)
 				imgFetchRequest.fetchLimit = 1
-				//TODO get more images
 				do{
 					let imgSearchResults = try context.fetch(imgFetchRequest)
 					for imgR in imgSearchResults as [NSManagedObject]{
@@ -113,12 +124,14 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 							self.postImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 						}
 					}
-				} catch {
+				}
+				catch {
 					NSLog(":POST:ERROR: Error getting image for post \(id): \(error)")
 				}
 				
 			}
-		} catch {
+		}
+		catch {
 			NSLog(":POST:ERROR: Error with request: \(error)")
 		}
 	}

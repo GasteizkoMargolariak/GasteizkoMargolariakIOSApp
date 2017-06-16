@@ -21,8 +21,9 @@
 import Foundation
 import UIKit
 
+
 /**
-Extension of UIView to be formatted as sections.
+Extension of UIView to be formatted as a future activity in the home screen.
 */
 @IBDesignable class RowHomeFutureActivities: UIView {
 	
@@ -38,7 +39,8 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Default constructor
+	Default constructor.
+	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
@@ -80,7 +82,8 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Default constructor for the interface builder
+	Default constructor for the interface builder.
+	:param: fraom View frame.
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -123,7 +126,7 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Opens an activity.
+	Opens an activity in a controller.
 	*/
 	func openActivity(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

@@ -23,6 +23,9 @@ import CoreData
 import GoogleMaps
 import UserNotifications
 
+/**
+Application delegate.
+*/
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -30,37 +33,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var controller: ViewController?
 	var albumController: AlbumViewController?
 	var syncController: SyncController?
-
+	var scheduleController: ScheduleViewController?
+	var futureActivityController: FutureActivityViewController?
 	
+	
+	/**
+	Application opened normally. Request permissions amd defines some settings.
+	*/
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		// Override point for customization after application launch.
 		
 		// Google Mapas API KEY
 		GMSServices.provideAPIKey("AIzaSyBfIiBM_YSBlxybmI_Uz_fGoUFN4wacR80")
 		
-		// Background mode.
+		// Enable background mode.
 		UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 		
+		// Enable notifications (for iOS 10)
 		if #available(iOS 10.0, *) {
 			let center = UNUserNotificationCenter.current()
 			center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-				// Enable or disable features based on authorization.
+				// Notification authorization granted
 			}
 		} else {
-			// Fallback on earlier versions
+			// No notifications for iOS < 10
 		}
-		
 		
 		return true
 	}
 	
 
+	/**
+	Application run in the background. Fectches notifications and syncs with the server.
+	*/
 	func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 		NSLog(":BACKGROUND:LOG: Start bg sync...")
 		Notifications()
 		Sync()
 		
-		let when = DispatchTime.now() + 120 // 2 minutes to perform the sync.
+		let when = DispatchTime.now() + 180 // 3 minutes to perform the sync.
 		DispatchQueue.main.asyncAfter(deadline: when) {
 			completionHandler(UIBackgroundFetchResult.newData)
 		}

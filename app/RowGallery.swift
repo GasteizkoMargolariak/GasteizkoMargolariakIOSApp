@@ -42,7 +42,8 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Default constructor
+	Default constructor.
+	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
@@ -89,7 +90,8 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Default constructor for the interface builder
+	Default constructor for the interface builder.
+	:param: frame View frame.
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -97,7 +99,7 @@ Extension of UIView to be formatted as sections.
 	
 	
 	/**
-	Opens an album.
+	Opens an album in other controller.
 	*/
 	func openAlbum(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

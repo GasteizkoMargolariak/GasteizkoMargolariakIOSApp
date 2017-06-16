@@ -31,9 +31,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	//The menu collection.
 	var sectionCollection: UICollectionView!
-	
-	// Need to save the sync segue.
-	var syncSegue: UIStoryboardSegue?
 
 	//Each of the sections of the app.
 	@IBOutlet var containerViewGallery: GalleryView!
@@ -43,6 +40,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	@IBOutlet var containerViewLocation: LocationView!
 	@IBOutlet var containerViewHome: HomeView!
 	
+	//Menu items.
+	let reuseIdentifier = "cell"
+	var selected = 0
+	var items = ["Inicio", "Localización", "La Blanca", "Actividades", "Blog", "Galería"]
+	
 	// Passed id to perform segues.
 	var passId: Int = -1
 	var passAlbum: Int = -1
@@ -50,8 +52,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	// Location-related variables.
 	var locationManager = CLLocationManager()
 	var didFindMyLocation = false
-	
-	
 	var locationTimer: Timer? = nil
 	
 	
@@ -65,6 +65,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 	}
 	
+	/**
+	Gets the device-reported location.
+	*/
 	func getLocation() -> CLLocationCoordinate2D {
 		return (locationManager.location?.coordinate)!
 	}
@@ -147,20 +150,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	
-	/** 
-	Handles the initial sync process.
-	It can start it, showing the sync screen, or finish it, hidding the screen.
-	:param: showScreen True to start the sync, false to end it.
-	*/
-	func initialSync(showScreen: Bool){
-		if showScreen == true{
-			Sync(synchronous: true)
-		}
-		else{
-			syncSegue?.destination.dismiss(animated: true, completion: nil)
-		}
-	}
-	
 	/**
 	Run before performing a segue.
 	Assigns id if neccessary.
@@ -186,9 +175,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				(segue.destination as! ScheduleViewController).margolari = false
 			}
 		}
-		if segue.identifier == "SegueSync"{
-			self.syncSegue = segue
-		}
 		if segue.identifier == "SeguePastActivity"{
 			(segue.destination as! PastActivityViewController).id = passId
 		}
@@ -197,9 +183,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		}
 	}
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-	}
 	
 	/**
 	Run when the app loads.
@@ -220,43 +203,21 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		// Start the location schedule
 		fetchLocation()
 		self.locationTimer = Timer.scheduledTimer(timeInterval: 90, target: self, selector: #selector(fetchLocation), userInfo: nil, repeats: true)
-				
-		NSLog(":CONTROLLER:DEBUG: Don't skyp sync")
-		//NSLog(":CONTROLLER:DEBUG: Skyp sync")
-		//Notifications()
-		//Sync()
-
 		
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.delegate?.controller = self
-		
-		//self.sectionCollection.visibleCells[0].isSelected = true
 		
 		super.viewDidLoad()
 		
 	}
 	
+	/**
+	Asynchronously gets a location report from the server.
+	*/
 	func fetchLocation(){
 		FetchLocation()
 	}
 	
-	
-	/**
-	Executed when the view is actually shown.
-	Performs the initial sync in the first run.
-	It also generates a user id if none exists.
-	:param: animated Wether the controller appearance must be animated or not.
-	*/
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		/*if UserDefaults.standard.object(forKey: "userId") == nil{
-			let newUid = randomString(length: 16)
-			let defaults = UserDefaults.standard
-			defaults.set(newUid, forKey: "userId")
-			initialSync(showScreen: true)
-		}*/
-		
-	}
 	
 	/**
 	Generates a random string to be used as a user identifier.
@@ -278,7 +239,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 		return randomString
 	}
-
+	
+	
 	/**
 	Dispose of any resources that can be recreated.
 	*/
@@ -287,12 +249,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
 	
 	
-	//Menu items.
-	let reuseIdentifier = "cell"
-	var selected = 0
-	var items = ["Home", "Location", "La Blanca", "Actividades", "Blog", "Gallery"]
-	
 	// MARK: - UICollectionViewDataSource protocol
+	
 	
 	/**
 	Sets a collection of menu items.
@@ -303,7 +261,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		return self.items.count
 	}
 	
-	//Make a cell for each section
+	
+	/**
+	Sets up the menu bar.
+	:param: cellForItemAt indexPath One cell of the menu.
+	*/
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
 		//Get a reference to our storyboard cell
@@ -322,16 +284,27 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	// MARK: - UICollectionViewDelegate protocol
 	
+	
+	/**
+	Inits items in the menu bar.
+	:paramm: didSelectItemAt item index
+	*/
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		sectionCollection = collectionView
 		showComponent(selected: indexPath.item)
 	}
+	
 	
 	/**
 	Caled when an item of the menu bar is selected.
 	:param: selected Index of the selected item.
 	*/
 	@IBAction func showComponent(selected: Int) {
+	
+		// Reverts the style of the first tab.
+		if selected != 0{
+			self.sectionCollection.visibleCells[0].isSelected = false
+		}
 				
 		//Show the view
 		if selected == 0 {

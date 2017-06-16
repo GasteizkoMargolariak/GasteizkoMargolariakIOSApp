@@ -22,8 +22,10 @@ import Foundation
 import CoreData
 import UIKit
 import GoogleMaps
+
+
 /**
-Class to handle the home view.
+Class to handle the location view.
 */
 class LocationView: UIView {
 	
@@ -40,6 +42,11 @@ class LocationView: UIView {
 	
 	var locationTimer: Timer? = nil
 	
+
+	/**
+	Default constructor for the interface builder.
+	:param: frame View frame.
+	*/
 	override init(frame: CGRect){
 		
 		// Set controller
@@ -79,7 +86,9 @@ class LocationView: UIView {
 	
 	
 	/**
-	I am not sure what does this do...
+	Enables the user location dot in the map, checking for permission.
+	:param: manager Location manager used to get the location.
+	:param: didChangeAuthorizationStatus status Permission status
 	*/
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
 		if status == CLAuthorizationStatus.authorizedWhenInUse {
@@ -89,7 +98,7 @@ class LocationView: UIView {
 	
 	
 	/**
-	Get new location
+	Get new user location and recalculates distance to GM .
 	*/
 	func getNewLocation(){
 		let defaults = UserDefaults.standard
@@ -132,11 +141,24 @@ class LocationView: UIView {
 	}
 
 
+	/**
+	Converts degrees to radians.
+	:param: degrees Angle in degrees.
+	:return: Angle in radiands.
+	*/
 	func degreesToRadians(degrees: Double) -> Double {
 		return degrees * Double.pi / 180;
 	}
 
 
+	/**
+	Calculates the distance, in integer meters, between two coordinates.
+	:param: lat1 Latitude component of the first point.
+	:param: lon1 Longitude component of the first point.
+	:param: lat2 Latitude component of the second point.
+	:param: lon2 Longitude component of the second point.
+	:return: Distance, in integer meters, between the points.
+	*/
 	func calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double) -> Int {
 		let eRadius: Double = 6371
 
@@ -152,7 +174,9 @@ class LocationView: UIView {
 		return Int(m)
 	}
 	
-	/*func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutableRawPointer) {
+	/*
+	// TODO: Whato does this do?
+	func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutableRawPointer) {
 		if !didFindMyLocation {
 			let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as CLLocation
 			map.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 10.0)

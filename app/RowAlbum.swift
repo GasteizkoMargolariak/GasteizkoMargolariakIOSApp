@@ -21,8 +21,9 @@
 import Foundation
 import UIKit
 
+
 /**
-Extension of UIView to be formatted as sections.
+Extension of UIView to be formatted as a row of an album.
 */
 @IBDesignable class RowAlbum: UIView {
 	
@@ -41,11 +42,13 @@ Extension of UIView to be formatted as sections.
 	var preview: [UIImageView] = []
 
 	/**
-	Default constructor
+	Default constructor.
+	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
+
 	
 	/**
 	Loads the view from the xib with the same name as the class.
@@ -83,25 +86,30 @@ Extension of UIView to be formatted as sections.
 		//Populate review array
 		self.preview = [self.photo0, self.photo1]
 		
-		// Set tap recognizers
-		// TODO
-		//let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowAlbum.openPhoto(_:)))
-		//tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
-		//self.addGestureRecognizer(tapRecognizer)
 	}
 	
+
 	/**
-	Default constructor for the interface builder
+	Default constructor for the interface builder.
+	:param: frame View frame.
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}
 	
+
+	/**
+	Opens the photo in the left side in a new controller.
+	*/
 	func openLeftPhoto(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.albumController?.showPhoto(album: self.id, photo: self.photoIds[0])
 	}
-	
+
+
+	/**
+	Opens the photo in the right side in a new controller.
+	*/
 	func openRightPhoto(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.albumController?.showPhoto(album: self.id, photo: self.photoIds[1])
@@ -137,7 +145,13 @@ Extension of UIView to be formatted as sections.
 			}
 		}
 	}
+
 	
+	/**
+	Set the image id for both photos.
+	:param: left Id of the photo in the left.
+	:param: right Id of the photo on the right.
+	*/
 	func setIds(left: Int, right: Int){
 		self.photoIds[0] = left
 		self.photoIds[1] = right

@@ -22,7 +22,7 @@ import Foundation
 import UIKit
 
 /**
-Extension of UIView to be formatted as sections.
+Extension of UIView to be formatted as entries or rows.
 */
 class Entry: UIView {
 	

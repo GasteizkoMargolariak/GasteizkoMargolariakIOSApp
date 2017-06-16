@@ -23,8 +23,9 @@ import CoreData
 import UIKit
 import UserNotifications
 
+
 /**
-Class to handle server sync.
+Class to fetch notifications from the server.
 */
 class Notifications{
 	
@@ -45,13 +46,12 @@ class Notifications{
 	func buildUrl() -> URL{
 		
 		let url = URL(string: "https://margolariak.com/API/v1/notifications.php")
-		
 		return url!
 	}
 	
 	
 	/**
-	Performs an asynchronous sync.
+	Performs an asynchronous request.
 	It fetches the info from the server and stores as Core Data
 	:param: url The url to sync.
 	*/
@@ -186,12 +186,23 @@ class Notifications{
 						if #available(iOS 10.0, *) {
 							let content = UNMutableNotificationContent()
 							
-							// TODO Select language.
-							content.title = title_es
-							content.body = text_es
+							let lang = getLanguage()
+							switch lang{
+								case "en":
+									content.title = title_en
+									content.body = text_en
+									break;
+								case "eu":
+									content.title = title_eu
+									content.body = text_eu
+									break;
+								default:
+									content.title = title_es
+									content.body = text_es
+							}
 							content.sound = UNNotificationSound.default()
 							let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 1, repeats: false)
-							let request = UNNotificationRequest.init(identifier: "Not", content: content, trigger: trigger)
+							let request = UNNotificationRequest.init(identifier: "Not\(id)", content: content, trigger: trigger)
 							
 							// Schedule the notification.
 							let center = UNUserNotificationCenter.current()
@@ -199,10 +210,10 @@ class Notifications{
 								(error) in
 								NSLog(":NOTIFICATION:ERROR: Error showing notification \(String(describing: error))")
 							}
-						} else {
-							// Fallback on earlier versions
 						}
-						// TODO Get language
+						else {
+							NSLog(":NOTIFICATION:ERROR: Can't send notifications in iOS versions lower than 10. Not showing notification \(id)")
+						}
 						
 					}
 					catch let error as NSError  {
@@ -218,6 +229,19 @@ class Notifications{
 			}
 		}
 	}
-	
-	
+
+	/**
+	Gets the device language. The only recognized languages are Spanish, English and Basque.
+	If the device has another language, Spanish will be selected by default.
+	:return: Two-letter language code.}
+	*/
+	func getLanguage() -> String{
+		let pre = NSLocale.preferredLanguages[0].subStr(start: 0, end: 1)
+		if(pre == "es" || pre == "en" || pre == "eu"){
+			return pre
+		}
+		else{
+			return "es"
+		}
+	}
 }

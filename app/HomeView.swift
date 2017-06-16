@@ -21,6 +21,8 @@
 import Foundation
 import CoreData
 import UIKit
+
+
 /**
  Class to handle the home view.
  */
@@ -63,7 +65,8 @@ class HomeView: UIView {
 	
 	
 	/**
-	 Run when the view is started.
+	Run when the view is started.
+	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		
@@ -138,7 +141,6 @@ class HomeView: UIView {
 	If no location is reported, it hiddes the section.
 	*/
 	func setUpLocation(){
-		// TODO: Also set up tap recognizer.
 		let defaults = UserDefaults.standard
 		if (defaults.value(forKey: "GMLocLat") != nil && defaults.value(forKey: "GMLocLon") != nil){
 			let lat = defaults.value(forKey: "GMLocLat") as! Double
@@ -228,7 +230,7 @@ class HomeView: UIView {
 					
 				}
 				catch {
-					NSLog(":LABLANCA:ERROR: Error getting festivals info: \(error)")
+					NSLog(":HOME:ERROR: Error getting setting the La Blanca section up: \(error)")
 				}
 			}
 			else{
@@ -438,7 +440,8 @@ class HomeView: UIView {
 				parent.addArrangedSubview(row)
 				
 			}
-		} catch {
+		}
+		catch {
 			NSLog(":HOME:ERROR: Error loading past activities: \(error)")
 		}
 	}
