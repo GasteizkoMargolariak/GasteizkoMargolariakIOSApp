@@ -21,8 +21,10 @@
 import Foundation
 import CoreData
 import UIKit
+
+
 /**
-Class to handle the home view.
+Class to handle the La Blanca view.
 */
 class LablancaView: UIView {
 
@@ -37,13 +39,13 @@ class LablancaView: UIView {
 	@IBOutlet weak var fOfferList: UIStackView!	// Stack view to hold the offer list.
 	@IBOutlet weak var fDayList: UIStackView!	// Stack view to hold the single days price list.
 	
-	
 	// App delegate
 	var delegate: AppDelegate? = nil
 	
 	
 	/**
-	Run when the view is started.
+	Default constructor for the interface builder.
+	:param: frame Window frame.
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -76,6 +78,7 @@ class LablancaView: UIView {
 			showNoFestivals()
 		}
 	}
+
 
 	/**
 	Displays the section to be shown while (and near) the La Blanca festivals.
@@ -131,7 +134,6 @@ class LablancaView: UIView {
 		let tapRecognizerGMSchedule = UITapGestureRecognizer(target: self, action: #selector(openGMSchedule(_:)))
 		fBtGMSchedule.isUserInteractionEnabled = true
 		fBtGMSchedule.addGestureRecognizer(tapRecognizerGMSchedule)
-
 		
 		// Get info about the days and offers.
 		let dateFormatter = DateFormatter()
@@ -243,13 +245,11 @@ class LablancaView: UIView {
 	func showNoFestivals(){
 		NSLog(":LABLANCA:LOG: Showing no festivals section.")
 		self.fWindow.isHidden = true
-		// Nothing else to be done.
 	}
 	
 
 	/**
 	Commands the view controller to show the city schedule view.
-	:param: sender The view that triggered the event.
 	*/
 	func openSchedule(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -259,7 +259,6 @@ class LablancaView: UIView {
 
 	/**
 	Commands the view controller to show the Gasteizko Margolariak schedule view.
-	:param: sender The view that triggered the event.
 	*/
 	func openGMSchedule(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

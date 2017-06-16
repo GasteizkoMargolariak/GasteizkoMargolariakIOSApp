@@ -88,6 +88,7 @@ class FutureActivityViewController: UIViewController, UIGestureRecognizerDelegat
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		appDelegate.futureActivityController = self
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
 		let fetchRequest: NSFetchRequest<Activity> = Activity.fetchRequest()
@@ -286,6 +287,31 @@ class FutureActivityViewController: UIViewController, UIGestureRecognizerDelegat
 			NSLog(":FUTUREACTIVITY:ERROR: Error getting infor about place \(place): \(error)")
 		}
 		return [placeName, placeAddress]
+	}
+	
+	
+	/**
+	Shows an itinerary dialog.
+	:param: id The itinerary id.
+	*/
+	func showItinerary(id: Int){
+		self.passId = id
+		// TODO
+		NSLog(":FUTUREACTIVITY:TODO: Implement segue")
+		//performSegue(withIdentifier: "SegueItinerary", sender: nil)
+	}
+	
+	
+	/**
+	Run before performing a segue.
+	Assigns id if neccessary.
+	:param: segue The segue to perform.
+	:sender: The calling view.
+	*/
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "SegueItinerary"{
+			(segue.destination as! EventController).id = passId
+		}
 	}
 	
 	

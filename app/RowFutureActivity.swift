@@ -21,6 +21,7 @@
 import Foundation
 import UIKit
 
+
 /**
 Extension of UIView to be formatted as future activity rows.
 */
@@ -40,7 +41,7 @@ Extension of UIView to be formatted as future activity rows.
 	
 	
 	/**
-	Default constructor
+	Default constructor.
 	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
@@ -83,7 +84,8 @@ Extension of UIView to be formatted as future activity rows.
 	
 	
 	/**
-	Default constructor for the interface builder
+	Default constructor for the interface builder.
+	:param: frame View frame.
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
@@ -184,7 +186,7 @@ Extension of UIView to be formatted as future activity rows.
 	
 	/**
 	Changes the image of the activity.
-	If null or empty, the igage is hidden.
+	If null or empty, the image is hidden.
 	:param: path The new text.
 	*/
 	func setImage(filename: String){
@@ -200,7 +202,7 @@ Extension of UIView to be formatted as future activity rows.
 	
 	
 	/**
-	Opens an activity.
+	Opens an activity in a new controller.
 	*/
 	func openActivity(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

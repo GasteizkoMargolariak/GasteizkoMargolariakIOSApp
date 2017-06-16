@@ -21,8 +21,9 @@
 import UIKit
 import CoreData
 
+
 /**
-The view controller of the app.
+The controller to show photos.
 */
 class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 
@@ -90,7 +91,7 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 				self.albumTitle = r.value(forKey: "title_\(lang)")! as! String
 			}
 			catch {
-				NSLog(":GALLERYCONTROLLER:ERROR: Error getting album info: \(error)")
+				NSLog(":PHOTO:ERROR: Error getting album info: \(error)")
 			}
 			
 		} catch {
@@ -149,7 +150,7 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	
 	/**
 	Loads a photo in the viewer.
-	:param: id
+	:param: id Photo id.
 	*/
 	public func loadPhoto(id: Int){
 		
@@ -217,12 +218,12 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 		}
 	}
 	
-
 	
 	/**
 	Formats a date to the desired language.
 	:param: text The date.
 	:param: lang Device language (only 'es', 'en', or 'eu').
+	:return: Human readable string in the required language.
 	*/
 	func formatDate(date: NSDate, lang: String) -> String{
 		

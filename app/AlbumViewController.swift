@@ -22,7 +22,7 @@ import UIKit
 import CoreData
 
 /**
-The view controller of the app.
+The view controller to show albums.
 */
 class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	
@@ -209,7 +209,8 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	
 	/**
 	Shows a photo.
-	:param: id The album id.
+	:param: album The album id.
+	:param: photo The photo id.
 	*/
 	func showPhoto(album: Int, photo: Int){
 		self.passAlbum = album

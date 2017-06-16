@@ -38,7 +38,8 @@ Extension of UIView to be formatted as post rows.
 	
 	
 	/**
-	Default constructor
+	Default constructor.
+	:param: coder Coder.
 	*/
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
@@ -80,7 +81,8 @@ Extension of UIView to be formatted as post rows.
 	
 	
 	/**
-	Default constructor for the interface builder
+	Default constructor for the interface builder.
+	:param: frame View frame.
 	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)

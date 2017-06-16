@@ -19,6 +19,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 import UIKit
+
 import CoreData
 
 /**
@@ -78,8 +79,8 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 	
 	
 	/**
-	Loads the selected post.
-	:param: id Post id.
+	Loads the selected activity.
+	:param: id Activity id.
 	*/
 	public func loadActivity(id: Int){
 		
@@ -187,6 +188,7 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 		
 		return strDate
 	}
+
 	
 	/**
 	Gets the device language. The only recognized languages are Spanish, English and Basque.

@@ -35,6 +35,7 @@ Extension of UIView to be formatted an activity itinerary.
 	@IBOutlet weak var lbLocation: UILabel!
 	
 	var id: Int = -1
+	var type: String = ""
 	
 	/**
 	Default constructor
@@ -71,6 +72,11 @@ Extension of UIView to be formatted an activity itinerary.
 		
 		container.frame = self.bounds
 		self.addSubview(container)
+		
+		// Set tap recognizer
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector (RowItinerary.openItinerary(_:)))
+		tapRecognizer.delegate = (UIApplication.shared.delegate as! AppDelegate).controller
+		self.addGestureRecognizer(tapRecognizer)
 	}
 	
 	
@@ -164,5 +170,7 @@ Extension of UIView to be formatted an activity itinerary.
 	func openItinerary(_ sender:UITapGestureRecognizer? = nil){
 		// TODO implement openItinerary.
 		NSLog(":ROWITINERARY:DEBUG: Open Itinerary")
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.futureActivityController?.showItinerary(id: self.id)
 	}
 }

@@ -22,7 +22,7 @@ import Foundation
 import CoreData
 import UIKit
 /**
-Class to handle the home view.
+Class to handle the blog view.
 */
 class BlogView: UIView {
 	
@@ -39,6 +39,10 @@ class BlogView: UIView {
 	var context: NSManagedObjectContext? = nil;
 	var lang: String? = nil
 	
+
+	/**
+	Default constructor for the interface builder.
+	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}

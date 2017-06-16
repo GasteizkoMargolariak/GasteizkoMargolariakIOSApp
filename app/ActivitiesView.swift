@@ -23,7 +23,7 @@ import CoreData
 import UIKit
 
 /**
-Class to handle the home view.
+Class to handle the activities view.
 */
 class ActivitiesView: UIView {
 	
@@ -41,6 +41,9 @@ class ActivitiesView: UIView {
 	var context: NSManagedObjectContext? = nil
 	
 	
+	/**
+	Default contstructor for the interface builder.
+	*/
 	override init(frame: CGRect){
 		super.init(frame: frame)
 	}

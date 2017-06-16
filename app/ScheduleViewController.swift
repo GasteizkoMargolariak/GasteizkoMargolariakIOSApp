@@ -19,8 +19,6 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 
-// TODO: Barely working. City schedule not working, GM is shown but events times are mixed.
-
 import UIKit
 import CoreData
 
@@ -51,6 +49,8 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	var days: [NSDate] = [NSDate]()
 	var selectedDay: Int = 0
 
+	// Id of event to open.
+	var passId: Int = -1
 	
 	/**
 	Gets the application context.
@@ -107,6 +107,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		
 		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
+		self.delegate?.scheduleController = self
 		self.lang = getLanguage()
 		self.context?.persistentStoreCoordinator = self.delegate?.persistentStoreCoordinator
 
@@ -233,6 +234,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		
 		var rowcount = 0
 		var row: RowSchedule
+		var id: Int
 		var start: NSDate
 		var title: String
 		var text: String
@@ -258,6 +260,8 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 			
 			for r in searchResults! {
 				
+				id = r.value(forKey: "id") as! Int
+				
 				title = r.value(forKey: "title_\(lang!)") as! String
 				if r.value(forKey: "description_\(lang!)") != nil{
 					text = r.value(forKey: "description_\(lang!)") as! String
@@ -272,6 +276,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 				row.setTitle(text: title)
 				row.setText(text: text)
 				row.setTime(dtime: start)
+				row.id = id
 				
 				// Get location info from Place entity
 				let locationFetchRequest: NSFetchRequest<Place> = Place.fetchRequest()
@@ -333,6 +338,30 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 			self.selectedDay = (self.days.count - 1)
 		}
 		loadDay()
+	}
+	
+	
+	/**
+	Shows an event dialog.
+	:param: id The event id.
+	*/
+	func showEvent(id: Int){
+		NSLog(":SCHEDULECONTROLLER:DEBUG: Show event \(id)")
+		self.passId = id
+		performSegue(withIdentifier: "SegueEvent", sender: nil)
+	}
+	
+	
+	/**
+	Run before performing a segue.
+	Assigns id if neccessary.
+	:param: segue The segue to perform.
+	:sender: The calling view.
+	*/
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "SegueEvent"{
+			(segue.destination as! EventController).id = passId
+		}
 	}
 	
 	
