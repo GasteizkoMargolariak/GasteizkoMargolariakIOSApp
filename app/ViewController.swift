@@ -303,7 +303,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 		// Reverts the style of the first tab.
 		if selected != 0{
-			self.sectionCollection.visibleCells[0].isSelected = false
+			if self.sectionCollection != nil{
+				self.sectionCollection.visibleCells[0].isSelected = false
+			}
 		}
 				
 		//Show the view
