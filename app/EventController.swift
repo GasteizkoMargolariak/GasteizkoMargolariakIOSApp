@@ -76,7 +76,9 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 				let r = searchResults[0]
 				
 				name = r.value(forKey: "title_\(lang)")! as! String
-				text = r.value(forKey: "description_\(lang)")! as! String
+				if r.value(forKey: "description_\(lang)") != nil{
+					text = r.value(forKey: "description_\(lang)")! as! String
+				}
 				start = r.value(forKey: "start")! as! NSDate
 				placeId = r.value(forKey: "place")! as! Int
 				place = getPlace(place: placeId, lang: getLanguage(), context: context)

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,7 +20,6 @@
                 <outlet property="btnMail" destination="5Xa-Sh-XrB" id="HCb-xY-VDs"/>
                 <outlet property="btnPhone" destination="512-B2-6nt" id="C2I-qn-kPa"/>
                 <outlet property="btnTwitter" destination="Ttk-Ce-1XP" id="JUs-rm-Q5M"/>
-                <outlet property="btnWhatsapp" destination="0jq-K4-utG" id="d7P-Md-D7b"/>
                 <outlet property="btnYoutube" destination="1qd-jG-4Bn" id="WVU-fK-qg1"/>
                 <outlet property="container" destination="2hI-rc-KPm" id="Qyi-RK-3V8"/>
                 <outlet property="entry" destination="wLM-VU-VYk" id="ebu-Wm-4By"/>
@@ -37,31 +37,27 @@
                             <rect key="frame" x="10" y="10" width="355" height="177.5"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Phone" translatesAutoresizingMaskIntoConstraints="NO" id="512-B2-6nt">
-                                    <rect key="frame" x="7" y="7" width="75" height="75"/>
+                                    <rect key="frame" x="51.5" y="7" width="75" height="75"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Mail" translatesAutoresizingMaskIntoConstraints="NO" id="5Xa-Sh-XrB" userLabel="Mail">
-                                    <rect key="frame" x="96" y="7" width="75" height="75"/>
-                                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="0jq-K4-utG" userLabel="Whatsapp">
-                                    <rect key="frame" x="185" y="7" width="75" height="75"/>
+                                    <rect key="frame" x="140.5" y="7" width="75" height="75"/>
                                     <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Facebook" translatesAutoresizingMaskIntoConstraints="NO" id="wP8-1o-Rrh" userLabel="Facebook">
-                                    <rect key="frame" x="274" y="7" width="75" height="75"/>
+                                    <rect key="frame" x="229.5" y="7" width="75" height="75"/>
                                     <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Twitter" translatesAutoresizingMaskIntoConstraints="NO" id="Ttk-Ce-1XP">
                                     <rect key="frame" x="7" y="96" width="75" height="74.5"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="GooglePlus" translatesAutoresizingMaskIntoConstraints="NO" id="L4k-eK-pkc">
-                                    <rect key="frame" x="96.5" y="96" width="75.5" height="74.5"/>
+                                    <rect key="frame" x="96" y="96" width="75.5" height="74.5"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Youtube" translatesAutoresizingMaskIntoConstraints="NO" id="1qd-jG-4Bn">
                                     <rect key="frame" x="185" y="96" width="75.5" height="75"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="Instagram" translatesAutoresizingMaskIntoConstraints="NO" id="OlS-ga-Ngl">
-                                    <rect key="frame" x="274" y="96" width="75.5" height="75"/>
+                                    <rect key="frame" x="274.5" y="96" width="75.5" height="75"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -71,34 +67,30 @@
                                 <constraint firstItem="wP8-1o-Rrh" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="7" id="3xb-00-2P6"/>
                                 <constraint firstItem="5Xa-Sh-XrB" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" constant="-14" id="7T1-Hk-R35"/>
                                 <constraint firstItem="Ttk-Ce-1XP" firstAttribute="top" secondItem="512-B2-6nt" secondAttribute="bottom" constant="14" id="9F0-DU-FFO"/>
-                                <constraint firstItem="0jq-K4-utG" firstAttribute="leading" secondItem="5Xa-Sh-XrB" secondAttribute="trailing" constant="14" id="AH1-0L-nYQ"/>
-                                <constraint firstItem="1qd-jG-4Bn" firstAttribute="height" secondItem="0jq-K4-utG" secondAttribute="height" id="CUC-LH-oVM"/>
-                                <constraint firstItem="wP8-1o-Rrh" firstAttribute="leading" secondItem="0jq-K4-utG" secondAttribute="trailing" constant="14" id="IM6-dv-FSu"/>
+                                <constraint firstItem="1qd-jG-4Bn" firstAttribute="leading" secondItem="L4k-eK-pkc" secondAttribute="trailing" constant="14" id="DHd-iN-xFN"/>
                                 <constraint firstItem="L4k-eK-pkc" firstAttribute="height" secondItem="5Xa-Sh-XrB" secondAttribute="height" id="IWg-0Z-7tO"/>
                                 <constraint firstItem="L4k-eK-pkc" firstAttribute="top" secondItem="5Xa-Sh-XrB" secondAttribute="bottom" constant="14" id="Jf9-UI-kn3"/>
-                                <constraint firstItem="L4k-eK-pkc" firstAttribute="leading" secondItem="5Xa-Sh-XrB" secondAttribute="leading" id="Lkg-Ff-jNA"/>
+                                <constraint firstItem="L4k-eK-pkc" firstAttribute="leading" secondItem="Ttk-Ce-1XP" secondAttribute="trailing" constant="14" id="JnS-QY-dWB"/>
                                 <constraint firstItem="wP8-1o-Rrh" firstAttribute="height" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" constant="-14" id="Lyv-es-d3j"/>
                                 <constraint firstItem="512-B2-6nt" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" constant="-14" id="MYA-FO-b5k"/>
-                                <constraint firstItem="1qd-jG-4Bn" firstAttribute="top" secondItem="0jq-K4-utG" secondAttribute="bottom" constant="14" id="QMP-Gi-WCw"/>
-                                <constraint firstItem="0jq-K4-utG" firstAttribute="height" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" constant="-14" id="RPd-iR-02y"/>
+                                <constraint firstItem="OlS-ga-Ngl" firstAttribute="leading" secondItem="1qd-jG-4Bn" secondAttribute="trailing" constant="14" id="Q2E-ks-nal"/>
+                                <constraint firstItem="wP8-1o-Rrh" firstAttribute="leading" secondItem="5Xa-Sh-XrB" secondAttribute="trailing" constant="14" id="RoW-RW-ffL"/>
                                 <constraint firstItem="512-B2-6nt" firstAttribute="height" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" constant="-14" id="Z1m-CY-xaF"/>
                                 <constraint firstItem="5Xa-Sh-XrB" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="7" id="aFU-bQ-Y2T"/>
-                                <constraint firstItem="OlS-ga-Ngl" firstAttribute="leading" secondItem="wP8-1o-Rrh" secondAttribute="leading" id="aGq-AJ-HXg"/>
                                 <constraint firstItem="5Xa-Sh-XrB" firstAttribute="height" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" constant="-14" id="agd-tD-Z7B"/>
                                 <constraint firstItem="L4k-eK-pkc" firstAttribute="width" secondItem="5Xa-Sh-XrB" secondAttribute="width" id="bD5-gc-RZQ"/>
                                 <constraint firstItem="OlS-ga-Ngl" firstAttribute="width" secondItem="wP8-1o-Rrh" secondAttribute="width" id="bil-4K-d7f"/>
-                                <constraint firstItem="Ttk-Ce-1XP" firstAttribute="leading" secondItem="512-B2-6nt" secondAttribute="leading" id="fMj-Zv-80b"/>
+                                <constraint firstItem="1qd-jG-4Bn" firstAttribute="height" secondItem="L4k-eK-pkc" secondAttribute="height" id="fYX-Si-Gp5"/>
                                 <constraint firstItem="wP8-1o-Rrh" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" constant="-14" id="gjG-xf-f2v"/>
+                                <constraint firstItem="Ttk-Ce-1XP" firstAttribute="leading" secondItem="wLM-VU-VYk" secondAttribute="leading" constant="7" id="hQg-Db-eah"/>
                                 <constraint firstItem="5Xa-Sh-XrB" firstAttribute="leading" secondItem="512-B2-6nt" secondAttribute="trailing" constant="14" id="iay-5b-e6B"/>
-                                <constraint firstItem="1qd-jG-4Bn" firstAttribute="width" secondItem="0jq-K4-utG" secondAttribute="width" id="jDu-hC-arJ"/>
                                 <constraint firstAttribute="height" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.5" id="jGP-1G-1P3"/>
                                 <constraint firstItem="512-B2-6nt" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="7" id="lyN-c0-DOH"/>
-                                <constraint firstItem="0jq-K4-utG" firstAttribute="top" secondItem="wLM-VU-VYk" secondAttribute="top" constant="7" id="nUV-gk-zhw"/>
-                                <constraint firstItem="0jq-K4-utG" firstAttribute="width" secondItem="wLM-VU-VYk" secondAttribute="width" multiplier="0.25" constant="-14" id="uCp-Vv-c61"/>
+                                <constraint firstItem="1qd-jG-4Bn" firstAttribute="centerY" secondItem="L4k-eK-pkc" secondAttribute="centerY" id="qoI-lN-Vto"/>
                                 <constraint firstItem="OlS-ga-Ngl" firstAttribute="top" secondItem="wP8-1o-Rrh" secondAttribute="bottom" constant="14" id="vCU-hL-wuO"/>
-                                <constraint firstItem="512-B2-6nt" firstAttribute="leading" secondItem="wLM-VU-VYk" secondAttribute="leading" constant="7" id="wMJ-K2-1e9"/>
+                                <constraint firstItem="1qd-jG-4Bn" firstAttribute="width" secondItem="L4k-eK-pkc" secondAttribute="width" id="vyj-8L-OtA"/>
                                 <constraint firstItem="OlS-ga-Ngl" firstAttribute="height" secondItem="wP8-1o-Rrh" secondAttribute="height" id="xZ5-XM-Ixz"/>
-                                <constraint firstItem="1qd-jG-4Bn" firstAttribute="leading" secondItem="0jq-K4-utG" secondAttribute="leading" id="zfP-9S-Gfc"/>
+                                <constraint firstItem="512-B2-6nt" firstAttribute="leading" secondItem="Ttk-Ce-1XP" secondAttribute="centerX" constant="7" id="zqm-aZ-Hwg"/>
                             </constraints>
                             <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                             <userDefinedRuntimeAttributes>
@@ -149,7 +141,6 @@
         <image name="Mail" width="105" height="105"/>
         <image name="Phone" width="105" height="105"/>
         <image name="Twitter" width="105" height="105"/>
-        <image name="Whatsapp" width="105" height="105"/>
         <image name="Youtube" width="105" height="105"/>
     </resources>
 </document>

@@ -178,7 +178,6 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 			v.removeFromSuperview()
 		}
 		
-		// TODO: Set toolbar elements.
 		if margolari == true{
 			let dayFetchRequest: NSFetchRequest<Festival_day> = Festival_day.fetchRequest()
 			dayFetchRequest.predicate = NSPredicate(format: "date = %@", argumentArray: [days[selectedDay]])

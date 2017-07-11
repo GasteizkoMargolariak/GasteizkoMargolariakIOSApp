@@ -35,7 +35,6 @@ Extension of UIView to be formatted as sections.
 	//The buttons
 	@IBOutlet weak var btnPhone: UIImageView!
 	@IBOutlet weak var btnMail: UIImageView!
-	@IBOutlet weak var btnWhatsapp: UIImageView!
 	@IBOutlet weak var btnFacebook: UIImageView!
 	@IBOutlet weak var btnTwitter: UIImageView!
 	@IBOutlet weak var btnGoogle: UIImageView!
@@ -83,9 +82,6 @@ Extension of UIView to be formatted as sections.
 		let mailTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapMail))
 		btnMail.isUserInteractionEnabled = true
 		btnMail.addGestureRecognizer(mailTapRecognizer)
-		let whatsappTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapWhatsapp))
-		btnWhatsapp.isUserInteractionEnabled = true
-		btnWhatsapp.addGestureRecognizer(whatsappTapRecognizer)
 		let facebookTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapFacebook))
 		btnFacebook.isUserInteractionEnabled = true
 		btnFacebook.addGestureRecognizer(facebookTapRecognizer)
@@ -125,15 +121,6 @@ Extension of UIView to be formatted as sections.
 	*/
 	func didTapMail() {
 		UIApplication.shared.openURL(NSURL(string: "mailto:gasteizkomargolariak@gmail.com")! as URL)
-	}
-	
-	
-	/**
-	Called when the Whatsapp button is tapped.
-	*/
-	func didTapWhatsapp() {
-		//As of today, imposible
-		//UIApplication.shared.openURL(NSURL(string: "+34637140371") as! URL)
 	}
 	
 	

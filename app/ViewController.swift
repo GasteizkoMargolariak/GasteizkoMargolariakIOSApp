@@ -208,6 +208,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		self.delegate?.controller = self
 		
 		super.viewDidLoad()
+		Sync()
 		
 	}
 	

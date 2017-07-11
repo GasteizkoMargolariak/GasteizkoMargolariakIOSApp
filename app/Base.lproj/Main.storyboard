@@ -16,7 +16,7 @@
         <scene sceneID="e3W-6Z-Jyk">
             <objects>
                 <navigationController title="Gasteizko Margolariak" id="cgF-cq-ysf" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lgI-h9-O0s">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lgI-h9-O0s">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.4079896717" green="1" blue="0.34807942549999998" alpha="1" colorSpace="calibratedRGB"/>

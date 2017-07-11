@@ -34,6 +34,7 @@ class HomeView: UIView {
 	@IBOutlet weak var locationMessage: UILabel!
 	@IBOutlet weak var lablancaImage: UIImageView!
 	@IBOutlet weak var lablancaText: UILabel!
+	@IBOutlet weak var btSchedule: UIButton!
 	
 	//Each of the sections of the view.
 	@IBOutlet weak var locationSection: UIView!
@@ -226,6 +227,12 @@ class HomeView: UIView {
 							let path = "img/fiestas/thumb/\(filename)"
 							self.lablancaImage.setImage(localPath: path, remotePath: "https://margolariak.com/\(path)")
 						}
+						
+						// Set button up
+	
+						let tapRecognizerGMSchedule = UITapGestureRecognizer(target: self, action: #selector(openGMSchedule(_:)))
+						btSchedule.isUserInteractionEnabled = true
+						btSchedule.addGestureRecognizer(tapRecognizerGMSchedule)
 					}
 					
 				}
@@ -575,5 +582,13 @@ class HomeView: UIView {
 	func openLocation(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showComponent(selected: 1)
+	}
+	
+	/**
+	Commands the view controller to show the Gasteizko Margolariak schedule view.
+	*/
+	func openGMSchedule(_ sender:UITapGestureRecognizer? = nil){
+		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+		delegate.controller?.showSchedule(margolari: true)
 	}
 }
