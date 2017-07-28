@@ -185,7 +185,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 			do {
 				let daySearchResults = try self.context?.fetch(dayFetchRequest)
 				for r in daySearchResults! {
-					name = r.value(forKey: "name_\(lang!)") as! String
+					name = (r.value(forKey: "name_\(lang!)") as! String).decode()
 				}
 				self.lbDayName.text = name
 			}

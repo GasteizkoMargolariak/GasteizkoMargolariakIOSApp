@@ -47,7 +47,10 @@ class FetchLocation{
 			if error != nil {
 				NSLog(":LOCATION:ERROR: Unknown error getting location: \(error.debugDescription)")
 			}
-			let status = (response as! HTTPURLResponse).statusCode
+			var status = 204
+			if (response != nil){
+				status = (response as! HTTPURLResponse).statusCode
+			}
 			
 			if status == 200{
 			

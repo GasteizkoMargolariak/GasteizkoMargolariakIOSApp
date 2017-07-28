@@ -163,7 +163,12 @@ class FutureActivityViewController: UIViewController, UIGestureRecognizerDelegat
 							row = RowItinerary.init(s: "rowItinerary\(count)", i: count)
 							itiId = r.value(forKey: "id")! as! Int
 							itiTitle = r.value(forKey: "name_\(lang)")! as! String
-							itiText = r.value(forKey: "description_\(lang)")! as! String
+							if r.value(forKey: "description_\(lang)") != nil{
+								itiText = r.value(forKey: "description_\(lang)")! as! String
+							}
+							else{
+								itiText = ""
+							}
 							itiStart = r.value(forKey: "start")! as! NSDate
 							itiPlace = r.value(forKey: "place")! as! Int
 							place = getPlace(place: itiPlace, lang: lang, context: context)
