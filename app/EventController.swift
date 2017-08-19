@@ -183,11 +183,19 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 		fetchRequest.predicate = NSPredicate(format: "id = %i", place)
 		do {
 			let searchResults = try context.fetch(fetchRequest)
-			let r: NSManagedObject = searchResults[0]
-			placeName = r.value(forKey: "name_\(lang)")! as! String
-			placeAddress = r.value(forKey: "address_\(lang)")! as! String
-			lat = r.value(forKey: "lat")! as! Double
-			lon = r.value(forKey: "lon")! as! Double
+			if (searchResults.count > 0){
+				let r: NSManagedObject = searchResults[0]
+				placeName = r.value(forKey: "name_\(lang)")! as! String
+				placeAddress = r.value(forKey: "address_\(lang)")! as! String
+				lat = r.value(forKey: "lat")! as! Double
+				lon = r.value(forKey: "lon")! as! Double
+			}
+			else{
+				placeName = " "
+				placeAddress =  " "
+				lat = 42.8507807
+				lon = -2.8394378
+			}
 		}
 		catch{
 			NSLog(":FUTUREACTIVITY:ERROR: Error getting infor about place \(place): \(error)")

@@ -160,19 +160,19 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¡Gasteizko Margolariak está por ahí!" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YsW-Bq-7gd" userLabel="Text">
-                                                            <rect key="frame" x="95" y="9.5" width="175" height="70"/>
+                                                            <rect key="frame" x="95" y="9.5" width="175" height="60"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="70" id="Txi-or-Pra"/>
+                                                                <constraint firstAttribute="height" constant="60" id="Txi-or-Pra"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Uj-NF-epp">
-                                                            <rect key="frame" x="95" y="84.5" width="175" height="25"/>
+                                                            <rect key="frame" x="95" y="74.5" width="175" height="35"/>
                                                             <color key="backgroundColor" red="0.070588235289999995" green="0.27058823529999998" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="25" id="FLs-1o-qFc"/>
+                                                                <constraint firstAttribute="height" constant="35" id="FLs-1o-qFc"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                             <state key="normal" title="Programa Margolari">

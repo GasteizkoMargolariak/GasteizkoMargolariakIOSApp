@@ -131,6 +131,9 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		}
 
 		dayFetchRequest.returnsDistinctResults = true
+		let sortDayDescriptor = NSSortDescriptor(key: "start", ascending: true)
+		let sortDayDescriptors = [sortDayDescriptor]
+		dayFetchRequest.sortDescriptors = sortDayDescriptors
 
 		do {
 			let results = try self.context?.fetch(dayFetchRequest)
@@ -283,10 +286,14 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 				locationFetchRequest.fetchLimit = 1
 				do{
 					var locationSearchResults = try self.context?.fetch(locationFetchRequest)
-					let locationR = locationSearchResults?[0]
-					location = locationR?.value(forKey: "name_\(lang!)")! as! String
-					
-					row.setLocation(text: location)
+					if (locationSearchResults?.count)! > 0{
+						let locationR = locationSearchResults?[0]
+						location = locationR?.value(forKey: "name_\(lang!)")! as! String
+						row.setLocation(text: location)
+					}
+					else{
+						row.setLocation(text: "")
+					}
 				} catch {
 					NSLog(":SCHEDULECONTROLLER:ERROR: Error getting location: \(error)")
 				}
