@@ -243,65 +243,64 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		var locationId: Int
 		var location: String
 
-		let fetchRequest: NSFetchRequest<Festival_event> = Festival_event.fetchRequest()
-		let sortDescriptor = NSSortDescriptor(key: "start", ascending: true)
-		let sortDescriptors = [sortDescriptor]
-		fetchRequest.sortDescriptors = sortDescriptors
-		
-		if margolari == true{
-			fetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (day = %@)", argumentArray: [1, days[selectedDay]])
-		}
-		else{
-			fetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (day = %@)", argumentArray: [0, days[selectedDay]])
-		}
-				
 		do {
 			
 			// Get the result
-			let searchResults = try self.context?.fetch(fetchRequest)
+			let searchResults: NSFetchRequest<NSFetchRequestResult>
 			
-			for r in searchResults! {
+			
+			if margolari == true{
+				let fetchRequest: NSFetchRequest<Festival_event_gm> = Festival_event_gm.fetchRequest()
+				let sortDescriptor = NSSortDescriptor(key: "start", ascending: true)
+				let sortDescriptors = [sortDescriptor]
+				fetchRequest.sortDescriptors = sortDescriptors
+				let searchResults = try self.context?.fetch(fetchRequest)
+			
+				for r in searchResults! {
 				
-				id = r.value(forKey: "id") as! Int
+					id = r.value(forKey: "id") as! Int
 				
-				title = r.value(forKey: "title_\(lang!)") as! String
-				if r.value(forKey: "description_\(lang!)") != nil{
-					text = r.value(forKey: "description_\(lang!)") as! String
-				}
-				else{
-					text = ""
-				}
-				start = r.value(forKey: "start")! as! NSDate
-				locationId = r.value(forKey: "place")! as! Int
-				row = RowSchedule.init(s: "rowSchedule\(rowcount)", i: rowcount)
-				
-				row.setTitle(text: title)
-				row.setText(text: text)
-				row.setTime(dtime: start)
-				row.id = id
-				
-				// Get location info from Place entity
-				let locationFetchRequest: NSFetchRequest<Place> = Place.fetchRequest()
-				locationFetchRequest.predicate = NSPredicate(format: "id == %i", locationId)
-				locationFetchRequest.fetchLimit = 1
-				do{
-					var locationSearchResults = try self.context?.fetch(locationFetchRequest)
-					if (locationSearchResults?.count)! > 0{
-						let locationR = locationSearchResults?[0]
-						location = locationR?.value(forKey: "name_\(lang!)")! as! String
-						row.setLocation(text: location)
+					title = r.value(forKey: "title_\(lang!)") as! String
+					if r.value(forKey: "description_\(lang!)") != nil{
+						text = r.value(forKey: "description_\(lang!)") as! String
 					}
 					else{
-						row.setLocation(text: "")
+						text = ""
 					}
-				} catch {
-					NSLog(":SCHEDULECONTROLLER:ERROR: Error getting location: \(error)")
+					start = r.value(forKey: "start")! as! NSDate
+					locationId = r.value(forKey: "place")! as! Int
+					row = RowSchedule.init(s: "rowSchedule\(rowcount)", i: rowcount)
+				
+					row.setTitle(text: title)
+					row.setText(text: text)
+					row.setTime(dtime: start)
+					row.id = id
+				
+					// Get location info from Place entity
+					let locationFetchRequest: NSFetchRequest<Place> = Place.fetchRequest()
+					locationFetchRequest.predicate = NSPredicate(format: "id == %i", locationId)
+					locationFetchRequest.fetchLimit = 1
+					do{
+						var locationSearchResults = try self.context?.fetch(locationFetchRequest)
+						if (locationSearchResults?.count)! > 0{
+							let locationR = locationSearchResults?[0]
+							location = locationR?.value(forKey: "name_\(lang!)")! as! String
+							row.setLocation(text: location)
+						}
+						else{
+							row.setLocation(text: "")
+						}
+					}
+					catch {
+						NSLog(":SCHEDULECONTROLLER:ERROR: Error getting location: \(error)")
+					}
+				
+					svScheduleList.addArrangedSubview(row)
+				
+					rowcount = rowcount + 1
 				}
 				
-				svScheduleList.addArrangedSubview(row)
-				
-				rowcount = rowcount + 1
-			}
+			} // if margolari == true
 
 			svScheduleList.setNeedsLayout()
 			svScheduleList.layoutIfNeeded()

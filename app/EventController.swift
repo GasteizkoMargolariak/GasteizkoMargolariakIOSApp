@@ -54,54 +54,61 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	override func viewDidLoad() {
 		
-		// Populate photo array.
+		// TODO: Pas this
+		let margolari: Bool = true
+		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-		let fetchRequest: NSFetchRequest<Festival_event> = Festival_event.fetchRequest()
-		fetchRequest.predicate = NSPredicate(format: "id = %i", id)
-		do {
-			let searchResults = try context.fetch(fetchRequest)
-			var name: String = ""
-			var text: String = ""
-			var start: NSDate
-			var placeId: Int = -1
-			var place: [Any]
-			var placeName: String = ""
-			var placeAddress: String = ""
-			var lat: Double = 0.0
-			var lon: Double = 0.0
-			if searchResults.count > 0{
-				let r = searchResults[0]
+		if (margolari == true){
+			
+			let fetchRequest: NSFetchRequest<Festival_event_gm> = Festival_event_gm.fetchRequest()
+			fetchRequest.predicate = NSPredicate(format: "id = %i", id)
+			do {
+				// Get the result
+				let searchResults = try context.fetch(fetchRequest)
+			
+				var name: String = ""
+				var text: String = ""
+				var start: NSDate
+				var placeId: Int = -1
+				var place: [Any]
+				var placeName: String = ""
+				var placeAddress: String = ""
+				var lat: Double = 0.0
+				var lon: Double = 0.0
+				if searchResults.count > 0{
+					let r = searchResults[0]
 				
-				name = r.value(forKey: "title_\(lang)")! as! String
-				if r.value(forKey: "description_\(lang)") != nil{
-					text = r.value(forKey: "description_\(lang)")! as! String
-				}
-				start = r.value(forKey: "start")! as! NSDate
-				placeId = r.value(forKey: "place")! as! Int
-				place = getPlace(place: placeId, lang: getLanguage(), context: context)
-				placeName = place[0] as! String
-				placeAddress = place[1] as! String
-				lat = place[2] as! Double
-				lon = place[3] as! Double
+					name = r.value(forKey: "title_\(lang)")! as! String
+					if r.value(forKey: "description_\(lang)") != nil{
+						text = r.value(forKey: "description_\(lang)")! as! String
+					}
+					start = r.value(forKey: "start")! as! NSDate
+					placeId = r.value(forKey: "place")! as! Int
+					place = getPlace(place: placeId, lang: getLanguage(), context: context)
+					placeName = place[0] as! String
+					placeAddress = place[1] as! String
+					lat = place[2] as! Double
+					lon = place[3] as! Double
 				
-				// Set labels
-				eventTitle.text = " \(name.decode().stripHtml())"
-				if text.length > 0{
-					eventText.text = " \(text.decode().stripHtml())"
-				}
-				else{
-					self.eventText.isHidden = true
-				}
-				self.eventTime.text = formatTime(date: start)
-				self.eventLocation.text = placeName.decode().stripHtml()
-				if placeAddress.length == 0 || placeAddress == placeName{
-					self.eventAddress.isHidden = true
-				}
-				else{
-					self.eventAddress.text = placeAddress.decode().stripHtml()
+					// Set labels
+					eventTitle.text = " \(name.decode().stripHtml())"
+					if text.length > 0{
+						eventText.text = " \(text.decode().stripHtml())"
+					}
+					else{
+						self.eventText.isHidden = true
+					}
+					self.eventTime.text = formatTime(date: start)
+					self.eventLocation.text = placeName.decode().stripHtml()
+					if placeAddress.length == 0 || placeAddress == placeName{
+						self.eventAddress.isHidden = true
+					}
+					else{
+						self.eventAddress.text = placeAddress.decode().stripHtml()
+					}
 				}
 				
 				// Set map marker
@@ -115,12 +122,12 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 				let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: lat, longitude: lon, zoom: 12.0)
 				self.eventMap.camera = camera
 				
-			}
 			
-		}
-		catch {
-			NSLog(":EVENT:ERROR: Error getting info from event \(id): \(error)")
-		}
+			}
+			catch {
+				NSLog(":EVENT:ERROR: Error getting info from event \(id): \(error)")
+			}
+		} // if margolari == true
 		
 		super.viewDidLoad()
 		
