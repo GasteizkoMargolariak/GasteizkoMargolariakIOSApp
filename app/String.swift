@@ -126,4 +126,15 @@ extension String {
 		CFStringTransform(convertedString, nil, transform, true)
 		return (convertedString as String).replacingOccurrences(of: "\\/", with: "/")
 	}
+	
+	/**
+	Capitalizes a string, turning the first caracter to uppercase.
+	:return: Capitalized string.
+	*/
+	func capitalize() -> String {
+		let first = String(characters.prefix(1)).capitalized
+		let other = String(characters.dropFirst())
+		return first + other
+	}
+
 }
