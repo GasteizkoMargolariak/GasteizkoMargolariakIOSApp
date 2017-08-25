@@ -239,7 +239,7 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	}
 	
 	
-	func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer!
+	func eventMapV(eventMap: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer!
 	{
 		
 		if overlay is MKTileOverlay
