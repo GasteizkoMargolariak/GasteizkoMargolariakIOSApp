@@ -267,11 +267,7 @@ class Sync{
 						query.setValue(day, forKey: "day")
 						
 					}
-					
-					
-					
 				}
-				
 				
 				let start: Int = row.indexOf(target: ",\"")! + 2
 				let end: Int = row.length
@@ -285,7 +281,7 @@ class Sync{
 			}
 			
 			do{
-				// Save the setting
+				// Save the row
 				try context.save()
 			}
 			catch let error as NSError {
@@ -333,7 +329,6 @@ class Sync{
 				else if (column == "value"){
 					defaults.set(value, forKey: name)
 				}
-				
 				
 				let start: Int = row.indexOf(target: ",\"")! + 2
 				let end: Int = row.length
@@ -405,7 +400,7 @@ class Sync{
 							query.setValue(Int(version), forKey: "version")
 						}
 						
-						// Save the setting
+						// Save the version
 						try context.save()
 					}
 					catch let error as NSError  {
