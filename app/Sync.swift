@@ -57,8 +57,6 @@ class Sync{
 	*/
 	func buildUrl() -> URL{
 		
-		NSLog(":SYNC:LOG: Building URL")
-
 		// Get user ID
 		let defaults = UserDefaults.standard
 		var uId: String = "unknown"
@@ -67,28 +65,37 @@ class Sync{
 		}
 
 		// Get versions
-		// TODO FIXME Not working
 		var strVersions = ""
-		//do {
-		//	let fetchRequest: NSFetchRequest<Version> = Version.fetchRequest()
-		//	let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-		//	let searchResults = try context.fetch(fetchRequest)
-		//	var s: String = ""
-		//	var v: Int = 0
-		//	for r in searchResults {
-		//		s = r.value(forKey: "section")! as! String
-		//		v = r.value(forKey: "version")! as! Int
-		//		strVersions = strVersions + "&\(s)=\(v)"
-		//	}
-		//}
-		//catch let error as NSError{
-		//	NSLog(":SYNC:ERROR: Error getting stored versions: \(error)")
-		//}
+		do{
+			let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+			let appDelegate = UIApplication.shared.delegate as! AppDelegate
+			context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
+			let fetchRequest: NSFetchRequest<Version> = Version.fetchRequest()
+			let searchResults = try context.fetch(fetchRequest)
+			var s: String = ""
+			var v: Int = 0
+			for r in searchResults {
+				s = r.value(forKey: "section")! as! String
+				v = r.value(forKey: "version")! as! Int
+				strVersions = strVersions + "&\(s)=\(v)"
+			}
+		}
+		catch let error as NSError{
+			NSLog(":SYNC:ERROR: Error getting stored versions: \(error)")
+		}
 
 		// Build URL
-		// TODO: Uncomment for production
-		//let url = URL(string: "https://margolariak.com/API/v3/sync.php?client=com.margolariak.app&user=\(uId)\(strVersions)")
-		let url = URL(string: "http://192.168.1.101/API/v3/sync.php?client=com.margolariak.app&user=\(uId)\(strVersions)")
+		// TODO: Change host for production
+		
+		var urlStr: String = ""
+		
+		if initial{
+			urlStr = "http://192.168.1.101/API/v3/fastsync.php?client=com.margolariak.app&user=\(uId)\(strVersions)"
+		}
+		else{
+			urlStr = "http://192.168.1.101/API/v3/sync.php?client=com.margolariak.app&user=\(uId)\(strVersions)"
+		}
+		let url = URL(string: urlStr)
 
 		
 		NSLog(":SYNC:LOG: URL built: \(String(describing: url))")
@@ -163,6 +170,7 @@ class Sync{
 		NSLog(":SYNC:LOG: Saving table \(table)")
 		
 		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 		dateFormatter.timeZone = TimeZone.ReferenceType.local
 
 		//Set up context
@@ -193,57 +201,74 @@ class Sync{
 		var query: NSManagedObject
 		
 		
-		while (data.indexOf(target: "}") != nil){
+		while data.indexOf(target: "}") != nil{
 			row = data.subStr(start: data.indexOf(target: "{")! + 1, end: data.indexOf(target: "}")! - 1)
 			row = "\(row),\""
 			
 			query = NSManagedObject(entity: entity!, insertInto: context)
 			
-			while (row.indexOf(target: ",\"") != nil){
+			while row.indexOf(target: ",\"") != nil{
 				tuple = row.subStr(start: 0, end: row.indexOf(target: ",\"")! - 1)
 				
-				column = tuple.subStr(start: 1, end: tuple.indexOf(target: "\":")! - 1)
-				value = tuple.subStr(start: column.length + 4, end: tuple.length - 2)
+				column = tuple.subStr(start: tuple.indexOf(target: "\"")! + 1, end: tuple.indexOf(target: "\":")! - 1)
 				
-				if entity?.attributesByName[column]?.attributeType == .stringAttributeType{
-					query.setValue(value, forKey: column)
+				if column.length + 4 >= tuple.length - 2{
+					value = "ul"
 				}
-				else if entity?.attributesByName[column]?.attributeType == .integer16AttributeType || entity?.attributesByName[column]?.attributeType == .integer32AttributeType || entity?.attributesByName[column]?.attributeType == .integer64AttributeType{
-					query.setValue(Int(value), forKey: column)
-				}
-				else if entity?.attributesByName[column]?.attributeType == .booleanAttributeType{
-					if Int(value) == 1{
-						query.setValue(true, forKey: column)
-					}
-					else if Int(value) == 0{
-						query.setValue(false, forKey: column)
-					}
-				}
-				else if entity?.attributesByName[column]?.attributeType == .dateAttributeType{
-					query.setValue(dateFormatter.date(from: value)!, forKey: column)
+				else{
+					value = tuple.subStr(start: column.length + 4, end: tuple.length - 2)
 				}
 				
-				// Special case: "festivl_event_citiy" and "festival_event_gm" have a special column: "day"
-				if (table == "festival_event_city" || table == "festival_event_gm") && column == "start"{
-					
-					dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-					dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601)! as Calendar
-					dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
-					dateFormatter.timeZone = NSTimeZone.local
-					let timeString = "\(value.subStr(start: 0, end: 19))"
-					let dayString = "\(value.subStr(start: 0, end: 10)) 00:00:00"
-					var day = dateFormatter.date(from: dayString)!
-					let start = dateFormatter.date(from: timeString)!
-					
-					// If on the first hours of the next day...
-					let calendar = Calendar.current
-					let hours = calendar.component(.hour, from: start )
-					
-					// ... the event belongs to the previous day.
-					if hours < 6{
-						day = Calendar.current.date(byAdding: .day, value: -1, to: day)!
+				if value != "ul"{ // 'ul' rom 'null' or empty. If it is, just do nothing.
+					if entity?.attributesByName[column]?.attributeType == .stringAttributeType{
+						query.setValue(value, forKey: column)
 					}
-					query.setValue(day, forKey: "day")
+					else if entity?.attributesByName[column]?.attributeType == .integer16AttributeType || entity?.attributesByName[column]?.attributeType == .integer32AttributeType || entity?.attributesByName[column]?.attributeType == .integer64AttributeType{
+						query.setValue(Int(value), forKey: column)
+					}
+					else if entity?.attributesByName[column]?.attributeType == .booleanAttributeType{
+						if Int(value) == 1{
+							query.setValue(true, forKey: column)
+						}
+						else if Int(value) == 0{
+							query.setValue(false, forKey: column)
+						}
+					}
+					else if entity?.attributesByName[column]?.attributeType == .dateAttributeType{
+						if value.length < 11{
+							value = "\(value) 00:00:00"
+						}
+						query.setValue(dateFormatter.date(from: value)!, forKey: column)
+					}
+					else{ //Regular string
+						
+					}
+					
+					// Special case: "festivl_event_citiy" and "festival_event_gm" have a special column: "day"
+					if (table == "festival_event_city" || table == "festival_event_gm") && (column == "start" || (column == "end" && value != "ul")) {
+						
+						dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+						dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601)! as Calendar
+						dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+						dateFormatter.timeZone = NSTimeZone.local
+						let timeString = value//"\(value.subStr(start: 0, end: 19))"
+						let dayString = "\(value.subStr(start: 0, end: 10)) 00:00:00"
+						var day = dateFormatter.date(from: dayString)!
+						let start = dateFormatter.date(from: timeString)!
+						
+						// If on the first hours of the next day...
+						let calendar = Calendar.current
+						let hours = calendar.component(.hour, from: start )
+						
+						// ... the event belongs to the previous day.
+						if hours < 6{
+							day = Calendar.current.date(byAdding: .day, value: -1, to: day)!
+						}
+						query.setValue(day, forKey: "day")
+						
+					}
+					
+					
 					
 				}
 				
@@ -254,10 +279,19 @@ class Sync{
 					row = ""
 				}
 				else{
-					row = row.subStr(start: row.indexOf(target: ",\"")! + 2, end: row.length - 1)
+					row = row.subStr(start: row.indexOf(target: ",\"")! + 1, end: row.length - 1)
 				}
 				
 			}
+			
+			do{
+				// Save the setting
+				try context.save()
+			}
+			catch let error as NSError {
+				NSLog(":SYNC:ERROR: Could not save a row for table \(table.capitalize()): \(error), \(error.userInfo).")
+			}
+			
 			data = data.subStr(start: data.indexOf(target: "}")! + 1, end: data.length - 1)
 		}
 	}
@@ -297,7 +331,6 @@ class Sync{
 					name = value
 				}
 				else if (column == "value"){
-					NSLog(":SYNC:LOG: Setting \(name) \(value)")
 					defaults.set(value, forKey: name)
 				}
 				
@@ -365,13 +398,11 @@ class Sync{
 						if searchResults.count > 0{
 							let v = searchResults[0]
 							v.setValue(Int(version), forKey: "version")
-							NSLog(":SYNC:LOG: New version for table \(section): \(version)")
 						}
 						else{
 							query = NSManagedObject(entity: entity!, insertInto: context)
 							query.setValue(section, forKey: "section")
 							query.setValue(Int(version), forKey: "version")
-							NSLog(":SYNC:LOG: Version for new table \(section): \(version)")
 						}
 						
 						// Save the setting
