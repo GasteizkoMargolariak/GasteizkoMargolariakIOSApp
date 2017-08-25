@@ -105,12 +105,14 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	public func loadSchedule(margolari: Bool){
 		
+		// TODO: if/else for margolari/city
+		
 		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.delegate?.scheduleController = self
 		self.lang = getLanguage()
 		self.context?.persistentStoreCoordinator = self.delegate?.persistentStoreCoordinator
-
+		
 		// Get days
 		// TODO: Get current year
 		let year = 2017
@@ -121,20 +123,16 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		let sDate = dateFormatter.date(from: dateString)
 		dateString = "\(year)-12-31"
 		let eDate = dateFormatter.date(from: dateString)
-		let dayFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Festival_event")
+		let dayFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Festival_event_gm")
 		dayFetchRequest.propertiesToFetch = ["day"]
-		if self.margolari == true{
-			dayFetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (start >= %@) AND (start <= %@)", argumentArray: [1, sDate!, eDate!])
-		}
-		else{
-			dayFetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (start >= %@) AND (start <= %@)", argumentArray: [0, sDate!, eDate!])
-		}
+		
+		dayFetchRequest.predicate = NSPredicate(format: "(start >= %@) AND (start <= %@)", argumentArray: [sDate!, eDate!])
 
 		dayFetchRequest.returnsDistinctResults = true
 		let sortDayDescriptor = NSSortDescriptor(key: "start", ascending: true)
 		let sortDayDescriptors = [sortDayDescriptor]
 		dayFetchRequest.sortDescriptors = sortDayDescriptors
-
+		
 		do {
 			let results = try self.context?.fetch(dayFetchRequest)
 			
@@ -161,7 +159,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		let tapRecognizerNextDay = UITapGestureRecognizer(target: self, action: #selector(nextDay(_:)))
 		self.btNext.isUserInteractionEnabled = true
 		self.btNext.addGestureRecognizer(tapRecognizerNextDay)
-
+		
 		loadDay()
 	}
 
