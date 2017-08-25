@@ -247,8 +247,6 @@ class Sync{
 					// Special case: "festivl_event_citiy" and "festival_event_gm" have a special column: "day"
 					if (table == "festival_event_city" || table == "festival_event_gm") && column == "start" {
 						
-						NSLog("IVV Getting day")
-						
 						dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 						dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601)! as Calendar
 						dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
