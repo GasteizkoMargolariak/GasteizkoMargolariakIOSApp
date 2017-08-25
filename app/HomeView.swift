@@ -193,7 +193,7 @@ class HomeView: UIView {
 		
 		let defaults = UserDefaults.standard
 		if (defaults.value(forKey: "festivals") != nil){
-			let festivals = defaults.value(forKey: "festivals") as! Int
+			let festivals = Int(defaults.value(forKey: "festivals") as! String)
 			if festivals == 1{
 				
 				// Set tap recognizer

@@ -245,7 +245,9 @@ class Sync{
 					}
 					
 					// Special case: "festivl_event_citiy" and "festival_event_gm" have a special column: "day"
-					if (table == "festival_event_city" || table == "festival_event_gm") && (column == "start" || (column == "end" && value != "ul")) {
+					if (table == "festival_event_city" || table == "festival_event_gm") && column == "start" {
+						
+						NSLog("IVV Getting day")
 						
 						dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 						dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601)! as Calendar
@@ -265,13 +267,8 @@ class Sync{
 							day = Calendar.current.date(byAdding: .day, value: -1, to: day)!
 						}
 						query.setValue(day, forKey: "day")
-						
 					}
-					
-					
-					
 				}
-				
 				
 				let start: Int = row.indexOf(target: ",\"")! + 2
 				let end: Int = row.length
@@ -285,7 +282,7 @@ class Sync{
 			}
 			
 			do{
-				// Save the setting
+				// Save the row
 				try context.save()
 			}
 			catch let error as NSError {
@@ -322,8 +319,8 @@ class Sync{
 			row = "\(row),\""
 			
 			while (row.indexOf(target: ",\"") != nil){
-				tuple = row.subStr(start: 0, end: row.indexOf(target: ",\"")! - 1)
 				
+				tuple = row.subStr(start: 0, end: row.indexOf(target: ",\"")! - 1)
 				column = tuple.subStr(start: 1, end: tuple.indexOf(target: "\":")! - 1)
 				value = tuple.subStr(start: column.length + 4, end: tuple.length - 2)
 				
@@ -335,13 +332,13 @@ class Sync{
 				}
 				
 				
-				let start: Int = row.indexOf(target: ",\"")! + 2
-				let end: Int = row.length
+				let start: Int = row.indexOf(target: ",\"")! + 1
+				let end: Int = row.length - 1
 				if (start == end){
 					row = ""
 				}
 				else{
-					row = row.subStr(start: row.indexOf(target: ",\"")! + 2, end: row.length - 1)
+					row = row.subStr(start: start, end: end)
 				}
 				
 			}
@@ -405,7 +402,7 @@ class Sync{
 							query.setValue(Int(version), forKey: "version")
 						}
 						
-						// Save the setting
+						// Save the row
 						try context.save()
 					}
 					catch let error as NSError  {

@@ -105,11 +105,17 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	public func loadSchedule(margolari: Bool){
 		
+		NSLog("IVV Loading schedule START")
+		
+		// TODO: if/else for margolari/city
+		
 		self.context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		self.delegate = UIApplication.shared.delegate as? AppDelegate
 		self.delegate?.scheduleController = self
 		self.lang = getLanguage()
 		self.context?.persistentStoreCoordinator = self.delegate?.persistentStoreCoordinator
+		
+		NSLog("IVV Loading schedule 1")
 
 		// Get days
 		// TODO: Get current year
@@ -121,22 +127,27 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		let sDate = dateFormatter.date(from: dateString)
 		dateString = "\(year)-12-31"
 		let eDate = dateFormatter.date(from: dateString)
-		let dayFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Festival_event")
+		let dayFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Festival_event_gm")
 		dayFetchRequest.propertiesToFetch = ["day"]
-		if self.margolari == true{
-			dayFetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (start >= %@) AND (start <= %@)", argumentArray: [1, sDate!, eDate!])
-		}
-		else{
-			dayFetchRequest.predicate = NSPredicate(format: "(gm = %i) AND (start >= %@) AND (start <= %@)", argumentArray: [0, sDate!, eDate!])
-		}
+		
+		NSLog("IVV Loading schedule 2")
+		
+		dayFetchRequest.predicate = NSPredicate(format: "(start >= %@) AND (start <= %@)", argumentArray: [sDate!, eDate!])
+		
+		NSLog("IVV Loading schedule 3")
+		
 
 		dayFetchRequest.returnsDistinctResults = true
 		let sortDayDescriptor = NSSortDescriptor(key: "start", ascending: true)
 		let sortDayDescriptors = [sortDayDescriptor]
 		dayFetchRequest.sortDescriptors = sortDayDescriptors
+		
+		NSLog("IVV Loading schedule 4")
 
 		do {
 			let results = try self.context?.fetch(dayFetchRequest)
+			
+			NSLog("IVV Loading schedule 5")
 			
 			for r in results as! [NSManagedObject] {
 				let day: NSDate = r.value(forKey: "day") as! NSDate
@@ -145,6 +156,8 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 					self.days.append(day)
 				}
 			}
+			
+			NSLog("IVV Loading schedule 6")
 		}
 		catch let err as NSError {
 			NSLog(":SCHEDULECONTROLLER:ERROR: Error getting day list: \(err)")
@@ -161,8 +174,12 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		let tapRecognizerNextDay = UITapGestureRecognizer(target: self, action: #selector(nextDay(_:)))
 		self.btNext.isUserInteractionEnabled = true
 		self.btNext.addGestureRecognizer(tapRecognizerNextDay)
+		
+		NSLog("IVV Loading schedule 7")
 
 		loadDay()
+		
+		NSLog("IVV Loading schedule END")
 	}
 
 
