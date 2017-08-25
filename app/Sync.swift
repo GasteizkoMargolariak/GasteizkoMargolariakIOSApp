@@ -226,6 +226,9 @@ class Sync{
 					else if entity?.attributesByName[column]?.attributeType == .integer16AttributeType || entity?.attributesByName[column]?.attributeType == .integer32AttributeType || entity?.attributesByName[column]?.attributeType == .integer64AttributeType{
 						query.setValue(Int(value), forKey: column)
 					}
+					else if entity?.attributesByName[column]?.attributeType == .doubleAttributeType{
+						query.setValue(Double(value), forKey: column)
+					}
 					else if entity?.attributesByName[column]?.attributeType == .booleanAttributeType{
 						if Int(value) == 1{
 							query.setValue(true, forKey: column)
