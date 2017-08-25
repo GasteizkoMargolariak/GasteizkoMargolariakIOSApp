@@ -20,8 +20,8 @@
 
 import Foundation
 import CoreData
+import MapKit
 import UIKit
-import GoogleMaps
 
 
 /**
@@ -30,7 +30,7 @@ Class to handle the location view.
 class LocationView: UIView {
 	
 	@IBOutlet var container: UIView!
-	@IBOutlet weak var map: GMSMapView!
+	@IBOutlet weak var map: MKMapView!
 	@IBOutlet weak var lbTitle: UILabel!
 	@IBOutlet weak var lbDistance: UILabel!
 	@IBOutlet weak var lbNo: UILabel!
@@ -74,10 +74,10 @@ class LocationView: UIView {
 		self.container.frame = self.bounds
 		
 		// Set map up
-		map.isMyLocationEnabled = true
+		//map.isMyLocationEnabled = true
 		//map.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
-		let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 42.846399, longitude: -2.673365, zoom: 12.0)
-		map.camera = camera
+		//let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 42.846399, longitude: -2.673365, zoom: 12.0)
+		//map.camera = camera
 		
 		// Schedule location fetches
 		getNewLocation()
@@ -92,7 +92,7 @@ class LocationView: UIView {
 	*/
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
 		if status == CLAuthorizationStatus.authorizedWhenInUse {
-			map.isMyLocationEnabled = true
+			//map.isMyLocationEnabled = true
 		}
 	}
 	
@@ -113,11 +113,11 @@ class LocationView: UIView {
 				self.lbTitle.isHidden = false
 				self.lbDistance.isHidden = false
 				self.lbNo.isHidden = true
-				let marker = GMSMarker()
-				marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-				marker.title = "Gasteizko Margolariak"
+				//let marker = GMSMarker()
+				//marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+				//marker.title = "Gasteizko Margolariak"
 				//marker.snippet = "Australia"
-				marker.map = self.map
+				//marker.map = self.map
 			
 				let location = self.controller.getLocation()
 				if location != nil {

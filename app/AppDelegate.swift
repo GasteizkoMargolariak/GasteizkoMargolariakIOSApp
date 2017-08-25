@@ -20,7 +20,6 @@
 
 import UIKit
 import CoreData
-import GoogleMaps
 import UserNotifications
 
 /**
@@ -41,9 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	Application opened normally. Request permissions amd defines some settings.
 	*/
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		
-		// Google Mapas API KEY
-		GMSServices.provideAPIKey("AIzaSyBfIiBM_YSBlxybmI_Uz_fGoUFN4wacR80")
 		
 		// Enable background mode.
 		UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)

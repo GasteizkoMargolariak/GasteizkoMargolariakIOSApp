@@ -117,22 +117,7 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 				}
 				
 				// Set up map
-				//self.eventMap.delegate = appDelegate as! MKMapViewDelegate
-				//self.eventMap.mapType = MKMapType.satellite
-				
-				//Map centre
-				NSLog("IVV Coordinates: \(lat) \(lon)")
-				let centre = CLLocationCoordinate2D(latitude: lat,
-				                                    longitude: lon)
-				//Declare span of map
-				let span = MKCoordinateSpan(latitudeDelta: 0.05,
-				                            longitudeDelta: 0.05)
-				//Set region of the map
-				let region = MKCoordinateRegion(center: centre, span: span)
-				self.eventMap.setRegion(region, animated: false)
-				self.eventMap.regionThatFits(region)
-				
-				var template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
+				let template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
 				let carte_indice = MKTileOverlay(urlTemplate:template)
 				carte_indice.isGeometryFlipped = true
 				carte_indice.canReplaceMapContent = false
