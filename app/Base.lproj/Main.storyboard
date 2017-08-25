@@ -1569,7 +1569,7 @@
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LsE-aH-N1R" customClass="GMSMapView">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LsE-aH-N1R" customClass="MKMapView">
                                                 <rect key="frame" x="10" y="242" width="305" height="277"/>
                                                 <color key="backgroundColor" red="1" green="0.20334201390000001" blue="0.32001410590000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <userDefinedRuntimeAttributes>

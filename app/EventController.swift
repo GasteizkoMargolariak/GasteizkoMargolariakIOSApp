@@ -20,7 +20,7 @@
 
 import UIKit
 import CoreData
-import GoogleMaps
+import MapKit
 
 /**
 The view controller of the app.
@@ -31,7 +31,7 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	@IBOutlet weak var eventText: UILabel!
 	@IBOutlet weak var eventTime: UILabel!
 	@IBOutlet weak var eventLocation: UILabel!
-	@IBOutlet weak var eventMap: GMSMapView!
+	@IBOutlet weak var eventMap: MKMapView!
 	@IBOutlet weak var btClose: UIButton!
 	@IBOutlet weak var eventAddress: UILabel!
 	
@@ -53,6 +53,11 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	Run when the app loads. Sets everything up.
 	*/
 	override func viewDidLoad() {
+		
+		//let mapTemplate: String = "http://tile.openstreetmap.org/{z}/{x}/{y}.png";
+		//let mapOverlay: MKTileOverlay = MKTileOverlay.initWithURLTemplate(mapTemplate)
+		//overlay.canReplaceMapContent = YES
+		//self.eventMap addOverlay(overlay level:MKOverlayLevelAboveLabels];         // (4)
 		
 		// TODO: Pas this
 		let margolari: Bool = true
@@ -111,18 +116,41 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 					}
 				}
 				
-				// Set map marker
-				let marker = GMSMarker()
-				marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-				marker.title = name
-				marker.map = self.eventMap
+				// Set up map
+				//self.eventMap.delegate = appDelegate as! MKMapViewDelegate
+				//self.eventMap.mapType = MKMapType.satellite
+				
+				//Map centre
+				NSLog("IVV Coordinates: \(lat) \(lon)")
+				let centre = CLLocationCoordinate2D(latitude: lat,
+				                                    longitude: lon)
+				//Declare span of map
+				let span = MKCoordinateSpan(latitudeDelta: 0.05,
+				                            longitudeDelta: 0.05)
+				//Set region of the map
+				let region = MKCoordinateRegion(center: centre, span: span)
+				self.eventMap.setRegion(region, animated: false)
+				self.eventMap.regionThatFits(region)
+				
+				var template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
+				let carte_indice = MKTileOverlay(urlTemplate:template)
+				carte_indice.isGeometryFlipped = true
+				carte_indice.canReplaceMapContent = false
+				self.eventMap.add(carte_indice)
+				
+				// Set marker
+				let annotation = MKPointAnnotation()
+				annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+				self.eventMap.addAnnotation(annotation)
+				
 				
 				// Center map
-				eventMap.isMyLocationEnabled = true
-				let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: lat, longitude: lon, zoom: 12.0)
-				self.eventMap.camera = camera
+				let center = CLLocation(latitude: lat, longitude: lon)
+				let radius: CLLocationDistance = 1000
+				let coordinateRegion = MKCoordinateRegionMakeWithDistance(center.coordinate,
+				                                                          radius, radius)
+				self.eventMap.setRegion(coordinateRegion, animated: true)
 				
-			
 			}
 			catch {
 				NSLog(":EVENT:ERROR: Error getting info from event \(id): \(error)")
@@ -208,6 +236,21 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 			NSLog(":FUTUREACTIVITY:ERROR: Error getting infor about place \(place): \(error)")
 		}
 		return [placeName, placeAddress, lat, lon]
+	}
+	
+	
+	func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer!
+	{
+		
+		if overlay is MKTileOverlay
+		{
+			var renderer = MKTileOverlayRenderer(overlay:overlay)
+			
+			renderer.alpha = 0.8
+			
+			return renderer
+		}
+		return nil
 	}
 	
 	

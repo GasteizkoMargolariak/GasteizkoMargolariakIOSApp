@@ -329,9 +329,9 @@ class Sync{
 					defaults.set(value, forKey: name)
 				}
 				
-				
 				let start: Int = row.indexOf(target: ",\"")! + 1
 				let end: Int = row.length - 1
+
 				if (start == end){
 					row = ""
 				}
@@ -400,7 +400,8 @@ class Sync{
 							query.setValue(Int(version), forKey: "version")
 						}
 						
-						// Save the row
+						// Save the version
+
 						try context.save()
 					}
 					catch let error as NSError  {
