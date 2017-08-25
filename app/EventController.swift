@@ -117,10 +117,11 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 				}
 				
 				// Set up map
-				self.eventMap.delegate = appDelegate as! MKMapViewDelegate
-				self.eventMap.mapType = MKMapType.satellite
+				//self.eventMap.delegate = appDelegate as! MKMapViewDelegate
+				//self.eventMap.mapType = MKMapType.satellite
 				
 				//Map centre
+				NSLog("IVV Coordinates: \(lat) \(lon)")
 				let centre = CLLocationCoordinate2D(latitude: lat,
 				                                    longitude: lon)
 				//Declare span of map
@@ -130,11 +131,26 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 				let region = MKCoordinateRegion(center: centre, span: span)
 				self.eventMap.setRegion(region, animated: false)
 				self.eventMap.regionThatFits(region)
+				
 				var template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
 				let carte_indice = MKTileOverlay(urlTemplate:template)
 				carte_indice.isGeometryFlipped = true
 				carte_indice.canReplaceMapContent = false
 				self.eventMap.add(carte_indice)
+				
+				// Set marker
+				let annotation = MKPointAnnotation()
+				annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+				self.eventMap.addAnnotation(annotation)
+				
+				
+				// Center map
+				let center = CLLocation(latitude: lat, longitude: lon)
+				let radius: CLLocationDistance = 1000
+				let coordinateRegion = MKCoordinateRegionMakeWithDistance(center.coordinate,
+				                                                          radius, radius)
+				self.eventMap.setRegion(coordinateRegion, animated: true)
+				
 			}
 			catch {
 				NSLog(":EVENT:ERROR: Error getting info from event \(id): \(error)")
