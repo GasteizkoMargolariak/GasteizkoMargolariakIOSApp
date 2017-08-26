@@ -42,6 +42,8 @@ class LocationView: UIView {
 	
 	var locationTimer: Timer? = nil
 	
+	var mapRenderer: MKTileOverlayRenderer!
+	
 
 	/**
 	Default constructor for the interface builder.
@@ -86,18 +88,6 @@ class LocationView: UIView {
 	
 	
 	/**
-	Enables the user location dot in the map, checking for permission.
-	:param: manager Location manager used to get the location.
-	:param: didChangeAuthorizationStatus status Permission status
-	*/
-	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-		if status == CLAuthorizationStatus.authorizedWhenInUse {
-			//map.isMyLocationEnabled = true
-		}
-	}
-	
-	
-	/**
 	Get new user location and recalculates distance to GM .
 	*/
 	func getNewLocation(){
@@ -113,11 +103,25 @@ class LocationView: UIView {
 				self.lbTitle.isHidden = false
 				self.lbDistance.isHidden = false
 				self.lbNo.isHidden = true
-				//let marker = GMSMarker()
-				//marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-				//marker.title = "Gasteizko Margolariak"
-				//marker.snippet = "Australia"
-				//marker.map = self.map
+				
+				// Set up map
+				setupMapRenderer()
+				self.map.showsUserLocation = true
+				self.map.delegate = self;
+				
+				// Set marker
+				let annotation = MKPointAnnotation()
+				annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+				self.map.addAnnotation(annotation)
+				
+				
+				// Center map
+				let center = CLLocation(latitude: lat, longitude: lon)
+				let radius: CLLocationDistance = 1000
+				let coordinateRegion = MKCoordinateRegionMakeWithDistance(center.coordinate,
+				                                                          radius, radius)
+				self.map.setRegion(coordinateRegion, animated: true)
+				
 			
 				let location = self.controller.getLocation()
 				if location != nil {
@@ -174,16 +178,33 @@ class LocationView: UIView {
 		return Int(m)
 	}
 	
-	/*
-	// TODO: Whato does this do?
-	func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutableRawPointer) {
-		if !didFindMyLocation {
-			let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as CLLocation
-			map.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 10.0)
-			map.settings.myLocationButton = true
-			
-			didFindMyLocation = true
-		}
-	}
+	/**
+	Selects the renderer for the map.
+	:return: The map renderer.
 	*/
+	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+		return mapRenderer
+	}
+	
+	/**
+	Sets up the map renderer using OpenStreet Maps tiles.
+	*/
+	func setupMapRenderer() {
+		let osmTemplate = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+		let osmOverlay = MKTileOverlay(urlTemplate: osmTemplate)
+		osmOverlay.canReplaceMapContent = true
+		self.map.add(osmOverlay, level: .aboveLabels)
+		self.mapRenderer = MKTileOverlayRenderer(tileOverlay: osmOverlay)
+	}
+	
+}
+
+/**
+Extension to make the class comply with MKMapViewDelegate.
+*/
+extension LocationView: MKMapViewDelegate {
+	func map(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+		return mapRenderer
+	}
+	
 }

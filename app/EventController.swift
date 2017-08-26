@@ -39,7 +39,7 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	var passId: Int = -1
 	var delegate: AppDelegate?
 	
-	var tileRenderer: MKTileOverlayRenderer!
+	var mapRenderer: MKTileOverlayRenderer!
 
 	
 	
@@ -57,12 +57,7 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	override func viewDidLoad() {
 		
-		//let mapTemplate: String = "http://tile.openstreetmap.org/{z}/{x}/{y}.png";
-		//let mapOverlay: MKTileOverlay = MKTileOverlay.initWithURLTemplate(mapTemplate)
-		//overlay.canReplaceMapContent = YES
-		//self.eventMap addOverlay(overlay level:MKOverlayLevelAboveLabels];         // (4)
-		
-		// TODO: Pas this
+		// TODO: Pass this as parameter, make an if to show city events.
 		let margolari: Bool = true
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -120,18 +115,9 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 				}
 				
 				// Set up map
-				setupTileRenderer()
-				//mapView.region = initialRegion
-				eventMap.showsUserLocation = true
-				//mapView.showsCompass = true
-				eventMap.setUserTrackingMode(.followWithHeading, animated: true)
-				//let osmTemplate = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
-				//let osmOverlay = MKTileOverlay(urlTemplate:osmTemplate)
-				//carte_indice.isGeometryFlipped = true
-				//osmOverlay.canReplaceMapContent = false
-				//self.eventMap.add(osmOverlay, level: .aboveLabels)
-				//tileRenderer = MKTileOverlayRenderer(tileOverlay: osmOverlay)
-				
+				setupMapRenderer()
+				self.eventMap.showsUserLocation = true
+				self.eventMap.setUserTrackingMode(.followWithHeading, animated: true)
 				self.eventMap.delegate = self;
 				
 				// Set marker
@@ -235,25 +221,24 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	}
 	
 	
+	/**
+	Selects the renderer for the map.
+	:return: The map renderer.
+	*/
 	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-		return tileRenderer
+		return mapRenderer
 	}
 	
-	func setupTileRenderer() {
-		// 1
-		let template = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-		
-		// 2
-		let overlay = MKTileOverlay(urlTemplate: template)
-		
-		// 3
-		overlay.canReplaceMapContent = true
-		
-		// 4
-		eventMap.add(overlay, level: .aboveLabels)
-		
-		//5
-		tileRenderer = MKTileOverlayRenderer(tileOverlay: overlay)
+	
+	/**
+	Sets up the map renderer using OpenStreet Maps tiles.
+	*/
+	func setupMapRenderer() {
+		let osmTemplate = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+		let osmOverlay = MKTileOverlay(urlTemplate: osmTemplate)
+		osmOverlay.canReplaceMapContent = true
+		self.eventMap.add(osmOverlay, level: .aboveLabels)
+		self.mapRenderer = MKTileOverlayRenderer(tileOverlay: osmOverlay)
 	}
 	
 	
@@ -273,9 +258,12 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	}
 }
 
+/**
+Extension to make the class comply with MKMapViewDelegate.
+*/
 extension EventController: MKMapViewDelegate {
 	func eventMap(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-  return tileRenderer
+		return mapRenderer
 	}
 	
 }
