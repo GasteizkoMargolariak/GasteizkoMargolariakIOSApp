@@ -20,8 +20,8 @@
 
 import Foundation
 import CoreData
+import MapKit
 import UIKit
-import GoogleMaps
 
 
 /**
@@ -30,7 +30,7 @@ Class to handle the location view.
 class LocationView: UIView {
 	
 	@IBOutlet var container: UIView!
-	@IBOutlet weak var map: GMSMapView!
+	@IBOutlet weak var map: MKMapView!
 	@IBOutlet weak var lbTitle: UILabel!
 	@IBOutlet weak var lbDistance: UILabel!
 	@IBOutlet weak var lbNo: UILabel!
@@ -41,6 +41,8 @@ class LocationView: UIView {
 	var didFindMyLocation = false
 	
 	var locationTimer: Timer? = nil
+	
+	var mapRenderer: MKTileOverlayRenderer!
 	
 
 	/**
@@ -74,26 +76,14 @@ class LocationView: UIView {
 		self.container.frame = self.bounds
 		
 		// Set map up
-		map.isMyLocationEnabled = true
+		//map.isMyLocationEnabled = true
 		//map.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
-		let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 42.846399, longitude: -2.673365, zoom: 12.0)
-		map.camera = camera
+		//let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 42.846399, longitude: -2.673365, zoom: 12.0)
+		//map.camera = camera
 		
 		// Schedule location fetches
 		getNewLocation()
 		Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(getNewLocation), userInfo: nil, repeats: true)
-	}
-	
-	
-	/**
-	Enables the user location dot in the map, checking for permission.
-	:param: manager Location manager used to get the location.
-	:param: didChangeAuthorizationStatus status Permission status
-	*/
-	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-		if status == CLAuthorizationStatus.authorizedWhenInUse {
-			map.isMyLocationEnabled = true
-		}
 	}
 	
 	
@@ -113,11 +103,25 @@ class LocationView: UIView {
 				self.lbTitle.isHidden = false
 				self.lbDistance.isHidden = false
 				self.lbNo.isHidden = true
-				let marker = GMSMarker()
-				marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-				marker.title = "Gasteizko Margolariak"
-				//marker.snippet = "Australia"
-				marker.map = self.map
+				
+				// Set up map
+				setupMapRenderer()
+				self.map.showsUserLocation = true
+				self.map.delegate = self;
+				
+				// Set marker
+				let annotation = MKPointAnnotation()
+				annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+				self.map.addAnnotation(annotation)
+				
+				
+				// Center map
+				let center = CLLocation(latitude: lat, longitude: lon)
+				let radius: CLLocationDistance = 1000
+				let coordinateRegion = MKCoordinateRegionMakeWithDistance(center.coordinate,
+				                                                          radius, radius)
+				self.map.setRegion(coordinateRegion, animated: true)
+				
 			
 				let location = self.controller.getLocation()
 				if location != nil {
@@ -174,16 +178,33 @@ class LocationView: UIView {
 		return Int(m)
 	}
 	
-	/*
-	// TODO: Whato does this do?
-	func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutableRawPointer) {
-		if !didFindMyLocation {
-			let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as CLLocation
-			map.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 10.0)
-			map.settings.myLocationButton = true
-			
-			didFindMyLocation = true
-		}
-	}
+	/**
+	Selects the renderer for the map.
+	:return: The map renderer.
 	*/
+	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+		return mapRenderer
+	}
+	
+	/**
+	Sets up the map renderer using OpenStreet Maps tiles.
+	*/
+	func setupMapRenderer() {
+		let osmTemplate = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+		let osmOverlay = MKTileOverlay(urlTemplate: osmTemplate)
+		osmOverlay.canReplaceMapContent = true
+		self.map.add(osmOverlay, level: .aboveLabels)
+		self.mapRenderer = MKTileOverlayRenderer(tileOverlay: osmOverlay)
+	}
+	
+}
+
+/**
+Extension to make the class comply with MKMapViewDelegate.
+*/
+extension LocationView: MKMapViewDelegate {
+	func map(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+		return mapRenderer
+	}
+	
 }

@@ -46,10 +46,6 @@
 		93B84BA71D9C31AB006C0F67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B84BA51D9C31AB006C0F67 /* LaunchScreen.storyboard */; };
 		93B9113D1ED7567C0061BA71 /* LocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93B9113C1ED7567B0061BA71 /* LocationView.xib */; };
 		93B9113F1ED7582B0061BA71 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B9113E1ED7582B0061BA71 /* LocationView.swift */; };
-		93B911411ED761D80061BA71 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B911401ED761D80061BA71 /* GoogleMapsBase.framework */; };
-		93B911441ED7621B0061BA71 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B911421ED7621B0061BA71 /* GoogleMaps.framework */; };
-		93B911451ED7621B0061BA71 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B911431ED7621B0061BA71 /* GoogleMapsCore.framework */; };
-		93B911471ED763690061BA71 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 93B911461ED763690061BA71 /* GoogleMaps.bundle */; };
 		93B911491ED764010061BA71 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B911481ED764010061BA71 /* AVFoundation.framework */; };
 		93B9114B1ED7640D0061BA71 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B9114A1ED7640D0061BA71 /* CoreLocation.framework */; };
 		93B9114D1ED7641C0061BA71 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B9114C1ED7641C0061BA71 /* CoreText.framework */; };
@@ -138,10 +134,6 @@
 		93B84BA81D9C31AB006C0F67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93B9113C1ED7567B0061BA71 /* LocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationView.xib; sourceTree = "<group>"; };
 		93B9113E1ED7582B0061BA71 /* LocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
-		93B911401ED761D80061BA71 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
-		93B911421ED7621B0061BA71 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
-		93B911431ED7621B0061BA71 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsCore.framework; sourceTree = "<group>"; };
-		93B911461ED763690061BA71 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		93B911481ED764010061BA71 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		93B9114A1ED7640D0061BA71 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		93B9114C1ED7641C0061BA71 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -205,10 +197,7 @@
 				93B9114D1ED7641C0061BA71 /* CoreText.framework in Frameworks */,
 				93B9114B1ED7640D0061BA71 /* CoreLocation.framework in Frameworks */,
 				93B911491ED764010061BA71 /* AVFoundation.framework in Frameworks */,
-				93B911411ED761D80061BA71 /* GoogleMapsBase.framework in Frameworks */,
 				931AA58B1E1DA911003A2290 /* CoreData.framework in Frameworks */,
-				93B911451ED7621B0061BA71 /* GoogleMapsCore.framework in Frameworks */,
-				93B911441ED7621B0061BA71 /* GoogleMaps.framework in Frameworks */,
 				93D9EA711DE37C7900089002 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,10 +314,6 @@
 				93B9114C1ED7641C0061BA71 /* CoreText.framework */,
 				93B9114A1ED7640D0061BA71 /* CoreLocation.framework */,
 				93B911481ED764010061BA71 /* AVFoundation.framework */,
-				93B911461ED763690061BA71 /* GoogleMaps.bundle */,
-				93B911421ED7621B0061BA71 /* GoogleMaps.framework */,
-				93B911431ED7621B0061BA71 /* GoogleMapsCore.framework */,
-				93B911401ED761D80061BA71 /* GoogleMapsBase.framework */,
 				931AA58A1E1DA910003A2290 /* CoreData.framework */,
 				93D9EA701DE37C7900089002 /* libsqlite3.tbd */,
 			);
@@ -421,7 +406,6 @@
 				935D6E2D1E8678B700CED3A1 /* GalleryView.xib in Resources */,
 				93EB2F0E1EBF5BF500F64186 /* RowSchedule.xib in Resources */,
 				935AE18C1ECE162C0055E71F /* RowLablancaOffer.xib in Resources */,
-				93B911471ED763690061BA71 /* GoogleMaps.bundle in Resources */,
 				93BAD2EE1E585578009DF853 /* RowHomeBlog.xib in Resources */,
 				9326C4F41EA51C39007DF2A4 /* RowLablancaDay.xib in Resources */,
 				935D6E311E867C5E00CED3A1 /* RowGallery.xib in Resources */,
