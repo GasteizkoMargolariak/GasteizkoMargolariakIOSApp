@@ -39,6 +39,9 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	var passId: Int = -1
 	var delegate: AppDelegate?
 	
+	var tileRenderer: MKTileOverlayRenderer!
+
+	
 	
 	/**
 	Gets the application context.
@@ -117,11 +120,19 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 				}
 				
 				// Set up map
-				let template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
-				let carte_indice = MKTileOverlay(urlTemplate:template)
-				carte_indice.isGeometryFlipped = true
-				carte_indice.canReplaceMapContent = false
-				self.eventMap.add(carte_indice)
+				setupTileRenderer()
+				//mapView.region = initialRegion
+				eventMap.showsUserLocation = true
+				//mapView.showsCompass = true
+				eventMap.setUserTrackingMode(.followWithHeading, animated: true)
+				//let osmTemplate = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
+				//let osmOverlay = MKTileOverlay(urlTemplate:osmTemplate)
+				//carte_indice.isGeometryFlipped = true
+				//osmOverlay.canReplaceMapContent = false
+				//self.eventMap.add(osmOverlay, level: .aboveLabels)
+				//tileRenderer = MKTileOverlayRenderer(tileOverlay: osmOverlay)
+				
+				self.eventMap.delegate = self;
 				
 				// Set marker
 				let annotation = MKPointAnnotation()
@@ -224,18 +235,25 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	}
 	
 	
-	func eventMapV(eventMap: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer!
-	{
+	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+		return tileRenderer
+	}
+	
+	func setupTileRenderer() {
+		// 1
+		let template = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
 		
-		if overlay is MKTileOverlay
-		{
-			var renderer = MKTileOverlayRenderer(overlay:overlay)
-			
-			renderer.alpha = 0.8
-			
-			return renderer
-		}
-		return nil
+		// 2
+		let overlay = MKTileOverlay(urlTemplate: template)
+		
+		// 3
+		overlay.canReplaceMapContent = true
+		
+		// 4
+		eventMap.add(overlay, level: .aboveLabels)
+		
+		//5
+		tileRenderer = MKTileOverlayRenderer(tileOverlay: overlay)
 	}
 	
 	
@@ -253,5 +271,12 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 			return "es"
 		}
 	}
+}
+
+extension EventController: MKMapViewDelegate {
+	func eventMap(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+  return tileRenderer
+	}
+	
 }
 
