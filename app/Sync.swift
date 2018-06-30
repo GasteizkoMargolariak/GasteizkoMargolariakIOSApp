@@ -89,12 +89,12 @@ class Sync{
 		
 		var urlStr: String = ""
 		
-		if initial{
-			urlStr = "http://192.168.1.101/API/v3/fastsync.php?client=com.margolariak.app&user=\(uId)\(strVersions)"
-		}
-		else{
-			urlStr = "http://192.168.1.101/API/v3/sync.php?client=com.margolariak.app&user=\(uId)\(strVersions)"
-		}
+		//if initial{
+		//	urlStr = "https://margolariak.com/API/v3/fastsync.php?client=com.margolariak.app&user=\(uId)\(strVersions)"
+		//}
+		//else{
+			urlStr = "https://margolariak.com/API/v3/sync.php?client=com.margolariak.app&user=\(uId)\(strVersions)"
+		//}
 		let url = URL(string: urlStr)
 
 		
@@ -252,7 +252,7 @@ class Sync{
 						
 						dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 						dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601)! as Calendar
-						dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+                        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale?
 						dateFormatter.timeZone = NSTimeZone.local
 						let timeString = value//"\(value.subStr(start: 0, end: 19))"
 						let dayString = "\(value.subStr(start: 0, end: 10)) 00:00:00"

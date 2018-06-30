@@ -89,7 +89,7 @@ class AlbumViewController: UIViewController, UIGestureRecognizerDelegate {
 	/**
 	Returns to the main view controller.
 	*/
-	func back() {
+	@objc func back() {
 		self.dismiss(animated: true, completion: nil)
 	}
 	

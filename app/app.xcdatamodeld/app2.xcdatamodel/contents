@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="V2">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G1314" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="V2">
     <entity name="Activity" representedClassName=".Activity" syncable="YES" codeGenerationType="class">
         <attribute name="after_en" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="after_es" optional="YES" attributeType="String" syncable="YES"/>
@@ -103,7 +103,7 @@
         <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Festival_event_gm" representedClassName="Festival_event_gm" syncable="YES" codeGenerationType="class">
+    <entity name="Festival_event_gm" representedClassName=".Festival_event_gm" syncable="YES" codeGenerationType="class">
         <attribute name="day" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
@@ -283,6 +283,7 @@
         <element name="Festival" positionX="36" positionY="-3852" width="128" height="180"/>
         <element name="Festival_day" positionX="-9" positionY="-3906" width="128" height="165"/>
         <element name="Festival_event_city" positionX="-261" positionY="-3810" width="128" height="253"/>
+        <element name="Festival_event_gm" positionX="-245" positionY="-4104" width="128" height="255"/>
         <element name="Festival_event_image" positionX="9" positionY="-3888" width="128" height="105"/>
         <element name="Festival_offer" positionX="18" positionY="-3879" width="128" height="195"/>
         <element name="Location" positionX="27" positionY="-3870" width="128" height="90"/>
@@ -290,16 +291,15 @@
         <element name="People" positionX="-9" positionY="-3906" width="128" height="120"/>
         <element name="Photo" positionX="-9" positionY="-3906" width="128" height="285"/>
         <element name="Photo_album" positionX="0" positionY="-3897" width="128" height="75"/>
+        <element name="Photo_comment" positionX="-9" positionY="-3906" width="128" height="135"/>
         <element name="Place" positionX="9" positionY="-3888" width="128" height="195"/>
         <element name="Post" positionX="18" positionY="-3879" width="128" height="210"/>
         <element name="Post_comment" positionX="27" positionY="-3870" width="128" height="135"/>
         <element name="Post_image" positionX="36" positionY="-3861" width="128" height="105"/>
         <element name="Post_tag" positionX="45" positionY="-3852" width="128" height="75"/>
-        <element name="Sponsor" positionX="-9" positionY="-3906" width="128" height="270"/>
-        <element name="Version" positionX="-9" positionY="-3906" width="128" height="75"/>
-        <element name="Photo_comment" positionX="-9" positionY="-3906" width="128" height="135"/>
         <element name="Route" positionX="0" positionY="-3897" width="128" height="90"/>
         <element name="Route_point" positionX="9" positionY="-3888" width="128" height="180"/>
-        <element name="Festival_event_gm" positionX="-245" positionY="-4104" width="128" height="253"/>
+        <element name="Sponsor" positionX="-9" positionY="-3906" width="128" height="270"/>
+        <element name="Version" positionX="-9" positionY="-3906" width="128" height="75"/>
     </elements>
 </model>

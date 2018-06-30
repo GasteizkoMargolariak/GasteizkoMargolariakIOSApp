@@ -82,7 +82,7 @@ Extension of UIView to be formatted as a the gallery section in the home view.
 	/**
 	Open the first photo in the photo viewer.
 	*/
-	func openFirstPhoto(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openFirstPhoto(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPhoto(album: self.albumIds[0], photo: self.photoIds[0])
 	}
@@ -91,7 +91,7 @@ Extension of UIView to be formatted as a the gallery section in the home view.
 	/**
 	Open the second photo in the photo viewer.
 	*/
-	func openSecondPhoto(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openSecondPhoto(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPhoto(album: self.albumIds[1], photo: self.photoIds[1])
 	}
@@ -100,7 +100,7 @@ Extension of UIView to be formatted as a the gallery section in the home view.
 	/**
 	Open the third photo in the photo viewer.
 	*/
-	func openThirdPhoto(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openThirdPhoto(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPhoto(album: self.albumIds[2], photo: self.photoIds[2])
 	}
@@ -109,7 +109,7 @@ Extension of UIView to be formatted as a the gallery section in the home view.
 	/**
 	Open the fourth photo in the photo viewer.
 	*/
-	func openFourthPhoto(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openFourthPhoto(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPhoto(album: self.albumIds[3], photo: self.photoIds[3])
 	}

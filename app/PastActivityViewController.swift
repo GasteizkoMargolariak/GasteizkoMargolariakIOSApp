@@ -65,7 +65,7 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 	/**
 	Dismisses the controller.
 	*/
-	func back() {
+	@objc func back() {
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -102,7 +102,7 @@ class PastActivityViewController: UIViewController, UIGestureRecognizerDelegate 
 			for r in searchResults as [NSManagedObject] {
 				count = count + 1
 				sTitle = r.value(forKey: "title_\(lang)")! as! String
-				if (r.value(forKey: "after_\(lang)")! as! String).length != 0{
+				if ((r.value(forKey: "after_\(lang)") != nil) && ((r.value(forKey: "after_\(lang)")! as! String).length != 0)){
 					sText = r.value(forKey: "after_\(lang)")! as! String
 				}
 				else{

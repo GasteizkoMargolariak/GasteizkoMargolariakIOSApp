@@ -111,7 +111,7 @@ Extension of UIView to be formatted as sections.
 	/**
 	Called when the phone button is tapped.
 	*/
-	func didTapPhone() {
+	@objc func didTapPhone() {
 		UIApplication.shared.openURL(NSURL(string: "tel://+34637140371")! as URL)
 	}
 	
@@ -119,7 +119,7 @@ Extension of UIView to be formatted as sections.
 	/**
 	Called when the mail button is tapped.
 	*/
-	func didTapMail() {
+	@objc func didTapMail() {
 		UIApplication.shared.openURL(NSURL(string: "mailto:gasteizkomargolariak@gmail.com")! as URL)
 	}
 	
@@ -127,7 +127,7 @@ Extension of UIView to be formatted as sections.
 	/**
 	Called when the Facebook button is tapped.
 	*/
-	func didTapFacebook() {
+	@objc func didTapFacebook() {
 		UIApplication.shared.openURL(NSURL(string: "http://facebook.com/gmargolariak")! as URL)
 	}
 	
@@ -135,7 +135,7 @@ Extension of UIView to be formatted as sections.
 	/**
 	Called when the Twitter button is tapped.
 	*/
-	func didTapTwitter() {
+	@objc func didTapTwitter() {
 		UIApplication.shared.openURL(NSURL(string: "http://twitter.com/gmargolariak")! as URL)
 	}
 	
@@ -143,7 +143,7 @@ Extension of UIView to be formatted as sections.
 	/**
 	Called when the G+ button is tapped.
 	*/
-	func didTapGoogle() {
+	@objc func didTapGoogle() {
 		UIApplication.shared.openURL(NSURL(string: "https://plus.google.com/106661466029005469492")! as URL)
 	}
 	
@@ -151,7 +151,7 @@ Extension of UIView to be formatted as sections.
 	/**
 	Called when the Youtube button is tapped.
 	*/
-	func didTapYoutube() {
+	@objc func didTapYoutube() {
 		UIApplication.shared.openURL(NSURL(string: "https://www.youtube.com/user/GasteizkoMargolariak")! as URL)
 	}
 	
@@ -159,7 +159,7 @@ Extension of UIView to be formatted as sections.
 	/**
 	Called when the Instagram button is tapped.
 	*/
-	func didTapInstagram() {
+	@objc func didTapInstagram() {
 		UIApplication.shared.openURL(NSURL(string: "https://instagram.com/gmargolariak/")! as URL)
 	}
 	

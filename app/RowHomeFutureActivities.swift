@@ -128,7 +128,7 @@ Extension of UIView to be formatted as a future activity in the home screen.
 	/**
 	Opens an activity in a controller.
 	*/
-	func openActivity(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openActivity(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showFutureActivity(id: self.id)
 	}

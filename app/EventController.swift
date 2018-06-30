@@ -149,7 +149,7 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	/**
 	Dismisses the controller.
 	*/
-	func back() {
+	@objc func back() {
 		self.dismiss(animated: true, completion: nil)
 	}
 	

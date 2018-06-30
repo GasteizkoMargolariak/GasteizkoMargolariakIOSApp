@@ -123,7 +123,7 @@ Extension of UIView to be formatted as sections.
 	/**
 	Opens an activity.
 	*/
-	func openActivity(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openActivity(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPastActivity(id: self.id)
 	}

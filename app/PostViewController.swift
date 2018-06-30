@@ -33,7 +33,8 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	@IBOutlet weak var postText: UILabel!
 	@IBOutlet weak var postTitle: UILabel!
 	@IBOutlet weak var postImage: UIImageView!
-	
+    @IBOutlet weak var postDate: UILabel!
+    
 	var id: Int = -1
 	var passId: Int = -1
 	var delegate: AppDelegate?
@@ -64,7 +65,7 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 	/**
 	Dismisses the controller, efectively going to the previous section.
 	*/
-	func back() {
+	@objc func back() {
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -96,6 +97,7 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 			var sTitle: String
 			var sText: String
 			var image: String
+            var date: NSDate
 			
 			for r in searchResults as [NSManagedObject] {
 				
@@ -103,6 +105,8 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 				sText = r.value(forKey: "text_\(lang)")! as! String
 				postTitle.text = "  \(sTitle.decode().stripHtml())"
 				postText.text = sText.decode().stripHtml()
+                date = r.value(forKey: "dtime")! as! NSDate
+                postDate.text = formatDate(date: date, lang: lang)
 				
 				// Get main image
 				image = ""
@@ -136,6 +140,57 @@ class PostViewController: UIViewController, UIGestureRecognizerDelegate {
 		}
 	}
 	
+    
+    /**
+     Formats a date to the desired language.
+     :param: text The date.
+     :param: lang Device language (only 'es', 'en', or 'eu').
+     */
+    func formatDate(date: NSDate, lang: String) -> String{
+        
+        let months_es = ["0index", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+        let months_en = ["0index", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        let months_eu = ["0index", "urtarrilaren", "otsailaren", "martxoaren", "abrilaren", "maiatzaren", "ekainaren", "ustailaren", "abustuaren", "irailaren", "urriaren", "azaroaren", "abenduaren"]
+        let days_es = ["0index", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+        let days_en = ["0index", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        let days_eu = ["0index", "Astelehena", "Asteartea", "Asteazkena", "Osteguna", "Ostirala", "Larumbata", "Igandea"]
+        
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: date as Date)
+        let month = calendar.component(.month, from: date as Date)
+        let weekday = calendar.component(.weekday, from: date as Date)
+        var strDate = ""
+        
+        switch lang{
+        case "en":
+            
+            var dayNum = ""
+            switch day{
+            case 1:
+                dayNum = "1th"
+                break
+            case 2:
+                dayNum = "2nd"
+                break;
+            case 3:
+                dayNum = "3rd"
+                break;
+            default:
+                dayNum = "\(weekday)th"
+            }
+            
+            strDate = "\(days_en[weekday]), \(months_en[month]) \(dayNum)"
+            break
+        case "eu":
+            strDate = "\(days_eu[weekday]) \(months_eu[month]) \(day)an"
+            break
+        default:
+            strDate = "\(days_es[weekday]) \(day) de \(months_es[month])"
+        }
+        
+        return strDate
+    }
+    
 	
 	/**
 	Gets the device language. The only recognized languages are Spanish, English and Basque.

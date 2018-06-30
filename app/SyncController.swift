@@ -79,7 +79,7 @@ class SyncController: UIViewController{
 		}
 	}
 	
-	func endSync(){
+	@objc func endSync(){
 		if self.nowSyncing == false{
 			syncTimer?.invalidate()
 			startApp()
@@ -126,7 +126,7 @@ class SyncController: UIViewController{
 	/**
 	Signal to update the progressbar and, maybe, the tag.
 	*/
-	func progress(){
+	@objc func progress(){
 		
 		if (Int(completion * 100) % 20) == 0 {
 			let rnd = Int(arc4random_uniform(UInt32(messages.count)));

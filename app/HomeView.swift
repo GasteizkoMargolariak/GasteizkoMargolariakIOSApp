@@ -90,7 +90,7 @@ class HomeView: UIView {
 		//Get info to populate sections
 		self.moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		
-		self.delegate = UIApplication.shared.delegate as! AppDelegate
+        self.delegate = (UIApplication.shared.delegate as! AppDelegate)
 		self.moc?.persistentStoreCoordinator = self.delegate?.persistentStoreCoordinator
 		self.lang = getLanguage()
 		
@@ -141,7 +141,7 @@ class HomeView: UIView {
 	Sets up the location section.
 	If no location is reported, it hiddes the section.
 	*/
-	func setUpLocation(){
+	@objc func setUpLocation(){
 		let defaults = UserDefaults.standard
 		if (defaults.value(forKey: "GMLocLat") != nil && defaults.value(forKey: "GMLocLon") != nil){
 			let lat = defaults.value(forKey: "GMLocLat") as! Double
@@ -561,7 +561,7 @@ class HomeView: UIView {
 	/**
 	Opens a post.
 	*/
-	func openPost(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openPost(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: (sender?.view as! RowHomeBlog).id)
 	}
@@ -570,7 +570,7 @@ class HomeView: UIView {
 	/**
 	Opens the La Blanca section when tapping the section.
 	*/
-	func openLablanca(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openLablanca(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showComponent(selected: 2)
 	}
@@ -579,7 +579,7 @@ class HomeView: UIView {
 	/**
 	Opens the Location section when tapping the section.
 	*/
-	func openLocation(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openLocation(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showComponent(selected: 1)
 	}
@@ -587,7 +587,7 @@ class HomeView: UIView {
 	/**
 	Commands the view controller to show the Gasteizko Margolariak schedule view.
 	*/
-	func openGMSchedule(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openGMSchedule(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showSchedule(margolari: true)
 	}

@@ -90,7 +90,7 @@ class LocationView: UIView {
 	/**
 	Get new user location and recalculates distance to GM .
 	*/
-	func getNewLocation(){
+	@objc func getNewLocation(){
 		let defaults = UserDefaults.standard
 		if (defaults.value(forKey: "GMLocLat") != nil && defaults.value(forKey: "GMLocLon") != nil){
 			let lat = defaults.value(forKey: "GMLocLat") as! Double

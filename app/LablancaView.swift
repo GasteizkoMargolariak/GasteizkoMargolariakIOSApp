@@ -251,7 +251,7 @@ class LablancaView: UIView {
 	/**
 	Commands the view controller to show the city schedule view.
 	*/
-	func openSchedule(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openSchedule(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showSchedule(margolari: false)
 	}
@@ -260,7 +260,7 @@ class LablancaView: UIView {
 	/**
 	Commands the view controller to show the Gasteizko Margolariak schedule view.
 	*/
-	func openGMSchedule(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openGMSchedule(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showSchedule(margolari: true)
 	}

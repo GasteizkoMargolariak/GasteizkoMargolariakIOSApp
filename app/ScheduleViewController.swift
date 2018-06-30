@@ -87,7 +87,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	/**
 	Returns to the main view controller.
 	*/
-	func back() {
+	@objc func back() {
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -313,7 +313,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	Shows the schedule of the next day
 	:param: sender Event trigger.
 	*/
-	func nextDay(_ sender:UITapGestureRecognizer? = nil){
+	@objc func nextDay(_ sender:UITapGestureRecognizer? = nil){
 		changeDay(increment: 1)
 	}
 
@@ -322,7 +322,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	Shows the schedule of the previous day.
 	:param: sender Event trigger.
 	*/
-	func prevDay(_ sender:UITapGestureRecognizer? = nil){
+	@objc func prevDay(_ sender:UITapGestureRecognizer? = nil){
 		changeDay(increment: -1)
 	}
 

@@ -178,6 +178,60 @@
 		93EB2F0B1EBF5AEB00F64186 /* RowSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowSchedule.swift; sourceTree = "<group>"; };
 		93EB2F0D1EBF5BF500F64186 /* RowSchedule.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowSchedule.xib; sourceTree = "<group>"; };
 		93EE9ECA1EE9B87100288F6E /* PastActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastActivityViewController.swift; sourceTree = "<group>"; };
+		FC63DC6420DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity_comment+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC6620DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity_comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC6820DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC6A20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC6C20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_event_image+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC6E20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_event_image+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC7020DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Post+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC7220DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC7420DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity_itinerary+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC7620DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity_itinerary+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC7820DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_offer+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC7A20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_offer+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC7C20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Route_point+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC7E20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Route_point+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC8020DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_event+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC8220DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_event+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC8420DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC8620DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC8820DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Version+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC8A20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Version+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC8C20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_event_gm+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC8E20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_event_gm+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC9020DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Place+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC9220DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC9420DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC9620DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC9820DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC9A20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DC9C20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity_image+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DC9E20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity_image+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DCA020DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Post_tag+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DCA220DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Post_tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DCA420DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Route+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DCA620DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Route+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DCA820DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Post_image+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DCAA20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Post_image+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DCAC20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Album+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DCAE20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Album+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DCB020DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Sponsor+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DCB220DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Sponsor+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DCB420DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity_tag+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DCB620DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity_tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DCB820DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_day+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DCBA20DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_day+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DCBC20DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Post_comment+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DCBE20DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Post_comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DCC020DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Photo_comment+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DCC220DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Photo_comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DCC420DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Photo_album+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DCC620DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Photo_album+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DCC820DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Notification+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DCCA20DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Notification+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FC63DCCC20DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/People+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC63DCCE20DC16B400C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/People+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +279,7 @@
 		93B84B981D9C31AB006C0F67 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				FC63DCCF20DC16F200C9A2E1 /* NSManagedObjects */,
 				93348A601EF4273F0093503A /* EventController.swift */,
 				93B84BA81D9C31AB006C0F67 /* Info.plist */,
 				93B84BA31D9C31AB006C0F67 /* Assets.xcassets */,
@@ -234,7 +289,6 @@
 				93B84B991D9C31AB006C0F67 /* AppDelegate.swift */,
 				93B84B9D1D9C31AB006C0F67 /* Main.storyboard */,
 				93B84B9B1D9C31AB006C0F67 /* ViewController.swift */,
-				93BEB6D11E7E878300C68DE5 /* PostViewController.swift */,
 				93B408021D9ED44C000FBC99 /* MenuCollectionViewCell.swift */,
 				93D9EA5F1DE271E700089002 /* Section.xib */,
 				93D9EA631DE273FD00089002 /* Section.swift */,
@@ -254,6 +308,7 @@
 				93075C6B1E59CB6B00396389 /* BlogView.swift */,
 				93075C711E59D06900396389 /* RowBlog.xib */,
 				93075C6F1E59D04A00396389 /* RowBlog.swift */,
+				93BEB6D11E7E878300C68DE5 /* PostViewController.swift */,
 				93D9EA751DE3ACBB00089002 /* Sync.swift */,
 				9357460F1EE20B99005DED61 /* FetchLocation.swift */,
 				931AA5881E1AFF8C003A2290 /* String.swift */,
@@ -320,6 +375,67 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FC63DCCF20DC16F200C9A2E1 /* NSManagedObjects */ = {
+			isa = PBXGroup;
+			children = (
+				FC63DC6320DC16B300C9A2E1 /* Activity_comment+CoreDataClass.swift */,
+				FC63DC6520DC16B300C9A2E1 /* Activity_comment+CoreDataProperties.swift */,
+				FC63DC6720DC16B300C9A2E1 /* Photo+CoreDataClass.swift */,
+				FC63DC6920DC16B300C9A2E1 /* Photo+CoreDataProperties.swift */,
+				FC63DC6B20DC16B300C9A2E1 /* Festival_event_image+CoreDataClass.swift */,
+				FC63DC6D20DC16B300C9A2E1 /* Festival_event_image+CoreDataProperties.swift */,
+				FC63DC6F20DC16B300C9A2E1 /* Post+CoreDataClass.swift */,
+				FC63DC7120DC16B300C9A2E1 /* Post+CoreDataProperties.swift */,
+				FC63DC7320DC16B300C9A2E1 /* Activity_itinerary+CoreDataClass.swift */,
+				FC63DC7520DC16B300C9A2E1 /* Activity_itinerary+CoreDataProperties.swift */,
+				FC63DC7720DC16B300C9A2E1 /* Festival_offer+CoreDataClass.swift */,
+				FC63DC7920DC16B300C9A2E1 /* Festival_offer+CoreDataProperties.swift */,
+				FC63DC7B20DC16B300C9A2E1 /* Route_point+CoreDataClass.swift */,
+				FC63DC7D20DC16B300C9A2E1 /* Route_point+CoreDataProperties.swift */,
+				FC63DC7F20DC16B300C9A2E1 /* Festival_event+CoreDataClass.swift */,
+				FC63DC8120DC16B300C9A2E1 /* Festival_event+CoreDataProperties.swift */,
+				FC63DC8320DC16B300C9A2E1 /* Activity+CoreDataClass.swift */,
+				FC63DC8520DC16B300C9A2E1 /* Activity+CoreDataProperties.swift */,
+				FC63DC8720DC16B300C9A2E1 /* Version+CoreDataClass.swift */,
+				FC63DC8920DC16B300C9A2E1 /* Version+CoreDataProperties.swift */,
+				FC63DC8B20DC16B300C9A2E1 /* Festival_event_gm+CoreDataClass.swift */,
+				FC63DC8D20DC16B300C9A2E1 /* Festival_event_gm+CoreDataProperties.swift */,
+				FC63DC8F20DC16B300C9A2E1 /* Place+CoreDataClass.swift */,
+				FC63DC9120DC16B300C9A2E1 /* Place+CoreDataProperties.swift */,
+				FC63DC9320DC16B300C9A2E1 /* Location+CoreDataClass.swift */,
+				FC63DC9520DC16B300C9A2E1 /* Location+CoreDataProperties.swift */,
+				FC63DC9720DC16B300C9A2E1 /* Festival+CoreDataClass.swift */,
+				FC63DC9920DC16B300C9A2E1 /* Festival+CoreDataProperties.swift */,
+				FC63DC9B20DC16B300C9A2E1 /* Activity_image+CoreDataClass.swift */,
+				FC63DC9D20DC16B300C9A2E1 /* Activity_image+CoreDataProperties.swift */,
+				FC63DC9F20DC16B300C9A2E1 /* Post_tag+CoreDataClass.swift */,
+				FC63DCA120DC16B300C9A2E1 /* Post_tag+CoreDataProperties.swift */,
+				FC63DCA320DC16B300C9A2E1 /* Route+CoreDataClass.swift */,
+				FC63DCA520DC16B300C9A2E1 /* Route+CoreDataProperties.swift */,
+				FC63DCA720DC16B300C9A2E1 /* Post_image+CoreDataClass.swift */,
+				FC63DCA920DC16B300C9A2E1 /* Post_image+CoreDataProperties.swift */,
+				FC63DCAB20DC16B300C9A2E1 /* Album+CoreDataClass.swift */,
+				FC63DCAD20DC16B300C9A2E1 /* Album+CoreDataProperties.swift */,
+				FC63DCAF20DC16B300C9A2E1 /* Sponsor+CoreDataClass.swift */,
+				FC63DCB120DC16B300C9A2E1 /* Sponsor+CoreDataProperties.swift */,
+				FC63DCB320DC16B300C9A2E1 /* Activity_tag+CoreDataClass.swift */,
+				FC63DCB520DC16B400C9A2E1 /* Activity_tag+CoreDataProperties.swift */,
+				FC63DCB720DC16B400C9A2E1 /* Festival_day+CoreDataClass.swift */,
+				FC63DCB920DC16B400C9A2E1 /* Festival_day+CoreDataProperties.swift */,
+				FC63DCBB20DC16B400C9A2E1 /* Post_comment+CoreDataClass.swift */,
+				FC63DCBD20DC16B400C9A2E1 /* Post_comment+CoreDataProperties.swift */,
+				FC63DCBF20DC16B400C9A2E1 /* Photo_comment+CoreDataClass.swift */,
+				FC63DCC120DC16B400C9A2E1 /* Photo_comment+CoreDataProperties.swift */,
+				FC63DCC320DC16B400C9A2E1 /* Photo_album+CoreDataClass.swift */,
+				FC63DCC520DC16B400C9A2E1 /* Photo_album+CoreDataProperties.swift */,
+				FC63DCC720DC16B400C9A2E1 /* Notification+CoreDataClass.swift */,
+				FC63DCC920DC16B400C9A2E1 /* Notification+CoreDataProperties.swift */,
+				FC63DCCB20DC16B400C9A2E1 /* People+CoreDataClass.swift */,
+				FC63DCCD20DC16B400C9A2E1 /* People+CoreDataProperties.swift */,
+			);
+			path = NSManagedObjects;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -353,7 +469,7 @@
 					93B84B951D9C31AB006C0F67 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 9F9ER4X7TG;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -486,6 +602,438 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		FC63DC6320DC16B300C9A2E1 /* Activity_comment+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC6420DC16B300C9A2E1 /* Base */,
+			);
+			name = "Activity_comment+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC6520DC16B300C9A2E1 /* Activity_comment+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC6620DC16B300C9A2E1 /* Base */,
+			);
+			name = "Activity_comment+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC6720DC16B300C9A2E1 /* Photo+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC6820DC16B300C9A2E1 /* Base */,
+			);
+			name = "Photo+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC6920DC16B300C9A2E1 /* Photo+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC6A20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Photo+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC6B20DC16B300C9A2E1 /* Festival_event_image+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC6C20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Festival_event_image+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC6D20DC16B300C9A2E1 /* Festival_event_image+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC6E20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Festival_event_image+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC6F20DC16B300C9A2E1 /* Post+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC7020DC16B300C9A2E1 /* Base */,
+			);
+			name = "Post+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC7120DC16B300C9A2E1 /* Post+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC7220DC16B300C9A2E1 /* Base */,
+			);
+			name = "Post+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC7320DC16B300C9A2E1 /* Activity_itinerary+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC7420DC16B300C9A2E1 /* Base */,
+			);
+			name = "Activity_itinerary+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC7520DC16B300C9A2E1 /* Activity_itinerary+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC7620DC16B300C9A2E1 /* Base */,
+			);
+			name = "Activity_itinerary+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC7720DC16B300C9A2E1 /* Festival_offer+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC7820DC16B300C9A2E1 /* Base */,
+			);
+			name = "Festival_offer+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC7920DC16B300C9A2E1 /* Festival_offer+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC7A20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Festival_offer+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC7B20DC16B300C9A2E1 /* Route_point+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC7C20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Route_point+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC7D20DC16B300C9A2E1 /* Route_point+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC7E20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Route_point+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC7F20DC16B300C9A2E1 /* Festival_event+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC8020DC16B300C9A2E1 /* Base */,
+			);
+			name = "Festival_event+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC8120DC16B300C9A2E1 /* Festival_event+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC8220DC16B300C9A2E1 /* Base */,
+			);
+			name = "Festival_event+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC8320DC16B300C9A2E1 /* Activity+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC8420DC16B300C9A2E1 /* Base */,
+			);
+			name = "Activity+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC8520DC16B300C9A2E1 /* Activity+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC8620DC16B300C9A2E1 /* Base */,
+			);
+			name = "Activity+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC8720DC16B300C9A2E1 /* Version+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC8820DC16B300C9A2E1 /* Base */,
+			);
+			name = "Version+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC8920DC16B300C9A2E1 /* Version+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC8A20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Version+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC8B20DC16B300C9A2E1 /* Festival_event_gm+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC8C20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Festival_event_gm+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC8D20DC16B300C9A2E1 /* Festival_event_gm+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC8E20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Festival_event_gm+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC8F20DC16B300C9A2E1 /* Place+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC9020DC16B300C9A2E1 /* Base */,
+			);
+			name = "Place+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC9120DC16B300C9A2E1 /* Place+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC9220DC16B300C9A2E1 /* Base */,
+			);
+			name = "Place+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC9320DC16B300C9A2E1 /* Location+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC9420DC16B300C9A2E1 /* Base */,
+			);
+			name = "Location+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC9520DC16B300C9A2E1 /* Location+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC9620DC16B300C9A2E1 /* Base */,
+			);
+			name = "Location+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC9720DC16B300C9A2E1 /* Festival+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC9820DC16B300C9A2E1 /* Base */,
+			);
+			name = "Festival+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC9920DC16B300C9A2E1 /* Festival+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC9A20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Festival+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC9B20DC16B300C9A2E1 /* Activity_image+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC9C20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Activity_image+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC9D20DC16B300C9A2E1 /* Activity_image+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DC9E20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Activity_image+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DC9F20DC16B300C9A2E1 /* Post_tag+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCA020DC16B300C9A2E1 /* Base */,
+			);
+			name = "Post_tag+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCA120DC16B300C9A2E1 /* Post_tag+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCA220DC16B300C9A2E1 /* Base */,
+			);
+			name = "Post_tag+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCA320DC16B300C9A2E1 /* Route+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCA420DC16B300C9A2E1 /* Base */,
+			);
+			name = "Route+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCA520DC16B300C9A2E1 /* Route+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCA620DC16B300C9A2E1 /* Base */,
+			);
+			name = "Route+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCA720DC16B300C9A2E1 /* Post_image+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCA820DC16B300C9A2E1 /* Base */,
+			);
+			name = "Post_image+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCA920DC16B300C9A2E1 /* Post_image+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCAA20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Post_image+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCAB20DC16B300C9A2E1 /* Album+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCAC20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Album+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCAD20DC16B300C9A2E1 /* Album+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCAE20DC16B300C9A2E1 /* Base */,
+			);
+			name = "Album+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCAF20DC16B300C9A2E1 /* Sponsor+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCB020DC16B300C9A2E1 /* Base */,
+			);
+			name = "Sponsor+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCB120DC16B300C9A2E1 /* Sponsor+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCB220DC16B300C9A2E1 /* Base */,
+			);
+			name = "Sponsor+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCB320DC16B300C9A2E1 /* Activity_tag+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCB420DC16B400C9A2E1 /* Base */,
+			);
+			name = "Activity_tag+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCB520DC16B400C9A2E1 /* Activity_tag+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCB620DC16B400C9A2E1 /* Base */,
+			);
+			name = "Activity_tag+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCB720DC16B400C9A2E1 /* Festival_day+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCB820DC16B400C9A2E1 /* Base */,
+			);
+			name = "Festival_day+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCB920DC16B400C9A2E1 /* Festival_day+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCBA20DC16B400C9A2E1 /* Base */,
+			);
+			name = "Festival_day+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCBB20DC16B400C9A2E1 /* Post_comment+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCBC20DC16B400C9A2E1 /* Base */,
+			);
+			name = "Post_comment+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCBD20DC16B400C9A2E1 /* Post_comment+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCBE20DC16B400C9A2E1 /* Base */,
+			);
+			name = "Post_comment+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCBF20DC16B400C9A2E1 /* Photo_comment+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCC020DC16B400C9A2E1 /* Base */,
+			);
+			name = "Photo_comment+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCC120DC16B400C9A2E1 /* Photo_comment+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCC220DC16B400C9A2E1 /* Base */,
+			);
+			name = "Photo_comment+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCC320DC16B400C9A2E1 /* Photo_album+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCC420DC16B400C9A2E1 /* Base */,
+			);
+			name = "Photo_album+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCC520DC16B400C9A2E1 /* Photo_album+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCC620DC16B400C9A2E1 /* Base */,
+			);
+			name = "Photo_album+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCC720DC16B400C9A2E1 /* Notification+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCC820DC16B400C9A2E1 /* Base */,
+			);
+			name = "Notification+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCC920DC16B400C9A2E1 /* Notification+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCCA20DC16B400C9A2E1 /* Base */,
+			);
+			name = "Notification+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCCB20DC16B400C9A2E1 /* People+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCCC20DC16B400C9A2E1 /* Base */,
+			);
+			name = "People+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC63DCCD20DC16B400C9A2E1 /* People+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC63DCCE20DC16B400C9A2E1 /* Base */,
+			);
+			name = "People+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -493,27 +1041,47 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_NOTICES = NO;
+				ASSETCATALOG_WARNINGS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_INCREMENTAL_DISTILL = NO;
+				ENABLE_NS_ASSERTIONS = YES;
+				ENABLE_ONLY_ACTIVE_RESOURCES = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -524,11 +1092,32 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				"GCC_WARN_64_TO_32_BIT_CONVERSION[arch=*64]" = YES_ERROR;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -537,6 +1126,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -544,39 +1134,82 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_NOTICES = NO;
+				ASSETCATALOG_WARNINGS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = NO;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_INCREMENTAL_DISTILL = NO;
+				ENABLE_NS_ASSERTIONS = YES;
+				ENABLE_ONLY_ACTIVE_RESOURCES = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				"GCC_WARN_64_TO_32_BIT_CONVERSION[arch=*64]" = YES;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = NO;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -603,7 +1236,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "app/app-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -625,7 +1259,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.margolariak.iosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "app/app-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

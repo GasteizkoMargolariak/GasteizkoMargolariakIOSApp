@@ -67,7 +67,7 @@ class FutureActivityViewController: UIViewController, UIGestureRecognizerDelegat
 	/**
 	Dismisses the controller.
 	*/
-	func back() {
+	@objc func back() {
 		self.dismiss(animated: true, completion: nil)
 	}
 	
