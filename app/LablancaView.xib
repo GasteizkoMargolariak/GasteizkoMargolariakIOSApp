@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,7 +41,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANk-4K-DBn" userLabel="NoFestivals">
                                             <rect key="frame" x="10" y="10" width="355" height="1375.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="NFTitle" text="NoFestivals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbu-EN-1UC" userLabel="NFTitle">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="NFTitle" text=" Fiestas de La Blanca" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbu-EN-1UC" userLabel="NFTitle">
                                                     <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
                                                     <color key="backgroundColor" red="0.0" green="0.47058823529999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
@@ -52,13 +52,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="61P-J5-lJc">
-                                                    <rect key="frame" x="0.0" y="30" width="355" height="1345.5"/>
+                                                    <rect key="frame" x="0.0" y="40" width="355" height="1335.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMm-Rh-0GJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="1345.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="1335.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSe-pA-fF3" userLabel="NFText">
-                                                                    <rect key="frame" x="8" y="8" width="339" height="1329.5"/>
+                                                                    <rect key="frame" x="8" y="8" width="339" height="1319.5"/>
                                                                     <string key="text">Las Fiestas de La Blanca. Esos días, del 4 al 9 de agosto, en los que Vitoria-Gasteiz se transforma. Se llena de color y alegría, y en cada esquina puedes encontrar actividades y espectáculos.
 
 Nosotros, como cuadrilla de Blusas y Nescas, ya estamos trabajando en ello. Tan pronto como vayamos sabiendo más, aquí iremos publicando nuestro programa y otra información sobre las fiestas.
@@ -98,7 +98,7 @@ Margolaris: Todo lo demás no sirve de nada si en una cuadrilla no hay buen ambi
                                             <color key="backgroundColor" red="0.59607843137254901" green="0.78431372549019607" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="rbu-EN-1UC" firstAttribute="width" secondItem="ANk-4K-DBn" secondAttribute="width" id="2rM-dk-8qK"/>
-                                                <constraint firstItem="61P-J5-lJc" firstAttribute="top" secondItem="rbu-EN-1UC" secondAttribute="bottom" id="8zQ-01-cy2"/>
+                                                <constraint firstItem="61P-J5-lJc" firstAttribute="top" secondItem="rbu-EN-1UC" secondAttribute="bottom" constant="10" id="8zQ-01-cy2"/>
                                                 <constraint firstItem="rbu-EN-1UC" firstAttribute="top" secondItem="ANk-4K-DBn" secondAttribute="top" id="EtJ-4V-V4H"/>
                                                 <constraint firstAttribute="bottom" secondItem="61P-J5-lJc" secondAttribute="bottom" id="H19-rV-6q8"/>
                                                 <constraint firstItem="rbu-EN-1UC" firstAttribute="centerX" secondItem="ANk-4K-DBn" secondAttribute="centerX" id="YlB-Dt-nSZ"/>

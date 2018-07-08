@@ -215,7 +215,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	/**
 	Asynchronously gets a location report from the server.
 	*/
-	func fetchLocation(){
+	@objc func fetchLocation(){
 		FetchLocation()
 	}
 	

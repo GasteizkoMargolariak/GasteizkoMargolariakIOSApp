@@ -153,7 +153,7 @@ class GalleryView: UIView {
 	/**
 	Opens an album.
 	*/
-	func openAlbum(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openAlbum(_ sender:UITapGestureRecognizer? = nil){
 		let id = (sender?.view as! RowGallery).id
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showAlbum(id: id)

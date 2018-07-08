@@ -128,7 +128,7 @@ Extension of UIView to be formatted as a row on the blog section of the home vie
 	/**
 	Opens a post in a controller.
 	*/
-	func openPost(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openPost(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showPost(id: self.id)
 	}

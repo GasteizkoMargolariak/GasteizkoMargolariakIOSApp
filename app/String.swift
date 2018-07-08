@@ -95,7 +95,7 @@ extension String {
 		let ed = self.index(self.startIndex, offsetBy: end)
 		
 		let range = st...ed
-		return self[range]
+		return String(self[range])
 	}
 	
 	
@@ -106,7 +106,7 @@ extension String {
 	func stripHtml() -> String {
 		let d = data(using: String.Encoding.utf8)
 		do{
-			return try NSAttributedString(data: d!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil).string
+			return try NSAttributedString(data: d!, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html, NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil).string
 		} catch let error as NSError {
 			print(error.localizedDescription)
 			return self
@@ -126,4 +126,15 @@ extension String {
 		CFStringTransform(convertedString, nil, transform, true)
 		return (convertedString as String).replacingOccurrences(of: "\\/", with: "/")
 	}
+	
+	/**
+	Capitalizes a string, turning the first caracter to uppercase.
+	:return: Capitalized string.
+	*/
+	func capitalize() -> String {
+		let first = String(characters.prefix(1)).capitalized
+		let other = String(characters.dropFirst())
+		return first + other
+	}
+
 }

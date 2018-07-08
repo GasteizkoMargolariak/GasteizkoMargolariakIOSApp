@@ -88,7 +88,7 @@ class LablancaView: UIView {
 		self.nfWindow.isHidden = true
 		
 		// TODO: Get current year
-		let year = 2017
+		let year = 2018
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -251,7 +251,7 @@ class LablancaView: UIView {
 	/**
 	Commands the view controller to show the city schedule view.
 	*/
-	func openSchedule(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openSchedule(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showSchedule(margolari: false)
 	}
@@ -260,7 +260,7 @@ class LablancaView: UIView {
 	/**
 	Commands the view controller to show the Gasteizko Margolariak schedule view.
 	*/
-	func openGMSchedule(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openGMSchedule(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showSchedule(margolari: true)
 	}

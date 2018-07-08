@@ -101,7 +101,7 @@ Extension of UIView to be formatted as a row of an album.
 	/**
 	Opens the photo in the left side in a new controller.
 	*/
-	func openLeftPhoto(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openLeftPhoto(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.albumController?.showPhoto(album: self.id, photo: self.photoIds[0])
 	}
@@ -110,7 +110,7 @@ Extension of UIView to be formatted as a row of an album.
 	/**
 	Opens the photo in the right side in a new controller.
 	*/
-	func openRightPhoto(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openRightPhoto(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.albumController?.showPhoto(album: self.id, photo: self.photoIds[1])
 	}

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G1314" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="V2">
+    <entity name="Activity" representedClassName=".Activity" syncable="YES" codeGenerationType="class">
+        <attribute name="after_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="after_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="after_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="album" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comments" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dtime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="inscription" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="max_people" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="people" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="permalink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="text_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Activity_comment" representedClassName=".Activity_comment" syncable="YES" codeGenerationType="class">
+        <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="dtime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lang" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Activity_image" representedClassName=".Activity_image" syncable="YES" codeGenerationType="class">
+        <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="idx" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Activity_itinerary" representedClassName=".Activity_itinerary" syncable="YES" codeGenerationType="class">
+        <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="place" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="route" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="Activity_tag" representedClassName=".Activity_tag" syncable="YES" codeGenerationType="class">
+        <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Album" representedClassName=".Album" syncable="YES" codeGenerationType="class">
+        <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="open" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="permalink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Festival" representedClassName=".Festival" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="img" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="summary_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="summary_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="summary_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Festival_day" representedClassName=".Festival_day" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="max_people" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="people" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Festival_event_city" representedClassName=".Festival_event" syncable="YES" codeGenerationType="class">
+        <attribute name="day" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="host" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="place" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="route" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sponsor" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Festival_event_gm" representedClassName=".Festival_event_gm" syncable="YES" codeGenerationType="class">
+        <attribute name="day" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="host" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="place" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="route" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sponsor" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Festival_event_image" representedClassName=".Festival_event_image" syncable="YES" codeGenerationType="class">
+        <attribute name="event" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="idx" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Festival_offer" representedClassName=".Festival_offer" syncable="YES" codeGenerationType="class">
+        <attribute name="days" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Location" representedClassName=".Location" syncable="YES" codeGenerationType="class">
+        <attribute name="dtime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Notification" representedClassName=".Notification" syncable="YES" codeGenerationType="class">
+        <attribute name="action" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dtime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="gm" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="seen" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="text_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="People" representedClassName="People" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Photo" representedClassName=".Photo" syncable="YES" codeGenerationType="class">
+        <attribute name="description_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dtime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="file" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="permalink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="place" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="size" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uploaded" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="width" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Photo_album" representedClassName=".Photo_album" syncable="YES" codeGenerationType="class">
+        <attribute name="album" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Photo_comment" representedClassName="Photo_comment" syncable="YES" codeGenerationType="class">
+        <attribute name="dtime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lang" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Place" representedClassName=".Place" syncable="YES" codeGenerationType="class">
+        <attribute name="address_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Post" representedClassName=".Post" syncable="YES" codeGenerationType="class">
+        <attribute name="comments" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="dtime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="permalink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Post_comment" representedClassName=".Post_comment" syncable="YES" codeGenerationType="class">
+        <attribute name="dtime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lang" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="post" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Post_image" representedClassName=".Post_image" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="idx" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="post" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Post_tag" representedClassName=".Post_tag" syncable="YES" codeGenerationType="class">
+        <attribute name="post" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Route" representedClassName="Route" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="mins" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Route_point" representedClassName="Route_point" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lat_d" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lat_o" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lon_d" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lon_o" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="part" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="place_d" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="place_o" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="route" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Sponsor" representedClassName=".Sponsor" syncable="YES" codeGenerationType="class">
+        <attribute name="address_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="local" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_eu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_es" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text_eu" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Version" representedClassName=".Version" syncable="YES" codeGenerationType="class">
+        <attribute name="section" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Activity" positionX="-56" positionY="-4059" width="128" height="345"/>
+        <element name="Activity_comment" positionX="-45" positionY="-3906" width="128" height="135"/>
+        <element name="Activity_image" positionX="-36" positionY="-3897" width="128" height="105"/>
+        <element name="Activity_itinerary" positionX="-18" positionY="-3888" width="128" height="225"/>
+        <element name="Activity_tag" positionX="0" positionY="-3852" width="128" height="75"/>
+        <element name="Album" positionX="18" positionY="-3861" width="128" height="195"/>
+        <element name="Festival" positionX="36" positionY="-3852" width="128" height="180"/>
+        <element name="Festival_day" positionX="-9" positionY="-3906" width="128" height="165"/>
+        <element name="Festival_event_city" positionX="-261" positionY="-3810" width="128" height="253"/>
+        <element name="Festival_event_gm" positionX="-245" positionY="-4104" width="128" height="255"/>
+        <element name="Festival_event_image" positionX="9" positionY="-3888" width="128" height="105"/>
+        <element name="Festival_offer" positionX="18" positionY="-3879" width="128" height="195"/>
+        <element name="Location" positionX="27" positionY="-3870" width="128" height="90"/>
+        <element name="Notification" positionX="36" positionY="-3861" width="128" height="225"/>
+        <element name="People" positionX="-9" positionY="-3906" width="128" height="120"/>
+        <element name="Photo" positionX="-9" positionY="-3906" width="128" height="285"/>
+        <element name="Photo_album" positionX="0" positionY="-3897" width="128" height="75"/>
+        <element name="Photo_comment" positionX="-9" positionY="-3906" width="128" height="135"/>
+        <element name="Place" positionX="9" positionY="-3888" width="128" height="195"/>
+        <element name="Post" positionX="18" positionY="-3879" width="128" height="210"/>
+        <element name="Post_comment" positionX="27" positionY="-3870" width="128" height="135"/>
+        <element name="Post_image" positionX="36" positionY="-3861" width="128" height="105"/>
+        <element name="Post_tag" positionX="45" positionY="-3852" width="128" height="75"/>
+        <element name="Route" positionX="0" positionY="-3897" width="128" height="90"/>
+        <element name="Route_point" positionX="9" positionY="-3888" width="128" height="180"/>
+        <element name="Sponsor" positionX="-9" positionY="-3906" width="128" height="270"/>
+        <element name="Version" positionX="-9" positionY="-3906" width="128" height="75"/>
+    </elements>
+</model>

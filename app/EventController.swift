@@ -20,7 +20,7 @@
 
 import UIKit
 import CoreData
-import GoogleMaps
+import MapKit
 
 /**
 The view controller of the app.
@@ -31,13 +31,16 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	@IBOutlet weak var eventText: UILabel!
 	@IBOutlet weak var eventTime: UILabel!
 	@IBOutlet weak var eventLocation: UILabel!
-	@IBOutlet weak var eventMap: GMSMapView!
+	@IBOutlet weak var eventMap: MKMapView!
 	@IBOutlet weak var btClose: UIButton!
 	@IBOutlet weak var eventAddress: UILabel!
 	
 	var id: Int = -1
 	var passId: Int = -1
 	var delegate: AppDelegate?
+	
+	var mapRenderer: MKTileOverlayRenderer!
+
 	
 	
 	/**
@@ -54,73 +57,87 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	override func viewDidLoad() {
 		
-		// Populate photo array.
+		// TODO: Pass this as parameter, make an if to show city events.
+		let margolari: Bool = true
+		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		let lang : String = getLanguage()
 		context.persistentStoreCoordinator = appDelegate.persistentStoreCoordinator
-		let fetchRequest: NSFetchRequest<Festival_event> = Festival_event.fetchRequest()
-		fetchRequest.predicate = NSPredicate(format: "id = %i", id)
-		do {
-			let searchResults = try context.fetch(fetchRequest)
-			var name: String = ""
-			var text: String = ""
-			var start: NSDate
-			var placeId: Int = -1
-			var place: [Any]
-			var placeName: String = ""
-			var placeAddress: String = ""
-			var lat: Double = 0.0
-			var lon: Double = 0.0
-			if searchResults.count > 0{
-				let r = searchResults[0]
+		if (margolari == true){
+			
+			let fetchRequest: NSFetchRequest<Festival_event_gm> = Festival_event_gm.fetchRequest()
+			fetchRequest.predicate = NSPredicate(format: "id = %i", id)
+			do {
+				// Get the result
+				let searchResults = try context.fetch(fetchRequest)
+			
+				var name: String = ""
+				var text: String = ""
+				var start: NSDate
+				var placeId: Int = -1
+				var place: [Any]
+				var placeName: String = ""
+				var placeAddress: String = ""
+				var lat: Double = 0.0
+				var lon: Double = 0.0
+				if searchResults.count > 0{
+					let r = searchResults[0]
 				
-				name = r.value(forKey: "title_\(lang)")! as! String
-				if r.value(forKey: "description_\(lang)") != nil{
-					text = r.value(forKey: "description_\(lang)")! as! String
-				}
-				start = r.value(forKey: "start")! as! NSDate
-				placeId = r.value(forKey: "place")! as! Int
-				place = getPlace(place: placeId, lang: getLanguage(), context: context)
-				placeName = place[0] as! String
-				placeAddress = place[1] as! String
-				lat = place[2] as! Double
-				lon = place[3] as! Double
+					name = r.value(forKey: "title_\(lang)")! as! String
+					if r.value(forKey: "description_\(lang)") != nil{
+						text = r.value(forKey: "description_\(lang)")! as! String
+					}
+					start = r.value(forKey: "start")! as! NSDate
+					placeId = r.value(forKey: "place")! as! Int
+					place = getPlace(place: placeId, lang: getLanguage(), context: context)
+					placeName = place[0] as! String
+					placeAddress = place[1] as! String
+					lat = place[2] as! Double
+					lon = place[3] as! Double
 				
-				// Set labels
-				eventTitle.text = " \(name.decode().stripHtml())"
-				if text.length > 0{
-					eventText.text = " \(text.decode().stripHtml())"
-				}
-				else{
-					self.eventText.isHidden = true
-				}
-				self.eventTime.text = formatTime(date: start)
-				self.eventLocation.text = placeName.decode().stripHtml()
-				if placeAddress.length == 0 || placeAddress == placeName{
-					self.eventAddress.isHidden = true
-				}
-				else{
-					self.eventAddress.text = placeAddress.decode().stripHtml()
+					// Set labels
+					eventTitle.text = " \(name.decode().stripHtml())"
+					if text.length > 0{
+						eventText.text = " \(text.decode().stripHtml())"
+					}
+					else{
+						self.eventText.isHidden = true
+					}
+					self.eventTime.text = formatTime(date: start)
+					self.eventLocation.text = placeName.decode().stripHtml()
+					if placeAddress.length == 0 || placeAddress == placeName{
+						self.eventAddress.isHidden = true
+					}
+					else{
+						self.eventAddress.text = placeAddress.decode().stripHtml()
+					}
 				}
 				
-				// Set map marker
-				let marker = GMSMarker()
-				marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-				marker.title = name
-				marker.map = self.eventMap
+				// Set up map
+				setupMapRenderer()
+				self.eventMap.showsUserLocation = true
+				self.eventMap.setUserTrackingMode(.followWithHeading, animated: true)
+				self.eventMap.delegate = self;
+				
+				// Set marker
+				let annotation = MKPointAnnotation()
+				annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+				self.eventMap.addAnnotation(annotation)
+				
 				
 				// Center map
-				eventMap.isMyLocationEnabled = true
-				let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: lat, longitude: lon, zoom: 12.0)
-				self.eventMap.camera = camera
+				let center = CLLocation(latitude: lat, longitude: lon)
+				let radius: CLLocationDistance = 1000
+				let coordinateRegion = MKCoordinateRegionMakeWithDistance(center.coordinate,
+				                                                          radius, radius)
+				self.eventMap.setRegion(coordinateRegion, animated: true)
 				
 			}
-			
-		}
-		catch {
-			NSLog(":EVENT:ERROR: Error getting info from event \(id): \(error)")
-		}
+			catch {
+				NSLog(":EVENT:ERROR: Error getting info from event \(id): \(error)")
+			}
+		} // if margolari == true
 		
 		super.viewDidLoad()
 		
@@ -132,7 +149,7 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	/**
 	Dismisses the controller.
 	*/
-	func back() {
+	@objc func back() {
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -205,6 +222,27 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 	
 	
 	/**
+	Selects the renderer for the map.
+	:return: The map renderer.
+	*/
+	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+		return mapRenderer
+	}
+	
+	
+	/**
+	Sets up the map renderer using OpenStreet Maps tiles.
+	*/
+	func setupMapRenderer() {
+		let osmTemplate = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+		let osmOverlay = MKTileOverlay(urlTemplate: osmTemplate)
+		osmOverlay.canReplaceMapContent = true
+		self.eventMap.add(osmOverlay, level: .aboveLabels)
+		self.mapRenderer = MKTileOverlayRenderer(tileOverlay: osmOverlay)
+	}
+	
+	
+	/**
 	Gets the device language. The only recognized languages are Spanish, English and Basque.
 	If the device has another language, Spanish will be selected by default.
 	:return: Two-letter language code.
@@ -218,5 +256,15 @@ class EventController: UIViewController, UIGestureRecognizerDelegate {
 			return "es"
 		}
 	}
+}
+
+/**
+Extension to make the class comply with MKMapViewDelegate.
+*/
+extension EventController: MKMapViewDelegate {
+	func eventMap(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+		return mapRenderer
+	}
+	
 }
 

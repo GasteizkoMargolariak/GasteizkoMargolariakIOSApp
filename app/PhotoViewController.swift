@@ -87,14 +87,17 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 			albumFetchRequest.predicate = NSPredicate(format: "id = %i", albumId)
 			do {
 				let results = try context.fetch(albumFetchRequest)
-				let r = results[0]
-				self.albumTitle = r.value(forKey: "title_\(lang)")! as! String
+                if (results.count > 0){
+                    let r = results[0]
+                    self.albumTitle = r.value(forKey: "title_\(lang)")! as! String
+                }
 			}
 			catch {
 				NSLog(":PHOTO:ERROR: Error getting album info: \(error)")
 			}
 			
-		} catch {
+		}
+        catch {
 			NSLog(":PHOTO:ERROR: Error getting infor from album \(albumId): \(error)")
 		}
 		
@@ -117,7 +120,7 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	/**
 	Dismisses the controller.
 	*/
-	func back() {
+	@objc func back() {
 		self.dismiss(animated: true, completion: nil)
 	}
 	
@@ -133,7 +136,7 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	/**
 	Opens the next photo.
 	*/
-	func nextPhoto(_ sender:UITapGestureRecognizer? = nil){
+	@objc func nextPhoto(_ sender:UITapGestureRecognizer? = nil){
 		photoIdx = photoIdx + 1
 		loadPhoto(id: photoIds[photoIdx])
 	}
@@ -142,7 +145,7 @@ class PhotoViewController: UIViewController, UIGestureRecognizerDelegate {
 	/**
 	Opens the previous photo.
 	*/
-	func prevPhoto(_ sender:UITapGestureRecognizer? = nil){
+	@objc func prevPhoto(_ sender:UITapGestureRecognizer? = nil){
 		photoIdx = photoIdx - 1
 		loadPhoto(id: photoIds[photoIdx])
 	}

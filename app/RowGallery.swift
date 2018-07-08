@@ -101,7 +101,7 @@ Extension of UIView to be formatted as sections.
 	/**
 	Opens an album in other controller.
 	*/
-	func openAlbum(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openAlbum(_ sender:UITapGestureRecognizer? = nil){
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.controller?.showAlbum(id: self.id)
 	}

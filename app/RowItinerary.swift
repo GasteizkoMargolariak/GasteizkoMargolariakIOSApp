@@ -49,8 +49,8 @@ Extension of UIView to be formatted an activity itinerary.
 	Loads the view from the xib with the same name as the class.
 	*/
 	private func loadViewFromNib() {
-		let bundle = Bundle(for: type(of: self))
-		let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
+		let bundle = Bundle(for: Swift.type(of: self))
+		let nib = UINib(nibName: String(describing: Swift.type(of: self)), bundle: bundle)
 		nib.instantiate(withOwner: self, options: nil)
 	}
 	
@@ -167,7 +167,7 @@ Extension of UIView to be formatted an activity itinerary.
 	/**
 	Opens an event dialog.
 	*/
-	func openItinerary(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openItinerary(_ sender:UITapGestureRecognizer? = nil){
 		// TODO implement openItinerary.
 		NSLog(":ROWITINERARY:DEBUG: Open Itinerary")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

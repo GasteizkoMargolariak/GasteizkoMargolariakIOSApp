@@ -164,7 +164,7 @@ Extension of UIView to be formatted as sections.
 	/**
 	Opens an schedule dialog.
 	*/
-	func openSchedule(_ sender:UITapGestureRecognizer? = nil){
+	@objc func openSchedule(_ sender:UITapGestureRecognizer? = nil){
 		NSLog(":ROWSCHEDULE:DEBUG: Open schedule")
 		let delegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 		delegate.scheduleController?.showEvent(id: self.id)
