@@ -202,7 +202,7 @@ class HomeView: UIView {
 				self.lablancaSection.addGestureRecognizer(tapRecognizer)
 				
 				// TODO: Get current year
-				let year = 2017
+				let year = 2018
 				
 				// Get info about festivals
 				let fetchRequest: NSFetchRequest<Festival> = Festival.fetchRequest()

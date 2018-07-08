@@ -115,7 +115,7 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		
 		// Get days
 		// TODO: Get current year
-		let year = 2017
+		let year = 2018
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		dateFormatter.locale = Locale.init(identifier: "en_GB")
@@ -175,24 +175,32 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		dateFormatter.locale = Locale.init(identifier: "en_GB")
 		
 		// Clear list.
-		for v in (self.svScheduleList?.subviews)!{
-			v.removeFromSuperview()
-		}
+        DispatchQueue.main.async() {
+            for v in (self.svScheduleList?.subviews)!{
+                v.removeFromSuperview()
+            }
+        }
+
 		
 		if margolari == true{
 			let dayFetchRequest: NSFetchRequest<Festival_day> = Festival_day.fetchRequest()
-			dayFetchRequest.predicate = NSPredicate(format: "date = %@", argumentArray: [days[selectedDay]])
-			var name: String = ""
-			do {
-				let daySearchResults = try self.context?.fetch(dayFetchRequest)
-				for r in daySearchResults! {
-					name = (r.value(forKey: "name_\(lang!)") as! String).decode()
-				}
-				self.lbDayName.text = name
-			}
-			catch {
-				NSLog(":SCHEDULECONTROLLER:ERROR: Error getting info about days: \(error)")
-			}
+            if selectedDay >= 0 && selectedDay < days.count{
+                dayFetchRequest.predicate = NSPredicate(format: "date = %@", argumentArray: [days[selectedDay]])
+                var name: String = ""
+                do {
+                    let daySearchResults = try self.context?.fetch(dayFetchRequest)
+                    for r in daySearchResults! {
+                        name = (r.value(forKey: "name_\(lang!)") as! String).decode()
+                    }
+                    self.lbDayName.text = name
+                }
+                catch{
+                    NSLog(":SCHEDULECONTROLLER:ERROR: Error getting info about days: \(error)")
+                }
+            }
+            else{
+                NSLog(":SCHEDULECONTROLLER:ERROR: No events")
+            }
 		}
 		else{
 			self.lbDayName.text = ""
@@ -214,23 +222,11 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 		self.lbDayMonth.text = nMonth
 		self.lbDayNumber.text = "\(Int(nDay)!)"
 		
-		// Enable or disable buttons
-		if self.selectedDay <= 0{
-			self.btPrev.alpha = 0.5
-			self.btPrev.isUserInteractionEnabled = false
-		}
-		else{
-			self.btPrev.alpha = 1
-			self.btPrev.isUserInteractionEnabled = true
-		}
-		if self.selectedDay >= (days.count - 1){
-			self.btNext.alpha = 0.5
-			self.btNext.isUserInteractionEnabled = false
-		}
-		else{
-			self.btNext.alpha = 1
-			self.btNext.isUserInteractionEnabled = true
-		}
+		// Disable all arrow buttons to prevent fast clicking, which leads to the list not being cleared
+        self.btPrev.alpha = 0.5
+        self.btPrev.isUserInteractionEnabled = false
+        self.btNext.alpha = 0.5
+        self.btNext.isUserInteractionEnabled = false
 		
 		var rowcount = 0
 		var row: RowSchedule
@@ -249,6 +245,8 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 			
 			if margolari == true{
 				let fetchRequest: NSFetchRequest<Festival_event_gm> = Festival_event_gm.fetchRequest()
+                fetchRequest.predicate = NSPredicate(format: "day = %@", days[selectedDay] as NSDate)
+                //fetchRequest.predicate = NSPredicate(format: "day = %@", argumentArray: [days[selectedDay]])
 				let sortDescriptor = NSSortDescriptor(key: "start", ascending: true)
 				let sortDescriptors = [sortDescriptor]
 				fetchRequest.sortDescriptors = sortDescriptors
@@ -299,11 +297,74 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 				}
 				
 			} // if margolari == true
+            else{
+                let fetchRequest: NSFetchRequest<Festival_event> = Festival_event.fetchRequest()
+                fetchRequest.predicate = NSPredicate(format: "day = %@", days[selectedDay] as NSDate)
+                let sortDescriptor = NSSortDescriptor(key: "start", ascending: true)
+                let sortDescriptors = [sortDescriptor]
+                fetchRequest.sortDescriptors = sortDescriptors
+                let searchResults = try self.context?.fetch(fetchRequest)
+                
+                for r in searchResults! {
+                    
+                    id = r.value(forKey: "id") as! Int
+                    
+                    title = r.value(forKey: "title_\(lang!)") as! String
+                    if r.value(forKey: "description_\(lang!)") != nil{
+                        text = r.value(forKey: "description_\(lang!)") as! String
+                    }
+                    else{
+                        text = ""
+                    }
+                    start = r.value(forKey: "start")! as! NSDate
+                    locationId = r.value(forKey: "place")! as! Int
+                    row = RowSchedule.init(s: "rowSchedule\(rowcount)", i: rowcount)
+                    
+                    row.setTitle(text: title)
+                    row.setText(text: text)
+                    row.setTime(dtime: start)
+                    row.id = id
+                    
+                    // Get location info from Place entity
+                    let locationFetchRequest: NSFetchRequest<Place> = Place.fetchRequest()
+                    locationFetchRequest.predicate = NSPredicate(format: "id == %i", locationId)
+                    locationFetchRequest.fetchLimit = 1
+                    do{
+                        var locationSearchResults = try self.context?.fetch(locationFetchRequest)
+                        if (locationSearchResults?.count)! > 0{
+                            let locationR = locationSearchResults?[0]
+                            location = locationR?.value(forKey: "name_\(lang!)")! as! String
+                            row.setLocation(text: location)
+                        }
+                        else{
+                            row.setLocation(text: "")
+                        }
+                    }
+                    catch {
+                        NSLog(":SCHEDULECONTROLLER:ERROR: Error getting location: \(error)")
+                    }
+                    
+                    svScheduleList.addArrangedSubview(row)
+                    
+                    rowcount = rowcount + 1
+                }
+            }
 
 			svScheduleList.setNeedsLayout()
 			svScheduleList.layoutIfNeeded()
+            
+            // Enable buttons
+            if self.selectedDay > 0{
+                self.btPrev.alpha = 1
+                self.btPrev.isUserInteractionEnabled = true
+            }
+            if self.selectedDay < (days.count - 1){
+                self.btNext.alpha = 1
+                self.btNext.isUserInteractionEnabled = true
+            }
 
-		} catch {
+		}
+        catch {
 			NSLog(":SCHEDULECONTROLLER:ERROR: Error with event: \(error)")
 		}
 	}
@@ -350,7 +411,12 @@ class ScheduleViewController: UIViewController, UIGestureRecognizerDelegate {
 	*/
 	func showEvent(id: Int){
 		NSLog(":SCHEDULECONTROLLER:DEBUG: Show event \(id)")
-		self.passId = id
+        if id < 0{
+            self.passId = 0
+        }
+        else{
+            self.passId = id
+        }
 		performSegue(withIdentifier: "SegueEvent", sender: nil)
 	}
 	

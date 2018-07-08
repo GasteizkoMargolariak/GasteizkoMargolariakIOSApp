@@ -41,9 +41,7 @@ class FetchLocation{
 	func fetch(){
 		NSLog(":LOCATION:LOG: Fetching location...")
 		
-		// TODO Change for production
-		//let url = URL(string: "https://margolariak.com/API/V1/location.php")
-		let url = URL(string: "http://192.168.1.101/API/V3/location.php")
+        let url = URL(string: "https://margolariak.com/API/V3/location.php")
 		
 		let task = URLSession.shared.dataTask(with: url!) { data, response, error in
 			if error != nil {

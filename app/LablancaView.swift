@@ -88,7 +88,7 @@ class LablancaView: UIView {
 		self.nfWindow.isHidden = true
 		
 		// TODO: Get current year
-		let year = 2017
+		let year = 2018
 		
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate

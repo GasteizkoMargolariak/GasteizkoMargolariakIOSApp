@@ -85,7 +85,6 @@ class Sync{
 		}
 
 		// Build URL
-		// TODO: Change host for production
 		
 		var urlStr: String = ""
 		
@@ -93,7 +92,7 @@ class Sync{
 		//	urlStr = "https://margolariak.com/API/v3/fastsync.php?client=com.margolariak.app&user=\(uId)\(strVersions)"
 		//}
 		//else{
-			urlStr = "https://margolariak.com/API/v3/sync.php?client=com.margolariak.app&user=\(uId)\(strVersions)"
+            urlStr = "https://margolariak.com/API/v3/sync.php?client=com.margolariak.app&user=\(uId)\(strVersions)"
 		//}
 		let url = URL(string: urlStr)
 
@@ -211,15 +210,15 @@ class Sync{
 				tuple = row.subStr(start: 0, end: row.indexOf(target: ",\"")! - 1)
 				
 				column = tuple.subStr(start: tuple.indexOf(target: "\"")! + 1, end: tuple.indexOf(target: "\":")! - 1)
-				
-				if column.length + 4 >= tuple.length - 2{
+                
+				if column.length + 4 > tuple.length - 2{
 					value = "ul"
 				}
 				else{
 					value = tuple.subStr(start: column.length + 4, end: tuple.length - 2)
 				}
 				
-				if value != "ul"{ // 'ul' rom 'null' or empty. If it is, just do nothing.
+				if value != "ul"{ // 'ul' from 'null' or empty. If it is, just do nothing.
 					if entity?.attributesByName[column]?.attributeType == .stringAttributeType{
 						query.setValue(value, forKey: column)
 					}

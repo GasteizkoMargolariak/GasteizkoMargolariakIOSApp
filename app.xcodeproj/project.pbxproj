@@ -178,6 +178,8 @@
 		93EB2F0B1EBF5AEB00F64186 /* RowSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowSchedule.swift; sourceTree = "<group>"; };
 		93EB2F0D1EBF5BF500F64186 /* RowSchedule.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RowSchedule.xib; sourceTree = "<group>"; };
 		93EE9ECA1EE9B87100288F6E /* PastActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastActivityViewController.swift; sourceTree = "<group>"; };
+		FC27E07220E95ABB00963227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_event_city+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FC27E07420E95ABD00963227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_event_city+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC63DC6420DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity_comment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FC63DC6620DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity_comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC63DC6820DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -192,8 +194,6 @@
 		FC63DC7A20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_offer+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC63DC7C20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Route_point+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FC63DC7E20DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Route_point+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		FC63DC8020DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_event+CoreDataClass.swift"; sourceTree = "<group>"; };
-		FC63DC8220DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Festival_event+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC63DC8420DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FC63DC8620DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FC63DC8820DC16B300C9A2E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Base; path = "app/Base.lproj/Version+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -379,6 +379,8 @@
 			isa = PBXGroup;
 			children = (
 				FC63DC6320DC16B300C9A2E1 /* Activity_comment+CoreDataClass.swift */,
+				FC27E07120E95ABB00963227 /* Festival_event_city+CoreDataClass.swift */,
+				FC27E07320E95ABD00963227 /* Festival_event_city+CoreDataProperties.swift */,
 				FC63DC6520DC16B300C9A2E1 /* Activity_comment+CoreDataProperties.swift */,
 				FC63DC6720DC16B300C9A2E1 /* Photo+CoreDataClass.swift */,
 				FC63DC6920DC16B300C9A2E1 /* Photo+CoreDataProperties.swift */,
@@ -392,8 +394,6 @@
 				FC63DC7920DC16B300C9A2E1 /* Festival_offer+CoreDataProperties.swift */,
 				FC63DC7B20DC16B300C9A2E1 /* Route_point+CoreDataClass.swift */,
 				FC63DC7D20DC16B300C9A2E1 /* Route_point+CoreDataProperties.swift */,
-				FC63DC7F20DC16B300C9A2E1 /* Festival_event+CoreDataClass.swift */,
-				FC63DC8120DC16B300C9A2E1 /* Festival_event+CoreDataProperties.swift */,
 				FC63DC8320DC16B300C9A2E1 /* Activity+CoreDataClass.swift */,
 				FC63DC8520DC16B300C9A2E1 /* Activity+CoreDataProperties.swift */,
 				FC63DC8720DC16B300C9A2E1 /* Version+CoreDataClass.swift */,
@@ -602,6 +602,22 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		FC27E07120E95ABB00963227 /* Festival_event_city+CoreDataClass.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC27E07220E95ABB00963227 /* Base */,
+			);
+			name = "Festival_event_city+CoreDataClass.swift";
+			sourceTree = "<group>";
+		};
+		FC27E07320E95ABD00963227 /* Festival_event_city+CoreDataProperties.swift */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC27E07420E95ABD00963227 /* Base */,
+			);
+			name = "Festival_event_city+CoreDataProperties.swift";
+			sourceTree = "<group>";
+		};
 		FC63DC6320DC16B300C9A2E1 /* Activity_comment+CoreDataClass.swift */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -712,22 +728,6 @@
 				FC63DC7E20DC16B300C9A2E1 /* Base */,
 			);
 			name = "Route_point+CoreDataProperties.swift";
-			sourceTree = "<group>";
-		};
-		FC63DC7F20DC16B300C9A2E1 /* Festival_event+CoreDataClass.swift */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FC63DC8020DC16B300C9A2E1 /* Base */,
-			);
-			name = "Festival_event+CoreDataClass.swift";
-			sourceTree = "<group>";
-		};
-		FC63DC8120DC16B300C9A2E1 /* Festival_event+CoreDataProperties.swift */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FC63DC8220DC16B300C9A2E1 /* Base */,
-			);
-			name = "Festival_event+CoreDataProperties.swift";
 			sourceTree = "<group>";
 		};
 		FC63DC8320DC16B300C9A2E1 /* Activity+CoreDataClass.swift */ = {
