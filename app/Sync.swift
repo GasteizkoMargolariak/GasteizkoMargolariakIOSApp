@@ -89,10 +89,10 @@ class Sync{
 		var urlStr: String = ""
 		
 		//if initial{
-		//	urlStr = "https://margolariak.com/API/v3/fastsync.php?client=com.margolariak.app&user=\(uId)\(strVersions)"
+		//	urlStr = "https://margolariak.com/API/v3/fastsync.php?client=com.margolariak.iosapp&user=\(uId)\(strVersions)"
 		//}
 		//else{
-            urlStr = "https://margolariak.com/API/v3/sync.php?client=com.margolariak.app&user=\(uId)\(strVersions)"
+            urlStr = "https://margolariak.com/API/v3/sync.php?client=com.margolariak.iosapp&user=\(uId)\(strVersions)"
 		//}
 		let url = URL(string: urlStr)
 
