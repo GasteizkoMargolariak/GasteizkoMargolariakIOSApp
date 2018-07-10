@@ -231,7 +231,7 @@ class FutureActivityViewController: UIViewController, UIGestureRecognizerDelegat
 				dayNum = "3rd"
 				break;
 			default:
-				dayNum = "\(weekday)th"
+				dayNum = "\(day)th"
 			}
 			
 			strDate = "\(days_en[weekday]), \(months_en[month]) \(dayNum)"

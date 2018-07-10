@@ -115,12 +115,7 @@ class ActivitiesView: UIView {
 					row = RowFutureActivity.init(s: "rowFutureActivity\(count)", i: count)
 					id = r.value(forKey: "id")! as! Int
 					title = r.value(forKey: "title_\(lang!)")! as! String
-                    if ((r.value(forKey: "after_\(lang)") != nil) && ((r.value(forKey: "after_\(lang)")! as! String).length != 0)){
-                        text = r.value(forKey: "after_\(lang)")! as! String
-                    }
-                    else{
-                        text = r.value(forKey: "text_\(lang)")! as! String
-                    }
+                    text = r.value(forKey: "text_\(lang!)")! as! String
 					city = r.value(forKey: "city")! as! String
 					price = r.value(forKey: "price")! as! Int
 					date = r.value(forKey: "date")! as! NSDate
@@ -185,7 +180,12 @@ class ActivitiesView: UIView {
 				row = RowPastActivity.init(s: "rowPastActivity\(count)", i: count)
 				id = r.value(forKey: "id")! as! Int
 				title = r.value(forKey: "title_\(lang!)")! as! String
-				text = r.value(forKey: "text_\(lang!)")! as! String
+                if ((r.value(forKey: "after_\(lang!)") != nil) && ((r.value(forKey: "after_\(lang!)")! as! String).length != 0)){
+                    text = r.value(forKey: "after_\(lang!)")! as! String
+                }
+                else{
+                    text = r.value(forKey: "text_\(lang!)")! as! String
+                }
 				row.setTitle(text: title)
 				row.setText(text: text)
 				row.id = id
